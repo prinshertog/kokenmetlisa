@@ -1,0 +1,126 @@
+* {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+body {
+  color: #222;
+  font-family: sans-serif;
+  line-height: 1.5;
+}
+
+header {
+  background-color: #222;
+  color: white;
+  padding: 10pt;
+  height: 40pt;
+}
+
+header .title {
+  float: left;
+  width: 20%;
+}
+
+header .navigation {
+  float: left;
+  width: 80%;
+  text-align: right;
+}
+
+header .navigation .default-nav li {
+  list-style: none;
+  display: inline-block;
+  margin: 10pt;
+}
+
+header .navigation .button-dropdown {
+  background-color: #333333;
+  position: absolute;
+  z-index: 1;
+  right: 0;
+  width: 100pt;
+  text-align: left;
+  padding: 10pt;
+  border-radius: 10pt;
+  margin: 10pt;
+  margin-top: 20pt;
+  display: none;
+}
+
+@media screen and (max-width: 700px) {
+  header .navigation .default-nav ul {
+    display: none;
+  }
+}
+
+@media screen and (min-width: 700px) {
+  header .navigation .menu-icon {
+    display: none;
+  }
+}
+
+header .navigation .button:hover {
+  position: relative;
+}
+
+header .navigation .button:hover .button-dropdown {
+  display: block;
+}
+
+header .navigation .menu-icon {
+  float: right;
+  margin: 10pt;
+}
+
+header .navigation .menu-icon:hover {
+  cursor: pointer;
+}
+
+header .navigation .menu-icon > .line {
+  background-color: #ffffff;
+  height: 2px;
+  display: block;
+  width: 20pt;
+}
+
+header .navigation .menu-icon > .line + .line {
+  margin-top: 6px;
+}
+
+main {
+  margin: 40pt;
+}
+
+main p {
+  margin-bottom: 10pt;
+}
+
+main a {
+  color: blue;
+}
+
+main a:hover {
+  color: rgb(122, 153, 255);
+}
+
+footer {
+  margin-top: 1rem;
+  bottom: 0;
+  position: fixed;
+  width: 100%;
+  text-align: center;
+  padding: 10pt;
+  background-color: #222;
+  color: white;
+}
+
+a:hover {
+  color: rgb(122, 153, 255);
+  text-decoration: underline;
+}
+
+a {
+  color: white;
+  text-decoration: none;
+}

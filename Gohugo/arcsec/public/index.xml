@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Home on Arcsec</title>
+    <link>https://freedombox.be/public/</link>
+    <description>Recent content in Home on Arcsec</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 01 Jan 2023 08:00:00 -0700</lastBuildDate><atom:link href="https://freedombox.be/public/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Contactinfo</title>
+      <link>https://freedombox.be/public/contact/</link>
+      <pubDate>Wed, 22 Nov 2023 16:15:35 +0100</pubDate>
+      
+      <guid>https://freedombox.be/public/contact/</guid>
+      <description>Locatie Blijde Inkomststraat 22
+B-3000 Leuven
+Belgium
+Email info@arcsecspace.com
+BTW nummer BE 0745.758.566</description>
+    </item>
+    
+  </channel>
+</rss>
