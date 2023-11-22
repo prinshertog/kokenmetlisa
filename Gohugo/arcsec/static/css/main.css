@@ -89,11 +89,7 @@ header .navigation .menu-icon > .line + .line {
 }
 
 main {
-  margin: 40pt;
-}
-
-main p {
-  margin-bottom: 10pt;
+  height: 800pt;
 }
 
 main a {
@@ -105,14 +101,45 @@ main a:hover {
 }
 
 footer {
-  margin-top: 1rem;
-  bottom: 0;
-  position: fixed;
-  width: 100%;
   text-align: center;
-  padding: 10pt;
   background-color: #222;
   color: white;
+  padding-top: 30pt;
+  padding-bottom: 20pt;
+  float: left;
+  width: 100%;
+}
+
+footer .copy {
+  float: left;
+  width: 100%;
+  padding-top: 20pt;
+  padding-bottom: 20pt;
+}
+
+footer .footer-navigation {
+  float: left;
+  width: 50%;
+}
+
+footer .footer-navigation-box {
+  text-align: left;
+  margin-left: 20%;
+}
+
+footer .footer-logo {
+  float: left;
+  width: 50%;
+}
+
+footer .footer-logo img {
+  height: 100pt;
+}
+
+@media screen and (max-width: 700px) {
+  footer .footer-logo img {
+    height: 20vw;
+  }
 }
 
 a:hover {
