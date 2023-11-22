@@ -1,4 +1,4 @@
-baseURL = 'https://freedombox.be/public/'
+baseURL = ''
 languageCode = 'en-us'
 title = 'Arcsec'
 
