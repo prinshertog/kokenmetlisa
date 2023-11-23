@@ -114,9 +114,6 @@ main .attention-title h1 {
 main .attention-image {
   float: right;
   width: 50%;
-  background-image: url("/satteliet-transparent.png");
-  background-repeat: no-repeat;
-  background-position: center;
   overflow: hidden;
 }
 
@@ -208,7 +205,8 @@ a {
   }
   main .attention-title {
     width: 100%;
-    margin-top: 10pt;
+    margin-top: 0pt;
+    font-size: 25pt;
   }
   main .attention-title h1, main .attention-title p {
     margin: 0;
@@ -217,7 +215,11 @@ a {
   }
   main .attention-title h1 {
     margin-bottom: 30pt;
-    margin-top: 100pt;
+    margin-top: 70pt;
+  }
+  main {
+    margin-top: 0;
+    margin-bottom: 100pt;
   }
 }
 

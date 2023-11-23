@@ -2,14 +2,14 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>/contact/</loc>
+    <loc>https://freedombox.be/arcsec/contact/</loc>
     <lastmod>2023-11-22T16:15:35+01:00</lastmod>
   </url><url>
-    <loc>/</loc>
+    <loc>https://freedombox.be/arcsec/</loc>
     <lastmod>2023-01-01T08:00:00-07:00</lastmod>
   </url><url>
-    <loc>/categories/</loc>
+    <loc>https://freedombox.be/arcsec/categories/</loc>
   </url><url>
-    <loc>/tags/</loc>
+    <loc>https://freedombox.be/arcsec/tags/</loc>
   </url>
 </urlset>
