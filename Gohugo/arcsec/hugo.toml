@@ -1,3 +1,4 @@
+#baseURL = 'https://freedombox.be/arcsec'
 baseURL = ''
 languageCode = 'en-us'
 title = 'Arcsec'
