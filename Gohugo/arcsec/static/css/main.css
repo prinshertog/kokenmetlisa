@@ -5,21 +5,32 @@
 }
 
 body {
-  color: #222;
   font-family: sans-serif;
   line-height: 1.5;
+  font-family: Verdana, sans-serif;
 }
 
 header {
-  background-color: #222;
-  color: white;
   padding: 10pt;
   height: 40pt;
+  font-size: 15pt;
+}
+
+header .default-nav a {
+  color: black;
+}
+
+header .default-nav a:hover {
+  color: deepskyblue;
 }
 
 header .title {
   float: left;
   width: 20%;
+}
+
+header .title img {
+  height: 70pt;
 }
 
 header .navigation {
@@ -48,13 +59,24 @@ header .navigation .button-dropdown {
   display: none;
 }
 
-@media screen and (max-width: 700px) {
+@media screen and (max-width: 1100px) {
+  header .navigation {
+    width: 100%;
+    text-align: center;
+  }
+  header .title {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+@media screen and (max-width: 800px) {
   header .navigation .default-nav ul {
     display: none;
   }
 }
 
-@media screen and (min-width: 700px) {
+@media screen and (min-width: 800px) {
   header .navigation .menu-icon {
     display: none;
   }
@@ -78,7 +100,7 @@ header .navigation .menu-icon:hover {
 }
 
 header .navigation .menu-icon > .line {
-  background-color: #ffffff;
+  background-color: #222;
   height: 2px;
   display: block;
   width: 20pt;
@@ -89,7 +111,17 @@ header .navigation .menu-icon > .line + .line {
 }
 
 main {
-  height: 800pt;
+  height: 600pt;
+  margin-left: 10%;
+  margin-right: 10%;
+  margin-top: 100pt;
+}
+
+main .attention-title {
+  font-size: 30pt;
+  color: #222;
+  text-align: center;
+  margin-top: 100pt;
 }
 
 main a {
@@ -97,7 +129,11 @@ main a {
 }
 
 main a:hover {
-  color: rgb(122, 153, 255);
+  color: deepskyblue;
+}
+
+footer a {
+  color: white;
 }
 
 footer {
@@ -128,12 +164,13 @@ footer .footer-navigation-box {
 }
 
 footer .footer-logo {
-  float: left;
-  width: 50%;
+  float: right;
+  width: 30%;
 }
 
 footer .footer-logo img {
   height: 100pt;
+  text-align: right;
 }
 
 @media screen and (max-width: 700px) {
@@ -143,7 +180,7 @@ footer .footer-logo img {
 }
 
 a:hover {
-  color: rgb(122, 153, 255);
+  color: deepskyblue;
   text-decoration: underline;
 }
 
