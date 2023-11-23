@@ -240,3 +240,10 @@ a {
     height: 20vw;
   }
 }
+
+@media screen and (min-height: 1300px) {
+  footer {
+    position: fixed;
+    bottom: 0;
+  }
+}
