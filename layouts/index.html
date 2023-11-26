@@ -1,2 +1,20 @@
-{{ define "main"}}
+{{ define "main" }}
+  {{ range site.RegularPages }}
+  <a href="{{ .RelPermalink }}">
+  <article class="posts">
+    {{ with .Params.featured }}
+      <div class="image"></div>
+      <style>
+        .image {
+          background-image: url("{{ . | absURL }}");
+          background-position: center;
+          background-size: cover;
+          padding: 80pt 20pt;
+        }
+      </style>
+    {{ end }}
+    <h2><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></h2>
+  </article>
+  </a>
+  {{ end }}
 {{ end }}

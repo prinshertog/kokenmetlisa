@@ -12,16 +12,14 @@ body {
 
 header {
   padding: 10pt;
-  height: 40pt;
+  height: 80pt;
   font-size: 15pt;
+  background-image: url("space.jpg");
+  box-shadow: 2pt 2pt 50pt rgb(202, 202, 202);
 }
 
 header .default-nav a {
   color: black;
-}
-
-header .default-nav a:hover {
-  color: deepskyblue;
 }
 
 header .title {
@@ -88,55 +86,32 @@ header .navigation .menu-icon > .line + .line {
 }
 
 main {
-  height: 600pt;
-  margin-top: 100pt;
-}
-
-main .attention-title {
-  font-size: 30pt;
-  color: #222;
-  text-align: center;
-  margin-top: 100pt;
-  float: left;
-  width: 50%;
-}
-
-main .attention-title h1, main .attention-title p {
+  margin-top: 30pt;
   margin-left: 10%;
   margin-right: 10%;
+  height: 1000pt;
 }
 
-main .attention-title h1 {
-  line-height: 70pt;
-  margin-bottom: 30pt;
-}
-
-main .attention-image {
-  float: right;
-  width: 50%;
+main .posts {
+  background-color: rgb(96, 110, 90);
+  padding: 10pt;
+  margin: 10pt;
+  width: 250pt;
+  float: left;
+  height: auto;
   overflow: hidden;
 }
 
-main article {
-  margin-left: 10%;
-  margin-right: 10%;
+main .posts h2 {
+  padding: 20pt;
 }
 
-/*
-body {
-  background-image: url("/satteliet-transparent-blue.png");
-  background-position: 200pt 80pt;
-  background-size: 1000pt;
-  background-repeat: no-repeat;
+main .posts a {
+  color: white;
 }
-*/
 
 main a {
-  color: blue;
-}
-
-main a:hover {
-  color: deepskyblue;
+  color: black;
 }
 
 footer a {
@@ -181,8 +156,9 @@ footer .footer-logo img {
 }
 
 a:hover {
-  color: deepskyblue;
   text-decoration: underline;
+  text-decoration-thickness: 2pt;
+  text-underline-offset: 3pt;
 }
 
 a {

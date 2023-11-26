@@ -1,7 +1,7 @@
-baseURL = 'https://freedombox.be/arcsec'
-#baseURL = ''
+#baseURL = 'https://kokenmetlisa.freedombox.be/'
+baseURL = ''
 languageCode = 'en-us'
-title = 'Arcsec'
+title = 'Kokenmetlisa'
 
 [menu]
 [[menu.header]]
@@ -9,25 +9,21 @@ title = 'Arcsec'
     pageRef = '/'
     weight = 10
 [[menu.header]]
-    name = 'Producten'
-    pageRef = '/producten'
+    name = 'Lunch'
+    pageRef = '/lunch'
     weight = 20
 [[menu.header]]
-    name = 'Over ons'
-    pageRef = '/over-ons'
+    name = 'Hoofdgerechten'
+    pageRef = '/hoofdgerechten'
     weight = 30
 [[menu.header]]
-    name = 'Contact'
-    pageRef = '/contact'
+    name = 'Nagerechten'
+    pageRef = '/nagerechten'
     weight = 40
 [[menu.header]]
-    name = 'Careers'
-    pageRef = '/careers'
+    name = 'Bijgerechten'
+    pageRef = '/bijgerechten'
     weight = 50
-[[menu.header]]
-    name = 'Blog'
-    pageRef = '/blog'
-    weight = 60
 
 
 
