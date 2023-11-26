@@ -12,8 +12,10 @@ body {
 
 header {
   padding: 10pt;
-  height: 40pt;
+  height: 150pt;
   font-size: 15pt;
+  background-image: url("space.jpg");
+  box-shadow: 2pt 2pt 50pt rgb(202, 202, 202);
 }
 
 header .default-nav a {
@@ -89,35 +91,7 @@ header .navigation .menu-icon > .line + .line {
 
 main {
   height: 600pt;
-  margin-top: 100pt;
-}
-
-main .attention-title {
-  font-size: 30pt;
-  color: #222;
-  text-align: center;
-  margin-top: 100pt;
-  float: left;
-  width: 50%;
-}
-
-main .attention-title h1, main .attention-title p {
-  margin-left: 10%;
-  margin-right: 10%;
-}
-
-main .attention-title h1 {
-  line-height: 70pt;
-  margin-bottom: 30pt;
-}
-
-main .attention-image {
-  float: right;
-  width: 50%;
-  overflow: hidden;
-}
-
-main article {
+  margin-top: 30pt;
   margin-left: 10%;
   margin-right: 10%;
 }
@@ -183,6 +157,8 @@ footer .footer-logo img {
 a:hover {
   color: deepskyblue;
   text-decoration: underline;
+  text-decoration-thickness: 2pt;
+  text-underline-offset: 3pt;
 }
 
 a {

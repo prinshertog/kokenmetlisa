@@ -1,0 +1,30 @@
+<div class="title">
+    <a href="{{$.Site.BaseURL}}"><img src="{{$.Site.BaseURL}}arcsec-logo.png"></a>
+</div>
+<div class="navigation">
+    <div class="button">
+        <div class="menu-icon">
+            <span class="line"></span>
+            <span class="line"></span>
+            <span class="line"></span>
+        </div>
+        {{ with site.Menus.header }}
+        <div class="button-dropdown">
+            <ul>
+                {{ range . }}
+                <li><a href="{{ .URL }}">{{ .Name }}</a></li>
+                {{ end }}
+            </ul>
+        </div>
+        {{ end }}
+    </div>
+    {{ with site.Menus.header }}
+    <div class="default-nav">
+        <ul>
+            {{ range . }}
+            <li><a href="{{ .URL }}">{{ .Name }}</a></li>
+            {{ end }}
+        </ul>
+    </div>
+    {{ end }}
+</div>

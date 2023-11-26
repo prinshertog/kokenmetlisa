@@ -1,0 +1,37 @@
+baseURL = 'https://freedombox.be/arcsec'
+#baseURL = ''
+languageCode = 'en-us'
+title = 'Arcsec'
+
+[menu]
+[[menu.header]]
+    name = 'Home'
+    pageRef = '/'
+    weight = 10
+[[menu.header]]
+    name = 'Producten'
+    pageRef = '/producten'
+    weight = 20
+[[menu.header]]
+    name = 'Over ons'
+    pageRef = '/over-ons'
+    weight = 30
+[[menu.header]]
+    name = 'Contact'
+    pageRef = '/contact'
+    weight = 40
+[[menu.header]]
+    name = 'Careers'
+    pageRef = '/careers'
+    weight = 50
+[[menu.header]]
+    name = 'Blog'
+    pageRef = '/blog'
+    weight = 60
+
+
+
+[module]
+  [module.hugoVersion]
+    extended = false
+    min = "0.116.0"
