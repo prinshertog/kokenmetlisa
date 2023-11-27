@@ -44,25 +44,7 @@ header .navigation .default-nav li {
 }
 
 header .navigation .button-dropdown {
-  background-color: #333333;
-  position: absolute;
-  z-index: 1;
-  right: 0;
-  width: 100pt;
-  text-align: left;
-  padding: 10pt;
-  border-radius: 10pt;
-  margin: 10pt;
-  margin-top: 20pt;
   display: none;
-}
-
-header .navigation .button:hover {
-  position: relative;
-}
-
-header .navigation .button:hover .button-dropdown {
-  display: block;
 }
 
 header .navigation .menu-icon {
@@ -106,6 +88,8 @@ main .posts {
 main .posts h2 {
   padding: 20pt;
   background-color: rgb(96, 110, 90);
+  border-bottom-left-radius: 10pt;
+  border-bottom-right-radius: 10pt;
 }
 
 main .posts a {
@@ -151,6 +135,7 @@ footer .footer-navigation-box {
 footer .footer-logo {
   float: right;
   width: 30%;
+  margin-right: 20pt;
 }
 
 footer .footer-logo img {

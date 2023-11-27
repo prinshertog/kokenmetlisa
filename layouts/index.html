@@ -4,7 +4,7 @@
     <a href="{{ .RelPermalink }}">
       <article class="posts">
         {{ if .Params.featured }}
-          <div class="image" style="background-image: url('{{ .Params.featured | absURL }}'); background-position: center; background-size: cover; padding: 80pt 20pt;"></div>
+          <div class="image" style="border-top-left-radius: 10pt; border-top-right-radius: 10pt; background-image: url('{{ .Params.featured | absURL }}'); background-position: center; background-size: cover; padding: 80pt 20pt;"></div>
         {{ end }}
         <h2><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></h2>
       </article>
