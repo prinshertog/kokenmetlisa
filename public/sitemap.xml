@@ -1,30 +1,5 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
-  <url>
-    <loc>/posts/</loc>
-    <lastmod>2023-11-26T19:54:10+01:00</lastmod>
-  </url><url>
-    <loc>/posts/salade-watermeloen-geitenkaas/</loc>
-    <lastmod>2023-11-26T19:54:10+01:00</lastmod>
-  </url><url>
-    <loc>/posts/pittigealbondigas-balletjes-in-tomatensaus/</loc>
-    <lastmod>2023-11-26T19:53:51+01:00</lastmod>
-  </url><url>
-    <loc>/posts/appel-confituur-taart/</loc>
-    <lastmod>2023-11-26T19:53:02+01:00</lastmod>
-  </url><url>
-    <loc>/posts/spaghetti-alle-vongole/</loc>
-    <lastmod>2023-11-26T19:52:53+01:00</lastmod>
-  </url><url>
-    <loc>/posts/geroosterde-tomaten-kokos-soep/</loc>
-    <lastmod>2023-11-26T19:52:32+01:00</lastmod>
-  </url><url>
-    <loc>/</loc>
-    <lastmod>2023-01-01T08:00:00-07:00</lastmod>
-  </url><url>
-    <loc>/categories/</loc>
-  </url><url>
-    <loc>/tags/</loc>
-  </url>
+  
 </urlset>

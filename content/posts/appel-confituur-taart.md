@@ -2,7 +2,9 @@
 title = 'Appel Confituur Taart'
 date = 2023-11-26T19:53:02+01:00
 draft = false
-featured = "images/geroosterde-tomaten-kokos-soep.jpg"
+featured = "images/appel-confituur-taart.jpeg"
+tags = ["taart", "nagerechten"]
+weight = 3
 +++
 
 Appel-confituur taart

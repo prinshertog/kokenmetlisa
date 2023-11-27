@@ -5,6 +5,43 @@
     <link>/tags/</link>
     <description>Recent content in Tags on Kokenmetlisa</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language><atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
+    <language>en-us</language>
+    <lastBuildDate>Sun, 26 Nov 2023 19:53:02 +0100</lastBuildDate><atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>nagerechten</title>
+      <link>/tags/nagerechten/</link>
+      <pubDate>Sun, 26 Nov 2023 19:53:02 +0100</pubDate>
+      
+      <guid>/tags/nagerechten/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>taart</title>
+      <link>/tags/taart/</link>
+      <pubDate>Sun, 26 Nov 2023 19:53:02 +0100</pubDate>
+      
+      <guid>/tags/taart/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>lunch</title>
+      <link>/tags/lunch/</link>
+      <pubDate>Sun, 26 Nov 2023 19:52:32 +0100</pubDate>
+      
+      <guid>/tags/lunch/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>soep</title>
+      <link>/tags/soep/</link>
+      <pubDate>Sun, 26 Nov 2023 19:52:32 +0100</pubDate>
+      
+      <guid>/tags/soep/</guid>
+      <description></description>
+    </item>
+    
   </channel>
 </rss>

@@ -3,6 +3,8 @@ title = 'Spaghetti Alle Vongole'
 date = 2023-11-26T19:52:53+01:00
 draft = false
 featured = "images/spaghetti-alle-vongole.jpg"
+tags = ["pasta", "hoofdgerechten"]
+weight = 2
 +++
 
 Spaghetti alle vongole

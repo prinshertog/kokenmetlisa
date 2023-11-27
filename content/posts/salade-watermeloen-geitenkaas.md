@@ -2,6 +2,9 @@
 title = 'Salade Watermeloen Geitenkaas'
 date = 2023-11-26T19:54:10+01:00
 draft = false
+featured = "images/salade-watermeloen-geitenkaas.jpg"
+tags = ["salade", "lunch"]
+weight = 5
 +++
 
 Salade watermeloen geitenkaas

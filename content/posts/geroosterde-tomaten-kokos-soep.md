@@ -3,6 +3,8 @@ title = 'Geroosterde Tomaten Kokos Soep'
 date = 2023-11-26T19:52:32+01:00
 draft = false
 featured = "images/geroosterde-tomaten-kokos-soep.jpg"
+tags = ["soep", "lunch"]
+weight = 1
 +++
 
 Geroosterde tomaten kokos soep

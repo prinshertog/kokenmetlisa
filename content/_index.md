@@ -1,9 +1,5 @@
 +++
-title = 'Home'
-date = 2023-01-01T08:00:00-07:00
-draft = false
+title = ''
+date = 2023-11-27T12:57:15+01:00
+draft = true
 +++
-
-## Welkom op de homepage van arcsec.
-
-### Hallo dit is een test.

@@ -12,7 +12,7 @@ body {
 
 header {
   padding: 10pt;
-  height: 80pt;
+  height: 120Pt;
   font-size: 15pt;
   background-image: url("space.jpg");
   box-shadow: 2pt 2pt 50pt rgb(202, 202, 202);
@@ -89,21 +89,23 @@ main {
   margin-top: 30pt;
   margin-left: 10%;
   margin-right: 10%;
-  height: 1000pt;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 main .posts {
-  background-color: rgb(96, 110, 90);
   padding: 10pt;
   margin: 10pt;
   width: 250pt;
-  float: left;
-  height: auto;
-  overflow: hidden;
+  height: 280pt;
+  width: calc(33.33% - 20px);
+  margin: 10px;
+  box-sizing: border-box;
 }
 
 main .posts h2 {
   padding: 20pt;
+  background-color: rgb(96, 110, 90);
 }
 
 main .posts a {
@@ -126,6 +128,7 @@ footer {
   padding-bottom: 20pt;
   float: left;
   width: 100%;
+  margin-top: 300pt;
 }
 
 footer .copy {
@@ -221,5 +224,11 @@ a {
   footer {
     position: fixed;
     bottom: 0;
+  }
+}
+
+@media screen and (max-width: 1130px) {
+  main .posts {
+    width: 100%;
   }
 }

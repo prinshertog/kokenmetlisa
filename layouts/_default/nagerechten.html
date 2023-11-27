@@ -1,6 +1,8 @@
 {{ define "main" }}
-  {{ $posts := where .Site.RegularPages "Section" "posts" }}
-  {{ range $posts }}
+  {{ $tags := slice "nagerechten" }} <!-- Replace with your specific tags -->
+  {{ $taggedPosts := where .Site.RegularPages "Params.tags" "intersect" $tags }}
+
+  {{ range $taggedPosts }}
     <a href="{{ .RelPermalink }}">
       <article class="posts">
         {{ if .Params.featured }}

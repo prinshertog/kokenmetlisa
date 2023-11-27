@@ -1,7 +1,10 @@
 +++
-title = 'Pittigealbondigas Balletjes in Tomatensaus'
+title = "Pittige Albondiga's (Balletjes in Tomatensaus)"
 date = 2023-11-26T19:53:51+01:00
 draft = false
+featured = "images/pittige-albondigas.jpeg"
+tags = ["vleesgerechten", "hoofdgerechten"]
+weight = 4
 +++
 
 Pittige albondiga’s (balletjes in tomatensaus)
