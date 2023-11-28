@@ -45,11 +45,31 @@ header .navigation .default-nav li {
 
 header .navigation .button-dropdown {
   display: none;
+  background-color: white;
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: 1;
+  text-align: left;
+  width: 100%;
+  padding-bottom: 3000pt;
+  padding-top: 100pt;
+  opacity: 0.9;
+}
+
+header .navigation .button-dropdown li {
+  padding-left: 20pt;
+}
+
+header .navigation .button-dropdown a {
+  color: black;
 }
 
 header .navigation .menu-icon {
-  float: right;
   margin: 10pt;
+  z-index: 2;
+  position: absolute;
+  right: 20pt;
 }
 
 header .navigation .menu-icon:hover {

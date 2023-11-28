@@ -3,13 +3,13 @@
 </div>
 <div class="navigation">
     <div class="button">
-        <div class="menu-icon">
+        <div class="menu-icon" id="button" onclick="onClick()">
             <span class="line"></span>
             <span class="line"></span>
             <span class="line"></span>
         </div>
         {{ with site.Menus.header }}
-        <div class="button-dropdown">
+        <div class="button-dropdown" id="menu">
             <ul>
                 {{ range . }}
                 <li><a href="{{ .URL }}">{{ .Name }}</a></li>
@@ -28,3 +28,18 @@
     </div>
     {{ end }}
 </div>
+
+
+<script>
+    const button = document.getElementById("button");
+    const menu = document.getElementById("menu")
+    function onClick() {
+        
+        if (menu.style.display == "none") {
+            menu.style.display = "unset"
+        } else {
+            menu.style.display = "none"
+        }
+    }
+
+</script>
