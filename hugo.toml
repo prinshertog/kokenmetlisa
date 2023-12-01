@@ -2,6 +2,7 @@
 baseURL = ''
 languageCode = 'en-us'
 title = 'Kokenmetlisa'
+disableKinds = ["taxonomy", "term", "section"]
 
 [menu]
 [[menu.header]]
@@ -25,7 +26,85 @@ title = 'Kokenmetlisa'
     pageRef = '/bijgerechten'
     weight = 50
 
+[[menu.lunch]]
+    name = 'Brood'
+    pageRef = '/brood'
+    weight = 10
 
+[[menu.lunch]]
+    name = 'Salades'
+    pageRef = '/Salades'
+    weight = 20
+
+[[menu.lunch]]
+    name = 'Soep'
+    pageRef = '/Soep'
+    weight = 30
+
+[[menu.hoofdgerechten]]
+    name = 'Vleesgerechten'
+    pageRef = '/vleesgerechten'
+    weight = 10
+
+[[menu.hoofdgerechten]]
+    name = 'Aardappelen'
+    pageRef = '/aardappelen'
+    weight = 20
+
+[[menu.hoofdgerechten]]
+    name = 'Ovenschotels'
+    pageRef = '/ovenschotels'
+    weight = 30
+
+[[menu.hoofdgerechten]]
+    name = 'Pasta'
+    pageRef = '/pasta'
+    weight = 40
+
+[[menu.hoofdgerechten]]
+    name = 'Risotto'
+    pageRef = '/risotto'
+    weight = 50
+
+[[menu.hoofdgerechten]]
+    name = 'Couscous'
+    pageRef = '/couscous'
+    weight = 60
+
+[[menu.hoofdgerechten]]
+    name = 'Rijst & noedels'
+    pageRef = '/rijst-noedels'
+    weight = 70
+
+[[menu.hoofdgerechten]]
+    name = 'Burgers & Wraps'
+    pageRef = '/burgers-wraps'
+    weight = 80
+
+[[menu.nagerechten]]
+    name = 'Taart'
+    pageRef = '/taart'
+    weight = 10
+
+[[menu.nagerechten]]
+    name = 'Dessert'
+    pageRef = '/dessert'
+    weight = 20
+
+[[menu.nagerechten]]
+    name = 'Koeken'
+    pageRef = '/koeken'
+    weight = 30
+
+[[menu.bijgerechten]]
+    name = 'Sauzen'
+    pageRef = '/sauzen'
+    weight = 10
+
+[[menu.bijgerechten]]
+    name = 'Deeg'
+    pageRef = '/deeg'
+    weight = 20
 
 [module]
   [module.hugoVersion]

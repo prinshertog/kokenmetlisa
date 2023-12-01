@@ -41,6 +41,7 @@ header .navigation .default-nav li {
   list-style: none;
   display: inline-block;
   margin: 10pt;
+  position: relative;
 }
 
 header .navigation .button-dropdown {
@@ -85,6 +86,20 @@ header .navigation .menu-icon > .line {
 
 header .navigation .menu-icon > .line + .line {
   margin-top: 6px;
+}
+
+header .navigation .button-dropdown-default-menu-1, .button-dropdown-default-menu-2, .button-dropdown-default-menu-3, .button-dropdown-default-menu-4 {
+  background-color: rgb(96, 110, 90);
+  text-align: left;
+  position: absolute;
+  left: 0pt;
+  top: 30pt;
+  display: none;
+  border-radius: 10pt;
+}
+
+header .navigation .button-dropdown-default-menu-1 a, header .navigation .button-dropdown-default-menu-2 a, header .navigation .button-dropdown-default-menu-3 a, header .navigation .button-dropdown-default-menu-4 a {
+  color: white;
 }
 
 main {
