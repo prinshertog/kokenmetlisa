@@ -12,7 +12,7 @@ body {
 
 header {
   padding: 10pt;
-  height: 120Pt;
+  height: 120pt;
   font-size: 15pt;
   background-image: url("space.jpg");
   box-shadow: 2pt 2pt 50pt rgb(202, 202, 202);
@@ -41,6 +41,7 @@ header .navigation .default-nav li {
   list-style: none;
   display: inline-block;
   margin: 10pt;
+  padding-bottom: 10pt;
   position: relative;
 }
 
@@ -98,12 +99,19 @@ header .navigation .button-dropdown-default-menu-1, .button-dropdown-default-men
   border-radius: 10pt;
 }
 
+header .navigation .button-dropdown-default-menu-1 ul, header .navigation .button-dropdown-default-menu-2 ul, header .navigation .button-dropdown-default-menu-3 ul, header .navigation .button-dropdown-default-menu-4 ul {
+  padding: 10pt;
+}
+
+header .navigation .button-dropdown-default-menu-1 li, header .navigation .button-dropdown-default-menu-2 li, header .navigation .button-dropdown-default-menu-3 li, header .navigation .button-dropdown-default-menu-4 li {
+  margin: 0pt;
+}
+
 header .navigation .button-dropdown-default-menu-1 a, header .navigation .button-dropdown-default-menu-2 a, header .navigation .button-dropdown-default-menu-3 a, header .navigation .button-dropdown-default-menu-4 a {
   color: white;
 }
 
 main {
-  margin-top: 30pt;
   margin-left: 10%;
   margin-right: 10%;
   display: flex;
@@ -127,6 +135,28 @@ main .posts h2 {
   border-bottom-right-radius: 10pt;
 }
 
+main .post-content {
+  float: left;
+  width: 50%;
+  color: white;
+  background-color: rgb(96, 110, 90);
+  height: 100%;
+}
+
+main .post-content .post-actual-content {
+  padding: 50pt;
+}
+
+main .post-image {
+  float: left;
+  width: 50%;
+  height: 100%;
+}
+
+main .post-image div {
+  height: 100%;
+}
+
 main .posts a {
   color: white;
 }
@@ -147,7 +177,7 @@ footer {
   padding-bottom: 20pt;
   float: left;
   width: 100%;
-  margin-top: 300pt;
+  display: none;
 }
 
 footer .copy {
@@ -242,8 +272,7 @@ a {
 
 @media screen and (min-height: 1300px) {
   footer {
-    position: fixed;
-    bottom: 0;
+    display: unset;
   }
 }
 

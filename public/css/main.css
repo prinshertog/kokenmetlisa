@@ -12,7 +12,7 @@ body {
 
 header {
   padding: 10pt;
-  height: 120Pt;
+  height: 120pt;
   font-size: 15pt;
   background-image: url("space.jpg");
   box-shadow: 2pt 2pt 50pt rgb(202, 202, 202);
@@ -41,6 +41,8 @@ header .navigation .default-nav li {
   list-style: none;
   display: inline-block;
   margin: 10pt;
+  padding-bottom: 10pt;
+  position: relative;
 }
 
 header .navigation .button-dropdown {
@@ -87,8 +89,29 @@ header .navigation .menu-icon > .line + .line {
   margin-top: 6px;
 }
 
+header .navigation .button-dropdown-default-menu-1, .button-dropdown-default-menu-2, .button-dropdown-default-menu-3, .button-dropdown-default-menu-4 {
+  background-color: rgb(96, 110, 90);
+  text-align: left;
+  position: absolute;
+  left: 0pt;
+  top: 30pt;
+  display: none;
+  border-radius: 10pt;
+}
+
+header .navigation .button-dropdown-default-menu-1 ul, header .navigation .button-dropdown-default-menu-2 ul, header .navigation .button-dropdown-default-menu-3 ul, header .navigation .button-dropdown-default-menu-4 ul {
+  padding: 10pt;
+}
+
+header .navigation .button-dropdown-default-menu-1 li, header .navigation .button-dropdown-default-menu-2 li, header .navigation .button-dropdown-default-menu-3 li, header .navigation .button-dropdown-default-menu-4 li {
+  margin: 0pt;
+}
+
+header .navigation .button-dropdown-default-menu-1 a, header .navigation .button-dropdown-default-menu-2 a, header .navigation .button-dropdown-default-menu-3 a, header .navigation .button-dropdown-default-menu-4 a {
+  color: white;
+}
+
 main {
-  margin-top: 30pt;
   margin-left: 10%;
   margin-right: 10%;
   display: flex;
@@ -110,6 +133,26 @@ main .posts h2 {
   background-color: rgb(96, 110, 90);
   border-bottom-left-radius: 10pt;
   border-bottom-right-radius: 10pt;
+}
+
+article .post-content {
+  float: left;
+  width: 50%;
+  background-color: rgb(96, 110, 90);
+  color: white;
+}
+
+article .post-content .post-actual-content {
+  padding: 100pt;
+}
+
+article .post-image {
+  float: left;
+  width: 50%;
+}
+
+article .post-image img {
+  height: 100pt;
 }
 
 main .posts a {

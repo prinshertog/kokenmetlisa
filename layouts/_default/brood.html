@@ -1,0 +1,15 @@
+{{ define "main" }}
+  {{ $tags := slice "brood" }} <!-- Replace with your specific tags -->
+  {{ $taggedPosts := where .Site.RegularPages "Params.tags" "intersect" $tags }}
+
+  {{ range $taggedPosts }}
+    <a href="{{ .RelPermalink }}">
+      <article class="posts">
+        {{ if .Params.featured }}
+          <div class="image" style="border-top-left-radius: 10pt; border-top-right-radius: 10pt; background-image: url('{{ .Params.featured | absURL }}'); background-position: center; background-size: cover; padding: 80pt 20pt;"></div>
+        {{ end }}
+        <h2><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></h2>
+      </article>
+    </a>
+  {{ end }}
+{{ end }}
