@@ -1,7 +1,6 @@
 * {
   margin: 0;
   padding: 0;
-  list-style: none;
 }
 
 body {
@@ -105,6 +104,7 @@ header .navigation .button-dropdown-default-menu-1 ul, header .navigation .butto
 
 header .navigation .button-dropdown-default-menu-1 li, header .navigation .button-dropdown-default-menu-2 li, header .navigation .button-dropdown-default-menu-3 li, header .navigation .button-dropdown-default-menu-4 li {
   margin: 0pt;
+  display: list-item;
 }
 
 header .navigation .button-dropdown-default-menu-1 a, header .navigation .button-dropdown-default-menu-2 a, header .navigation .button-dropdown-default-menu-3 a, header .navigation .button-dropdown-default-menu-4 a {
@@ -120,9 +120,7 @@ main {
 
 main .posts {
   padding: 10pt;
-  margin: 10pt;
-  width: 250pt;
-  height: 280pt;
+  height: 350pt;
   width: calc(33.33% - 20px);
   margin: 10px;
   box-sizing: border-box;
@@ -133,26 +131,60 @@ main .posts h2 {
   background-color: rgb(96, 110, 90);
   border-bottom-left-radius: 10pt;
   border-bottom-right-radius: 10pt;
+  height: 100pt;
+}
+
+article {
+  height: 1000pt;
+}
+
+article li {
+  margin-left: 30pt;
+}
+
+article .post-actual-content h1 {
+  margin-bottom: 10pt;
+  margin-top: 10pt;
+  font-size: 25pt;
+}
+article .post-actual-content h2 {
+  margin-bottom: 10pt;
+  margin-top: 10pt;
+}
+article .post-actual-content h3 {
+  margin-bottom: 10pt;
+  margin-top: 10pt;
 }
 
 article .post-content {
   float: left;
   width: 50%;
-  background-color: rgb(96, 110, 90);
   color: white;
+  background-color: rgb(96, 110, 90);
+  height: 100%;
 }
 
 article .post-content .post-actual-content {
-  padding: 100pt;
+  padding: 50pt;
 }
 
 article .post-image {
   float: left;
   width: 50%;
+  height: 100%;
 }
 
-article .post-image img {
-  height: 100pt;
+article .post-image div {
+  height: 100%;
+}
+
+article .post-content .post-actual-content li {
+  list-style-type: unset;
+}
+
+article img {
+  margin-top: 50pt;
+  height: 110pt;
 }
 
 main .posts a {
@@ -175,7 +207,7 @@ footer {
   padding-bottom: 20pt;
   float: left;
   width: 100%;
-  margin-top: 300pt;
+  display: none;
 }
 
 footer .copy {
@@ -254,6 +286,19 @@ a {
   header .navigation .default-nav ul {
     display: none;
   }
+
+  article .post-content {
+    width: 100%;
+  }
+
+  article .post-content .post-actual-content {
+    padding: 30pt;
+  }
+
+  article .post-image {
+    width: 100%;
+    height: 300pt;
+  }
 }
 
 @media screen and (min-width: 800px) {
@@ -270,8 +315,7 @@ a {
 
 @media screen and (min-height: 1300px) {
   footer {
-    position: fixed;
-    bottom: 0;
+    display: unset;
   }
 }
 

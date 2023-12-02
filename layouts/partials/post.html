@@ -1,0 +1,12 @@
+{{ define "article" }}
+    <div class="post-image">
+    {{ if .Params.featured }}
+        <div style="background-image: url('{{ .Params.featured | absURL }}'); background-position: center; background-size: cover;"></div>
+    {{ end }}
+    </div>
+    <div class="post-content">
+        <div class="post-actual-content">
+            {{ .Content }}
+        </div>
+    </div>
+{{ end }}

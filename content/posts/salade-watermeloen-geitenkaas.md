@@ -8,23 +8,23 @@ weight = 5
 layout = "standard-recepten-layout"
 +++
 
-Salade watermeloen geitenkaas
+# Salade watermeloen geitenkaas
 
-Ingrediënten:
+### Ingrediënten:
 
-Watermeloen
-Geitenkaas
-Parmaham/ Serranoham
-Komkommer
-Avocado
-Sla
-Balsamico
-Olijfolie
-Peper en zout
+- Watermeloen
+- Geitenkaas
+- Parmaham/ Serranoham
+- Komkommer
+- Avocado
+- Sla
+- Balsamico
+- Olijfolie
+- Peper en zout
 
-Bereiding:
+### Bereiding:
 
-Snijd alles in stukjes en verdeel het over een kom.
-Kruid met peper en zout.
-Voeg wat balsamico en olijfolie toe.
+1. Snijd alles in stukjes en verdeel het over een kom.
+2. Kruid met peper en zout.
+3. Voeg wat balsamico en olijfolie toe.
 

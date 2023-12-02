@@ -73,12 +73,12 @@ disableKinds = ["taxonomy", "term", "section"]
 
 [[menu.hoofdgerechten]]
     name = 'Rijst & noedels'
-    pageRef = '/rijst-noedels'
+    pageRef = '/rijst-en-noedels'
     weight = 70
 
 [[menu.hoofdgerechten]]
     name = 'Burgers & Wraps'
-    pageRef = '/burgers-wraps'
+    pageRef = '/burgers-en-wraps'
     weight = 80
 
 [[menu.nagerechten]]

@@ -33,8 +33,8 @@
                 </div>
                 {{ end }}
             </li>
-            <li id="nagerechten-div">
-                <a href="{{ $.Site.BaseURL }}nagerechten" id="nagerechten" onpointerover="onHoverNagerechten()">Nagerechten</a>
+            <li id="hoofdgerechten-div">
+                <a href="{{ $.Site.BaseURL }}hoofdgerechten" id="hoofdgerechten" onpointerover="onHoverHoofdgerechten()">Hoofdgerechten</a>
                 {{ with site.Menus.hoofdgerechten }}
                 <div class="button-dropdown-default-menu-2" id="menu-2">
                     <ul>
@@ -45,8 +45,8 @@
                 </div>
                 {{ end }}
             </li>
-            <li id="hoofdgerechten-div">
-                <a href="{{ $.Site.BaseURL }}hoofdgerechten" id="hoofdgerechten" onpointerover="onHoverHoofdgerechten()">Hoofdgerechten</a>
+            <li id="nagerechten-div">
+                <a href="{{ $.Site.BaseURL }}nagerechten" id="nagerechten" onpointerover="onHoverNagerechten()">Nagerechten</a>
                 {{ with site.Menus.nagerechten }}
                 <div class="button-dropdown-default-menu-3" id="menu-3">
                     <ul>
@@ -101,9 +101,9 @@
         }
     }
 
-    function onHoverNagerechten() {
-        const button = document.getElementById("nagerechten")
-        const div = document.getElementById("nagerechten-div")
+    function onHoverHoofdgerechten() {
+        const button = document.getElementById("hoofdgerechten")
+        const div = document.getElementById("hoofdgerechten-div")
         const menu = document.getElementById("menu-2")
 
         menu.style.display = "unset"
@@ -115,9 +115,9 @@
         }
     }   
 
-    function onHoverHoofdgerechten() {
-        const button = document.getElementById("hoofdgerechten")
-        const div = document.getElementById("hoofdgerechten-div")
+    function onHoverNagerechten() {
+        const button = document.getElementById("nagerechten")
+        const div = document.getElementById("nagerechten-div")
         const menu = document.getElementById("menu-3")
 
         menu.style.display = "unset"

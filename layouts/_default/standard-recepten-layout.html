@@ -1,12 +1,18 @@
-{{ define "main"}}
-    <div class="post-image">
-        {{ if .Params.featured }}
-        <div style="background-image: url('{{ .Params.featured | absURL }}'); background-position: center; background-size: cover;"></div>
+<!DOCTYPE html>
+<html lang="{{ or site.Language.LanguageCode site.Language.Lang }}" dir="{{ or site.Language.LanguageDirection `ltr` }}">
+<head>
+    {{ partial "head.html" . }}
+</head>
+<body>
+    <header>
+        {{ partial "header.html" . }}
+    </header>
+    <article>
+        {{ block "article" . }}
         {{ end }}
-    </div>
-    <div class="post-content">
-        <div class="post-actual-content">
-            <p>{{ .Content }}</p>
-        </div>
-    </div>
-{{ end }}
+    </article>
+    <footer>
+        {{ partial "footer.html" . }}
+    </footer id="footer">
+</body>
+</html>
