@@ -111,6 +111,14 @@ header .navigation .button-dropdown-default-menu-1 a, header .navigation .button
   color: white;
 }
 
+header .button-dropdown-mobile-menu ul {
+  list-style-type: none;
+}
+
+header .button-dropdown-mobile-menu {
+  display: none;
+}
+
 main {
   margin-left: 10%;
   margin-right: 10%;

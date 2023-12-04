@@ -11,9 +11,55 @@
         {{ with site.Menus.header }}
         <div class="button-dropdown" id="menu">
             <ul>
-                {{ range . }}
-                <li><a href="{{ .URL }}">{{ .Name }}</a></li>
-                {{ end }}
+                <li><a href="{{ $.Site.BaseURL }}">Home</a></li>
+                <li id="lunch-div">
+                    <a href="{{ $.Site.BaseURL }}lunch" id="lunch" onpointerover="onHoverLunch()">Lunch</a>
+                    {{ with site.Menus.lunch }}
+                    <div class="button-dropdown-mobile-menu" id="menu-1">
+                        <ul>
+                            {{ range . }}
+                            <li><a href="{{ .URL }}">{{ .Name }}</a></li>
+                            {{ end }}
+                        </ul>
+                    </div>
+                    {{ end }}
+                </li>
+                <li id="hoofdgerechten-div">
+                    <a href="{{ $.Site.BaseURL }}hoofdgerechten" id="hoofdgerechten" onpointerover="onHoverHoofdgerechten()">Hoofdgerechten</a>
+                    {{ with site.Menus.hoofdgerechten }}
+                    <div class="button-dropdown-mobile-menu" id="menu-2">
+                        <ul>
+                            {{ range . }}
+                            <li><a href="{{ .URL }}">{{ .Name }}</a></li>
+                            {{ end }}
+                        </ul>
+                    </div>
+                    {{ end }}
+                </li>
+                <li id="nagerechten-div">
+                    <a href="{{ $.Site.BaseURL }}nagerechten" id="nagerechten" onpointerover="onHoverNagerechten()">Nagerechten</a>
+                    {{ with site.Menus.nagerechten }}
+                    <div class="button-dropdown-mobile-menu" id="menu-3">
+                        <ul>
+                            {{ range . }}
+                            <li><a href="{{ .URL }}">{{ .Name }}</a></li>
+                            {{ end }}
+                        </ul>
+                    </div>
+                    {{ end }}
+                </li>
+                <li id="bijgerechten-div">
+                    <a href="{{ $.Site.BaseURL }}bijgerechten" id="bijgerechten" onpointerover="onHoverBijgerechten()">Bijgerechten</a>
+                    {{ with site.Menus.bijgerechten }}
+                    <div class="button-dropdown-mobile-menu" id="menu-4">
+                        <ul>
+                            {{ range . }}
+                            <li><a href="{{ .URL }}">{{ .Name }}</a></li>
+                            {{ end }}
+                        </ul>
+                    </div>
+                    {{ end }}
+                </li>
             </ul>
         </div>
         {{ end }}
@@ -77,6 +123,7 @@
 <script>
     function onClick() {
         const menu = document.getElementById("menu")
+
         
         if (menu.style.display == "none") {
             menu.style.display = "unset"
