@@ -12,10 +12,10 @@
         <div class="button-dropdown" id="menu">
             <ul>
                 <li><a href="{{ $.Site.BaseURL }}">Home</a></li>
-                <li id="lunch-div">
-                    <a href="{{ $.Site.BaseURL }}lunch" id="lunch" onpointerover="onHoverLunch()">Lunch</a>
+                <li id="lunch-div-mobile">
+                    <a href="{{ $.Site.BaseURL }}lunch" id="lunch-mobile" onpointerover="onHoverLunchMobile()">Lunch</a>
                     {{ with site.Menus.lunch }}
-                    <div class="button-dropdown-mobile-menu" id="menu-1">
+                    <div class="button-dropdown-mobile-menu" id="menu-mobile-1">
                         <ul>
                             {{ range . }}
                             <li><a href="{{ .URL }}">{{ .Name }}</a></li>
@@ -24,10 +24,10 @@
                     </div>
                     {{ end }}
                 </li>
-                <li id="hoofdgerechten-div">
-                    <a href="{{ $.Site.BaseURL }}hoofdgerechten" id="hoofdgerechten" onpointerover="onHoverHoofdgerechten()">Hoofdgerechten</a>
+                <li id="hoofdgerechten-div-mobile">
+                    <a href="{{ $.Site.BaseURL }}hoofdgerechten" id="hoofdgerechten-mobile" onpointerover="onHoverHoofdgerechtenMobile()">Hoofdgerechten</a>
                     {{ with site.Menus.hoofdgerechten }}
-                    <div class="button-dropdown-mobile-menu" id="menu-2">
+                    <div class="button-dropdown-mobile-menu" id="menu-mobile-2">
                         <ul>
                             {{ range . }}
                             <li><a href="{{ .URL }}">{{ .Name }}</a></li>
@@ -36,10 +36,10 @@
                     </div>
                     {{ end }}
                 </li>
-                <li id="nagerechten-div">
-                    <a href="{{ $.Site.BaseURL }}nagerechten" id="nagerechten" onpointerover="onHoverNagerechten()">Nagerechten</a>
+                <li id="nagerechten-div-mobile">
+                    <a href="{{ $.Site.BaseURL }}nagerechten" id="nagerechten-mobile" onpointerover="onHoverNagerechtenMobile()">Nagerechten</a>
                     {{ with site.Menus.nagerechten }}
-                    <div class="button-dropdown-mobile-menu" id="menu-3">
+                    <div class="button-dropdown-mobile-menu" id="menu-mobile-3">
                         <ul>
                             {{ range . }}
                             <li><a href="{{ .URL }}">{{ .Name }}</a></li>
@@ -48,10 +48,10 @@
                     </div>
                     {{ end }}
                 </li>
-                <li id="bijgerechten-div">
-                    <a href="{{ $.Site.BaseURL }}bijgerechten" id="bijgerechten" onpointerover="onHoverBijgerechten()">Bijgerechten</a>
+                <li id="bijgerechten-div-mobile">
+                    <a href="{{ $.Site.BaseURL }}bijgerechten" id="bijgerechten-mobile" onpointerover="onHoverBijgerechtenMobile()">Bijgerechten</a>
                     {{ with site.Menus.bijgerechten }}
-                    <div class="button-dropdown-mobile-menu" id="menu-4">
+                    <div class="button-dropdown-mobile-menu" id="menu-mobile-4">
                         <ul>
                             {{ range . }}
                             <li><a href="{{ .URL }}">{{ .Name }}</a></li>
@@ -124,6 +124,7 @@
     function onClick() {
         const menu = document.getElementById("menu")
 
+
         
         if (menu.style.display == "none") {
             menu.style.display = "unset"
@@ -189,5 +190,62 @@
             }
         }
     }   
+
+    function onHoverLunchMobile() {
+        const button = document.getElementById("lunch-mobile")
+        const div = document.getElementById("lunch-div-mobile")
+        const menu = document.getElementById("menu-mobile-1")
+
+        menu.style.display = "unset"
+
+        div.onmouseleave = function() {
+            if (menu.style.display == "unset") {
+                menu.style.display = "none"
+            }
+        }
+    }
+
+    function onHoverHoofdgerechtenMobile() {
+        const button = document.getElementById("hoofdgerechten-mobile")
+        const div = document.getElementById("hoofdgerechten-div-mobile")
+        const menu = document.getElementById("menu-mobile-2")
+
+        menu.style.display = "unset"
+
+        div.onmouseleave = function() {
+            if (menu.style.display == "unset") {
+                menu.style.display = "none"
+            }
+        }
+    }   
+
+    function onHoverNagerechtenMobile() {
+        const button = document.getElementById("nagerechten-mobile")
+        const div = document.getElementById("nagerechten-div-mobile")
+        const menu = document.getElementById("menu-mobile-3")
+
+        menu.style.display = "unset"
+
+        div.onmouseleave = function() {
+            if (menu.style.display == "unset") {
+                menu.style.display = "none"
+            }
+        }
+    }   
+
+    function onHoverBijgerechtenMobile() {
+        const button = document.getElementById("bijgerechten-mobile")
+        const div = document.getElementById("bijgerechten-div-mobile")
+        const menu = document.getElementById("menu-mobile-4")
+
+        menu.style.display = "unset"
+
+        div.onmouseleave = function() {
+            if (menu.style.display == "unset") {
+                menu.style.display = "none"
+            }
+        }
+    }   
+
 
 </script>
