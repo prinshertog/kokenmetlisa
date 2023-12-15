@@ -2,7 +2,7 @@
 title = 'Risotto Met Champignons en Parmezaanse Kaas'
 date = 2023-12-15T11:44:29+01:00
 draft = false
-featured = "images/lasagne-bolognese.jpg"
+featured = "images/risotto-met-champignons-en-parmezaanse-kaas.jpeg"
 tags = ["risotto", "hoofdgerechten"]
 weight = 22
 layout = "standard-recepten-layout"

@@ -121,10 +121,23 @@
 
 
 <script>
+
+    function checkMenuWidth() {
+        const menu = document.getElementById("menu")
+        if (window.innerWidth > 800) {
+            menu.style.display = "none"
+        }
+    }
+
+    function initButton() {
+        const menu = document.getElementById("menu")
+        menu.style.display = "none"
+    }
+
+    initButton()
+
     function onClick() {
         const menu = document.getElementById("menu")
-
-
         
         if (menu.style.display == "none") {
             menu.style.display = "unset"
@@ -132,7 +145,8 @@
             menu.style.display = "none"
         }
     }
-
+    window.addEventListener('resize', checkMenuWidth);
+    checkMenuWidth()
 
 
     function onHoverLunch() {
