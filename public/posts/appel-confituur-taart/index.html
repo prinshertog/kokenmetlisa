@@ -1,97 +1,379 @@
 <!DOCTYPE html>
 <html lang="en-us" dir="ltr">
 <head>
-  <meta charset="utf-8">
+    <meta charset="utf-8">
 <meta name="viewport" content="width=device-width">
-<link rel="icon" type="image/x-icon" href="images/kokenmetlisa.png">
-<link rel="stylesheet" href="css/main.css">
+<link rel="icon" type="image/x-icon" href="https://kokenmetlisa.freedombox.be/images/kokenmetlisa.png">
+<link rel="stylesheet" href="https://kokenmetlisa.freedombox.be/css/main.css">
 <title>Appel Confituur Taart | Kokenmetlisa</title>
 
 </head>
 <body>
-  <header>
-    <div class="title">
-    <a href=""><img src="images/kokenmetlisa.png"></a>
+    <header>
+        <div class="title">
+    <a href="https://kokenmetlisa.freedombox.be"><img src="https://kokenmetlisa.freedombox.be/images/kokenmetlisa.png"></a>
 </div>
 <div class="navigation">
     <div class="button">
-        <div class="menu-icon">
+        <div class="menu-icon" id="button" onclick="onClick()">
             <span class="line"></span>
             <span class="line"></span>
             <span class="line"></span>
         </div>
         
-        <div class="button-dropdown">
+        <div class="button-dropdown" id="menu">
             <ul>
-                
-                <li><a href="/">Home</a></li>
-                
-                <li><a href="/lunch/">Lunch</a></li>
-                
-                <li><a href="/hoofdgerechten/">Hoofdgerechten</a></li>
-                
-                <li><a href="/nagerechten/">Nagerechten</a></li>
-                
-                <li><a href="/bijgerechten/">Bijgerechten</a></li>
-                
+                <li><a href="https://kokenmetlisa.freedombox.be">Home</a></li>
+                <li id="lunch-div-mobile">
+                    <a href="https://kokenmetlisa.freedombox.be/lunch" id="lunch-mobile" onpointerover="onHoverLunchMobile()">Lunch</a>
+                    
+                    <div class="button-dropdown-mobile-menu" id="menu-mobile-1">
+                        <ul>
+                            
+                            <li><a href="/sub-menu/brood/">Brood</a></li>
+                            
+                            <li><a href="/sub-menu/salades/">Salades</a></li>
+                            
+                            <li><a href="/sub-menu/soep/">Soep</a></li>
+                            
+                        </ul>
+                    </div>
+                    
+                </li>
+                <li id="hoofdgerechten-div-mobile">
+                    <a href="https://kokenmetlisa.freedombox.be/hoofdgerechten" id="hoofdgerechten-mobile" onpointerover="onHoverHoofdgerechtenMobile()">Hoofdgerechten</a>
+                    
+                    <div class="button-dropdown-mobile-menu" id="menu-mobile-2">
+                        <ul>
+                            
+                            <li><a href="/sub-menu/vleesgerechten/">Vleesgerechten</a></li>
+                            
+                            <li><a href="/sub-menu/aardappelen/">Aardappelen</a></li>
+                            
+                            <li><a href="/sub-menu/ovenschotels/">Ovenschotels</a></li>
+                            
+                            <li><a href="/sub-menu/pasta/">Pasta</a></li>
+                            
+                            <li><a href="/sub-menu/risotto/">Risotto</a></li>
+                            
+                            <li><a href="/sub-menu/couscous/">Couscous</a></li>
+                            
+                            <li><a href="/sub-menu/rijst-en-noedels/">Rijst &amp; noedels</a></li>
+                            
+                            <li><a href="/sub-menu/burgers-en-wraps/">Burgers &amp; Wraps</a></li>
+                            
+                        </ul>
+                    </div>
+                    
+                </li>
+                <li id="nagerechten-div-mobile">
+                    <a href="https://kokenmetlisa.freedombox.be/nagerechten" id="nagerechten-mobile" onpointerover="onHoverNagerechtenMobile()">Nagerechten</a>
+                    
+                    <div class="button-dropdown-mobile-menu" id="menu-mobile-3">
+                        <ul>
+                            
+                            <li><a href="/sub-menu/taart/">Taart</a></li>
+                            
+                            <li><a href="/sub-menu/dessert/">Dessert</a></li>
+                            
+                            <li><a href="/sub-menu/koeken/">Koeken</a></li>
+                            
+                        </ul>
+                    </div>
+                    
+                </li>
+                <li id="bijgerechten-div-mobile">
+                    <a href="https://kokenmetlisa.freedombox.be/bijgerechten" id="bijgerechten-mobile" onpointerover="onHoverBijgerechtenMobile()">Bijgerechten</a>
+                    
+                    <div class="button-dropdown-mobile-menu" id="menu-mobile-4">
+                        <ul>
+                            
+                            <li><a href="/sub-menu/sauzen/">Sauzen</a></li>
+                            
+                            <li><a href="/sub-menu/deeg/">Deeg</a></li>
+                            
+                        </ul>
+                    </div>
+                    
+                </li>
             </ul>
         </div>
         
     </div>
-    
     <div class="default-nav">
         <ul>
-            
-            <li><a href="/">Home</a></li>
-            
-            <li><a href="/lunch/">Lunch</a></li>
-            
-            <li><a href="/hoofdgerechten/">Hoofdgerechten</a></li>
-            
-            <li><a href="/nagerechten/">Nagerechten</a></li>
-            
-            <li><a href="/bijgerechten/">Bijgerechten</a></li>
-            
+            <li><a href="https://kokenmetlisa.freedombox.be">Home</a></li>
+            <li id="lunch-div">
+                <a href="https://kokenmetlisa.freedombox.be/lunch" id="lunch" onpointerover="onHoverLunch()">Lunch</a>
+                
+                <div class="button-dropdown-default-menu-1" id="menu-1">
+                    <ul>
+                        
+                        <li><a href="/sub-menu/brood/">Brood</a></li>
+                        
+                        <li><a href="/sub-menu/salades/">Salades</a></li>
+                        
+                        <li><a href="/sub-menu/soep/">Soep</a></li>
+                        
+                    </ul>
+                </div>
+                
+            </li>
+            <li id="hoofdgerechten-div">
+                <a href="https://kokenmetlisa.freedombox.be/hoofdgerechten" id="hoofdgerechten" onpointerover="onHoverHoofdgerechten()">Hoofdgerechten</a>
+                
+                <div class="button-dropdown-default-menu-2" id="menu-2">
+                    <ul>
+                        
+                        <li><a href="/sub-menu/vleesgerechten/">Vleesgerechten</a></li>
+                        
+                        <li><a href="/sub-menu/aardappelen/">Aardappelen</a></li>
+                        
+                        <li><a href="/sub-menu/ovenschotels/">Ovenschotels</a></li>
+                        
+                        <li><a href="/sub-menu/pasta/">Pasta</a></li>
+                        
+                        <li><a href="/sub-menu/risotto/">Risotto</a></li>
+                        
+                        <li><a href="/sub-menu/couscous/">Couscous</a></li>
+                        
+                        <li><a href="/sub-menu/rijst-en-noedels/">Rijst &amp; noedels</a></li>
+                        
+                        <li><a href="/sub-menu/burgers-en-wraps/">Burgers &amp; Wraps</a></li>
+                        
+                    </ul>
+                </div>
+                
+            </li>
+            <li id="nagerechten-div">
+                <a href="https://kokenmetlisa.freedombox.be/nagerechten" id="nagerechten" onpointerover="onHoverNagerechten()">Nagerechten</a>
+                
+                <div class="button-dropdown-default-menu-3" id="menu-3">
+                    <ul>
+                        
+                        <li><a href="/sub-menu/taart/">Taart</a></li>
+                        
+                        <li><a href="/sub-menu/dessert/">Dessert</a></li>
+                        
+                        <li><a href="/sub-menu/koeken/">Koeken</a></li>
+                        
+                    </ul>
+                </div>
+                
+            </li>
+            <li id="bijgerechten-div">
+                <a href="https://kokenmetlisa.freedombox.be/bijgerechten" id="bijgerechten" onpointerover="onHoverBijgerechten()">Bijgerechten</a>
+                
+                <div class="button-dropdown-default-menu-4" id="menu-4">
+                    <ul>
+                        
+                        <li><a href="/sub-menu/sauzen/">Sauzen</a></li>
+                        
+                        <li><a href="/sub-menu/deeg/">Deeg</a></li>
+                        
+                    </ul>
+                </div>
+                
+            </li>
         </ul>
     </div>
-    
 </div>
 
-  </header>
-  <main>
+
+<script>
+
+    function checkMenuWidth() {
+        const menu = document.getElementById("menu")
+        if (window.innerWidth > 800) {
+            menu.style.display = "none"
+        }
+    }
+
+    function initButton() {
+        const menu = document.getElementById("menu")
+        menu.style.display = "none"
+    }
+
+    initButton()
+
+    function onClick() {
+        const menu = document.getElementById("menu")
+        
+        if (menu.style.display == "none") {
+            menu.style.display = "unset"
+        } else {
+            menu.style.display = "none"
+        }
+    }
+    window.addEventListener('resize', checkMenuWidth);
+    checkMenuWidth()
+
+
+    function onHoverLunch() {
+        const button = document.getElementById("lunch")
+        const div = document.getElementById("lunch-div")
+        const menu = document.getElementById("menu-1")
+
+        menu.style.display = "unset"
+
+        div.onmouseleave = function() {
+            if (menu.style.display == "unset") {
+                menu.style.display = "none"
+            }
+        }
+    }
+
+    function onHoverHoofdgerechten() {
+        const button = document.getElementById("hoofdgerechten")
+        const div = document.getElementById("hoofdgerechten-div")
+        const menu = document.getElementById("menu-2")
+
+        menu.style.display = "unset"
+
+        div.onmouseleave = function() {
+            if (menu.style.display == "unset") {
+                menu.style.display = "none"
+            }
+        }
+    }   
+
+    function onHoverNagerechten() {
+        const button = document.getElementById("nagerechten")
+        const div = document.getElementById("nagerechten-div")
+        const menu = document.getElementById("menu-3")
+
+        menu.style.display = "unset"
+
+        div.onmouseleave = function() {
+            if (menu.style.display == "unset") {
+                menu.style.display = "none"
+            }
+        }
+    }   
+
+    function onHoverBijgerechten() {
+        const button = document.getElementById("bijgerechten")
+        const div = document.getElementById("bijgerechten-div")
+        const menu = document.getElementById("menu-4")
+
+        menu.style.display = "unset"
+
+        div.onmouseleave = function() {
+            if (menu.style.display == "unset") {
+                menu.style.display = "none"
+            }
+        }
+    }   
+
+    function onHoverLunchMobile() {
+        const button = document.getElementById("lunch-mobile")
+        const div = document.getElementById("lunch-div-mobile")
+        const menu = document.getElementById("menu-mobile-1")
+
+        menu.style.display = "unset"
+
+        div.onmouseleave = function() {
+            if (menu.style.display == "unset") {
+                menu.style.display = "none"
+            }
+        }
+    }
+
+    function onHoverHoofdgerechtenMobile() {
+        const button = document.getElementById("hoofdgerechten-mobile")
+        const div = document.getElementById("hoofdgerechten-div-mobile")
+        const menu = document.getElementById("menu-mobile-2")
+
+        menu.style.display = "unset"
+
+        div.onmouseleave = function() {
+            if (menu.style.display == "unset") {
+                menu.style.display = "none"
+            }
+        }
+    }   
+
+    function onHoverNagerechtenMobile() {
+        const button = document.getElementById("nagerechten-mobile")
+        const div = document.getElementById("nagerechten-div-mobile")
+        const menu = document.getElementById("menu-mobile-3")
+
+        menu.style.display = "unset"
+
+        div.onmouseleave = function() {
+            if (menu.style.display == "unset") {
+                menu.style.display = "none"
+            }
+        }
+    }   
+
+    function onHoverBijgerechtenMobile() {
+        const button = document.getElementById("bijgerechten-mobile")
+        const div = document.getElementById("bijgerechten-div-mobile")
+        const menu = document.getElementById("menu-mobile-4")
+
+        menu.style.display = "unset"
+
+        div.onmouseleave = function() {
+            if (menu.style.display == "unset") {
+                menu.style.display = "none"
+            }
+        }
+    }   
+
+
+</script>
+
+    </header>
+    <article>
+        
+    <div class="post-image">
     
-  <article>
-    <h1>Appel Confituur Taart</h1>
-    <p>Appel-confituur taart</p>
-<p>Ingrediënten</p>
-<p>Gebak</p>
-<pre><code>100 g kristalsuiker
-200 g ongezouten boter
-370 g bloem
-1 medium ei
-1 snufje zout
-</code></pre>
-<p>Vulling</p>
-<pre><code>180 g zwarte bessenconfituur
-3/4 appels
-2 theelepels poedersuiker, voor het bestuiven
-</code></pre>
-<p>Bereiding</p>
-<pre><code>Doe suiker, boter, bloem, ei en zout in een mengkom en meng dit met een keukenrobot.
-Breng het deeg over naar een bebloemd werkvlak, maak er een platte bal van en wikkel in vershoudfolie. Zet 1 uur in de koelkast.
-Verwarm de oven voor op 180°C en plaats er een bakplaat in. Vet een taartvorm (Ø 26 cm) in met boter.
-Rol twee derde van het gekoelde deeg uit tot een dikte van 5 mm. Bekleed de voorbereide vorm met het deeg.
-Verdeel de confituur over de deegbodem en leg de appelschijfjes erop.
-Rol het resterende deeg uit tot een dikte van 5 mm.
-Snijd het deeg met een spatel of mes in 10 repen van elk 1 cm breed. Schik de stroken op de taart zodat er een rasterpatroon ontstaat. Druk elke strook stevig tegen de rand van de taart en snijd het teveel aan deeg weg.
-Plaats de taart in de oven en bak 30 minuten (180°C) of tot het deeg goudkleurig is. Bestuif met poedersuiker voor het opdienen.
-</code></pre>
+        <div style="background-image: url('https://kokenmetlisa.freedombox.be/images/appel-confituur-taart.jpeg'); background-position: center; background-size: cover;"></div>
+    
+    </div>
+    <div class="post-content">
+        <div class="post-actual-content">
+            <h1 id="appel-confituur-taart">Appel-confituur taart</h1>
+<h3 id="ingrediënten">Ingrediënten</h3>
+<h3 id="gebak">Gebak</h3>
+<ul>
+<li>100 g kristalsuiker</li>
+<li>200 g ongezouten boter</li>
+<li>370 g bloem</li>
+<li>1 medium ei</li>
+<li>1 snufje zout</li>
+</ul>
+<h3 id="vulling">Vulling</h3>
+<ul>
+<li>180 g zwarte bessenconfituur</li>
+<li>3/4 appels</li>
+<li>2 theelepels poedersuiker, voor het bestuiven</li>
+</ul>
+<h3 id="bereiding">Bereiding</h3>
+<ol>
+<li>Doe suiker, boter, bloem, ei en zout in een mengkom en meng dit met een keukenrobot.</li>
+<li>Breng het deeg over naar een bebloemd werkvlak, maak er een platte bal van en wikkel in vershoudfolie.
+Zet 1 uur in de koelkast.</li>
+<li>Verwarm de oven voor op 180°C en plaats er een bakplaat in.
+Vet een taartvorm (Ø 26 cm) in met boter.</li>
+<li>Rol twee derde van het gekoelde deeg uit tot een dikte van 5 mm.
+Bekleed de voorbereide vorm met het deeg.</li>
+<li>Verdeel de confituur over de deegbodem en leg de appelschijfjes erop.</li>
+<li>Rol het resterende deeg uit tot een dikte van 5 mm.</li>
+<li>Snijd het deeg met een spatel of mes in 10 repen van elk 1 cm breed.
+Schik de stroken op de taart zodat er een rasterpatroon ontstaat.
+Druk elke strook stevig tegen de rand van de taart en snijd het teveel aan deeg weg.</li>
+<li>Plaats de taart in de oven en bak 30 minuten (180°C) of tot het deeg goudkleurig is.
+Bestuif met poedersuiker voor het opdienen.</li>
+</ol>
 
-  </article>
+        </div>
+    </div>
 
-  </main>
-  <footer>
-    <div class="footer-navigation">
+    </article>
+    <footer>
+        <div class="footer-navigation">
     <div class="footer-navigation-box">
         <h3>Navigatie</h3>
         
@@ -112,12 +394,15 @@ Plaats de taart in de oven en bak 30 minuten (180°C) of tot het deeg goudkleuri
     </div>
 </div>
 <div class="footer-logo">
-    <a href=""><img src="images/kokenmetlisa.png" alt="Arcsec logo"></a>
+    <a href="https://kokenmetlisa.freedombox.be"><img src="https://kokenmetlisa.freedombox.be/images/kokenmetlisa.png" alt="Arcsec logo"></a>
 </div>
 <div class="copy">
     <p>Copyright 2023. All rights reserved.</p>
 </div>
 
-  </footer>
+<script src="https://kokenmetlisa.freedombox.be/js/main.js">
+
+</script>
+    </footer id="footer">
 </body>
 </html>

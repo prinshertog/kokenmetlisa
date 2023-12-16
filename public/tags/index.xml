@@ -2,44 +2,206 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on Kokenmetlisa</title>
-    <link>/tags/</link>
+    <link>https://kokenmetlisa.freedombox.be/tags/</link>
     <description>Recent content in Tags on Kokenmetlisa</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 26 Nov 2023 19:53:02 +0100</lastBuildDate><atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 15 Dec 2023 23:57:09 +0100</lastBuildDate><atom:link href="https://kokenmetlisa.freedombox.be/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>nagerechten</title>
-      <link>/tags/nagerechten/</link>
-      <pubDate>Sun, 26 Nov 2023 19:53:02 +0100</pubDate>
+      <title>hoofdgerechten</title>
+      <link>https://kokenmetlisa.freedombox.be/tags/hoofdgerechten/</link>
+      <pubDate>Fri, 15 Dec 2023 23:57:09 +0100</pubDate>
       
-      <guid>/tags/nagerechten/</guid>
+      <guid>https://kokenmetlisa.freedombox.be/tags/hoofdgerechten/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>taart</title>
-      <link>/tags/taart/</link>
-      <pubDate>Sun, 26 Nov 2023 19:53:02 +0100</pubDate>
+      <title>pasta</title>
+      <link>https://kokenmetlisa.freedombox.be/tags/pasta/</link>
+      <pubDate>Fri, 15 Dec 2023 23:57:09 +0100</pubDate>
       
-      <guid>/tags/taart/</guid>
+      <guid>https://kokenmetlisa.freedombox.be/tags/pasta/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>brood</title>
+      <link>https://kokenmetlisa.freedombox.be/tags/brood/</link>
+      <pubDate>Fri, 15 Dec 2023 23:56:41 +0100</pubDate>
+      
+      <guid>https://kokenmetlisa.freedombox.be/tags/brood/</guid>
       <description></description>
     </item>
     
     <item>
       <title>lunch</title>
-      <link>/tags/lunch/</link>
-      <pubDate>Sun, 26 Nov 2023 19:52:32 +0100</pubDate>
+      <link>https://kokenmetlisa.freedombox.be/tags/lunch/</link>
+      <pubDate>Fri, 15 Dec 2023 23:56:41 +0100</pubDate>
       
-      <guid>/tags/lunch/</guid>
+      <guid>https://kokenmetlisa.freedombox.be/tags/lunch/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>risotto</title>
+      <link>https://kokenmetlisa.freedombox.be/tags/risotto/</link>
+      <pubDate>Fri, 15 Dec 2023 23:56:23 +0100</pubDate>
+      
+      <guid>https://kokenmetlisa.freedombox.be/tags/risotto/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>aardappelen</title>
+      <link>https://kokenmetlisa.freedombox.be/tags/aardappelen/</link>
+      <pubDate>Fri, 15 Dec 2023 23:56:11 +0100</pubDate>
+      
+      <guid>https://kokenmetlisa.freedombox.be/tags/aardappelen/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>ovenschotels</title>
+      <link>https://kokenmetlisa.freedombox.be/tags/ovenschotels/</link>
+      <pubDate>Fri, 15 Dec 2023 23:56:11 +0100</pubDate>
+      
+      <guid>https://kokenmetlisa.freedombox.be/tags/ovenschotels/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>vleesgerechten</title>
+      <link>https://kokenmetlisa.freedombox.be/tags/vleesgerechten/</link>
+      <pubDate>Fri, 15 Dec 2023 23:56:04 +0100</pubDate>
+      
+      <guid>https://kokenmetlisa.freedombox.be/tags/vleesgerechten/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>couscous</title>
+      <link>https://kokenmetlisa.freedombox.be/tags/couscous/</link>
+      <pubDate>Fri, 15 Dec 2023 23:55:47 +0100</pubDate>
+      
+      <guid>https://kokenmetlisa.freedombox.be/tags/couscous/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>rijst-en-noedels</title>
+      <link>https://kokenmetlisa.freedombox.be/tags/rijst-en-noedels/</link>
+      <pubDate>Fri, 15 Dec 2023 23:55:25 +0100</pubDate>
+      
+      <guid>https://kokenmetlisa.freedombox.be/tags/rijst-en-noedels/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>burgers-en-wraps</title>
+      <link>https://kokenmetlisa.freedombox.be/tags/burgers-en-wraps/</link>
+      <pubDate>Fri, 15 Dec 2023 23:54:59 +0100</pubDate>
+      
+      <guid>https://kokenmetlisa.freedombox.be/tags/burgers-en-wraps/</guid>
       <description></description>
     </item>
     
     <item>
       <title>soep</title>
-      <link>/tags/soep/</link>
-      <pubDate>Sun, 26 Nov 2023 19:52:32 +0100</pubDate>
+      <link>https://kokenmetlisa.freedombox.be/tags/soep/</link>
+      <pubDate>Fri, 15 Dec 2023 23:54:40 +0100</pubDate>
       
-      <guid>/tags/soep/</guid>
+      <guid>https://kokenmetlisa.freedombox.be/tags/soep/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>salades</title>
+      <link>https://kokenmetlisa.freedombox.be/tags/salades/</link>
+      <pubDate>Fri, 15 Dec 2023 23:54:30 +0100</pubDate>
+      
+      <guid>https://kokenmetlisa.freedombox.be/tags/salades/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>bijgerechten</title>
+      <link>https://kokenmetlisa.freedombox.be/tags/bijgerechten/</link>
+      <pubDate>Fri, 15 Dec 2023 23:54:13 +0100</pubDate>
+      
+      <guid>https://kokenmetlisa.freedombox.be/tags/bijgerechten/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>sauzen</title>
+      <link>https://kokenmetlisa.freedombox.be/tags/sauzen/</link>
+      <pubDate>Fri, 15 Dec 2023 23:54:13 +0100</pubDate>
+      
+      <guid>https://kokenmetlisa.freedombox.be/tags/sauzen/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>deeg</title>
+      <link>https://kokenmetlisa.freedombox.be/tags/deeg/</link>
+      <pubDate>Fri, 15 Dec 2023 23:54:08 +0100</pubDate>
+      
+      <guid>https://kokenmetlisa.freedombox.be/tags/deeg/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>dessert</title>
+      <link>https://kokenmetlisa.freedombox.be/tags/dessert/</link>
+      <pubDate>Fri, 15 Dec 2023 23:54:02 +0100</pubDate>
+      
+      <guid>https://kokenmetlisa.freedombox.be/tags/dessert/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>nagerechten</title>
+      <link>https://kokenmetlisa.freedombox.be/tags/nagerechten/</link>
+      <pubDate>Fri, 15 Dec 2023 23:54:02 +0100</pubDate>
+      
+      <guid>https://kokenmetlisa.freedombox.be/tags/nagerechten/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>koeken</title>
+      <link>https://kokenmetlisa.freedombox.be/tags/koeken/</link>
+      <pubDate>Fri, 15 Dec 2023 23:53:51 +0100</pubDate>
+      
+      <guid>https://kokenmetlisa.freedombox.be/tags/koeken/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>taart</title>
+      <link>https://kokenmetlisa.freedombox.be/tags/taart/</link>
+      <pubDate>Fri, 15 Dec 2023 23:50:24 +0100</pubDate>
+      
+      <guid>https://kokenmetlisa.freedombox.be/tags/taart/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>aardappel</title>
+      <link>https://kokenmetlisa.freedombox.be/tags/aardappel/</link>
+      <pubDate>Sat, 02 Dec 2023 15:40:57 +0100</pubDate>
+      
+      <guid>https://kokenmetlisa.freedombox.be/tags/aardappel/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>salade</title>
+      <link>https://kokenmetlisa.freedombox.be/tags/salade/</link>
+      <pubDate>Sun, 26 Nov 2023 19:54:10 +0100</pubDate>
+      
+      <guid>https://kokenmetlisa.freedombox.be/tags/salade/</guid>
       <description></description>
     </item>
     

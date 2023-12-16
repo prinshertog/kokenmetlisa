@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+<head>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<link rel="icon" type="image/x-icon" href="https://kokenmetlisa.freedombox.be/images/kokenmetlisa.png">
+<link rel="stylesheet" href="https://kokenmetlisa.freedombox.be/css/main.css">
+<title>Pasta | Kokenmetlisa</title>
+
+</head>
+<body>
+  <header>
+    <div class="title">
+    <a href="https://kokenmetlisa.freedombox.be"><img src="https://kokenmetlisa.freedombox.be/images/kokenmetlisa.png"></a>
+</div>
+<div class="navigation">
+    <div class="button">
+        <div class="menu-icon" id="button" onclick="onClick()">
+            <span class="line"></span>
+            <span class="line"></span>
+            <span class="line"></span>
+        </div>
+        
+        <div class="button-dropdown" id="menu">
+            <ul>
+                <li><a href="https://kokenmetlisa.freedombox.be">Home</a></li>
+                <li id="lunch-div-mobile">
+                    <a href="https://kokenmetlisa.freedombox.be/lunch" id="lunch-mobile" onpointerover="onHoverLunchMobile()">Lunch</a>
+                    
+                    <div class="button-dropdown-mobile-menu" id="menu-mobile-1">
+                        <ul>
+                            
+                            <li><a href="/sub-menu/brood/">Brood</a></li>
+                            
+                            <li><a href="/sub-menu/salades/">Salades</a></li>
+                            
+                            <li><a href="/sub-menu/soep/">Soep</a></li>
+                            
+                        </ul>
+                    </div>
+                    
+                </li>
+                <li id="hoofdgerechten-div-mobile">
+                    <a href="https://kokenmetlisa.freedombox.be/hoofdgerechten" id="hoofdgerechten-mobile" onpointerover="onHoverHoofdgerechtenMobile()">Hoofdgerechten</a>
+                    
+                    <div class="button-dropdown-mobile-menu" id="menu-mobile-2">
+                        <ul>
+                            
+                            <li><a href="/sub-menu/vleesgerechten/">Vleesgerechten</a></li>
+                            
+                            <li><a href="/sub-menu/aardappelen/">Aardappelen</a></li>
+                            
+                            <li><a href="/sub-menu/ovenschotels/">Ovenschotels</a></li>
+                            
+                            <li><a href="/sub-menu/pasta/">Pasta</a></li>
+                            
+                            <li><a href="/sub-menu/risotto/">Risotto</a></li>
+                            
+                            <li><a href="/sub-menu/couscous/">Couscous</a></li>
+                            
+                            <li><a href="/sub-menu/rijst-en-noedels/">Rijst &amp; noedels</a></li>
+                            
+                            <li><a href="/sub-menu/burgers-en-wraps/">Burgers &amp; Wraps</a></li>
+                            
+                        </ul>
+                    </div>
+                    
+                </li>
+                <li id="nagerechten-div-mobile">
+                    <a href="https://kokenmetlisa.freedombox.be/nagerechten" id="nagerechten-mobile" onpointerover="onHoverNagerechtenMobile()">Nagerechten</a>
+                    
+                    <div class="button-dropdown-mobile-menu" id="menu-mobile-3">
+                        <ul>
+                            
+                            <li><a href="/sub-menu/taart/">Taart</a></li>
+                            
+                            <li><a href="/sub-menu/dessert/">Dessert</a></li>
+                            
+                            <li><a href="/sub-menu/koeken/">Koeken</a></li>
+                            
+                        </ul>
+                    </div>
+                    
+                </li>
+                <li id="bijgerechten-div-mobile">
+                    <a href="https://kokenmetlisa.freedombox.be/bijgerechten" id="bijgerechten-mobile" onpointerover="onHoverBijgerechtenMobile()">Bijgerechten</a>
+                    
+                    <div class="button-dropdown-mobile-menu" id="menu-mobile-4">
+                        <ul>
+                            
+                            <li><a href="/sub-menu/sauzen/">Sauzen</a></li>
+                            
+                            <li><a href="/sub-menu/deeg/">Deeg</a></li>
+                            
+                        </ul>
+                    </div>
+                    
+                </li>
+            </ul>
+        </div>
+        
+    </div>
+    <div class="default-nav">
+        <ul>
+            <li><a href="https://kokenmetlisa.freedombox.be">Home</a></li>
+            <li id="lunch-div">
+                <a href="https://kokenmetlisa.freedombox.be/lunch" id="lunch" onpointerover="onHoverLunch()">Lunch</a>
+                
+                <div class="button-dropdown-default-menu-1" id="menu-1">
+                    <ul>
+                        
+                        <li><a href="/sub-menu/brood/">Brood</a></li>
+                        
+                        <li><a href="/sub-menu/salades/">Salades</a></li>
+                        
+                        <li><a href="/sub-menu/soep/">Soep</a></li>
+                        
+                    </ul>
+                </div>
+                
+            </li>
+            <li id="hoofdgerechten-div">
+                <a href="https://kokenmetlisa.freedombox.be/hoofdgerechten" id="hoofdgerechten" onpointerover="onHoverHoofdgerechten()">Hoofdgerechten</a>
+                
+                <div class="button-dropdown-default-menu-2" id="menu-2">
+                    <ul>
+                        
+                        <li><a href="/sub-menu/vleesgerechten/">Vleesgerechten</a></li>
+                        
+                        <li><a href="/sub-menu/aardappelen/">Aardappelen</a></li>
+                        
+                        <li><a href="/sub-menu/ovenschotels/">Ovenschotels</a></li>
+                        
+                        <li><a href="/sub-menu/pasta/">Pasta</a></li>
+                        
+                        <li><a href="/sub-menu/risotto/">Risotto</a></li>
+                        
+                        <li><a href="/sub-menu/couscous/">Couscous</a></li>
+                        
+                        <li><a href="/sub-menu/rijst-en-noedels/">Rijst &amp; noedels</a></li>
+                        
+                        <li><a href="/sub-menu/burgers-en-wraps/">Burgers &amp; Wraps</a></li>
+                        
+                    </ul>
+                </div>
+                
+            </li>
+            <li id="nagerechten-div">
+                <a href="https://kokenmetlisa.freedombox.be/nagerechten" id="nagerechten" onpointerover="onHoverNagerechten()">Nagerechten</a>
+                
+                <div class="button-dropdown-default-menu-3" id="menu-3">
+                    <ul>
+                        
+                        <li><a href="/sub-menu/taart/">Taart</a></li>
+                        
+                        <li><a href="/sub-menu/dessert/">Dessert</a></li>
+                        
+                        <li><a href="/sub-menu/koeken/">Koeken</a></li>
+                        
+                    </ul>
+                </div>
+                
+            </li>
+            <li id="bijgerechten-div">
+                <a href="https://kokenmetlisa.freedombox.be/bijgerechten" id="bijgerechten" onpointerover="onHoverBijgerechten()">Bijgerechten</a>
+                
+                <div class="button-dropdown-default-menu-4" id="menu-4">
+                    <ul>
+                        
+                        <li><a href="/sub-menu/sauzen/">Sauzen</a></li>
+                        
+                        <li><a href="/sub-menu/deeg/">Deeg</a></li>
+                        
+                    </ul>
+                </div>
+                
+            </li>
+        </ul>
+    </div>
+</div>
+
+
+<script>
+
+    function checkMenuWidth() {
+        const menu = document.getElementById("menu")
+        if (window.innerWidth > 800) {
+            menu.style.display = "none"
+        }
+    }
+
+    function initButton() {
+        const menu = document.getElementById("menu")
+        menu.style.display = "none"
+    }
+
+    initButton()
+
+    function onClick() {
+        const menu = document.getElementById("menu")
+        
+        if (menu.style.display == "none") {
+            menu.style.display = "unset"
+        } else {
+            menu.style.display = "none"
+        }
+    }
+    window.addEventListener('resize', checkMenuWidth);
+    checkMenuWidth()
+
+
+    function onHoverLunch() {
+        const button = document.getElementById("lunch")
+        const div = document.getElementById("lunch-div")
+        const menu = document.getElementById("menu-1")
+
+        menu.style.display = "unset"
+
+        div.onmouseleave = function() {
+            if (menu.style.display == "unset") {
+                menu.style.display = "none"
+            }
+        }
+    }
+
+    function onHoverHoofdgerechten() {
+        const button = document.getElementById("hoofdgerechten")
+        const div = document.getElementById("hoofdgerechten-div")
+        const menu = document.getElementById("menu-2")
+
+        menu.style.display = "unset"
+
+        div.onmouseleave = function() {
+            if (menu.style.display == "unset") {
+                menu.style.display = "none"
+            }
+        }
+    }   
+
+    function onHoverNagerechten() {
+        const button = document.getElementById("nagerechten")
+        const div = document.getElementById("nagerechten-div")
+        const menu = document.getElementById("menu-3")
+
+        menu.style.display = "unset"
+
+        div.onmouseleave = function() {
+            if (menu.style.display == "unset") {
+                menu.style.display = "none"
+            }
+        }
+    }   
+
+    function onHoverBijgerechten() {
+        const button = document.getElementById("bijgerechten")
+        const div = document.getElementById("bijgerechten-div")
+        const menu = document.getElementById("menu-4")
+
+        menu.style.display = "unset"
+
+        div.onmouseleave = function() {
+            if (menu.style.display == "unset") {
+                menu.style.display = "none"
+            }
+        }
+    }   
+
+    function onHoverLunchMobile() {
+        const button = document.getElementById("lunch-mobile")
+        const div = document.getElementById("lunch-div-mobile")
+        const menu = document.getElementById("menu-mobile-1")
+
+        menu.style.display = "unset"
+
+        div.onmouseleave = function() {
+            if (menu.style.display == "unset") {
+                menu.style.display = "none"
+            }
+        }
+    }
+
+    function onHoverHoofdgerechtenMobile() {
+        const button = document.getElementById("hoofdgerechten-mobile")
+        const div = document.getElementById("hoofdgerechten-div-mobile")
+        const menu = document.getElementById("menu-mobile-2")
+
+        menu.style.display = "unset"
+
+        div.onmouseleave = function() {
+            if (menu.style.display == "unset") {
+                menu.style.display = "none"
+            }
+        }
+    }   
+
+    function onHoverNagerechtenMobile() {
+        const button = document.getElementById("nagerechten-mobile")
+        const div = document.getElementById("nagerechten-div-mobile")
+        const menu = document.getElementById("menu-mobile-3")
+
+        menu.style.display = "unset"
+
+        div.onmouseleave = function() {
+            if (menu.style.display == "unset") {
+                menu.style.display = "none"
+            }
+        }
+    }   
+
+    function onHoverBijgerechtenMobile() {
+        const button = document.getElementById("bijgerechten-mobile")
+        const div = document.getElementById("bijgerechten-div-mobile")
+        const menu = document.getElementById("menu-mobile-4")
+
+        menu.style.display = "unset"
+
+        div.onmouseleave = function() {
+            if (menu.style.display == "unset") {
+                menu.style.display = "none"
+            }
+        }
+    }   
+
+
+</script>
+
+  </header>
+  <main>
+    
+   
+  
+
+  
+    <a href="/posts/spaghetti-alle-vongole/">
+      <article class="posts">
+        
+          <div class="image" style="border-top-left-radius: 10pt; border-top-right-radius: 10pt; background-image: url('https://kokenmetlisa.freedombox.be/images/spaghetti-alle-vongole.jpg'); background-position: center; background-size: cover; padding: 80pt 20pt;"></div>
+        
+        <h2><a href="/posts/spaghetti-alle-vongole/">Spaghetti Alle Vongole</a></h2>
+      </article>
+    </a>
+  
+    <a href="/posts/zalm-en-spinazie-lasagne/">
+      <article class="posts">
+        
+          <div class="image" style="border-top-left-radius: 10pt; border-top-right-radius: 10pt; background-image: url('https://kokenmetlisa.freedombox.be/images/Spinazie-en-zalm-lasagne-met-bechamelsaus.webp'); background-position: center; background-size: cover; padding: 80pt 20pt;"></div>
+        
+        <h2><a href="/posts/zalm-en-spinazie-lasagne/">Zalm en spinazie lasagne</a></h2>
+      </article>
+    </a>
+  
+    <a href="/posts/pasta-zalm-en-broccoli/">
+      <article class="posts">
+        
+          <div class="image" style="border-top-left-radius: 10pt; border-top-right-radius: 10pt; background-image: url('https://kokenmetlisa.freedombox.be/images/pasta-zalm-en-broccoli.jpg'); background-position: center; background-size: cover; padding: 80pt 20pt;"></div>
+        
+        <h2><a href="/posts/pasta-zalm-en-broccoli/">Pasta Zalm en Broccoli</a></h2>
+      </article>
+    </a>
+  
+    <a href="/posts/tortellini-ovenschotel-met-paprika/">
+      <article class="posts">
+        
+          <div class="image" style="border-top-left-radius: 10pt; border-top-right-radius: 10pt; background-image: url('https://kokenmetlisa.freedombox.be/images/tortellini-ovenschotel-paprika.jpeg'); background-position: center; background-size: cover; padding: 80pt 20pt;"></div>
+        
+        <h2><a href="/posts/tortellini-ovenschotel-met-paprika/">Tortellini Ovenschotel Met Paprika</a></h2>
+      </article>
+    </a>
+  
+    <a href="/posts/pasta-feta/">
+      <article class="posts">
+        
+          <div class="image" style="border-top-left-radius: 10pt; border-top-right-radius: 10pt; background-image: url('https://kokenmetlisa.freedombox.be/images/pasta-feta.jpeg'); background-position: center; background-size: cover; padding: 80pt 20pt;"></div>
+        
+        <h2><a href="/posts/pasta-feta/">Pasta Feta</a></h2>
+      </article>
+    </a>
+  
+    <a href="/posts/lasagne-bolognese/">
+      <article class="posts">
+        
+          <div class="image" style="border-top-left-radius: 10pt; border-top-right-radius: 10pt; background-image: url('https://kokenmetlisa.freedombox.be/images/lasagne-bolognese.jpg'); background-position: center; background-size: cover; padding: 80pt 20pt;"></div>
+        
+        <h2><a href="/posts/lasagne-bolognese/">Lasagne Bolognese</a></h2>
+      </article>
+    </a>
+  
+    <a href="/posts/oreo-cheesecake/">
+      <article class="posts">
+        
+          <div class="image" style="border-top-left-radius: 10pt; border-top-right-radius: 10pt; background-image: url('https://kokenmetlisa.freedombox.be/images/oreo-cheesecake.jpeg'); background-position: center; background-size: cover; padding: 80pt 20pt;"></div>
+        
+        <h2><a href="/posts/oreo-cheesecake/">Oreo Cheesecake</a></h2>
+      </article>
+    </a>
+  
+    <a href="/posts/creamy-lemon-pasta-met-asperges/">
+      <article class="posts">
+        
+          <div class="image" style="border-top-left-radius: 10pt; border-top-right-radius: 10pt; background-image: url('https://kokenmetlisa.freedombox.be/images/asperge.png'); background-position: center; background-size: cover; padding: 80pt 20pt;"></div>
+        
+        <h2><a href="/posts/creamy-lemon-pasta-met-asperges/">Creamy Lemon Pasta Met Asperges</a></h2>
+      </article>
+    </a>
+  
+    <a href="/posts/pasta-tonijn-spinazie-en-champignons/">
+      <article class="posts">
+        
+          <div class="image" style="border-top-left-radius: 10pt; border-top-right-radius: 10pt; background-image: url('https://kokenmetlisa.freedombox.be/images/Tonijn-pasta.png'); background-position: center; background-size: cover; padding: 80pt 20pt;"></div>
+        
+        <h2><a href="/posts/pasta-tonijn-spinazie-en-champignons/">Pasta Tonijn Spinazie en Champignons</a></h2>
+      </article>
+    </a>
+  
+    <a href="/posts/aubergine-ricottalasagne/">
+      <article class="posts">
+        
+          <div class="image" style="border-top-left-radius: 10pt; border-top-right-radius: 10pt; background-image: url('https://kokenmetlisa.freedombox.be/images/aubergine-ricottalasagne.jpg'); background-position: center; background-size: cover; padding: 80pt 20pt;"></div>
+        
+        <h2><a href="/posts/aubergine-ricottalasagne/">Aubergine Ricottalasagne</a></h2>
+      </article>
+    </a>
+  
+    <a href="/posts/parelcouscous-met-mediterraanse-groenten-scampi-en-boursin/">
+      <article class="posts">
+        
+          <div class="image" style="border-top-left-radius: 10pt; border-top-right-radius: 10pt; background-image: url('https://kokenmetlisa.freedombox.be/images/parelcouscous-met-mediterraanse-groenten-scampi-en-boursin.png'); background-position: center; background-size: cover; padding: 80pt 20pt;"></div>
+        
+        <h2><a href="/posts/parelcouscous-met-mediterraanse-groenten-scampi-en-boursin/">Parelcouscous Met Mediterraanse Groenten Scampi en Boursin</a></h2>
+      </article>
+    </a>
+  
+    <a href="/posts/pasta-courgette-en-champignons/">
+      <article class="posts">
+        
+          <div class="image" style="border-top-left-radius: 10pt; border-top-right-radius: 10pt; background-image: url('https://kokenmetlisa.freedombox.be/images/pasta-courgette-en-champignons.jpeg'); background-position: center; background-size: cover; padding: 80pt 20pt;"></div>
+        
+        <h2><a href="/posts/pasta-courgette-en-champignons/">Pasta Courgette en Champignons</a></h2>
+      </article>
+    </a>
+  
+    <a href="/posts/orzo-zalm-en-spinazie/">
+      <article class="posts">
+        
+          <div class="image" style="border-top-left-radius: 10pt; border-top-right-radius: 10pt; background-image: url('https://kokenmetlisa.freedombox.be/images/orzo-zalm-en-spinazie.jpg'); background-position: center; background-size: cover; padding: 80pt 20pt;"></div>
+        
+        <h2><a href="/posts/orzo-zalm-en-spinazie/">Orzo Zalm en Spinazie</a></h2>
+      </article>
+    </a>
+  
+    <a href="/posts/pasta-paprika-en-burrata/">
+      <article class="posts">
+        
+          <div class="image" style="border-top-left-radius: 10pt; border-top-right-radius: 10pt; background-image: url('https://kokenmetlisa.freedombox.be/images/pasta-paprika-en-burrata.png'); background-position: center; background-size: cover; padding: 80pt 20pt;"></div>
+        
+        <h2><a href="/posts/pasta-paprika-en-burrata/">Pasta Paprika en Burrata</a></h2>
+      </article>
+    </a>
+  
+    <a href="/posts/penne-met-geroosterde-pompoen/">
+      <article class="posts">
+        
+          <div class="image" style="border-top-left-radius: 10pt; border-top-right-radius: 10pt; background-image: url('https://kokenmetlisa.freedombox.be/images/penne-met-geroosterde-pompoen.jpg'); background-position: center; background-size: cover; padding: 80pt 20pt;"></div>
+        
+        <h2><a href="/posts/penne-met-geroosterde-pompoen/">Penne Met Geroosterde Pompoen</a></h2>
+      </article>
+    </a>
+  
+    <a href="/posts/romige-groene-veggie-pasta/">
+      <article class="posts">
+        
+          <div class="image" style="border-top-left-radius: 10pt; border-top-right-radius: 10pt; background-image: url('https://kokenmetlisa.freedombox.be/images/romige-groene-veggie-pasta.png'); background-position: center; background-size: cover; padding: 80pt 20pt;"></div>
+        
+        <h2><a href="/posts/romige-groene-veggie-pasta/">Romige Groene Veggie Pasta</a></h2>
+      </article>
+    </a>
+  
+    <a href="/posts/penne-met-bloemkool-en-spekjes/">
+      <article class="posts">
+        
+          <div class="image" style="border-top-left-radius: 10pt; border-top-right-radius: 10pt; background-image: url('https://kokenmetlisa.freedombox.be/images/penne-met-bloemkool-en-spekjes.jpg'); background-position: center; background-size: cover; padding: 80pt 20pt;"></div>
+        
+        <h2><a href="/posts/penne-met-bloemkool-en-spekjes/">Penne Met Bloemkool en Spekjes</a></h2>
+      </article>
+    </a>
+  
+    <a href="/posts/pasta-champignonenroomsaus-met-spekjes/">
+      <article class="posts">
+        
+          <div class="image" style="border-top-left-radius: 10pt; border-top-right-radius: 10pt; background-image: url('https://kokenmetlisa.freedombox.be/images/pasta-champignonenroomsaus-met-spekjes.jpg'); background-position: center; background-size: cover; padding: 80pt 20pt;"></div>
+        
+        <h2><a href="/posts/pasta-champignonenroomsaus-met-spekjes/">Pasta Champignonenroomsaus Met Spekjes</a></h2>
+      </article>
+    </a>
+  
+    <a href="/posts/pasta-met-geroosterde-bloemkool-en-pancetta/">
+      <article class="posts">
+        
+          <div class="image" style="border-top-left-radius: 10pt; border-top-right-radius: 10pt; background-image: url('https://kokenmetlisa.freedombox.be/images/pasta-met-geroosterde-bloemkool-en-pancetta.jpeg'); background-position: center; background-size: cover; padding: 80pt 20pt;"></div>
+        
+        <h2><a href="/posts/pasta-met-geroosterde-bloemkool-en-pancetta/">Pasta Met Geroosterde Bloemkool en Pancetta</a></h2>
+      </article>
+    </a>
+  
+    <a href="/posts/parelcouscous-met-yoghurt-pesto/">
+      <article class="posts">
+        
+          <div class="image" style="border-top-left-radius: 10pt; border-top-right-radius: 10pt; background-image: url('https://kokenmetlisa.freedombox.be/images/parelcouscous-met-mediterraanse-groenten-scampi-en-boursin.png'); background-position: center; background-size: cover; padding: 80pt 20pt;"></div>
+        
+        <h2><a href="/posts/parelcouscous-met-yoghurt-pesto/">Parelcouscous Met Yoghurt Pesto</a></h2>
+      </article>
+    </a>
+  
+    <a href="/posts/linguine-scampi-tomatenroomsaus/">
+      <article class="posts">
+        
+          <div class="image" style="border-top-left-radius: 10pt; border-top-right-radius: 10pt; background-image: url('https://kokenmetlisa.freedombox.be/images/linguine-scampi-tomatenroomsaus.jpeg'); background-position: center; background-size: cover; padding: 80pt 20pt;"></div>
+        
+        <h2><a href="/posts/linguine-scampi-tomatenroomsaus/">Linguine Scampi Tomatenroomsaus</a></h2>
+      </article>
+    </a>
+  
+    <a href="/posts/spaghetti-carbonara/">
+      <article class="posts">
+        
+          <div class="image" style="border-top-left-radius: 10pt; border-top-right-radius: 10pt; background-image: url('https://kokenmetlisa.freedombox.be/images/spaghetti-carbonara.jpg'); background-position: center; background-size: cover; padding: 80pt 20pt;"></div>
+        
+        <h2><a href="/posts/spaghetti-carbonara/">Spaghetti Carbonara</a></h2>
+      </article>
+    </a>
+  
+
+  </main>
+  <footer>
+    <div class="footer-navigation">
+    <div class="footer-navigation-box">
+        <h3>Navigatie</h3>
+        
+        <ul>
+            
+            <li><a href="/">Home</a></li>
+            
+            <li><a href="/lunch/">Lunch</a></li>
+            
+            <li><a href="/hoofdgerechten/">Hoofdgerechten</a></li>
+            
+            <li><a href="/nagerechten/">Nagerechten</a></li>
+            
+            <li><a href="/bijgerechten/">Bijgerechten</a></li>
+            
+        </ul>
+        
+    </div>
+</div>
+<div class="footer-logo">
+    <a href="https://kokenmetlisa.freedombox.be"><img src="https://kokenmetlisa.freedombox.be/images/kokenmetlisa.png" alt="Arcsec logo"></a>
+</div>
+<div class="copy">
+    <p>Copyright 2023. All rights reserved.</p>
+</div>
+
+<script src="https://kokenmetlisa.freedombox.be/js/main.js">
+
+</script>
+  </footer id="footer">
+</body>
+</html>

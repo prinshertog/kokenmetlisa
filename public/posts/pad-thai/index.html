@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+<head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<link rel="icon" type="image/x-icon" href="https://kokenmetlisa.freedombox.be/images/kokenmetlisa.png">
+<link rel="stylesheet" href="https://kokenmetlisa.freedombox.be/css/main.css">
+<title>Pad Thai | Kokenmetlisa</title>
+
+</head>
+<body>
+    <header>
+        <div class="title">
+    <a href="https://kokenmetlisa.freedombox.be"><img src="https://kokenmetlisa.freedombox.be/images/kokenmetlisa.png"></a>
+</div>
+<div class="navigation">
+    <div class="button">
+        <div class="menu-icon" id="button" onclick="onClick()">
+            <span class="line"></span>
+            <span class="line"></span>
+            <span class="line"></span>
+        </div>
+        
+        <div class="button-dropdown" id="menu">
+            <ul>
+                <li><a href="https://kokenmetlisa.freedombox.be">Home</a></li>
+                <li id="lunch-div-mobile">
+                    <a href="https://kokenmetlisa.freedombox.be/lunch" id="lunch-mobile" onpointerover="onHoverLunchMobile()">Lunch</a>
+                    
+                    <div class="button-dropdown-mobile-menu" id="menu-mobile-1">
+                        <ul>
+                            
+                            <li><a href="/sub-menu/brood/">Brood</a></li>
+                            
+                            <li><a href="/sub-menu/salades/">Salades</a></li>
+                            
+                            <li><a href="/sub-menu/soep/">Soep</a></li>
+                            
+                        </ul>
+                    </div>
+                    
+                </li>
+                <li id="hoofdgerechten-div-mobile">
+                    <a href="https://kokenmetlisa.freedombox.be/hoofdgerechten" id="hoofdgerechten-mobile" onpointerover="onHoverHoofdgerechtenMobile()">Hoofdgerechten</a>
+                    
+                    <div class="button-dropdown-mobile-menu" id="menu-mobile-2">
+                        <ul>
+                            
+                            <li><a href="/sub-menu/vleesgerechten/">Vleesgerechten</a></li>
+                            
+                            <li><a href="/sub-menu/aardappelen/">Aardappelen</a></li>
+                            
+                            <li><a href="/sub-menu/ovenschotels/">Ovenschotels</a></li>
+                            
+                            <li><a href="/sub-menu/pasta/">Pasta</a></li>
+                            
+                            <li><a href="/sub-menu/risotto/">Risotto</a></li>
+                            
+                            <li><a href="/sub-menu/couscous/">Couscous</a></li>
+                            
+                            <li><a href="/sub-menu/rijst-en-noedels/">Rijst &amp; noedels</a></li>
+                            
+                            <li><a href="/sub-menu/burgers-en-wraps/">Burgers &amp; Wraps</a></li>
+                            
+                        </ul>
+                    </div>
+                    
+                </li>
+                <li id="nagerechten-div-mobile">
+                    <a href="https://kokenmetlisa.freedombox.be/nagerechten" id="nagerechten-mobile" onpointerover="onHoverNagerechtenMobile()">Nagerechten</a>
+                    
+                    <div class="button-dropdown-mobile-menu" id="menu-mobile-3">
+                        <ul>
+                            
+                            <li><a href="/sub-menu/taart/">Taart</a></li>
+                            
+                            <li><a href="/sub-menu/dessert/">Dessert</a></li>
+                            
+                            <li><a href="/sub-menu/koeken/">Koeken</a></li>
+                            
+                        </ul>
+                    </div>
+                    
+                </li>
+                <li id="bijgerechten-div-mobile">
+                    <a href="https://kokenmetlisa.freedombox.be/bijgerechten" id="bijgerechten-mobile" onpointerover="onHoverBijgerechtenMobile()">Bijgerechten</a>
+                    
+                    <div class="button-dropdown-mobile-menu" id="menu-mobile-4">
+                        <ul>
+                            
+                            <li><a href="/sub-menu/sauzen/">Sauzen</a></li>
+                            
+                            <li><a href="/sub-menu/deeg/">Deeg</a></li>
+                            
+                        </ul>
+                    </div>
+                    
+                </li>
+            </ul>
+        </div>
+        
+    </div>
+    <div class="default-nav">
+        <ul>
+            <li><a href="https://kokenmetlisa.freedombox.be">Home</a></li>
+            <li id="lunch-div">
+                <a href="https://kokenmetlisa.freedombox.be/lunch" id="lunch" onpointerover="onHoverLunch()">Lunch</a>
+                
+                <div class="button-dropdown-default-menu-1" id="menu-1">
+                    <ul>
+                        
+                        <li><a href="/sub-menu/brood/">Brood</a></li>
+                        
+                        <li><a href="/sub-menu/salades/">Salades</a></li>
+                        
+                        <li><a href="/sub-menu/soep/">Soep</a></li>
+                        
+                    </ul>
+                </div>
+                
+            </li>
+            <li id="hoofdgerechten-div">
+                <a href="https://kokenmetlisa.freedombox.be/hoofdgerechten" id="hoofdgerechten" onpointerover="onHoverHoofdgerechten()">Hoofdgerechten</a>
+                
+                <div class="button-dropdown-default-menu-2" id="menu-2">
+                    <ul>
+                        
+                        <li><a href="/sub-menu/vleesgerechten/">Vleesgerechten</a></li>
+                        
+                        <li><a href="/sub-menu/aardappelen/">Aardappelen</a></li>
+                        
+                        <li><a href="/sub-menu/ovenschotels/">Ovenschotels</a></li>
+                        
+                        <li><a href="/sub-menu/pasta/">Pasta</a></li>
+                        
+                        <li><a href="/sub-menu/risotto/">Risotto</a></li>
+                        
+                        <li><a href="/sub-menu/couscous/">Couscous</a></li>
+                        
+                        <li><a href="/sub-menu/rijst-en-noedels/">Rijst &amp; noedels</a></li>
+                        
+                        <li><a href="/sub-menu/burgers-en-wraps/">Burgers &amp; Wraps</a></li>
+                        
+                    </ul>
+                </div>
+                
+            </li>
+            <li id="nagerechten-div">
+                <a href="https://kokenmetlisa.freedombox.be/nagerechten" id="nagerechten" onpointerover="onHoverNagerechten()">Nagerechten</a>
+                
+                <div class="button-dropdown-default-menu-3" id="menu-3">
+                    <ul>
+                        
+                        <li><a href="/sub-menu/taart/">Taart</a></li>
+                        
+                        <li><a href="/sub-menu/dessert/">Dessert</a></li>
+                        
+                        <li><a href="/sub-menu/koeken/">Koeken</a></li>
+                        
+                    </ul>
+                </div>
+                
+            </li>
+            <li id="bijgerechten-div">
+                <a href="https://kokenmetlisa.freedombox.be/bijgerechten" id="bijgerechten" onpointerover="onHoverBijgerechten()">Bijgerechten</a>
+                
+                <div class="button-dropdown-default-menu-4" id="menu-4">
+                    <ul>
+                        
+                        <li><a href="/sub-menu/sauzen/">Sauzen</a></li>
+                        
+                        <li><a href="/sub-menu/deeg/">Deeg</a></li>
+                        
+                    </ul>
+                </div>
+                
+            </li>
+        </ul>
+    </div>
+</div>
+
+
+<script>
+
+    function checkMenuWidth() {
+        const menu = document.getElementById("menu")
+        if (window.innerWidth > 800) {
+            menu.style.display = "none"
+        }
+    }
+
+    function initButton() {
+        const menu = document.getElementById("menu")
+        menu.style.display = "none"
+    }
+
+    initButton()
+
+    function onClick() {
+        const menu = document.getElementById("menu")
+        
+        if (menu.style.display == "none") {
+            menu.style.display = "unset"
+        } else {
+            menu.style.display = "none"
+        }
+    }
+    window.addEventListener('resize', checkMenuWidth);
+    checkMenuWidth()
+
+
+    function onHoverLunch() {
+        const button = document.getElementById("lunch")
+        const div = document.getElementById("lunch-div")
+        const menu = document.getElementById("menu-1")
+
+        menu.style.display = "unset"
+
+        div.onmouseleave = function() {
+            if (menu.style.display == "unset") {
+                menu.style.display = "none"
+            }
+        }
+    }
+
+    function onHoverHoofdgerechten() {
+        const button = document.getElementById("hoofdgerechten")
+        const div = document.getElementById("hoofdgerechten-div")
+        const menu = document.getElementById("menu-2")
+
+        menu.style.display = "unset"
+
+        div.onmouseleave = function() {
+            if (menu.style.display == "unset") {
+                menu.style.display = "none"
+            }
+        }
+    }   
+
+    function onHoverNagerechten() {
+        const button = document.getElementById("nagerechten")
+        const div = document.getElementById("nagerechten-div")
+        const menu = document.getElementById("menu-3")
+
+        menu.style.display = "unset"
+
+        div.onmouseleave = function() {
+            if (menu.style.display == "unset") {
+                menu.style.display = "none"
+            }
+        }
+    }   
+
+    function onHoverBijgerechten() {
+        const button = document.getElementById("bijgerechten")
+        const div = document.getElementById("bijgerechten-div")
+        const menu = document.getElementById("menu-4")
+
+        menu.style.display = "unset"
+
+        div.onmouseleave = function() {
+            if (menu.style.display == "unset") {
+                menu.style.display = "none"
+            }
+        }
+    }   
+
+    function onHoverLunchMobile() {
+        const button = document.getElementById("lunch-mobile")
+        const div = document.getElementById("lunch-div-mobile")
+        const menu = document.getElementById("menu-mobile-1")
+
+        menu.style.display = "unset"
+
+        div.onmouseleave = function() {
+            if (menu.style.display == "unset") {
+                menu.style.display = "none"
+            }
+        }
+    }
+
+    function onHoverHoofdgerechtenMobile() {
+        const button = document.getElementById("hoofdgerechten-mobile")
+        const div = document.getElementById("hoofdgerechten-div-mobile")
+        const menu = document.getElementById("menu-mobile-2")
+
+        menu.style.display = "unset"
+
+        div.onmouseleave = function() {
+            if (menu.style.display == "unset") {
+                menu.style.display = "none"
+            }
+        }
+    }   
+
+    function onHoverNagerechtenMobile() {
+        const button = document.getElementById("nagerechten-mobile")
+        const div = document.getElementById("nagerechten-div-mobile")
+        const menu = document.getElementById("menu-mobile-3")
+
+        menu.style.display = "unset"
+
+        div.onmouseleave = function() {
+            if (menu.style.display == "unset") {
+                menu.style.display = "none"
+            }
+        }
+    }   
+
+    function onHoverBijgerechtenMobile() {
+        const button = document.getElementById("bijgerechten-mobile")
+        const div = document.getElementById("bijgerechten-div-mobile")
+        const menu = document.getElementById("menu-mobile-4")
+
+        menu.style.display = "unset"
+
+        div.onmouseleave = function() {
+            if (menu.style.display == "unset") {
+                menu.style.display = "none"
+            }
+        }
+    }   
+
+
+</script>
+
+    </header>
+    <article>
+        
+    <div class="post-image">
+    
+        <div style="background-image: url('https://kokenmetlisa.freedombox.be/images/pad-thai.jpg'); background-position: center; background-size: cover;"></div>
+    
+    </div>
+    <div class="post-content">
+        <div class="post-actual-content">
+            <h1 id="pad-thai">Pad Thai</h1>
+<h2 id="ingrediënten-4-personen">Ingrediënten (4 personen)</h2>
+<ul>
+<li>200g glasnoedels</li>
+<li>1 rode ui</li>
+<li>1 teentje knoflook</li>
+<li>20g gember</li>
+<li>½ chillipeper</li>
+<li>1 bussel lente-ui</li>
+<li>300g kipfilet of vega kipstukjes</li>
+<li>250g sojascheuten (taugé voor de Nederlanders;)</li>
+<li>2 eieren</li>
+<li>150g pinda’s</li>
+<li>Limoen</li>
+<li>Soja saus</li>
+<li>Zoetzure saus</li>
+</ul>
+<h2 id="bereiding">Bereiding</h2>
+<ol>
+<li>Doe de glasnoedels in een kom. Giet er kokend water op en laat ze zacht worden. Kook de noedels niet, dan worden ze te snel plat.</li>
+<li>Snij de groenten en de kip. Marineer de kip met een beetje sojasaus.</li>
+<li>Bak de rode ui in een wokpan en voeg de kip toe.</li>
+<li>Voeg vervolgens de knoflook, chillipeper en gember toe.</li>
+<li>Voeg de noedels en een scheutje water toe.</li>
+<li>Duw alle ingrediënten naar één kant van de wok. Bak de eieren en roer ze door de rest heen.</li>
+<li>Voeg de sojasheuten toe en laat kort stoven.</li>
+<li>Voeg sojasaus en zoetzure saus toe naar smaak.</li>
+<li>Werk af met het gesnipperde groen van de lente-uien en gecrushte pinda’s.</li>
+</ol>
+
+        </div>
+    </div>
+
+    </article>
+    <footer>
+        <div class="footer-navigation">
+    <div class="footer-navigation-box">
+        <h3>Navigatie</h3>
+        
+        <ul>
+            
+            <li><a href="/">Home</a></li>
+            
+            <li><a href="/lunch/">Lunch</a></li>
+            
+            <li><a href="/hoofdgerechten/">Hoofdgerechten</a></li>
+            
+            <li><a href="/nagerechten/">Nagerechten</a></li>
+            
+            <li><a href="/bijgerechten/">Bijgerechten</a></li>
+            
+        </ul>
+        
+    </div>
+</div>
+<div class="footer-logo">
+    <a href="https://kokenmetlisa.freedombox.be"><img src="https://kokenmetlisa.freedombox.be/images/kokenmetlisa.png" alt="Arcsec logo"></a>
+</div>
+<div class="copy">
+    <p>Copyright 2023. All rights reserved.</p>
+</div>
+
+<script src="https://kokenmetlisa.freedombox.be/js/main.js">
+
+</script>
+    </footer id="footer">
+</body>
+</html>
