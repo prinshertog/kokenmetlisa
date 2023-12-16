@@ -1,5 +1,5 @@
 #baseURL = 'https://kokenmetlisa.freedombox.be/'
-baseURL = ''
+#baseURL = ''
 languageCode = 'en-us'
 title = 'Kokenmetlisa'
 disableKinds = ["taxonomy", "term", "section"]

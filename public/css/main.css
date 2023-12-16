@@ -120,16 +120,15 @@ header .button-dropdown-mobile-menu {
 }
 
 main {
-  margin-left: 10%;
-  margin-right: 10%;
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
 }
 
 main .posts {
   padding: 10pt;
-  height: 350pt;
-  width: calc(33.33% - 20px);
+  height: 300pt;
+  width: 300pt;
   margin: 10px;
   box-sizing: border-box;
 }
@@ -139,11 +138,11 @@ main .posts h2 {
   background-color: rgb(96, 110, 90);
   border-bottom-left-radius: 10pt;
   border-bottom-right-radius: 10pt;
-  height: 100pt;
+  height: 60pt;
 }
 
 article {
-  height: 1000pt;
+  height: 1300pt;
 }
 
 article li {
