@@ -4,7 +4,7 @@ date = 2023-12-20T16:05:30+01:00
 draft = false
 featured = "images/ovenschotel-met-broccoli-puree-en-kip.jpeg"
 tags = ["aardappelen", "hoofdgerechten", "ovenschotels"]
-weight = 61
+weight = 68
 layout = "standard-recepten-layout"
 +++
 

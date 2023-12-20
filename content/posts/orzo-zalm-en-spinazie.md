@@ -4,7 +4,7 @@ date = 2023-12-15T23:51:24+01:00
 draft = false
 featured = "images/orzo-zalm-en-spinazie.jpg"
 tags = ["pasta", "hoofdgerechten"]
-weight = 43
+weight = 67
 layout = "standard-recepten-layout"
 +++
 
