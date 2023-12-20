@@ -4,7 +4,7 @@ date = 2023-12-20T15:57:47+01:00
 draft = false
 featured = "images/ratatouille-orzo-met-geroosterde-paprika.jpeg"
 tags = ["pasta", "hoofdgerechten"]
-weight = 60
+weight = 67
 layout = "standard-recepten-layout"
 +++
 
