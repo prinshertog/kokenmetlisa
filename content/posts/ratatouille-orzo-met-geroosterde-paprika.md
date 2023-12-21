@@ -4,13 +4,13 @@ date = 2023-12-20T15:57:47+01:00
 draft = false
 featured = "images/ratatouille-orzo-met-geroosterde-paprika.jpeg"
 tags = ["pasta", "hoofdgerechten"]
-weight = 67
+weight = -2
 layout = "standard-recepten-layout"
 +++
 
-Ratatouille Orzo met geroosterde paprika
+# Ratatouille Orzo met geroosterde paprika
 
-Ingrediënten (4 personen):
+## Ingrediënten (4 personen):
 - 2 aubergines
 - 2 courgettes
 - 200g kerstomaatjes
@@ -26,7 +26,7 @@ Ingrediënten (4 personen):
 - Cayennepeper
 - Keuze om kip of vegetarische kip toe te voegen
 
-Bereiding:
+## Bereiding:
 1. Kook de orzo volgens de verpakking. Voeg hieraan een half of heel blokje bouillon toe. 
 1. Snijd de kip en de groenten in stukjes. 
 1. Voeg wat olijfolie toe in een pan en bak de kip en de groentjes.
