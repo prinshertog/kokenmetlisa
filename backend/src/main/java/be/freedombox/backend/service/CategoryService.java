@@ -1,0 +1,33 @@
+package be.freedombox.backend.service;
+
+import be.freedombox.backend.domain.Category;
+import be.freedombox.backend.dto.CategoryDTO;
+import be.freedombox.backend.repository.CategoryRepository;
+import be.freedombox.backend.request.CategoryRequest;
+import be.freedombox.backend.tools.Mapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
+@Service
+public class CategoryService implements ICategoryService {
+    CategoryRepository categoryRepository;
+
+    @Autowired
+    public CategoryService(CategoryRepository categoryRepository) {
+        this.categoryRepository = categoryRepository;
+    }
+
+    @Override
+    public CategoryDTO create(CategoryRequest categoryRequest) {
+        Category category = new Category(categoryRequest.getCategory());
+        return Mapper.toCategoryDTO(categoryRepository.save(category));
+    }
+
+    @Override
+    public List<CategoryDTO> all() {
+        return categoryRepository.findAll().stream().map(Mapper::toCategoryDTO).collect(Collectors.toList());
+    }
+}

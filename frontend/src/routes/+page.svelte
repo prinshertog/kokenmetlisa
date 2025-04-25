@@ -36,11 +36,9 @@
             <h2>{dish.name}</h2>
             <p>{dish.description}</p>
             <h3>Category</h3>
-            <p>{dish.category}</p>
+            <p>{dish.category.category}</p>
             <h3>Sub Category</h3>
-            <p>{dish.subcategory}</p>
-            <h3>Available</h3>
-            <p>{dish.isAvailable}</p>
+            <p>{dish.subCategory.subCategory}</p>
             <h3>Image</h3>
             <img src={dish['Image Url']} alt={dish.name} />
         </div>

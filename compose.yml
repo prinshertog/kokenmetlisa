@@ -1,0 +1,16 @@
+services:
+  postgres:
+    image: postgres:15
+    container_name: postgres-dishes
+    restart: always
+    environment:
+      POSTGRES_USER: dishes_user
+      POSTGRES_PASSWORD: dishes_password
+      POSTGRES_DB: dishes_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:

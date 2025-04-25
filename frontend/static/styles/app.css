@@ -40,7 +40,7 @@ form input, textarea {
 
 .dishes-list .dish {
     padding: 20px;
-    margin: 30px;
+    margin: 10px;
     background-color: rgb(104, 127, 255);
     border-radius: 20px;
     box-shadow: 10px 10px 10px rgb(200, 200, 200);
