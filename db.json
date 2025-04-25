@@ -1,0 +1,60 @@
+{
+  "dishes": [
+      {
+          "id": 1,
+          "name": "Spaghetti Carbonara",
+          "description": "Classic Italian pasta with eggs, cheese, pancetta, and pepper.",
+          "category": "Hoofdgerechten",
+          "subcategory": "Pasta",
+          "isAvailable": true
+      },
+      {
+          "id": 2,
+          "name": "Margherita Pizza",
+          "description": "Fresh tomatoes, mozzarella cheese, fresh basil, and olive oil.",
+          "category": "Hoofdgerechten",
+          "subcategory": "Ovenschotels",
+          "isAvailable": true
+      },
+      {
+          "id": 3,
+          "name": "Grilled Chicken Caesar Salad",
+          "description": "Romaine lettuce with grilled chicken, croutons, parmesan, and Caesar dressing.",
+          "category": "Lunch",
+          "subcategory": "Salades",
+          "isAvailable": true
+      },
+      {
+          "id": 4,
+          "name": "Beef Tacos",
+          "description": "Three tacos filled with seasoned beef, lettuce, cheese, and salsa.",
+          "category": "Hoofdgerechten",
+          "subcategory": "Burgers & Wraps",
+          "isAvailable": false
+      },
+      {
+          "id": 5,
+          "name": "Pad Thai",
+          "description": "Stir-fried rice noodles with shrimp, tofu, peanuts, and bean sprouts.",
+          "category": "Hoofdgerechten",
+          "subcategory": "Rijst & noedels",
+          "isAvailable": true
+      },
+      {
+          "id": 6,
+          "name": "Cheeseburger",
+          "description": "Juicy beef patty with cheddar cheese, lettuce, tomato, and pickles on a brioche bun.",
+          "category": "Hoofdgerechten",
+          "subcategory": "Burgers & Wraps",
+          "isAvailable": true
+      },
+      {
+          "id": 7,
+          "name": "Butter Chicken",
+          "description": "Indian curry made with tender chicken in a spiced tomato and butter sauce.",
+          "category": "Hoofdgerechten",
+          "subcategory": "Rijst & noedels",
+          "isAvailable": false
+      }
+  ]
+}

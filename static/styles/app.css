@@ -1,0 +1,54 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+form input, textarea {
+    width: 90%;
+    max-width: 300px;
+}
+
+.dishes-add {
+    width: 100%;
+    padding: 50px;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: rgb(255, 126, 103);
+    color: white;
+}
+
+.dishes-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.dishes-list .dish {
+    padding: 20px;
+    margin: 30px;
+    background-color: rgb(104, 127, 255);
+    border-radius: 20px;
+    box-shadow: 10px 10px 10px rgb(200, 200, 200);
+    width: 70%;
+    max-width: 500px;
+    color: white;
+}
+
+.dishes-list .dish p {
+    margin-bottom: 10px;
+}
