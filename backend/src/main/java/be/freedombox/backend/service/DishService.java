@@ -4,6 +4,8 @@ import be.freedombox.backend.domain.Category;
 import be.freedombox.backend.domain.Dish;
 import be.freedombox.backend.domain.SubCategory;
 import be.freedombox.backend.dto.DishDTO;
+import be.freedombox.backend.exception.ObjectAlreadyExistsException;
+import be.freedombox.backend.exception.ObjectDoesNotExistException;
 import be.freedombox.backend.repository.CategoryRepository;
 import be.freedombox.backend.repository.DishRepository;
 import be.freedombox.backend.repository.SubCategoryRepository;
@@ -39,6 +41,12 @@ public class DishService implements IDishService {
     public DishDTO create(DishRequest dishrequest) {
         Category category = categoryRepository.findByCategory(dishrequest.getCategory());
         SubCategory subCategory = subCategoryRepository.findBySubCategory(dishrequest.getSubCategory());
+        if (subCategory == null) {
+            throw new ObjectDoesNotExistException("The sub category " + dishrequest.getSubCategory() + " does not exist");
+        }
+        if (category == null) {
+            throw new ObjectDoesNotExistException("The category " + dishrequest.getCategory() + " does not exist");
+        }
         Dish dish = new Dish(dishrequest.getName(), dishrequest.getDescription(), category, subCategory, dishrequest.getImageUrl());
         return Mapper.toDishDTO(dishRepository.save(dish));
     }

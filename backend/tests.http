@@ -11,7 +11,7 @@ Content-Type: application/json
 {
   "name": "Spaghetti Carbonara",
   "description": "Classic Italian pasta with eggs, cheese, pancetta, and pepper.",
-  "category": "Vlees",
+  "category": "Hoofdgerechten",
   "subCategory": "Pasta",
   "imageUrl": "https://freedombox.be/jellyfin.png"
 }
@@ -25,9 +25,9 @@ Content-Type: application/json
 {
   "name": "Pizza Margharitta",
   "description": "De meest basic pizza die er bestaat.",
-  "category": "Lunch",
+  "category": "Hoofdgerechten",
   "subCategory": "Salades",
-  "imageUrl": "https://freedombox.be/jellyfin.png"
+  "imageUrl": "https://freedombox.be/images/jellyfin.png"
 }
 
 ###
@@ -73,5 +73,5 @@ POST http://localhost:8080/subcategory
 Content-Type: application/json
 
 {
-  "subCategory": "Pasta"
+  "subCategory": "Brood"
 }

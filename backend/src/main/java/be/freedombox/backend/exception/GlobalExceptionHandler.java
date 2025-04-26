@@ -32,4 +32,15 @@ public class GlobalExceptionHandler {
         });
         return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
     }
+
+    @ExceptionHandler(ObjectAlreadyExistsException.class)
+    public ResponseEntity<Map<String, String>> handleEmailOrUsernameAlreadyInUseException(ObjectAlreadyExistsException ex) {
+        return createErrorResponse(ex.getMessage(), HttpStatus.CONFLICT);
+    }
+
+    @ExceptionHandler(ObjectDoesNotExistException.class)
+    public ResponseEntity<Map<String, String>> handleEmailOrUsernameAlreadyInUseException(ObjectDoesNotExistException ex) {
+        return createErrorResponse(ex.getMessage(), HttpStatus.NOT_FOUND);
+    }
+
 }

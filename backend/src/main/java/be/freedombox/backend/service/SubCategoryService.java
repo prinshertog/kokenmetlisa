@@ -2,6 +2,7 @@ package be.freedombox.backend.service;
 
 import be.freedombox.backend.domain.SubCategory;
 import be.freedombox.backend.dto.SubCategoryDTO;
+import be.freedombox.backend.exception.ObjectAlreadyExistsException;
 import be.freedombox.backend.repository.SubCategoryRepository;
 import be.freedombox.backend.request.SubCategoryRequest;
 import be.freedombox.backend.tools.Mapper;
@@ -24,6 +25,10 @@ public class SubCategoryService implements ISubCategoryService {
 
     @Override
     public SubCategoryDTO create(SubCategoryRequest subCategoryRequest) {
+        SubCategory existingSubCategory = subCategoryRepository.findBySubCategory(subCategoryRequest.getSubCategory());
+        if (existingSubCategory != null) {
+            throw new ObjectAlreadyExistsException("The sub category " + subCategoryRequest.getSubCategory() + " already exists");
+        }
         SubCategory subCategory = new SubCategory(subCategoryRequest.getSubCategory());
         return Mapper.toSubCategoryDTO(subCategoryRepository.save(subCategory));
     }

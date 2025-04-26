@@ -24,7 +24,7 @@
             placeholder="Enter image URL"
             required
         />
-        <input type="submit"
+        <input class="submit-button" type="submit"
             value="Add Dish"
         />
     </form>
@@ -33,14 +33,15 @@
 <div class="dishes-list">
     {#each data.dishes as dish}
         <div class="dish">
+            <button class="delete-button">Delete</button>
             <h2>{dish.name}</h2>
             <p>{dish.description}</p>
             <h3>Category</h3>
-            <p>{dish.category.category}</p>
+            <p>{dish.category.category} </p>
             <h3>Sub Category</h3>
             <p>{dish.subCategory.subCategory}</p>
             <h3>Image</h3>
-            <img src={dish['Image Url']} alt={dish.name} />
+            <img src={dish.imageUrl} alt={dish.name} />
         </div>
     {/each}
 </div>

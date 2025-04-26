@@ -15,6 +15,43 @@ form {
 form input, textarea {
     width: 90%;
     max-width: 300px;
+    min-width: 300px;
+    border-radius: 10px;
+    padding: 10px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: rgb(170, 170, 170);
+    box-shadow: 5px 5px 5px rgb(200, 200, 200);
+    margin: 5px;
+}
+
+form input:focus, textarea:focus {
+    border-color: rgb(162, 0, 255);
+    outline: none;
+}
+
+.submit-button:hover {
+    cursor: pointer;
+    background-color: rgb(255, 126, 103);
+    color: white;
+}
+
+.delete-button {
+    float: right;
+    background-color: red;
+    border-style: none;
+    border-radius: 10px;
+    padding: 5px;
+    color: white;
+}
+
+.delete-button:hover {
+    cursor: pointer;
+    background-color: rgb(255, 126, 103);
+}
+
+.edit-button {
+    float: right;;
 }
 
 .dishes-add {
@@ -51,4 +88,10 @@ form input, textarea {
 
 .dishes-list .dish p {
     margin-bottom: 10px;
+}
+
+.dish img {
+    margin-top: 10px;
+    max-width: 100%;
+    max-height: 200px;
 }
