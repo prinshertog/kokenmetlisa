@@ -1,23 +1,22 @@
 package be.freedombox.backend.dto;
 
 import be.freedombox.backend.domain.Category;
-import be.freedombox.backend.domain.SubCategory;
 
 public class DishDTO {
+    private Long id;
     private String name;
     private String description;
     private Category category;
-    private SubCategory subCategory;
     private String imageUrl;
 
     public DishDTO() {
     }
 
-    public DishDTO(String name, String description, Category category, SubCategory subCategory, String imageUrl) {
+    public DishDTO(Long id, String name, String description, Category category, String imageUrl) {
+        this.id = id;
         this.name = name;
         this.description = description;
         this.category = category;
-        this.subCategory = subCategory;
         this.imageUrl = imageUrl;
     }
 
@@ -45,19 +44,19 @@ public class DishDTO {
         this.category = category;
     }
 
-    public SubCategory getSubCategory() {
-        return subCategory;
-    }
-
-    public void setSubCategory(SubCategory subCategory) {
-        this.subCategory = subCategory;
-    }
-
     public String getImageUrl() {
         return imageUrl;
     }
 
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }

@@ -1,10 +1,50 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: sans-serif;
-}
+<script>
+    let { data } = $props();
+</script>
 
+<div class="dishes-add">
+    <form method="POST">
+        <label for="dish-name">Add a dish:</label>
+        <input type="text"
+            id="dish-name"
+            name="Name"
+            placeholder="Enter dish name"
+            required
+        />
+        <textarea
+            name="Description"
+            placeholder="Description"
+            rows="5"
+            cols="30"
+            required
+        ></textarea>
+        <input type="text"
+            id="dish-image-url"
+            name="Image Url"
+            placeholder="Enter image URL"
+            required
+        />
+        <input class="submit-button" type="submit"
+            value="Add Dish"
+        />
+    </form>
+</div>
+
+<div class="dishes-list">
+    {#each data.dishes as dish}
+        <div class="dish">
+            <button class="delete-button">Delete</button>
+            <h2>{dish.name}</h2>
+            <p>{dish.description}</p>
+            <h3>Category</h3>
+            <p>{dish.category.category} </p>
+            <h3>Image</h3>
+            <img src={dish.imageUrl} alt={dish.name} />
+        </div>
+    {/each}
+</div>
+
+<style>
 form {
     display: flex;
     flex-direction: column;
@@ -50,22 +90,9 @@ form input:focus, textarea:focus {
     background-color: rgb(255, 126, 103);
 }
 
-.edit-button {
-    float: right;;
-}
-
 .dishes-add {
     width: 100%;
     padding: 50px;
-}
-
-.header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 20px;
-    background-color: rgb(255, 126, 103);
-    color: white;
 }
 
 .dishes-list {
@@ -95,3 +122,4 @@ form input:focus, textarea:focus {
     max-width: 100%;
     max-height: 200px;
 }
+</style>

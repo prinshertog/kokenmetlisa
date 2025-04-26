@@ -1,6 +1,5 @@
 package be.freedombox.backend.api;
 
-import be.freedombox.backend.domain.Category;
 import be.freedombox.backend.dto.CategoryDTO;
 import be.freedombox.backend.request.CategoryRequest;
 import be.freedombox.backend.service.CategoryService;

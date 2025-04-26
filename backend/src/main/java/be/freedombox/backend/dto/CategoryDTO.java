@@ -1,14 +1,18 @@
 package be.freedombox.backend.dto;
 
+import be.freedombox.backend.domain.Category;
+
 public class CategoryDTO {
     private String category;
+    private Category parentCategory;
 
     public CategoryDTO() {
 
     }
 
-    public CategoryDTO(String category) {
+    public CategoryDTO(String category, Category parentCategory) {
         this.category = category;
+        this.parentCategory = parentCategory;
     }
 
     public String getCategory() {
@@ -17,5 +21,13 @@ public class CategoryDTO {
 
     public void setCategory(String category) {
         this.category = category;
+    }
+
+    public Category getParentCategory() {
+        return parentCategory;
+    }
+
+    public void setParentCategory(Category parentCategory) {
+        this.parentCategory = parentCategory;
     }
 }

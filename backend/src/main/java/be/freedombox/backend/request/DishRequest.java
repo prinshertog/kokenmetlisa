@@ -1,7 +1,5 @@
 package be.freedombox.backend.request;
 
-import be.freedombox.backend.domain.Category;
-import be.freedombox.backend.domain.SubCategory;
 import jakarta.validation.constraints.NotBlank;
 
 public class DishRequest {

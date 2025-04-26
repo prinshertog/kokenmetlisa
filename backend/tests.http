@@ -4,6 +4,12 @@ Content-Type: application/json
 
 ###
 
+# Get a dish
+GET http://localhost:8080/dishes/1
+Content-Type: application/json
+
+###
+
 # Create a new dish
 POST http://localhost:8080/dishes
 Content-Type: application/json
@@ -12,8 +18,7 @@ Content-Type: application/json
   "name": "Spaghetti Carbonara",
   "description": "Classic Italian pasta with eggs, cheese, pancetta, and pepper.",
   "category": "Hoofdgerechten",
-  "subCategory": "Pasta",
-  "imageUrl": "https://freedombox.be/jellyfin.png"
+  "imageUrl": "https://kokenmetlisa.be/images/pinda-koekjes.png"
 }
 
 ###
@@ -26,8 +31,7 @@ Content-Type: application/json
   "name": "Pizza Margharitta",
   "description": "De meest basic pizza die er bestaat.",
   "category": "Hoofdgerechten",
-  "subCategory": "Salades",
-  "imageUrl": "https://freedombox.be/images/jellyfin.png"
+  "imageUrl": "https://kokenmetlisa.be/images/pinda-koekjes.png"
 }
 
 ###
@@ -41,7 +45,8 @@ POST http://localhost:8080/category
 Content-Type: application/json
 
 {
-  "category": "Hoofdgerechten"
+  "category": "test2",
+  "parentCategory": "Hoofdgerechten"
 }
 
 ###
@@ -50,28 +55,5 @@ POST http://localhost:8080/category
 Content-Type: application/json
 
 {
-  "category": "Vlees"
-}
-
-###
-
-POST http://localhost:8080/subcategory
-Content-Type: application/json
-
-{
-  "subCategory": "Salades"
-}
-
-###
-
-GET http://localhost:8080/subcategory
-Content-Type: application/json
-
-###
-
-POST http://localhost:8080/subcategory
-Content-Type: application/json
-
-{
-  "subCategory": "Brood"
+  "category": "Hoofdgerechten"
 }

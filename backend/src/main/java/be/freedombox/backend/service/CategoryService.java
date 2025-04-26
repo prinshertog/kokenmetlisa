@@ -3,6 +3,7 @@ package be.freedombox.backend.service;
 import be.freedombox.backend.domain.Category;
 import be.freedombox.backend.dto.CategoryDTO;
 import be.freedombox.backend.exception.ObjectAlreadyExistsException;
+import be.freedombox.backend.exception.ObjectDoesNotExistException;
 import be.freedombox.backend.repository.CategoryRepository;
 import be.freedombox.backend.request.CategoryRequest;
 import be.freedombox.backend.tools.Mapper;
@@ -24,11 +25,18 @@ public class CategoryService implements ICategoryService {
     @Override
     public CategoryDTO create(CategoryRequest categoryRequest) {
         Category existingCategory = categoryRepository.findByCategory(categoryRequest.getCategory());
+        Category parentCategory = categoryRepository.findByCategory(categoryRequest.getParentCategory());
+
+        if (categoryRequest.getParentCategory() != null && categoryRequest.getParentCategory().isEmpty()) {
+            if (parentCategory == null) {
+                throw new ObjectDoesNotExistException("The category " + categoryRequest.getParentCategory() + " does not exist.");
+            }
+        }
         if (existingCategory != null) {
             throw new ObjectAlreadyExistsException("The category " + categoryRequest.getCategory() + " already exists.");
         }
 
-        Category category = new Category(categoryRequest.getCategory());
+        Category category = new Category(categoryRequest.getCategory(), parentCategory);
         return Mapper.toCategoryDTO(categoryRepository.save(category));
     }
 

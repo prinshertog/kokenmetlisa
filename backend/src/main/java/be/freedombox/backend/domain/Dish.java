@@ -22,10 +22,6 @@ public class Dish {
     @NotNull
     private Category category;
     @Valid
-    @ManyToOne
-    @NotNull
-    private SubCategory subCategory;
-    @Valid
     @NotBlank(message = "Image url is required")
     private String imageUrl;
 
@@ -33,11 +29,10 @@ public class Dish {
 
     }
 
-    public Dish(String name, String description, Category category, SubCategory subCategory, String imageUrl) {
+    public Dish(String name, String description, Category category, String imageUrl) {
         this.name = name;
         this.description = description;
         this.category = category;
-        this.subCategory = subCategory;
         this.imageUrl = imageUrl;
     }
 
@@ -67,14 +62,6 @@ public class Dish {
 
     public void setCategory(Category category) {
         this.category = category;
-    }
-
-    public SubCategory getSubCategory() {
-        return subCategory;
-    }
-
-    public void setSubCategory(SubCategory subCategory) {
-        this.subCategory = subCategory;
     }
 
     public String getImageUrl() {

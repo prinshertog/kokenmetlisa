@@ -2,46 +2,23 @@
     let { data } = $props();
 </script>
 
-<div class="dishes-add">
-    <form method="POST">
-        <label for="dish-name">Add a dish:</label>
-        <input type="text"
-            id="dish-name"
-            name="Name"
-            placeholder="Enter dish name"
-            required
-        />
-        <textarea
-            name="Description"
-            placeholder="Description"
-            rows="5"
-            cols="30"
-            required
-        ></textarea>
-        <input type="text"
-            id="dish-image-url"
-            name="Image Url"
-            placeholder="Enter image URL"
-            required
-        />
-        <input class="submit-button" type="submit"
-            value="Add Dish"
-        />
-    </form>
-</div>
-
-<div class="dishes-list">
-    {#each data.dishes as dish}
-        <div class="dish">
-            <button class="delete-button">Delete</button>
-            <h2>{dish.name}</h2>
-            <p>{dish.description}</p>
-            <h3>Category</h3>
-            <p>{dish.category.category} </p>
-            <h3>Sub Category</h3>
-            <p>{dish.subCategory.subCategory}</p>
-            <h3>Image</h3>
-            <img src={dish.imageUrl} alt={dish.name} />
+<div class="container mx-auto px-4">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        {#each data.dishes as dish}
+        <div class="overflow-hidden rounded-lg shadow-lg">
+            <a aria-label="Link" href="/dishes/{dish.id}" class="block">
+                <div 
+                    class="h-48 w-full bg-cover bg-center" 
+                    style="background-image: url({dish.imageUrl});"
+                >
+                </div>
+                <div class="bg-[rgb(73,105,83)] p-4 text-white">
+                    <h2 class="text-lg font-bold truncate">
+                        {dish.name}
+                    </h2>
+                </div>
+            </a>
         </div>
-    {/each}
+        {/each}
+    </div>
 </div>
