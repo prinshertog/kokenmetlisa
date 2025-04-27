@@ -49,14 +49,6 @@ public class DishRequest {
         this.category = category;
     }
 
-    public String getSubCategory() {
-        return subCategory;
-    }
-
-    public void setSubCategory(String subCategory) {
-        this.subCategory = subCategory;
-    }
-
     public String getImageUrl() {
         return imageUrl;
     }

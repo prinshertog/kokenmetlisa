@@ -1,7 +1,8 @@
 <script>
   import "../app.css";
   
-  const { children } = $props();
+  const { children, data } = $props();
+  const { dishes, categories } = data;
   let isMenuOpen = $state(false);
   
   function toggleMenu() {
@@ -36,11 +37,12 @@
       </button>
 
       <!-- Desktop menu -->
-      <nav class="hidden md:flex space-x-8">      
-        <a href="/dishes/lunch" class="text-gray-700 hover:text-green-600 transition-colors">Lunch</a>
-        <a href="/dishes/hoofdgerechten" class="text-gray-700 hover:text-green-600 transition-colors">Hoofdgerechten</a>
-        <a href="/dishes/nagerechten" class="text-gray-700 hover:text-green-600 transition-colors">Nagerechten</a>
-        <a href="/dishes/bijgerechten" class="text-gray-700 hover:text-green-600 transition-colors">Bijgerechten</a>
+      <nav class="hidden md:flex space-x-8">
+        {#each categories as category}
+          {#if category.parentCategory === null}
+          <a href="/{category.category}" class="text-gray-700 hover:text-green-600 transition-colors">{category.category}</a>
+          {/if}
+        {/each}
       </nav>
     </div>
 
@@ -48,11 +50,11 @@
     {#if isMenuOpen}
       <div class="md:hidden bg-white border-t border-gray-200">
         <nav class="flex flex-col space-y-4 px-4 py-6">
-          <a href="/" class="text-gray-700 hover:text-green-600 transition-colors">Home</a>
-          <a href="/dishes/lunch" class="text-gray-700 hover:text-green-600 transition-colors">Lunch</a>
-          <a href="/dishes/hoofdgerechten" class="text-gray-700 hover:text-green-600 transition-colors">Hoofdgerechten</a>
-          <a href="/dishes/nagerechten" class="text-gray-700 hover:text-green-600 transition-colors">Nagerechten</a>
-          <a href="/dishes/bijgerechten" class="text-gray-700 hover:text-green-600 transition-colors">Bijgerechten</a>
+          {#each categories as category}
+            {#if category.parentCategory === null}
+            <a href="/{category.category}" class="text-gray-700 hover:text-green-600 transition-colors">{category.category}</a>
+            {/if}
+          {/each}
         </nav>
       </div>
     {/if}

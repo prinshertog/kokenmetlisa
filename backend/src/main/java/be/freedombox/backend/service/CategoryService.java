@@ -7,7 +7,9 @@ import be.freedombox.backend.exception.ObjectDoesNotExistException;
 import be.freedombox.backend.repository.CategoryRepository;
 import be.freedombox.backend.request.CategoryRequest;
 import be.freedombox.backend.tools.Mapper;
+import be.freedombox.backend.tools.Validator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -24,18 +26,13 @@ public class CategoryService implements ICategoryService {
 
     @Override
     public CategoryDTO create(CategoryRequest categoryRequest) {
+        categoryRequest.setCategory(Validator.initCap(categoryRequest.getCategory()));
         Category existingCategory = categoryRepository.findByCategory(categoryRequest.getCategory());
         Category parentCategory = categoryRepository.findByCategory(categoryRequest.getParentCategory());
-
         if (categoryRequest.getParentCategory() != null && categoryRequest.getParentCategory().isEmpty()) {
-            if (parentCategory == null) {
-                throw new ObjectDoesNotExistException("The category " + categoryRequest.getParentCategory() + " does not exist.");
-            }
+            if (parentCategory == null) throw new ObjectDoesNotExistException("The category " + categoryRequest.getParentCategory() + " does not exist.");
         }
-        if (existingCategory != null) {
-            throw new ObjectAlreadyExistsException("The category " + categoryRequest.getCategory() + " already exists.");
-        }
-
+        if (existingCategory != null) throw new ObjectAlreadyExistsException("The category " + categoryRequest.getCategory() + " already exists.");
         Category category = new Category(categoryRequest.getCategory(), parentCategory);
         return Mapper.toCategoryDTO(categoryRepository.save(category));
     }
@@ -43,5 +40,13 @@ public class CategoryService implements ICategoryService {
     @Override
     public List<CategoryDTO> all() {
         return categoryRepository.findAll().stream().map(Mapper::toCategoryDTO).collect(Collectors.toList());
+    }
+
+    @Override
+    public void delete(CategoryRequest categoryRequest) {
+        categoryRequest.setCategory(Validator.initCap(categoryRequest.getCategory()));
+        Category category = categoryRepository.findByCategory(categoryRequest.getCategory());
+        if (category == null) throw new ObjectDoesNotExistException("The category " + categoryRequest.getCategory() + " does not exist.");
+        categoryRepository.delete(category);
     }
 }

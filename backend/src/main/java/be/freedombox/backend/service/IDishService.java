@@ -9,4 +9,6 @@ public interface IDishService {
     List<DishDTO> all();
     DishDTO create(DishRequest dishrequest);
     List<DishDTO> getById(Long id);
+    void delete(Long id);
+    List<DishDTO> getByCategory(String category);
 }

@@ -6,8 +6,10 @@ import be.freedombox.backend.dto.DishDTO;
 import be.freedombox.backend.exception.ObjectDoesNotExistException;
 import be.freedombox.backend.repository.CategoryRepository;
 import be.freedombox.backend.repository.DishRepository;
+import be.freedombox.backend.request.CategoryRequest;
 import be.freedombox.backend.request.DishRequest;
 import be.freedombox.backend.tools.Mapper;
+import be.freedombox.backend.tools.Validator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -34,10 +36,10 @@ public class DishService implements IDishService {
 
     @Override
     public DishDTO create(DishRequest dishrequest) {
+        dishrequest.setCategory(Validator.initCap(dishrequest.getCategory()));
+        dishrequest.setName(Validator.initCap(dishrequest.getName()));
         Category category = categoryRepository.findByCategory(dishrequest.getCategory());
-        if (category == null) {
-            throw new ObjectDoesNotExistException("The category " + dishrequest.getCategory() + " does not exist");
-        }
+        if (category == null) throw new ObjectDoesNotExistException("The category " + dishrequest.getCategory() + " does not exist");
         Dish dish = new Dish(dishrequest.getName(), dishrequest.getDescription(), category, dishrequest.getImageUrl());
         return Mapper.toDishDTO(dishRepository.save(dish));
     }
@@ -45,5 +47,18 @@ public class DishService implements IDishService {
     @Override
     public List<DishDTO> getById(Long id) {
         return dishRepository.findById(id).stream().map(Mapper::toDishDTO).toList();
+    }
+
+    @Override
+    public void delete(Long id) {
+        if (dishRepository.findById(id).isEmpty()) throw new ObjectDoesNotExistException("The dish with id " + id + " does not exist");
+        dishRepository.deleteById(id);
+    }
+
+    @Override
+    public List<DishDTO> getByCategory(String category) {
+        String validatedCategory = Validator.initCap(category);
+        Category fetchedCategory = categoryRepository.findByCategory(validatedCategory);
+        return dishRepository.getByCategory(fetchedCategory).stream().map(Mapper::toDishDTO).toList();
     }
 }

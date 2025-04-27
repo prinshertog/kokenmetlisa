@@ -5,7 +5,7 @@ Content-Type: application/json
 ###
 
 # Get a dish
-GET http://localhost:8080/dishes/1
+GET http://localhost:8080/dishes/2
 Content-Type: application/json
 
 ###
@@ -36,6 +36,11 @@ Content-Type: application/json
 
 ###
 
+DELETE http://localhost:8080/dishes/1
+Content-Type: application/json
+
+###
+
 GET http://localhost:8080/category
 Content-Type: application/json
 
@@ -55,5 +60,206 @@ POST http://localhost:8080/category
 Content-Type: application/json
 
 {
-  "category": "Hoofdgerechten"
+  "category": "Lunch"
 }
+
+###
+
+POST http://localhost:8080/category
+Content-Type: application/json
+
+{
+"category": "Hoofdgerechten"
+}
+
+###
+
+POST http://localhost:8080/category
+Content-Type: application/json
+
+{
+  "category": "Nagerechten"
+}
+
+###
+
+POST http://localhost:8080/category
+Content-Type: application/json
+
+{
+  "category": "Bijgerechten"
+}
+
+###
+
+POST http://localhost:8080/category
+Content-Type: application/json
+
+{
+  "category": "Brood",
+  "parentCategory": "Lunch"
+}
+
+###
+
+POST http://localhost:8080/category
+Content-Type: application/json
+
+{
+  "category": "Salades",
+  "parentCategory": "Lunch"
+}
+
+###
+
+POST http://localhost:8080/category
+Content-Type: application/json
+
+{
+  "category": "Soep",
+  "parentCategory": "Lunch"
+}
+
+###
+
+POST http://localhost:8080/category
+Content-Type: application/json
+
+{
+  "category": "Vleesgerechten",
+  "parentCategory": "Hoofdgerechten"
+}
+
+###
+
+POST http://localhost:8080/category
+Content-Type: application/json
+
+{
+  "category": "Aardappelen",
+  "parentCategory": "Hoofdgerechten"
+}
+
+###
+
+POST http://localhost:8080/category
+Content-Type: application/json
+
+{
+  "category": "Ovenschotels",
+  "parentCategory": "Hoofdgerechten"
+}
+
+###
+
+POST http://localhost:8080/category
+Content-Type: application/json
+
+{
+  "category": "Pasta",
+  "parentCategory": "Hoofdgerechten"
+}
+
+###
+
+POST http://localhost:8080/category
+Content-Type: application/json
+
+{
+  "category": "Risotto",
+  "parentCategory": "Hoofdgerechten"
+}
+
+###
+
+POST http://localhost:8080/category
+Content-Type: application/json
+
+{
+  "category": "Couscous",
+  "parentCategory": "Hoofdgerechten"
+}
+
+###
+
+POST http://localhost:8080/category
+Content-Type: application/json
+
+{
+  "category": "Rijst & Noedels",
+  "parentCategory": "Hoofdgerechten"
+}
+
+###
+
+POST http://localhost:8080/category
+Content-Type: application/json
+
+{
+  "category": "Burgers & Wraps",
+  "parentCategory": "Vleesgerechten"
+}
+
+###
+
+POST http://localhost:8080/category
+Content-Type: application/json
+
+{
+  "category": "Taart",
+  "parentCategory": "Nagerechten"
+}
+
+###
+
+POST http://localhost:8080/category
+Content-Type: application/json
+
+{
+  "category": "Dessert",
+  "parentCategory": "Nagerechten"
+}
+
+###
+
+POST http://localhost:8080/category
+Content-Type: application/json
+
+{
+  "category": "Koeken",
+  "parentCategory": "Nagerechten"
+}
+
+###
+
+POST http://localhost:8080/category
+Content-Type: application/json
+
+{
+  "category": "Sauzen",
+  "parentCategory": "Bijgerechten"
+}
+
+###
+
+POST http://localhost:8080/category
+Content-Type: application/json
+
+{
+  "category": "Deeg",
+  "parentCategory": "Bijgerechten"
+}
+
+###
+
+DELETE http://localhost:8080/category
+Content-Type: application/json
+
+{
+  "category": "hoofdgerechten"
+}
+
+###
+
+GET http://localhost:8080/dishes/category/hoofdgerechten
+Content-Type: application/json
