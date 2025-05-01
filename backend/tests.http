@@ -4,6 +4,22 @@ Content-Type: application/json
 
 ###
 
+POST http://localhost:8080/login
+Content-Type: application/json
+
+{
+  "username": "jan",
+  "password": "test123"
+}
+
+###
+
+GET http://localhost:8080/users
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqYW4iLCJpYXQiOjE3NDYwOTk4NjcsImV4cCI6MTc0NjEwMzQ2N30.tD_BFk4lUaOcp85rtFPoJfxIt9P_LceFA1OPDg_9OhE
+Content-Type: application/json
+
+###
+
 # Get a dish
 GET http://localhost:8080/dishes/2
 Content-Type: application/json
@@ -12,6 +28,7 @@ Content-Type: application/json
 
 # Create a new dish
 POST http://localhost:8080/dishes
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqYW4iLCJpYXQiOjE3NDYwOTk4NjcsImV4cCI6MTc0NjEwMzQ2N30.tD_BFk4lUaOcp85rtFPoJfxIt9P_LceFA1OPDg_9OhE
 Content-Type: application/json
 
 {

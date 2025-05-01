@@ -43,4 +43,9 @@ public class GlobalExceptionHandler {
         return createErrorResponse(ex.getMessage(), HttpStatus.NOT_FOUND);
     }
 
+    @ExceptionHandler(UnAuthorizedException.class)
+    public ResponseEntity<Map<String, String>> handleUnAuthorizedException(UnAuthorizedException ex) {
+        return createErrorResponse(ex.getMessage(), HttpStatus.UNAUTHORIZED);
+    }
+
 }
