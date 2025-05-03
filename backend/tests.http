@@ -42,6 +42,7 @@ Content-Type: application/json
 
 # Create a new dish
 POST http://localhost:8080/dishes
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqYW4iLCJpYXQiOjE3NDYxMDY2OTIsImV4cCI6MTc0NjExMDI5Mn0.zYXLzWwFkJpHia0zQE3gNlY_XIsZT5oGyGuPyXy0MPk
 Content-Type: application/json
 
 {
@@ -83,6 +84,7 @@ Content-Type: application/json
 ###
 
 POST http://localhost:8080/category
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqYW4iLCJpYXQiOjE3NDYxMDY2OTIsImV4cCI6MTc0NjExMDI5Mn0.zYXLzWwFkJpHia0zQE3gNlY_XIsZT5oGyGuPyXy0MPk
 Content-Type: application/json
 
 {
