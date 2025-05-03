@@ -48,4 +48,8 @@ public class GlobalExceptionHandler {
         return createErrorResponse(ex.getMessage(), HttpStatus.UNAUTHORIZED);
     }
 
+    @ExceptionHandler(IllegalInputException.class)
+    public ResponseEntity<Map<String, String>> handleIllegalInputException(IllegalInputException ex) {
+        return createErrorResponse(ex.getMessage(), HttpStatus.BAD_REQUEST);
+    }
 }

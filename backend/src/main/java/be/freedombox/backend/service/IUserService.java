@@ -1,16 +1,16 @@
 package be.freedombox.backend.service;
 
-import be.freedombox.backend.domain.User;
+import be.freedombox.backend.dto.ChangePasswordDTO;
 import be.freedombox.backend.dto.UserDTO;
 import be.freedombox.backend.request.UserRequest;
 
 import java.util.List;
 
 public interface IUserService {
-    User findByUsername(String username);
-    String validate(String username, String password);
     List<UserDTO> all();
-    void create(UserRequest userRequest);
-    void update(UserRequest userRequest);
-    void delete(String username);
+    void create(String authorizationHeader, UserRequest userRequest);
+    void update(String authorizationHeader, UserRequest userRequest);
+    void delete(String authorizationHeader, String username);
+    void changePassword(String authorizationHeader, ChangePasswordDTO changePasswordDTO);
+    String bearerTokenGenerator(String username, String password);
 }

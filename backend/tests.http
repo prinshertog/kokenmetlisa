@@ -8,14 +8,38 @@ POST http://localhost:8080/login
 Content-Type: application/json
 
 {
-  "username": "jan",
-  "password": "test123"
+  "username": "jan10",
+  "password": "test1234"
+}
+
+###
+
+POST http://localhost:8080/users
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqYW4yIiwiaWF0IjoxNzQ2Mjg3MDQwLCJleHAiOjE3NDYyOTA2NDB9.rSCi1ca65BTgh7kot8dMPfc_JRF3x7Gi12HgPyxYdpg
+Content-Type: application/json
+
+{
+  "username": "jan10",
+  "password": "test123",
+  "role": "USER"
+}
+
+###
+
+PUT http://localhost:8080/users/password
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqYW4xMCIsImlhdCI6MTc0NjI4ODIwMywiZXhwIjoxNzQ2MjkxODAzfQ.4yAdivvFkYEy8VmGI1axQcuj5onEGnKVFglzMarNWPQ
+Content-Type: application/json
+
+{
+  "username": "jan10",
+  "oldPassword": "test1234",
+  "newPassword": "test123"
 }
 
 ###
 
 GET http://localhost:8080/users
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqYW4iLCJpYXQiOjE3NDYwOTk4NjcsImV4cCI6MTc0NjEwMzQ2N30.tD_BFk4lUaOcp85rtFPoJfxIt9P_LceFA1OPDg_9OhE
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqYW4yIiwiaWF0IjoxNzQ2Mjg0OTY4LCJleHAiOjE3NDYyODg1Njh9.EWD8r1m5eBMq37qnjlVPttM0cZtvH8-syDg_L67t4dY
 Content-Type: application/json
 
 ###

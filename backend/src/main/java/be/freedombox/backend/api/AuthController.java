@@ -19,6 +19,6 @@ public class AuthController {
 
     @PostMapping
     public ResponseEntity<String> login(@RequestBody AuthRequest authRequest) {
-        return ResponseEntity.ok(userService.validate(authRequest.getUsername(), authRequest.getPassword()));
+        return ResponseEntity.ok(userService.bearerTokenGenerator(authRequest.getUsername(), authRequest.getPassword()));
     }
 }

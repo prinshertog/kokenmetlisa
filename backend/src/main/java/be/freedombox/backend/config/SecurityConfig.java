@@ -14,6 +14,7 @@ import org.springframework.security.authentication.ProviderManager;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.oauth2.jwt.JwtDecoder;
+import org.springframework.security.oauth2.jwt.JwtValidators;
 import org.springframework.security.oauth2.jwt.NimbusJwtDecoder;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationProvider;
 import org.springframework.security.web.SecurityFilterChain;
@@ -24,8 +25,11 @@ import javax.crypto.SecretKey;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
-    @Value("${jwt.secret}")
-    private String secretKey;
+    private final JwtFilter jwtFilter;
+
+    public SecurityConfig(@Autowired JwtFilter jwtFilter) {
+        this.jwtFilter = jwtFilter;
+    }
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -35,24 +39,8 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.GET, "/dishes/**").permitAll()
                         .requestMatchers("/login").permitAll()
                         .anyRequest().authenticated()
-                )
-                .oauth2ResourceServer(oauth2 -> oauth2
-                        .authenticationManagerResolver(authenticationManagerResolver())
-                );
+                ).addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
-    }
-
-    @Bean
-    public AuthenticationManagerResolver<HttpServletRequest> authenticationManagerResolver() {
-        JwtAuthenticationProvider provider = new JwtAuthenticationProvider(jwtDecoder());
-        AuthenticationManager manager = new ProviderManager(provider);
-        return request -> manager;
-    }
-
-    @Bean
-    public JwtDecoder jwtDecoder() {
-        SecretKey key = Keys.hmacShaKeyFor(secretKey.getBytes());
-        return NimbusJwtDecoder.withSecretKey(key).build();
     }
 }
