@@ -8,32 +8,32 @@ POST http://localhost:8080/login
 Content-Type: application/json
 
 {
-  "username": "jan10",
-  "password": "test1234"
+  "username": "jan2",
+  "password": "test123"
 }
 
 ###
 
 POST http://localhost:8080/users
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqYW4yIiwiaWF0IjoxNzQ2Mjg3MDQwLCJleHAiOjE3NDYyOTA2NDB9.rSCi1ca65BTgh7kot8dMPfc_JRF3x7Gi12HgPyxYdpg
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqYW4yIiwiaWF0IjoxNzQ2NDcyMDgzLCJleHAiOjE3NDY0NzU2ODN9.Py8SGZOgH84GDiBSfxJoaH8O4I6lKNqGKnLiosGJDgQ
 Content-Type: application/json
 
 {
-  "username": "jan10",
-  "password": "test123",
+  "username": "Levi",
+  "password": "levi123",
   "role": "USER"
 }
 
 ###
 
 PUT http://localhost:8080/users/password
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqYW4xMCIsImlhdCI6MTc0NjI4ODIwMywiZXhwIjoxNzQ2MjkxODAzfQ.4yAdivvFkYEy8VmGI1axQcuj5onEGnKVFglzMarNWPQ
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJMZXZpIiwiaWF0IjoxNzQ2NDcyMTA2LCJleHAiOjE3NDY0NzU3MDZ9.X-Eflyab-EdWlu76y3nLIfxi2Ah5R_eYW0jzC1vId0g
 Content-Type: application/json
 
 {
-  "username": "jan10",
-  "oldPassword": "test1234",
-  "newPassword": "test123"
+  "username": "Levi",
+  "oldPassword": "levi123",
+  "newPassword": "test1234"
 }
 
 ###
@@ -52,7 +52,7 @@ Content-Type: application/json
 
 # Create a new dish
 POST http://localhost:8080/dishes
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqYW4iLCJpYXQiOjE3NDYwOTk4NjcsImV4cCI6MTc0NjEwMzQ2N30.tD_BFk4lUaOcp85rtFPoJfxIt9P_LceFA1OPDg_9OhE
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqYW4yIiwiaWF0IjoxNzQ2NDcyMzgwLCJleHAiOjE3NDY0NzU5ODB9.m3NX1eVuVGiY4EN4QqFesu3J4AudxrO2PysDegTEU18
 Content-Type: application/json
 
 {
@@ -108,7 +108,7 @@ Content-Type: application/json
 ###
 
 POST http://localhost:8080/category
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqYW4iLCJpYXQiOjE3NDYxMDY2OTIsImV4cCI6MTc0NjExMDI5Mn0.zYXLzWwFkJpHia0zQE3gNlY_XIsZT5oGyGuPyXy0MPk
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqYW4yIiwiaWF0IjoxNzQ2NDcyMzgwLCJleHAiOjE3NDY0NzU5ODB9.m3NX1eVuVGiY4EN4QqFesu3J4AudxrO2PysDegTEU18
 Content-Type: application/json
 
 {
