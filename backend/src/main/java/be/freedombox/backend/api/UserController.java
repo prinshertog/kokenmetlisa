@@ -38,9 +38,9 @@ public class UserController {
         return ResponseEntity.ok(HttpStatus.OK);
     }
 
-    //TODO DELETE MAPPING AFMAKEN
     @DeleteMapping
-    public ResponseEntity<HttpStatus> deleteUser(@RequestBody String username) {
+    public ResponseEntity<HttpStatus> deleteUser(@RequestHeader(value = "Authorization") String authorizationHeader, @RequestBody String username) {
+        userService.delete(authorizationHeader, username);
         return ResponseEntity.ok(HttpStatus.OK);
     }
 }

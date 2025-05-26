@@ -8,14 +8,24 @@ POST http://localhost:8080/login
 Content-Type: application/json
 
 {
-  "username": "jan2",
+  "username": "jan",
   "password": "test123"
 }
 
 ###
 
+DELETE http://localhost:8080/users
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqYW4iLCJpYXQiOjE3NDgyNjA0NTMsImV4cCI6MTc0ODI2NDA1M30.L0hiij-yXUznfGlIbVKvU5hkCDd5jCnlyLsTdI9gocc
+Content-Type: application/json
+
+{
+  "username": "Levi"
+}
+
+
+###
 POST http://localhost:8080/users
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqYW4yIiwiaWF0IjoxNzQ2NDcyMDgzLCJleHAiOjE3NDY0NzU2ODN9.Py8SGZOgH84GDiBSfxJoaH8O4I6lKNqGKnLiosGJDgQ
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqYW4iLCJpYXQiOjE3NDgyNjA0NTMsImV4cCI6MTc0ODI2NDA1M30.L0hiij-yXUznfGlIbVKvU5hkCDd5jCnlyLsTdI9gocc
 Content-Type: application/json
 
 {

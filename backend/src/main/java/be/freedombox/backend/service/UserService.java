@@ -61,8 +61,7 @@ public class UserService implements IUserService {
 
     public void delete(String authorizationHeader, String username) {
         if (!hasRole(authorizationHeader, username, "ADMIN")) throw new UnAuthorizedException("You do not have permission to access this resource");
-        User user = userRepository.findByUsername(username);
-        if (user == null) throw new ObjectDoesNotExistException("There is no user with username " + username);
+        User user = findByUsername(username);
         userRepository.delete(user);
     }
 
