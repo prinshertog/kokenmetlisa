@@ -1,8 +1,9 @@
 import { error } from '@sveltejs/kit';
 import type { PageLoad } from './$types';
+const BACKEND_URL = "http://localhost:8080";
 
 export const load: PageLoad = async ({ params, fetch }) => {
-    const apiUrl = `http://localhost:8080/dishes/${params.id}`;
+    const apiUrl = BACKEND_URL + `/dishes/${params.id}`;
 
     const response = await fetch(apiUrl);
 
