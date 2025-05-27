@@ -81,8 +81,8 @@
         <div class="text-center md:text-left">
           <h3 class="font-bold text-lg mb-4">Volg ons</h3>
           <div class="flex justify-center md:justify-start space-x-4">
-            <a href="#" class="hover:text-gray-300 transition-colors">Instagram</a>
-            <a href="#" class="hover:text-gray-300 transition-colors">Facebook</a>
+            <a href="https://www.instagram.com/kokenmetlisa" class="hover:text-gray-300 transition-colors">Instagram</a>
+            <a href="https://www.facebook.com/kokenmetlisa" class="hover:text-gray-300 transition-colors">Facebook</a>
           </div>
         </div>
       </div>

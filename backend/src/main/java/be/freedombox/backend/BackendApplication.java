@@ -24,8 +24,8 @@ public class BackendApplication {
     @Bean
     public CommandLineRunner createTestUser(UserRepository userRepository, PasswordEncoder encoder) {
         return args -> {
-            if (!userRepository.existsByUsername("jan")) {
-                User user = new User("jan", encoder.encode("test123"), "ADMIN");
+            if (!userRepository.existsByUsername("admin")) {
+                User user = new User("admin", encoder.encode("test123"), "ADMIN");
                 userRepository.save(user);
                 System.out.println("Created user: " + user);
             } else {

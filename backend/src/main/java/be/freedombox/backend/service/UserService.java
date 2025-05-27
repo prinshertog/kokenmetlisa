@@ -1,6 +1,7 @@
 package be.freedombox.backend.service;
 
 import be.freedombox.backend.domain.User;
+import be.freedombox.backend.dto.AuthDTO;
 import be.freedombox.backend.dto.ChangePasswordDTO;
 import be.freedombox.backend.dto.UserDTO;
 import be.freedombox.backend.exception.IllegalInputException;
@@ -8,6 +9,7 @@ import be.freedombox.backend.exception.ObjectAlreadyExistsException;
 import be.freedombox.backend.exception.ObjectDoesNotExistException;
 import be.freedombox.backend.exception.UnAuthorizedException;
 import be.freedombox.backend.repository.UserRepository;
+import be.freedombox.backend.request.AuthRequest;
 import be.freedombox.backend.request.UserRequest;
 import be.freedombox.backend.tools.JwtUtils;
 import be.freedombox.backend.tools.Mapper;
@@ -92,5 +94,11 @@ public class UserService implements IUserService {
     public User getUserByBearerToken(String authorizationHeader) {
         String bearerToken = authorizationHeader.replace("Bearer ", "");
         return findByUsername(JwtUtils.extractUsername(bearerToken));
+    }
+
+    public AuthDTO authenticate(AuthRequest authRequest) {
+        String bearer = bearerTokenGenerator(authRequest.getUsername(), authRequest.getPassword());
+        User user = getUserByBearerToken(bearer);
+        return Mapper.toAuthDTO(bearer, user.getRole());
     }
 }

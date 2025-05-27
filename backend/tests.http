@@ -8,14 +8,14 @@ POST http://localhost:8080/login
 Content-Type: application/json
 
 {
-  "username": "jan",
+  "username": "admin",
   "password": "test123"
 }
 
 ###
 
 DELETE http://localhost:8080/users
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqYW4iLCJpYXQiOjE3NDgyNjA0NTMsImV4cCI6MTc0ODI2NDA1M30.L0hiij-yXUznfGlIbVKvU5hkCDd5jCnlyLsTdI9gocc
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTc0ODM3NTg0NSwiZXhwIjoxNzQ4Mzc5NDQ1fQ.42m7cpvEQkqOceKwQ9JpC1Og6kgPCdihjgn-OrsxbqU
 Content-Type: application/json
 
 {
@@ -25,7 +25,7 @@ Content-Type: application/json
 
 ###
 POST http://localhost:8080/users
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqYW4iLCJpYXQiOjE3NDgyNjA0NTMsImV4cCI6MTc0ODI2NDA1M30.L0hiij-yXUznfGlIbVKvU5hkCDd5jCnlyLsTdI9gocc
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqYW4iLCJpYXQiOjE3NDgzNzUxNTAsImV4cCI6MTc0ODM3ODc1MH0.aX_H2h3yBj9vAuUBHYyusBQLQ8C51LkFg9vSPrlBgFE
 Content-Type: application/json
 
 {
@@ -49,7 +49,7 @@ Content-Type: application/json
 ###
 
 GET http://localhost:8080/users
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqYW4yIiwiaWF0IjoxNzQ2Mjg0OTY4LCJleHAiOjE3NDYyODg1Njh9.EWD8r1m5eBMq37qnjlVPttM0cZtvH8-syDg_L67t4dY
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTc0ODM3NTg0NSwiZXhwIjoxNzQ4Mzc5NDQ1fQ.42m7cpvEQkqOceKwQ9JpC1Og6kgPCdihjgn-OrsxbqU
 Content-Type: application/json
 
 ###

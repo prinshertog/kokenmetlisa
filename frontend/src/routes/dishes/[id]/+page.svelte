@@ -1,19 +1,28 @@
-<script>
-    export let data;
+<script lang="ts">
+    import { marked } from 'marked';
+    import type { PageData } from './$types';
+    
+    const { data } = $props();
+    const { imageUrl, name, description, category, subcategory } = data;
+    
+    // Convert markdown to HTML
+    let descriptionHtml = $derived(marked(description));
 </script>
 
-<svelte:head>
-  <title>{data.name}</title>
-</svelte:head>
-
-<div class="flex">
-    <div 
-        class="h-screen w-1/2 bg-center bg-cover" 
-        style="background-image: url({data.imageUrl});">
-    </div>
-    
-    <div class="bg-[rgb(73,105,83)] p-4 text-white w-1/2">
-        <h1 class="text-4xl">{data.name}</h1>
-        <p class="pt-5">{data.description}</p>
+<div class="max-w-4xl mx-auto py-8 px-4">
+    <div class="bg-white shadow rounded-lg overflow-hidden">
+        <img class="w-full h-64 object-cover" src={imageUrl} alt={name} />
+        <div class="p-6">
+            <h1 class="text-3xl font-bold mb-4">{name}</h1>
+            <div class="prose max-w-none">
+                {descriptionHtml}
+            </div>
+            <div class="mt-4 text-sm text-gray-500">
+                <p>Category: {category.category}</p>
+                {#if subcategory}
+                    <p>Subcategory: {subcategory}</p>
+                {/if}
+            </div>
+        </div>
     </div>
 </div>

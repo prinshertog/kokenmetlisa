@@ -1,6 +1,7 @@
 package be.freedombox.backend.api;
 
 import be.freedombox.backend.domain.User;
+import be.freedombox.backend.dto.AuthDTO;
 import be.freedombox.backend.request.AuthRequest;
 import be.freedombox.backend.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +19,7 @@ public class AuthController {
     }
 
     @PostMapping
-    public ResponseEntity<String> login(@RequestBody AuthRequest authRequest) {
-        return ResponseEntity.ok(userService.bearerTokenGenerator(authRequest.getUsername(), authRequest.getPassword()));
+    public ResponseEntity<AuthDTO> login(@RequestBody AuthRequest authRequest) {
+        return ResponseEntity.ok(userService.authenticate(authRequest));
     }
 }

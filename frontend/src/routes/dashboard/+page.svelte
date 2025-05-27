@@ -1,0 +1,193 @@
+<script lang="ts">
+    import type { ActionData, PageData } from './$types';
+    
+    const { data, form } = $props();
+    const { username, role, categories, dishes } = data;
+    
+    interface Category {
+        category: string;
+        parentCategory: {
+            category: string;
+            parentCategory: null;
+        } | null;
+    }
+
+    let mainCategories = $derived(categories.filter((cat: Category) => !cat.parentCategory));
+    let getSubcategories = (parentCat: string) => {
+        return categories.filter((cat: Category) => 
+            cat.parentCategory && cat.parentCategory.category === parentCat
+        );
+    };
+
+    let handleImageError = (event: Event) => {
+        const img = event.target as HTMLImageElement;
+        img.src = '/placeholder-dish.jpg';
+        img.onerror = null;
+    };
+</script>
+
+<div class="min-h-screen bg-gray-50">
+    <!-- Header -->
+    <header class="bg-white shadow">
+        <div class="max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8 flex justify-between items-center">
+            <h1 class="text-2xl font-semibold text-gray-900">Welcome {username}</h1>
+            <div class="flex items-center space-x-4">
+                {#if role === 'ADMIN'}
+                    <a href="/users" 
+                        class="px-4 py-2 text-blue-600 hover:text-blue-800 font-medium">
+                        Users
+                    </a>
+                {:else}
+                    <a href="/users" 
+                        class="px-4 py-2 text-blue-600 hover:text-blue-800 font-medium">
+                        User Settings
+                    </a>
+                {/if}
+                <form action="?/logout" method="POST" class="inline">
+                    <button class="px-4 py-2 text-red-600 hover:text-red-800 font-medium">
+                        Logout
+                    </button>
+                </form>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
+        <!-- Forms Section -->
+        <div class="grid md:grid-cols-2 gap-6 mb-8">
+            <!-- Add Dish Form -->
+            <div class="bg-white shadow rounded-lg p-6">
+                <h2 class="text-xl font-semibold mb-4">Add a Dish</h2>
+                <form method="POST" action="?/add" class="space-y-4">
+                    <div>
+                        <input class="w-full px-3 py-2 border rounded-md" type="text"
+                            name="name" placeholder="Dish name" required />
+                    </div>
+                    <div>
+                        <textarea class="w-full px-3 py-2 border rounded-md"
+                            name="description" placeholder="Description" rows="3" required></textarea>
+                    </div>
+                    <div>
+                        <select class="w-full px-3 py-2 border rounded-md"
+                            name="category" required>
+                            <option value="">Select a category</option>
+                            {#each data.categories as category}
+                                <option value={category.category}>{category.category}</option>
+                            {/each}
+                        </select>
+                    </div>
+                    <div>
+                        <select class="w-full px-3 py-2 border rounded-md"
+                            name="subcategory">
+                            <option value="">Select a subcategory (optional)</option>
+                            {#each data.categories as category}
+                                <option value={category.category}>{category.category}</option>
+                            {/each}
+                        </select>
+                    </div>
+                    <div>
+                        <input class="w-full px-3 py-2 border rounded-md" type="text"
+                            name="imageUrl" placeholder="Image URL" required />
+                    </div>
+                    <button class="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700">
+                        Add Dish
+                    </button>
+                </form>
+                {#if form?.error}
+                    <p class="mt-2 text-red-500">{form.error}</p>
+                {:else if form?.success && form?.dishDeleted}
+                    <p class="mt-2 text-green-500">Dish deleted successfully!</p>
+                {:else if form?.success}
+                    <p class="mt-2 text-green-500">Dish added successfully!</p>
+                {/if}
+            </div>
+
+            <!-- Categories Section -->
+            <div class="bg-white shadow rounded-lg p-6">
+                <h2 class="text-xl font-semibold mb-4">Categories</h2>
+                <div class="mb-4">
+                    <h3 class="font-medium mb-2">Categories and Subcategories:</h3>
+                    <div class="space-y-2">
+                        {#each mainCategories as category}
+                            <!-- Main category -->
+                            <div class="space-y-1">
+                                <div class="flex justify-between items-center p-2 bg-gray-50 rounded">
+                                    <span class="font-medium">{category.category}</span>
+                                    <form action="?/deleteCategory" method="POST" class="inline">
+                                        <input type="hidden" name="category" value={category.category}>
+                                        <button class="text-red-600 hover:text-red-800">Delete</button>
+                                    </form>
+                                </div>
+                                <!-- Subcategories -->
+                                {#each getSubcategories(category.category) as subcategory}
+                                    <div class="flex justify-between items-center p-2 bg-gray-100 rounded ml-4">
+                                        <span class="text-sm">↳ {subcategory.category}</span>
+                                        <form action="?/deleteCategory" method="POST" class="inline">
+                                            <input type="hidden" name="category" value={subcategory.category}>
+                                            <button class="text-red-600 hover:text-red-800">Delete</button>
+                                        </form>
+                                    </div>
+                                {/each}
+                            </div>
+                        {/each}
+                    </div>
+                </div>
+
+                <!-- Update Category Form -->
+                <form method="POST" action="?/addCategory" class="space-y-4">
+                    <div>
+                        <input class="w-full px-3 py-2 border rounded-md" type="text"
+                            name="category" placeholder="Category name" required />
+                    </div>
+                    <div>
+                        <select class="w-full px-3 py-2 border rounded-md"
+                            name="parentCategory">
+                            <option value="">Select parent category (optional)</option>
+                            {#each mainCategories as category}
+                                <option value={category.category}>{category.category}</option>
+                            {/each}
+                        </select>
+                    </div>
+                    <button class="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700">
+                        Add Category
+                    </button>
+                </form>
+                {#if form?.categoryError}
+                    <p class="mt-2 text-red-500">{form.categoryError}</p>
+                {:else if form?.categorySuccess && form?.categoryDeleted}
+                    <p class="mt-2 text-green-500">Category deleted successfully!</p>
+                {:else if form?.categorySuccess}
+                    <p class="mt-2 text-green-500">Category added successfully!</p>
+                {/if}
+            </div>
+        </div>
+
+        <!-- Dishes Grid -->
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {#each data.dishes as dish}
+                <div class="bg-white shadow rounded-lg overflow-hidden">
+                    <img 
+                        class="w-full h-48 object-cover" 
+                        src={dish.imageUrl || '/placeholder-dish.jpg'} 
+                        alt={dish.name}
+                        on:error={handleImageError} 
+                        loading="lazy"
+                    />
+                    <div class="p-6">
+                        <div class="flex justify-between items-start">
+                            <h3 class="text-xl font-semibold">{dish.name}</h3>
+                            <form action="?/deleteDish" method="POST" class="inline">
+                                <input type="hidden" name="id" value={dish.id}>
+                                <button class="bg-red-600 text-white px-3 py-1 rounded-md hover:bg-red-700">
+                                    Delete
+                                </button>
+                            </form>
+                        </div>
+                        <p class="mt-2 text-gray-600">{dish.description}</p>
+                        <p class="mt-4 text-sm text-gray-500">Category: {dish.category.category}</p>
+                    </div>
+                </div>
+            {/each}
+        </div>
+    </main>
+</div>
