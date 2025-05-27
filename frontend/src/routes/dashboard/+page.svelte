@@ -170,7 +170,7 @@
                         class="w-full h-48 object-cover" 
                         src={dish.imageUrl || '/placeholder-dish.jpg'} 
                         alt={dish.name}
-                        on:error={handleImageError} 
+                        onerror={handleImageError} 
                         loading="lazy"
                     />
                     <div class="p-6">
