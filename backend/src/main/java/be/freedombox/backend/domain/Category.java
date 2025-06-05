@@ -2,6 +2,7 @@ package be.freedombox.backend.domain;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import org.hibernate.annotations.Cascade;
 
 @Entity
 @Table(name = "Categories")

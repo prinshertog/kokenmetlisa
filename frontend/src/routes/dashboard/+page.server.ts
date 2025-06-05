@@ -1,7 +1,8 @@
 import { fail, redirect } from '@sveltejs/kit';
 import type { Actions } from './$types';
-
-const BACKEND_URL = "http://localhost:8080";
+import { writeFile, unlink, mkdir } from 'fs/promises';
+import { join } from 'path';
+import { BASE_URL_BACKEND, IMAGES_LOCATION } from '$env/static/private';
 
 export async function load({ cookies }) {
     const bearer = cookies.get('bearer');
@@ -10,12 +11,40 @@ export async function load({ cookies }) {
     }
 
     try {
+        const response = await fetch(BASE_URL_BACKEND + "/login", {
+            headers: {
+                'Authorization': `Bearer ${bearer}`
+            }
+        });
+        
+        if (!response.ok) {
+            cookies.delete('bearer', { path: '/' });
+            cookies.delete('username', { path: '/' });
+            cookies.delete('role', { path: '/' });
+            throw redirect(303, '/login');
+        }
+
+        const isLoggedIn = await response.json();
+        if (!isLoggedIn.success) { 
+            cookies.delete('bearer', { path: '/' });
+            cookies.delete('username', { path: '/' });
+            cookies.delete('role', { path: '/' });
+            throw redirect(303, '/login');
+        }
+    } catch (error) {
+        cookies.delete('bearer', { path: '/' });
+        cookies.delete('username', { path: '/' });
+        cookies.delete('role', { path: '/' });
+        throw redirect(303, '/login');
+    }
+
+    try {
         const username = cookies.get('username');
         const role = cookies.get('role');
         
         const [dishesResponse, categoriesResponse] = await Promise.all([
-            fetch(BACKEND_URL + '/dishes'),
-            fetch(BACKEND_URL + '/category', {
+            fetch(BASE_URL_BACKEND + '/dishes'),
+            fetch(BASE_URL_BACKEND + '/category', {
                 headers: {
                     'Authorization': `Bearer ${bearer}`
                 }
@@ -53,16 +82,30 @@ export const actions = {
     add: async ({ request, cookies }) => {
         try {
             const data = await request.formData();
+            const image = data.get('image') as File;
+            let imageUrl = '/placeholder-dish.png';
+
+            if (image.size > 0) {
+                const filename = `${Date.now()}-${image.name}`;
+                const folderPath = "/images";
+                const filepath = join(folderPath, filename);
+                const arrayBuffer = await image.arrayBuffer();
+                const buffer = Buffer.from(arrayBuffer);
+
+                await mkdir(folderPath, { recursive: true }); // Ensure folder exists
+                await writeFile(filepath, buffer);
+                imageUrl = `${IMAGES_LOCATION}/${filename}`;
+            }
+
             const dishData = {
                 name: data.get('name'),
                 description: data.get('description'),
                 category: data.get('category'),
-                subcategory: data.get('subcategory'),
-                imageUrl: data.get('imageUrl')
+                imageUrl
             };
 
             const bearer = cookies.get('bearer');
-            const response = await fetch(BACKEND_URL + '/dishes', {
+            const response = await fetch(BASE_URL_BACKEND + '/dishes', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -101,7 +144,7 @@ export const actions = {
             };
 
             const bearer = cookies.get('bearer');
-            const response = await fetch(BACKEND_URL + '/category', {
+            const response = await fetch(BASE_URL_BACKEND + '/category', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -127,9 +170,22 @@ export const actions = {
         try {
             const data = await request.formData();
             const id = data.get('id');
+            const imageUrl = data.get('imageUrl');
+            let name = '';
+            if (imageUrl != null) {
+                if (typeof imageUrl === 'string') {
+                    name = imageUrl.split("/").pop() ?? '';
+                }
+            }
             const bearer = cookies.get('bearer');
 
-            const response = await fetch(`${BACKEND_URL}/dishes/${id}`, {
+            if (name != null) {
+                if (typeof name === 'string') {
+                    await unlink(`/images/${name}`);
+                }
+            }
+
+            const response = await fetch(`${BASE_URL_BACKEND}/dishes/${id}`, {
                 method: 'DELETE',
                 headers: {
                     'Authorization': `Bearer ${bearer}`
@@ -152,7 +208,7 @@ export const actions = {
             const category = data.get('category');
             const bearer = cookies.get('bearer');
 
-            const response = await fetch(`${BACKEND_URL}/category`, {
+            const response = await fetch(`${BASE_URL_BACKEND}/category`, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',

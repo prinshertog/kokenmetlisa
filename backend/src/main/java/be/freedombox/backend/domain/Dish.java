@@ -16,6 +16,7 @@ public class Dish {
     private String name;
     @Valid
     @NotBlank(message = "Description is required")
+    @Column(length = 10000)
     private String description;
     @Valid
     @ManyToOne

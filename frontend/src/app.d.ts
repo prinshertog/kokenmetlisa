@@ -5,8 +5,12 @@ declare global {
 		// interface Error {}
 		// interface Locals {}
 		// interface PageData {}
-		// interface PageState {}
 		// interface Platform {}
+	}
+	namespace NodeJS {
+		interface ProcessEnv {
+			BASE_URL_BACKEND: string;
+		}
 	}
 }
 

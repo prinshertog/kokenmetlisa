@@ -2,7 +2,7 @@
   import "../app.css";
   
   const { children, data } = $props();
-  const { dishes, categories } = data;
+  const { categories } = data;
   let isMenuOpen = $state(false);
   
   function toggleMenu() {
@@ -38,26 +38,60 @@
 
       <!-- Desktop menu -->
       <nav class="hidden md:flex space-x-8">
-        {#each categories as category}
-          {#if category.parentCategory === null}
-          <a href="/{category.category}" class="text-gray-700 hover:text-green-600 transition-colors">{category.category}</a>
+        {#each categories as parentCategory}
+          {#if parentCategory.parentCategory === null}
+            <div class="relative group">
+              <a rel="external" href="/category/{parentCategory.category}" 
+                class="text-gray-700 hover:text-green-600 transition-colors inline-flex items-center">
+                {parentCategory.category}
+                <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                </svg>
+              </a>
+              <div class="absolute left-0 mt-2 w-48 bg-white rounded-md shadow-lg opacity-0 invisible 
+                         group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+                {#each categories as subCategory}
+                  {#if subCategory.parentCategory?.category === parentCategory.category}
+                    <a rel="external" href="/category/{subCategory.category}" 
+                      class="block px-4 py-2 text-sm text-gray-700 hover:bg-green-50 hover:text-green-600">
+                      {subCategory.category}
+                    </a>
+                  {/if}
+                {/each}
+              </div>
+            </div>
           {/if}
         {/each}
       </nav>
-    </div>
 
-    <!-- Mobile menu overlay -->
-    {#if isMenuOpen}
-      <div class="md:hidden bg-white border-t border-gray-200">
-        <nav class="flex flex-col space-y-4 px-4 py-6">
-          {#each categories as category}
-            {#if category.parentCategory === null}
-            <a href="/{category.category}" class="text-gray-700 hover:text-green-600 transition-colors">{category.category}</a>
-            {/if}
-          {/each}
-        </nav>
-      </div>
-    {/if}
+      <!-- Mobile menu overlay -->
+      {#if isMenuOpen}
+        <div class="md:hidden bg-white border-t border-gray-200">
+          <nav class="flex flex-col px-4 py-6">
+            {#each categories as category}
+              {#if category.parentCategory === null}
+                <div class="py-2">
+                  <a rel="external" href="/category/{category.category}" 
+                    class="text-gray-700 hover:text-green-600 transition-colors font-medium">
+                    {category.category}
+                  </a>
+                  <div class="ml-4 mt-2 space-y-2">
+                    {#each categories as subCategory}
+                      {#if subCategory.parentCategory?.category === category.category}
+                        <a rel="external" href="/category/{subCategory.category}" 
+                          class="block text-gray-600 hover:text-green-600 transition-colors text-sm">
+                          {subCategory.category}
+                        </a>
+                      {/if}
+                    {/each}
+                  </div>
+                </div>
+              {/if}
+            {/each}
+          </nav>
+        </div>
+      {/if}
+    </div>
   </header>
 
   <main class="container mx-auto px-4 mt-24 mb-16 flex-grow">
@@ -75,14 +109,9 @@
           >
         </div>
         <div class="text-center md:text-left">
-          <h3 class="font-bold text-lg mb-4">Contact</h3>
-          <p>Email: info@kokenmetlisa.be</p>
-        </div>
-        <div class="text-center md:text-left">
           <h3 class="font-bold text-lg mb-4">Volg ons</h3>
           <div class="flex justify-center md:justify-start space-x-4">
-            <a href="https://www.instagram.com/kokenmetlisa" class="hover:text-gray-300 transition-colors">Instagram</a>
-            <a href="https://www.facebook.com/kokenmetlisa" class="hover:text-gray-300 transition-colors">Facebook</a>
+            <a href="https://www.instagram.com/kokenmetlisa_" class="hover:text-gray-300 transition-colors">Instagram</a>
           </div>
         </div>
       </div>

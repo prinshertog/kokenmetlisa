@@ -8,6 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @RestController
 @RequestMapping("/login")
 public class AuthController {
@@ -21,5 +24,16 @@ public class AuthController {
     @PostMapping
     public ResponseEntity<AuthDTO> login(@RequestBody AuthRequest authRequest) {
         return ResponseEntity.ok(userService.authenticate(authRequest));
+    }
+
+    @GetMapping
+    public ResponseEntity<Map<String, Boolean>> isAuthenticated(@RequestHeader(value = "Authorization") String authorizationHeader) {
+        Map<String, Boolean> response = new HashMap<>();
+        if (userService.isAuthenticated(authorizationHeader)) {
+            response.put("success", true);
+        } else {
+            response.put("success", false);
+        }
+        return ResponseEntity.ok(response);
     }
 }

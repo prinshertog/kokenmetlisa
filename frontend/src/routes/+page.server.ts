@@ -1,6 +1,7 @@
-export async function load() {
+import { BASE_URL_BACKEND } from '$env/static/private';
+export async function load({}) {
     try {
-        const response = await fetch('http://localhost:8080/dishes');
+        const response = await fetch(BASE_URL_BACKEND + '/dishes');
         if (!response.ok) {
             throw new Error(`Failed to fetch dishes: ${response.statusText}`);
         }

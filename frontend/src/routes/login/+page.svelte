@@ -1,5 +1,4 @@
 <script lang="ts">
-    import type { ActionData } from './$types';
     const { form } = $props();
 </script>
 

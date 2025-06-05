@@ -7,9 +7,8 @@ import be.freedombox.backend.request.UserRequest;
 import java.util.List;
 
 public interface IUserService {
-    List<UserDTO> all();
+    List<UserDTO> all(String authorizationHeader);
     void create(String authorizationHeader, UserRequest userRequest);
-    void update(String authorizationHeader, UserRequest userRequest);
     void delete(String authorizationHeader, String username);
     void changePassword(String authorizationHeader, ChangePasswordDTO changePasswordDTO);
     String bearerTokenGenerator(String username, String password);

@@ -1,9 +1,14 @@
 import { redirect, fail } from "@sveltejs/kit";
 import type { Actions, PageServerLoad } from "../$types";
-
-let BACKEND_URL = "http://localhost:8080"
+import { BASE_URL_BACKEND } from '$env/static/private';
 
 export const actions = {
+    logout: async ({ cookies }) => {
+        cookies.delete('bearer', { path: '/' });
+        cookies.delete('username', { path: '/' });
+        cookies.delete('role', { path: '/' });
+        throw redirect(303, '/login');
+    },
     login: async ({ cookies, request }) => {
         try {
             const data = await request.formData();
@@ -13,7 +18,7 @@ export const actions = {
                 username: username,
                 password: password
             }
-            const response = await fetch(BACKEND_URL + '/login', {
+            const response = await fetch(BASE_URL_BACKEND + '/login', {
                 method: "POST",
                 headers: { "Content-Type": "application/json"},
                 body: JSON.stringify(userData)

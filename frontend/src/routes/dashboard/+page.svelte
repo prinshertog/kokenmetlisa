@@ -1,6 +1,4 @@
 <script lang="ts">
-    import type { ActionData, PageData } from './$types';
-    
     const { data, form } = $props();
     const { username, role, categories, dishes } = data;
     
@@ -17,12 +15,6 @@
         return categories.filter((cat: Category) => 
             cat.parentCategory && cat.parentCategory.category === parentCat
         );
-    };
-
-    let handleImageError = (event: Event) => {
-        const img = event.target as HTMLImageElement;
-        img.src = '/placeholder-dish.jpg';
-        img.onerror = null;
     };
 </script>
 
@@ -58,7 +50,7 @@
             <!-- Add Dish Form -->
             <div class="bg-white shadow rounded-lg p-6">
                 <h2 class="text-xl font-semibold mb-4">Add a Dish</h2>
-                <form method="POST" action="?/add" class="space-y-4">
+                <form method="POST" action="?/add" class="space-y-4" enctype="multipart/form-data">
                     <div>
                         <input class="w-full px-3 py-2 border rounded-md" type="text"
                             name="name" placeholder="Dish name" required />
@@ -77,17 +69,9 @@
                         </select>
                     </div>
                     <div>
-                        <select class="w-full px-3 py-2 border rounded-md"
-                            name="subcategory">
-                            <option value="">Select a subcategory (optional)</option>
-                            {#each data.categories as category}
-                                <option value={category.category}>{category.category}</option>
-                            {/each}
-                        </select>
-                    </div>
-                    <div>
-                        <input class="w-full px-3 py-2 border rounded-md" type="text"
-                            name="imageUrl" placeholder="Image URL" required />
+                        <input class="w-full px-3 py-2 border rounded-md" 
+                            type="file" accept="image/*"
+                            name="image" />
                     </div>
                     <button class="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700">
                         Add Dish
@@ -168,9 +152,8 @@
                 <div class="bg-white shadow rounded-lg overflow-hidden">
                     <img 
                         class="w-full h-48 object-cover" 
-                        src={dish.imageUrl || '/placeholder-dish.jpg'} 
+                        src={dish.imageUrl} 
                         alt={dish.name}
-                        onerror={handleImageError} 
                         loading="lazy"
                     />
                     <div class="p-6">
@@ -178,12 +161,12 @@
                             <h3 class="text-xl font-semibold">{dish.name}</h3>
                             <form action="?/deleteDish" method="POST" class="inline">
                                 <input type="hidden" name="id" value={dish.id}>
+                                <input type="hidden" name="imageUrl" value={dish.imageUrl}>
                                 <button class="bg-red-600 text-white px-3 py-1 rounded-md hover:bg-red-700">
                                     Delete
                                 </button>
                             </form>
                         </div>
-                        <p class="mt-2 text-gray-600">{dish.description}</p>
                         <p class="mt-4 text-sm text-gray-500">Category: {dish.category.category}</p>
                     </div>
                 </div>

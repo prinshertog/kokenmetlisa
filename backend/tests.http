@@ -14,12 +14,24 @@ Content-Type: application/json
 
 ###
 
+GET http://localhost:8080/health
+Content-Type: application/json
+
+###
+
+GET http://localhost:8080/login
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTc0OTA1MzMwMSwiZXhwIjoxNzQ5MDU2OTAxfQ.XqPx8Ft3LG7djLZ29GHBGUN2B1bFAAqVNq9gDzLx4aI
+Content-Type: application/json
+
+
+###
+
 DELETE http://localhost:8080/users
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTc0ODM3NTg0NSwiZXhwIjoxNzQ4Mzc5NDQ1fQ.42m7cpvEQkqOceKwQ9JpC1Og6kgPCdihjgn-OrsxbqU
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTc0OTAyMzk3MiwiZXhwIjoxNzQ5MDI3NTcyfQ.Zpv9MJ-x-n5cHIIztUBPp-JIsFtbSVzt9TB7jzPDbsI
 Content-Type: application/json
 
 {
-  "username": "Levi"
+  "username": "jan"
 }
 
 

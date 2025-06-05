@@ -1,24 +1,16 @@
+import { BASE_URL_BACKEND } from "$env/static/private";
 export async function load() {
     try {
-        const [dishesResponse, categoriesResponse] = await Promise.all([
-            fetch('http://localhost:8080/dishes'),
-            fetch('http://localhost:8080/category')
-        ]);
+        const categoriesResponse = await fetch(BASE_URL_BACKEND + "/category");
 
-        if (!dishesResponse.ok || !categoriesResponse.ok) {
-            throw new Error('Failed to fetch data');
+        if (!categoriesResponse.ok) {
+            throw new Error(`Failed to fetch data: ${categoriesResponse.statusText}`);
         }
 
-        const [dishes, categories] = await Promise.all([
-            dishesResponse.json(),
-            categoriesResponse.json()
-        ]);
-
-        return { dishes, categories };
+        const categories = await categoriesResponse.json();
+        return { categories };
     } catch (error) {
-        console.error(error);
-        return {
-            error: 'Failed to load data'
-        };
+        console.error("Error fetching data:", error);
+        return { error: "Failed to fetch categories" };
     }
-  }
+}

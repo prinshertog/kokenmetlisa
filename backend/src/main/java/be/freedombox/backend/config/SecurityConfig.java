@@ -38,6 +38,7 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.GET,"/category").permitAll()
                         .requestMatchers(HttpMethod.GET, "/dishes/**").permitAll()
                         .requestMatchers("/login").permitAll()
+                        .requestMatchers("/health").permitAll()
                         .anyRequest().authenticated()
                 ).addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
 

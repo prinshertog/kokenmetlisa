@@ -43,52 +43,41 @@ public class UserService implements IUserService {
         return JwtUtils.generateToken(user.getUsername());
     }
 
-    public List<UserDTO> all() {
+    public List<UserDTO> all(String authorizationHeader) {
+        if (!hasRole(authorizationHeader, "ADMIN")) throw new UnAuthorizedException("Unauthorized");
         return userRepository.findAll().stream().map(Mapper::toUserDTO).collect(Collectors.toList());
     }
 
     public void create(String authorizationHeader, UserRequest userRequest) {
-        User requestingUser =  getUserByBearerToken(authorizationHeader);
-        if (!hasRole(authorizationHeader, requestingUser.getUsername(), "ADMIN")) throw new UnAuthorizedException("You do not have permission to access this resource");
+        if (!hasRole(authorizationHeader, "ADMIN")) throw new UnAuthorizedException("You do not have permission to access this resource");
         if (userRepository.existsByUsername(userRequest.getUsername())) throw new ObjectAlreadyExistsException("Username already exists");
         User user = new User(userRequest.getUsername(), passwordEncoder.encode(userRequest.getPassword()), userRequest.getRole());
         userRepository.save(user);
     }
 
-    public void update(String authorizationHeader, UserRequest userRequest) {
-        if (!hasRole(authorizationHeader, userRequest.getUsername(), "ADMIN")) throw new UnAuthorizedException("You do not have permission to access this resource");
-        User user = findByUsername(userRequest.getUsername());
-        if (passwordEncoder.matches(userRequest.getPassword(), user.getPassword())) throw new UnAuthorizedException("Wrong password");
-    }
-
     public void delete(String authorizationHeader, String username) {
-        if (!hasRole(authorizationHeader, username, "ADMIN")) throw new UnAuthorizedException("You do not have permission to access this resource");
+        if (!hasRole(authorizationHeader, "ADMIN")) throw new UnAuthorizedException("You do not have permission to access this resource");
         User user = findByUsername(username);
         userRepository.delete(user);
     }
 
     public void changePassword(String authorizationHeader, ChangePasswordDTO changePasswordDTO) {
-        User requestingUser = getUserByBearerToken(authorizationHeader);
-        if (!hasRole(authorizationHeader, requestingUser.getUsername(), "ADMIN")) {
-            if (!isActualUser(authorizationHeader, changePasswordDTO.getUsername())) throw new UnAuthorizedException("You do not have permission to change the password for this user");
-            if (changePasswordDTO.getNewPassword().equals(changePasswordDTO.getOldPassword())) throw new IllegalInputException("New password cannot be the old password");
+        User currentUser = getUserByBearerToken(authorizationHeader);
+        if (!changePasswordDTO.getUsername().equals(currentUser.getUsername())) {
+            if (!hasRole(authorizationHeader, "ADMIN")) {
+                throw new UnAuthorizedException("You do not have permission to access this resource");
+            }
         }
+        if (changePasswordDTO.getNewPassword().equals(changePasswordDTO.getOldPassword())) throw new IllegalInputException("New password cannot be the old password");
         User user = findByUsername(changePasswordDTO.getUsername());
         if (!passwordEncoder.matches(changePasswordDTO.getOldPassword(), user.getPassword())) throw new IllegalInputException("Old password is wrong");
         user.setPassword(passwordEncoder.encode(changePasswordDTO.getNewPassword()));
         userRepository.save(user);
     }
 
-    public boolean hasRole(String authorizationHeader, String username, String role) {
-        isActualUser(authorizationHeader, username);
-        User currentUser = findByUsername(username);
+    public boolean hasRole(String authorizationHeader, String role) {
+        User currentUser = getUserByBearerToken(authorizationHeader);
         return currentUser.getRole().equals(role);
-    }
-
-    public boolean isActualUser(String authorizationHeader, String username) {
-        String bearerToken = authorizationHeader.replace("Bearer ", "");
-        User currentUser = findByUsername(JwtUtils.extractUsername(bearerToken));
-        return currentUser.getUsername().equals(username);
     }
 
     public User getUserByBearerToken(String authorizationHeader) {
@@ -100,5 +89,9 @@ public class UserService implements IUserService {
         String bearer = bearerTokenGenerator(authRequest.getUsername(), authRequest.getPassword());
         User user = getUserByBearerToken(bearer);
         return Mapper.toAuthDTO(bearer, user.getRole());
+    }
+
+    public Boolean isAuthenticated(String authorizationHeader) {
+        return JwtUtils.isValid(authorizationHeader.replace("Bearer ", ""));
     }
 }

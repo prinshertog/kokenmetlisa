@@ -1,0 +1,42 @@
+import { error } from '@sveltejs/kit';
+import { BASE_URL_BACKEND } from '$env/static/private';
+
+interface Category {
+    category: string,
+    parentCategory: Category | null
+}
+
+interface Dish {
+    id: number,
+    name: string,
+    description: string,
+    category: Category
+    imageUrl: string
+}
+
+export async function load({ params, fetch }) {
+    try {
+        const response = await fetch(`${BASE_URL_BACKEND}/dishes`);
+        if (!response.ok) {
+            const errorData = await response.text();
+            throw error(response.status, errorData);
+        }
+        const data: Dish[] = await response.json();
+        if (data.length === 0) {
+            throw error(404, "No dishes found");
+        }
+        const categoryDishes = data.filter(dish => 
+            dish.category.category === params.category || dish.category.parentCategory?.category === params.category
+        )
+        if (categoryDishes.length === 0) {
+            throw error(404, "No dishes found");
+        }
+        return { categoryDishes };
+
+    } catch (err: any) {
+        if (err.status && err.body) {
+            throw err;
+        }
+        throw error(500, "Failed to fetch dishes");
+    }
+}

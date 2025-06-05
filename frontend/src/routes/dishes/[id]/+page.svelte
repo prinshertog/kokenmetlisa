@@ -1,12 +1,13 @@
 <script lang="ts">
-    import { marked } from 'marked';
-    import type { PageData } from './$types';
-    
+    import { marked } from 'marked';    
     const { data } = $props();
-    const { imageUrl, name, description, category, subcategory } = data;
+    const { imageUrl, name, description, category } = data;
+    marked.setOptions({ breaks: true });
     
     // Convert markdown to HTML
-    let descriptionHtml = $derived(marked(description));
+    let formattedDescription = description.replace(/\r\n/g, " <br> ");
+    let descriptionHtml = $derived(marked(formattedDescription));
+
 </script>
 
 <div class="max-w-4xl mx-auto py-8 px-4">
@@ -15,13 +16,10 @@
         <div class="p-6">
             <h1 class="text-3xl font-bold mb-4">{name}</h1>
             <div class="prose max-w-none">
-                {descriptionHtml}
+                {@html descriptionHtml}
             </div>
             <div class="mt-4 text-sm text-gray-500">
                 <p>Category: {category.category}</p>
-                {#if subcategory}
-                    <p>Subcategory: {subcategory}</p>
-                {/if}
             </div>
         </div>
     </div>

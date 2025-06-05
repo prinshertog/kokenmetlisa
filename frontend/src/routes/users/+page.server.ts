@@ -1,14 +1,42 @@
 import { fail, redirect } from '@sveltejs/kit';
-import type { Actions, PageServerLoad } from './$types';
+import type { Actions } from './$types';
+import { BASE_URL_BACKEND } from '$env/static/private';
 
-const BACKEND_URL = "http://localhost:8080";
-
-export const load: PageServerLoad = async ({ cookies }) => {
+export async function load({ cookies }) {
     const bearer = cookies.get('bearer');
     const role = cookies.get('role');
     const username = cookies.get('username');
 
     if (!bearer) {
+        throw redirect(303, '/login');
+    }
+    
+    try {
+        const response = await fetch(BASE_URL_BACKEND + "/login", {
+            headers: {
+                'Authorization': `Bearer ${bearer}`
+            }
+        });
+        
+        if (!response.ok) {
+            cookies.delete('bearer', { path: '/' });
+            cookies.delete('username', { path: '/' });
+            cookies.delete('role', { path: '/' });
+            throw redirect(303, '/login');
+        }
+        
+        const isLoggedIn = await response.json();
+        if (!isLoggedIn.success) { 
+            cookies.delete('bearer', { path: '/' });
+            cookies.delete('username', { path: '/' });
+            cookies.delete('role', { path: '/' });
+            throw redirect(303, '/login');
+        }
+
+    } catch (error) {
+        cookies.delete('bearer', { path: '/' });
+        cookies.delete('username', { path: '/' });
+        cookies.delete('role', { path: '/' });
         throw redirect(303, '/login');
     }
 
@@ -19,7 +47,7 @@ export const load: PageServerLoad = async ({ cookies }) => {
     let users = [];
     if (role === 'ADMIN') {
         try {
-            const response = await fetch(`${BACKEND_URL}/users`, {
+            const response = await fetch(`${BASE_URL_BACKEND}/users`, {
                 headers: {
                     'Authorization': `Bearer ${bearer}`,
                     'Content-Type': 'application/json'
@@ -43,6 +71,12 @@ export const load: PageServerLoad = async ({ cookies }) => {
 };
 
 export const actions = {
+    logout: async ({ cookies }) => {
+        cookies.delete('bearer', { path: '/' });
+        cookies.delete('username', { path: '/' });
+        cookies.delete('role', { path: '/' });
+        throw redirect(303, '/login');
+    },
     createUser: async ({ request, cookies }) => {
         try {
             const data = await request.formData();
@@ -52,7 +86,7 @@ export const actions = {
                 role: data.get('role')
             };
 
-            const response = await fetch(`${BACKEND_URL}/users`, {
+            const response = await fetch(`${BASE_URL_BACKEND}/users`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -77,13 +111,13 @@ export const actions = {
             const data = await request.formData();
             const username = data.get('username');
 
-            const response = await fetch(`${BACKEND_URL}/users`, {
+            const response = await fetch(`${BASE_URL_BACKEND}/users`, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${cookies.get('bearer')}`
                 },
-                body: JSON.stringify({ username })
+                body: username
             });
 
             if (!response.ok) {
@@ -106,7 +140,7 @@ export const actions = {
                 newPassword: data.get('newPassword')
             };
 
-            const response = await fetch(`${BACKEND_URL}/users/password`, {
+            const response = await fetch(`${BASE_URL_BACKEND}/users/password`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',

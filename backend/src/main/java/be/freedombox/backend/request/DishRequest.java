@@ -10,8 +10,6 @@ public class DishRequest {
     @NotBlank
     private String category;
     @NotBlank
-    private String subCategory;
-    @NotBlank
     private String imageUrl;
 
     public DishRequest() {
@@ -21,7 +19,6 @@ public class DishRequest {
         this.name = name;
         this.description = description;
         this.category = category;
-        this.subCategory = subCategory;
         this.imageUrl = imageUrl;
     }
 
@@ -55,13 +52,5 @@ public class DishRequest {
 
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
-    }
-
-    public String getSubCategory() {
-        return subCategory;
-    }
-
-    public void setSubCategory(String subCategory) {
-        this.subCategory = subCategory;
     }
 }

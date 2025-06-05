@@ -22,8 +22,9 @@ public class UserController {
     }
 
     @GetMapping
-    public ResponseEntity<List<UserDTO>> allUsers() {
-        return ResponseEntity.ok(userService.all());
+    public ResponseEntity<List<UserDTO>> allUsers(@RequestHeader(value = "Authorization") String authorizationHeader) {
+        List<UserDTO> users = userService.all(authorizationHeader);
+        return ResponseEntity.ok(users);
     }
 
     @PostMapping

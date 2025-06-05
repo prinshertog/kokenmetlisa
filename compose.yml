@@ -7,10 +7,56 @@ services:
       POSTGRES_USER: dishes_user
       POSTGRES_PASSWORD: dishes_password
       POSTGRES_DB: dishes_db
-    ports:
-      - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
+    networks:
+      - network
+
+  backend:
+    #image: kokenmetlisa-backend
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: kokenmetlisa-backend
+    ports:
+      - 8080:8080
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/dishes_db
+      SPRING_DATASOURCE_USERNAME: dishes_user
+      SPRING_DATASOURCE_PASSWORD: dishes_password
+    depends_on:
+      - postgres
+    networks:
+      - network
+    healthcheck:
+      test: ["CMD-SHELL", "nc -z localhost 8080 || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+  frontend:
+    #image: kokenmetlisa-frontend
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: kokenmetlisa-frontend
+    init: true
+    ports:
+      - "3000:3000"
+    environment:
+      NODE_ENV: production
+      PORT: 3000
+      BASE_URL_BACKEND: http://kokenmetlisa-backend:8080
+      ORIGIN: http://localhost:3000
+      VITE_BASE_URL_BACKEND: http://kokenmetlisa-backend:8080
+    depends_on:
+      backend:
+        condition: service_healthy
+    networks:
+      - network
 
 volumes:
   postgres_data:
+
+networks:
+  network:
