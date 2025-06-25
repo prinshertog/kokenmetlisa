@@ -8,7 +8,8 @@ export async function load({}) {
 
         const dishes = await response.json();
         return {
-            dishes
+            dishes,
+            BASE_URL_BACKEND
         };
     } catch (error) {
         console.error(error);

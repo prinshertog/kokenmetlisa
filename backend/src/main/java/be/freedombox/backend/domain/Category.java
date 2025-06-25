@@ -12,6 +12,7 @@ public class Category {
     private String category;
     @ManyToOne
     private Category parentCategory;
+    private int position;
 
     public Category() {}
 
@@ -34,5 +35,13 @@ public class Category {
 
     public void setParentCategory(Category parentCategory) {
         this.parentCategory = parentCategory;
+    }
+
+    public int getPosition() {
+        return position;
+    }
+
+    public void setPosition(int position) {
+        this.position = position;
     }
 }

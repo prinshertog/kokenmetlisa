@@ -23,18 +23,17 @@ public class Dish {
     @NotNull
     private Category category;
     @Valid
-    @NotBlank(message = "Image url is required")
-    private String imageUrl;
+    private String imageName;
 
     public Dish() {
 
     }
 
-    public Dish(String name, String description, Category category, String imageUrl) {
+    public Dish(String name, String description, Category category, String imageName) {
         this.name = name;
         this.description = description;
         this.category = category;
-        this.imageUrl = imageUrl;
+        this.imageName = imageName;
     }
 
     public Long getId() {
@@ -65,11 +64,15 @@ public class Dish {
         this.category = category;
     }
 
-    public String getImageUrl() {
-        return imageUrl;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
+    public String getImageName() {
+        return imageName;
+    }
+
+    public void setImageName(String imageName) {
+        this.imageName = imageName;
     }
 }

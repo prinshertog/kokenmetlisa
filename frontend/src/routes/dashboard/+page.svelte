@@ -1,6 +1,6 @@
 <script lang="ts">
     const { data, form } = $props();
-    const { username, role, categories, dishes } = data;
+    const { username, role, categories, BASE_URL_BACKEND } = data;
     
     interface Category {
         category: string;
@@ -97,10 +97,20 @@
                             <div class="space-y-1">
                                 <div class="flex justify-between items-center p-2 bg-gray-50 rounded">
                                     <span class="font-medium">{category.category}</span>
-                                    <form action="?/deleteCategory" method="POST" class="inline">
-                                        <input type="hidden" name="category" value={category.category}>
-                                        <button class="text-red-600 hover:text-red-800">Delete</button>
-                                    </form>
+                                    <div>
+                                        <form action="?/deleteCategory" method="POST" class="inline">
+                                            <input type="hidden" name="category" value={category.category}>
+                                            <button class="text-blue-600 hover:text-blue-800">Up</button>
+                                        </form>
+                                        <form action="?/deleteCategory" method="POST" class="inline">
+                                            <input type="hidden" name="category" value={category.category}>
+                                            <button class="text-blue-600 hover:text-blue-800">Down</button>
+                                        </form>
+                                        <form action="?/deleteCategory" method="POST" class="inline">
+                                            <input type="hidden" name="category" value={category.category}>
+                                            <button class="text-red-600 hover:text-red-800">Delete</button>
+                                        </form>
+                                    </div>
                                 </div>
                                 <!-- Subcategories -->
                                 {#each getSubcategories(category.category) as subcategory}
@@ -152,7 +162,7 @@
                 <div class="bg-white shadow rounded-lg overflow-hidden">
                     <img 
                         class="w-full h-48 object-cover" 
-                        src={dish.imageUrl} 
+                        src="{`${BASE_URL_BACKEND}/file/${dish.imageName}`}"
                         alt={dish.name}
                         loading="lazy"
                     />
@@ -161,7 +171,7 @@
                             <h3 class="text-xl font-semibold">{dish.name}</h3>
                             <form action="?/deleteDish" method="POST" class="inline">
                                 <input type="hidden" name="id" value={dish.id}>
-                                <input type="hidden" name="imageUrl" value={dish.imageUrl}>
+                                <input type="hidden" name="imageName" value={dish.imageName}>
                                 <button class="bg-red-600 text-white px-3 py-1 rounded-md hover:bg-red-700">
                                     Delete
                                 </button>

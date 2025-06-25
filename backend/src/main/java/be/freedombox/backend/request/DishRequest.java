@@ -10,16 +10,16 @@ public class DishRequest {
     @NotBlank
     private String category;
     @NotBlank
-    private String imageUrl;
+    private String imageName;
 
     public DishRequest() {
     }
 
-    public DishRequest(String name, String description, String category, String subCategory, String imageUrl) {
+    public DishRequest(String name, String description, String category, String subCategory, String imageName) {
         this.name = name;
         this.description = description;
         this.category = category;
-        this.imageUrl = imageUrl;
+        this.imageName = imageName;
     }
 
     public String getName() {
@@ -46,11 +46,11 @@ public class DishRequest {
         this.category = category;
     }
 
-    public String getImageUrl() {
-        return imageUrl;
+    public String getImageName() {
+        return imageName;
     }
 
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
+    public void setImageName(String imageName) {
+        this.imageName = imageName;
     }
 }

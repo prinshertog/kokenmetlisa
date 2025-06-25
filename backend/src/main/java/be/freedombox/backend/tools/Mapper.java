@@ -10,7 +10,7 @@ import be.freedombox.backend.dto.UserDTO;
 
 public class Mapper {
     public static DishDTO toDishDTO(Dish dish) {
-        return new DishDTO(dish.getId(), dish.getName(), dish.getDescription(), dish.getCategory(), dish.getImageUrl());
+        return new DishDTO(dish.getId(), dish.getName(), dish.getDescription(), dish.getCategory(), dish.getImageName());
     }
 
     public static CategoryDTO toCategoryDTO(Category category) {

@@ -7,17 +7,17 @@ public class DishDTO {
     private String name;
     private String description;
     private Category category;
-    private String imageUrl;
+    private String imageName;
 
     public DishDTO() {
     }
 
-    public DishDTO(Long id, String name, String description, Category category, String imageUrl) {
+    public DishDTO(Long id, String name, String description, Category category, String imageName) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.category = category;
-        this.imageUrl = imageUrl;
+        this.imageName = imageName;
     }
 
     public String getName() {
@@ -44,12 +44,12 @@ public class DishDTO {
         this.category = category;
     }
 
-    public String getImageUrl() {
-        return imageUrl;
+    public String getImageName() {
+        return imageName;
     }
 
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
+    public void setImageName(String imageName) {
+        this.imageName = imageName;
     }
 
     public Long getId() {

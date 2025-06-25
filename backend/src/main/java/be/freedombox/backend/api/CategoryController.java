@@ -31,6 +31,11 @@ public class CategoryController {
         return ResponseEntity.ok(categoryService.create(categoryRequest));
     }
 
+    @PostMapping
+    public ResponseEntity<HttpStatus> switchCategoryPosition(@RequestBody ) {
+
+    }
+
     @DeleteMapping
     public ResponseEntity<HttpStatus> deleteCategory(@RequestBody CategoryRequest categoryRequest) {
         categoryService.delete(categoryRequest);

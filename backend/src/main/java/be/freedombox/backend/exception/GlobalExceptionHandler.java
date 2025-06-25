@@ -52,4 +52,19 @@ public class GlobalExceptionHandler {
     public ResponseEntity<Map<String, String>> handleIllegalInputException(IllegalInputException ex) {
         return createErrorResponse(ex.getMessage(), HttpStatus.BAD_REQUEST);
     }
+
+    @ExceptionHandler(NotImplementedException.class)
+    public ResponseEntity<Map<String, String>> handleNotImplementedException(NotImplementedException ex) {
+        return createErrorResponse(ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    @ExceptionHandler(FileException.class)
+    public ResponseEntity<Map<String, String>> handleFileException(FileException ex) {
+        return createErrorResponse(ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    @ExceptionHandler(DishException.class)
+    public ResponseEntity<Map<String, String>> handleDishException(DishException ex) {
+        return createErrorResponse(ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+    }
 }

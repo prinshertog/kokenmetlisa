@@ -1,8 +1,6 @@
 import { fail, redirect } from '@sveltejs/kit';
 import type { Actions } from './$types';
-import { writeFile, unlink, mkdir } from 'fs/promises';
-import { join } from 'path';
-import { BASE_URL_BACKEND, IMAGES_LOCATION } from '$env/static/private';
+import { BASE_URL_BACKEND } from '$env/static/private';
 
 export async function load({ cookies }) {
     const bearer = cookies.get('bearer');
@@ -64,7 +62,8 @@ export async function load({ cookies }) {
             dishes, 
             categories, 
             username,
-            role 
+            role,
+            BASE_URL_BACKEND
         };
     } catch (error) {
         console.error(error);
@@ -83,43 +82,39 @@ export const actions = {
         try {
             const data = await request.formData();
             const image = data.get('image') as File;
-            let imageUrl = '/placeholder-dish.png';
+            console.log(image)
 
             if (image.size > 0) {
                 const filename = `${Date.now()}-${image.name}`;
-                const folderPath = "/images";
-                const filepath = join(folderPath, filename);
-                const arrayBuffer = await image.arrayBuffer();
-                const buffer = Buffer.from(arrayBuffer);
+                const dishData = {
+                    name: data.get('name'),
+                    description: data.get('description'),
+                    category: data.get('category'),
+                    imageName: filename
+                };
+    
+                const bearer = cookies.get('bearer');
+                const formData = new FormData();
+                formData.append("file", image);
+                formData.append("dishRequest", new Blob([JSON.stringify(dishData)], { type: "application/json" }));
 
-                await mkdir(folderPath, { recursive: true }); // Ensure folder exists
-                await writeFile(filepath, buffer);
-                imageUrl = `${IMAGES_LOCATION}/${filename}`;
+                const response = await fetch(BASE_URL_BACKEND + '/dishes', {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${bearer}`
+                    },
+                    body: formData
+                });
+    
+                if (!response.ok) {
+                    const errorText = await response.json();
+                    return fail(400, { error: errorText.error || 'Failed to add dish' });
+                }
+    
+                return { success: true };
             }
 
-            const dishData = {
-                name: data.get('name'),
-                description: data.get('description'),
-                category: data.get('category'),
-                imageUrl
-            };
-
-            const bearer = cookies.get('bearer');
-            const response = await fetch(BASE_URL_BACKEND + '/dishes', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${bearer}`
-                },
-                body: JSON.stringify(dishData)
-            });
-
-            if (!response.ok) {
-                const errorText = await response.json();
-                return fail(400, { error: errorText.error || 'Failed to add dish' });
-            }
-
-            return { success: true };
+            
         } catch (error) {
             return fail(500, {
                 error: error instanceof Error ? error.message : 'An unknown error occurred'
@@ -170,20 +165,7 @@ export const actions = {
         try {
             const data = await request.formData();
             const id = data.get('id');
-            const imageUrl = data.get('imageUrl');
-            let name = '';
-            if (imageUrl != null) {
-                if (typeof imageUrl === 'string') {
-                    name = imageUrl.split("/").pop() ?? '';
-                }
-            }
             const bearer = cookies.get('bearer');
-
-            if (name != null) {
-                if (typeof name === 'string') {
-                    await unlink(`/images/${name}`);
-                }
-            }
 
             const response = await fetch(`${BASE_URL_BACKEND}/dishes/${id}`, {
                 method: 'DELETE',
@@ -193,12 +175,13 @@ export const actions = {
             });
 
             if (!response.ok) {
-                return fail(400, { error: 'Failed to delete dish' });
+                const error = await response.json()
+                return fail(400, { error: 'Failed to delete dish' + error.message });
             }
 
             return { success: true, dishDeleted: true };
         } catch (error) {
-            return fail(500, { error: 'Failed to delete dish' });
+            return fail(500, { error: 'Failed to delete dish' + (error instanceof Error ? error.message : 'An unknown error occurred') });
         }
     },
 

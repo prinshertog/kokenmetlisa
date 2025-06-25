@@ -10,4 +10,5 @@ public interface ICategoryService {
     List<CategoryDTO> all();
     CategoryDTO create(CategoryRequest categoryRequest);
     void delete(CategoryRequest categoryRequest);
+    void switchPosition(String category1, String category2);
 }

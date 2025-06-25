@@ -1,6 +1,7 @@
 package be.freedombox.backend.api;
 
 import be.freedombox.backend.dto.DishDTO;
+import be.freedombox.backend.exception.NotImplementedException;
 import be.freedombox.backend.request.CategoryRequest;
 import be.freedombox.backend.request.DishRequest;
 import be.freedombox.backend.service.IDishService;
@@ -9,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -38,8 +40,15 @@ public class DishController {
     }
 
     @PostMapping
-    public ResponseEntity<DishDTO> createDish(@RequestBody DishRequest dishRequest) {
-        return ResponseEntity.ok(dishService.create(dishRequest));
+    public ResponseEntity<HttpStatus> createDish(@RequestParam("file") MultipartFile file, @RequestPart DishRequest dishRequest) {
+        dishService.create(dishRequest, file);
+        return ResponseEntity.ok(HttpStatus.OK);
+    }
+
+    @PostMapping("/{id}")
+    public ResponseEntity<DishDTO> updateDish(@PathVariable Long id, @RequestBody DishRequest dishRequest) {
+        //TODO add functionality to update a dish
+        throw new NotImplementedException("This controller method is not implemented yet!");
     }
 
     @DeleteMapping("/{id}")
