@@ -2,6 +2,7 @@ package be.freedombox.backend.api;
 
 import be.freedombox.backend.dto.CategoryDTO;
 import be.freedombox.backend.request.CategoryRequest;
+import be.freedombox.backend.request.SwitchCategoryRequest;
 import be.freedombox.backend.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -31,9 +32,10 @@ public class CategoryController {
         return ResponseEntity.ok(categoryService.create(categoryRequest));
     }
 
-    @PostMapping
-    public ResponseEntity<HttpStatus> switchCategoryPosition(@RequestBody ) {
-
+    @PutMapping("/position")
+    public ResponseEntity<HttpStatus> switchCategoryPosition(@RequestBody SwitchCategoryRequest categoryRequest) {
+        categoryService.switchPosition(categoryRequest.getCategory(), categoryRequest.isUp());
+        return ResponseEntity.ok(HttpStatus.OK);
     }
 
     @DeleteMapping

@@ -2,6 +2,7 @@ package be.freedombox.backend.service;
 
 import be.freedombox.backend.domain.Category;
 import be.freedombox.backend.dto.CategoryDTO;
+import be.freedombox.backend.exception.CategoryException;
 import be.freedombox.backend.exception.ObjectAlreadyExistsException;
 import be.freedombox.backend.exception.ObjectDoesNotExistException;
 import be.freedombox.backend.repository.CategoryRepository;
@@ -41,7 +42,9 @@ public class CategoryService implements ICategoryService {
 
     @Override
     public List<CategoryDTO> all() {
-        return categoryRepository.findAll().stream().sorted().map(Mapper::toCategoryDTO).collect(Collectors.toList());
+        List<Category> categories = categoryRepository.findAll();
+        categories.sort(Comparator.comparing(Category::getPosition));
+        return categories.stream().map(Mapper::toCategoryDTO).toList();
     }
 
     @Override
@@ -55,14 +58,41 @@ public class CategoryService implements ICategoryService {
     private int getFreePosition() {
         List<Category> categories = categoryRepository.findAll();
         categories.sort(Comparator.comparing(Category::getPosition).reversed());
-        return categories.get(0).getPosition() + 1;
+
+        if (categories.isEmpty()) {
+            return 1;
+        } else {
+            return categories.get(0).getPosition() + 1;
+        }
     }
 
     @Override
-    public void switchPosition(String categoryName1, String categoryName2) {
-        Category category1 = categoryRepository.findByCategory(categoryName1);
-        Category category2 = categoryRepository.findByCategory(categoryName2);
-        category1.setPosition(category2.getPosition());
-        category2.setPosition(category1.getPosition());
+    public void switchPosition(String categoryName, boolean isUp) {
+        try {
+            Category otherCategory;
+            Category category = categoryRepository.findByCategory(categoryName);
+
+            if (category == null) throw new ObjectDoesNotExistException("Current category does not exist!");
+
+            if (isUp) {
+                otherCategory = categoryRepository.findByPosition(category.getPosition() - 1);
+            } else {
+                otherCategory = categoryRepository.findByPosition(category.getPosition() + 1);
+            }
+
+            if (otherCategory == null) throw new ObjectDoesNotExistException("No category to swap with!");
+
+            int categoryPosition = category.getPosition();
+            int otherCategoryPosition = otherCategory.getPosition();
+
+            category.setPosition(otherCategoryPosition);
+            otherCategory.setPosition(categoryPosition);
+
+            categoryRepository.save(category);
+            categoryRepository.save(otherCategory);
+
+        } catch (Exception e) {
+            throw new CategoryException(e.getMessage());
+        }
     }
 }
