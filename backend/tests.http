@@ -16,10 +16,10 @@ Content-Type: application/json
 
 PUT http://localhost:8080/category/position
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTc1MDg4MjI1OSwiZXhwIjoxNzUwODg1ODU5fQ.w2OlsSMPp3DOkBs3Gp46Y5WLgUYxfZQm8B60VEo4wIo
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTc1MDkzNjE0NiwiZXhwIjoxNzUwOTM5NzQ2fQ.A35cnlIxPt5TfpwmJgj-RRZcY7pcg4I9r3XU29VLOWQ
 
 {
-  "category": "Category2",
+  "category": "Cat 1",
   "up": true
 }
 

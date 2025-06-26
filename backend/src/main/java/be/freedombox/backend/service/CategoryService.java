@@ -52,7 +52,20 @@ public class CategoryService implements ICategoryService {
         categoryRequest.setCategory(Validator.initCap(categoryRequest.getCategory()));
         Category category = categoryRepository.findByCategory(categoryRequest.getCategory());
         if (category == null) throw new ObjectDoesNotExistException("The category " + categoryRequest.getCategory() + " does not exist.");
+        int deletedPosition = category.getPosition();
         categoryRepository.delete(category);
+        resortPositions(deletedPosition);
+    }
+
+    private void resortPositions(int deletedPosition) {
+        List<Category> categories = categoryRepository.findAll();
+
+        for (Category category : categories) {
+            if (category.getPosition() > deletedPosition) {
+                category.setPosition(category.getPosition() - 1);
+                categoryRepository.save(category);
+            }
+        }
     }
 
     private int getFreePosition() {
