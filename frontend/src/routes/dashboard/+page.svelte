@@ -79,10 +79,6 @@
                 </form>
                 {#if form?.error}
                     <p class="mt-2 text-red-500">{form.error}</p>
-                {:else if form?.success && form?.dishDeleted}
-                    <p class="mt-2 text-green-500">Dish deleted successfully!</p>
-                {:else if form?.success}
-                    <p class="mt-2 text-green-500">Dish added successfully!</p>
                 {/if}
             </div>
 
@@ -98,11 +94,11 @@
                                 <div class="flex justify-between items-center p-2 bg-gray-50 rounded">
                                     <span class="font-medium">{category.category}</span>
                                     <div>
-                                        <form action="?/deleteCategory" method="POST" class="inline">
+                                        <form action="?/up" method="POST" class="inline">
                                             <input type="hidden" name="category" value={category.category}>
                                             <button class="text-blue-600 hover:text-blue-800">Up</button>
                                         </form>
-                                        <form action="?/deleteCategory" method="POST" class="inline">
+                                        <form action="?/down" method="POST" class="inline">
                                             <input type="hidden" name="category" value={category.category}>
                                             <button class="text-blue-600 hover:text-blue-800">Down</button>
                                         </form>
@@ -116,10 +112,20 @@
                                 {#each getSubcategories(category.category) as subcategory}
                                     <div class="flex justify-between items-center p-2 bg-gray-100 rounded ml-4">
                                         <span class="text-sm">↳ {subcategory.category}</span>
-                                        <form action="?/deleteCategory" method="POST" class="inline">
-                                            <input type="hidden" name="category" value={subcategory.category}>
-                                            <button class="text-red-600 hover:text-red-800">Delete</button>
-                                        </form>
+                                        <div>
+                                            <form action="?/up" method="POST" class="inline">
+                                                <input type="hidden" name="category" value={subcategory.category}>
+                                                <button class="text-blue-600 hover:text-blue-800">Up</button>
+                                            </form>
+                                            <form action="?/down" method="POST" class="inline">
+                                                <input type="hidden" name="category" value={subcategory.category}>
+                                                <button class="text-blue-600 hover:text-blue-800">Down</button>
+                                            </form>
+                                            <form action="?/deleteCategory" method="POST" class="inline">
+                                                <input type="hidden" name="category" value={subcategory.category}>
+                                                <button class="text-red-600 hover:text-red-800">Delete</button>
+                                            </form>
+                                        </div>
                                     </div>
                                 {/each}
                             </div>
@@ -148,10 +154,6 @@
                 </form>
                 {#if form?.categoryError}
                     <p class="mt-2 text-red-500">{form.categoryError}</p>
-                {:else if form?.categorySuccess && form?.categoryDeleted}
-                    <p class="mt-2 text-green-500">Category deleted successfully!</p>
-                {:else if form?.categorySuccess}
-                    <p class="mt-2 text-green-500">Category added successfully!</p>
                 {/if}
             </div>
         </div>

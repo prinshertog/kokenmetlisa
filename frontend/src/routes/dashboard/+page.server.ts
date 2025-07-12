@@ -208,5 +208,61 @@ export const actions = {
         } catch (error) {
             return fail(500, { categoryError: 'Failed to delete category' });
         }
+    },
+
+    down: async ({ request, cookies }) => {
+        try {
+            const data = await request.formData();
+            const category = data.get('category');
+            const bearer = cookies.get('bearer');
+            const response = await fetch(`${BASE_URL_BACKEND}/category/position`, {
+                method: "PUT",
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${bearer}`
+                },
+                body: JSON.stringify({ 
+                    category: category,
+                    up: false
+                })
+            })
+
+            if (!response.ok) {
+                const error = await response.json();
+                return fail(400, { categoryError:  error.error })
+            }
+
+            return { categorySuccess: true };
+        } catch (error) {
+            return fail(500, { categoryError: (error instanceof Error ? error.message : "Something went wrong.") })
+        }
+    },
+
+    up: async ({ request, cookies }) => {
+        try {
+            const data = await request.formData();
+            const category = data.get('category');
+            const bearer = cookies.get('bearer');
+            const response = await fetch(`${BASE_URL_BACKEND}/category/position`, {
+                method: "PUT",
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${bearer}`
+                },
+                body: JSON.stringify({ 
+                    category: category,
+                    up: true
+                })
+            })
+
+            if (!response.ok) {
+                const error = await response.json();
+                return fail(400, { categoryError:  error.error })
+            }
+
+            return { categorySuccess: true };
+        } catch (error) {
+            return fail(500, { categoryError: (error instanceof Error ? error.message : "Something went wrong.") })
+        }
     }
 } satisfies Actions;

@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -82,18 +83,11 @@ public class CategoryService implements ICategoryService {
     @Override
     public void switchPosition(String categoryName, boolean isUp) {
         try {
-            Category otherCategory;
             Category category = categoryRepository.findByCategory(categoryName);
 
             if (category == null) throw new ObjectDoesNotExistException("Current category does not exist!");
 
-            if (isUp) {
-                otherCategory = categoryRepository.findByPosition(category.getPosition() - 1);
-            } else {
-                otherCategory = categoryRepository.findByPosition(category.getPosition() + 1);
-            }
-
-            if (otherCategory == null) throw new ObjectDoesNotExistException("No category to swap with!");
+            Category otherCategory = findCategory(isUp, category);
 
             int categoryPosition = category.getPosition();
             int otherCategoryPosition = otherCategory.getPosition();
@@ -104,8 +98,36 @@ public class CategoryService implements ICategoryService {
             categoryRepository.save(category);
             categoryRepository.save(otherCategory);
 
+            System.out.println("Becomes: " + otherCategoryPosition);
+
         } catch (Exception e) {
             throw new CategoryException(e.getMessage());
         }
+    }
+
+    private Category findCategory(boolean up, Category category) {
+        List<Category> categories;
+
+        if (up) categories = categoryRepository.findAll().stream()
+                .filter(cat -> cat.getPosition() < category.getPosition()).toList();
+        else categories = categoryRepository.findAll().stream()
+                .filter(cat -> cat.getPosition() > category.getPosition()).toList();
+
+        if (category.getParentCategory() != null) {
+            categories = new ArrayList<>(categories.stream()
+                    .filter(cat -> cat.getParentCategory() != null)
+                    .filter(cat -> cat.getParentCategory() == category.getParentCategory()).toList());
+        } else {
+            categories = new ArrayList<>(categories.stream()
+                    .filter(cat -> cat.getParentCategory() == null).toList());
+        }
+
+        if (up) categories.sort(Comparator.comparing(Category::getPosition).reversed());
+        else categories.sort(Comparator.comparing(Category::getPosition));
+
+        if (up && categories.isEmpty()) throw new ObjectDoesNotExistException("No category above.");
+        else if (categories.isEmpty()) throw new ObjectDoesNotExistException("No category below.");
+
+        return categories.get(0);
     }
 }

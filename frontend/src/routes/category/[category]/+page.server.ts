@@ -11,7 +11,7 @@ interface Dish {
     name: string,
     description: string,
     category: Category
-    imageUrl: string
+    imageName: string
 }
 
 export async function load({ params, fetch }) {
@@ -31,7 +31,7 @@ export async function load({ params, fetch }) {
         if (categoryDishes.length === 0) {
             throw error(404, "No dishes found");
         }
-        return { categoryDishes };
+        return { categoryDishes, BASE_URL_BACKEND };
 
     } catch (err: any) {
         if (err.status && err.body) {
