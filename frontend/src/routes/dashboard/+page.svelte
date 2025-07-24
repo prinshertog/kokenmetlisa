@@ -1,4 +1,6 @@
 <script lang="ts">
+    import { goto } from '$app/navigation';
+
     const { data, form } = $props();
     const { username, role, categories, BASE_URL_BACKEND } = data;
     
@@ -16,6 +18,11 @@
             cat.parentCategory && cat.parentCategory.category === parentCat
         );
     };
+
+    function dishClick(id: number) {
+        goto(`/update/${id}`);
+    }
+
 </script>
 
 <div class="min-h-screen bg-gray-50">
@@ -161,7 +168,7 @@
         <!-- Dishes Grid -->
         <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {#each data.dishes as dish}
-                <div class="bg-white shadow rounded-lg overflow-hidden">
+                <div class="cursor-pointer bg-white shadow rounded-lg overflow-hidden" onclick={() => dishClick(dish.id)}>
                     <img 
                         class="w-full h-48 object-cover" 
                         src="{`${BASE_URL_BACKEND}/file/${dish.imageName}`}"

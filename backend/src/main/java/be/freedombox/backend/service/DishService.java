@@ -10,6 +10,7 @@ import be.freedombox.backend.repository.CategoryRepository;
 import be.freedombox.backend.repository.DishRepository;
 import be.freedombox.backend.request.CategoryRequest;
 import be.freedombox.backend.request.DishRequest;
+import be.freedombox.backend.request.DishUpdateRequest;
 import be.freedombox.backend.tools.GlobalVariables;
 import be.freedombox.backend.tools.Mapper;
 import be.freedombox.backend.tools.Validator;
@@ -20,6 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class DishService implements IDishService {
@@ -73,9 +75,19 @@ public class DishService implements IDishService {
     }
 
     @Override
-    public void update(Long id, DishRequest dishRequest) {
-        //TODO add functionality to update dishes
-        throw new NotImplementedException("This method is not implemented yet.");
+    public void update(DishUpdateRequest dishUpdateRequest, MultipartFile file) {
+        if (dishRepository.findById(dishUpdateRequest.getId()).isEmpty()) throw new ObjectDoesNotExistException("Dish does not exist so cannot be updated.");
+        Dish dish = dishRepository.findById(dishUpdateRequest.getId()).get();
+        if (dishUpdateRequest.getDishName().isEmpty()) dishUpdateRequest.setDishName(dish.getName());
+        if (dishUpdateRequest.getDescription().isEmpty()) dishUpdateRequest.setDescription(dish.getDescription());
+        if (dishUpdateRequest.getCategory() == null) dishUpdateRequest.setCategory(dish.getCategory());
+        if (dishUpdateRequest.getImageName().isEmpty()) dishUpdateRequest.setImageName(dish.getImageName());
+
+        dish.setName(dishUpdateRequest.getDishName());
+        dish.setCategory(dishUpdateRequest.getCategory());
+        dish.setDescription(dishUpdateRequest.getDescription());
+
+        dishRepository.save(dish);
     }
 
     @Override

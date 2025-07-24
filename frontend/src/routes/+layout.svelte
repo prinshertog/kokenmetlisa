@@ -109,7 +109,7 @@
           >
         </div>
         <div class="text-center md:text-left">
-          <h3 class="font-bold text-lg mb-4">Volg ons</h3>
+          <h3 class="font-bold text-lg mb-4">Volg mij</h3>
           <div class="flex justify-center md:justify-start space-x-4">
             <a href="https://www.instagram.com/kokenmetlisa_" class="hover:text-gray-300 transition-colors">Instagram</a>
           </div>

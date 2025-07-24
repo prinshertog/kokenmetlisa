@@ -2,6 +2,7 @@ package be.freedombox.backend.service;
 
 import be.freedombox.backend.dto.DishDTO;
 import be.freedombox.backend.request.DishRequest;
+import be.freedombox.backend.request.DishUpdateRequest;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
@@ -13,5 +14,5 @@ public interface IDishService {
     void delete(Long id);
     List<DishDTO> getByCategory(String category);
 
-    void update(Long id, DishRequest dishRequest);
+    void update(DishUpdateRequest dishUpdateRequest, MultipartFile file);
 }
