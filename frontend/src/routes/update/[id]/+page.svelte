@@ -1,6 +1,6 @@
 <script>
     const { data, form } = $props();
-    const { dish, error, BASE_URL_BACKEND } = data;
+    const { dish, error } = data;
 </script>
 
 <main class="flex justify-center">

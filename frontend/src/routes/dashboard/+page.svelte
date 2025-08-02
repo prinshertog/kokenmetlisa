@@ -165,7 +165,7 @@
         <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {#each data.dishes as dish}
                 <div class="cursor-pointer bg-white shadow rounded-lg overflow-hidden">
-                    <a href="/update/{dish.id}">
+                    <a href="${FILE_URL}/${dish.imageName}">
                     <img 
                         class="w-full h-48 object-cover" 
                         src="{`${FILE_URL}/${dish.imageName}`}"
@@ -182,6 +182,9 @@
                                 <button class="bg-red-600 text-white px-3 py-1 rounded-md hover:bg-red-700">
                                     Delete
                                 </button>
+                                <a href="/update/{dish.id}" class="bg-blue-600 text-white px-3 py-1 rounded-md hover:bg-red-700">
+                                    Update
+                                </a>
                             </form>
                         </div>
                         <p class="mt-4 text-sm text-gray-500">Category: {dish.category.category}</p>
