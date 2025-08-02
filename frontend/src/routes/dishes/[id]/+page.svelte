@@ -2,7 +2,8 @@
     import { marked } from 'marked';    
     const { data } = $props();
     const { imageName, name, description, category } = data.dish;
-    const { BASE_URL_BACKEND } = data;
+    import { env } from '$env/dynamic/public';
+    const FILE_URL = env.PUBLIC_FILE_URL
     marked.setOptions({ breaks: true });
     
     // Convert markdown to HTML
@@ -13,7 +14,7 @@
 
 <div class="max-w-4xl mx-auto py-8 px-4">
     <div class="bg-white shadow rounded-lg overflow-hidden">
-        <img class="w-full h-64 object-cover" src='{`${BASE_URL_BACKEND}/file/${imageName}`}' alt={name} />
+        <img class="w-full h-64 object-cover" src='{`${FILE_URL}/file/${imageName}`}' alt={name} />
         <div class="p-6">
             <h1 class="text-3xl font-bold mb-4">{name}</h1>
             <div class="prose max-w-none">
