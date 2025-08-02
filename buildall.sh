@@ -22,6 +22,15 @@ npm run build
 #echo "Pruning all images of docker"
 #docker system prune --all --force
 
+echo "Build docker image for frontend"
+cd /home/jan/Github/kokenmetlisa/frontend
+docker build . -t kokenmetlisa-frontend
+
+echo "Build docker image for backend"
+cd /home/jan/Github/kokenmetlisa/backend
+docker build . -t kokenmetlisa-backend
+
 echo "Starting project docker compose"
 cd /home/jan/Github/kokenmetlisa
-docker compose up --build --force-recreate -d
+docker compose up --force-recreate -d
+

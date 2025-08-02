@@ -162,14 +162,15 @@
         <!-- Dishes Grid -->
         <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {#each data.dishes as dish}
-            <a href="/update/{dish.id}">
                 <div class="cursor-pointer bg-white shadow rounded-lg overflow-hidden">
+                    <a href="/update/{dish.id}">
                     <img 
                         class="w-full h-48 object-cover" 
                         src="{`${BASE_URL_BACKEND}/file/${dish.imageName}`}"
                         alt={dish.name}
                         loading="lazy"
                     />
+                    </a>
                     <div class="p-6">
                         <div class="flex justify-between items-start">
                             <h3 class="text-xl font-semibold">{dish.name}</h3>
@@ -184,7 +185,6 @@
                         <p class="mt-4 text-sm text-gray-500">Category: {dish.category.category}</p>
                     </div>
                 </div>
-            </a>
             {/each}
         </div>
     </main>

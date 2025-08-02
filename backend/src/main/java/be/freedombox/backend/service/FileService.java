@@ -16,6 +16,15 @@ public class FileService {
     private final Path fileLocation = Paths.get("Files").toAbsolutePath();
     public void saveFile(MultipartFile multipartFile, String fileName) {
         try {
+            File directory = new File(fileLocation.toUri());
+            if (!directory.exists()) {
+                boolean created = directory.mkdirs();
+                if (created) {
+                    System.out.println("Files folder was created because it did not already exist.");
+                } else {
+                    System.out.println("Files folder was not created, something went wrong.");
+                }
+            }
             File file = new File(fileLocation + "/" + fileName);
             try (FileOutputStream fileOutputStream = new FileOutputStream(file)) {
                 fileOutputStream.write(multipartFile.getBytes());

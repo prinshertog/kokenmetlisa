@@ -1,7 +1,7 @@
 import { env } from '$env/dynamic/private';
 const BASE_URL_BACKEND = env.BASE_URL_BACKEND;
 import { fail, redirect } from '@sveltejs/kit';
-import type { PageServerLoad, Actions } from '../../$types';
+import type { PageServerLoad, Actions } from './$types';
 
 interface Category {
     category: string,

@@ -11,10 +11,7 @@ services:
       - postgres_data:/var/lib/postgresql/data
 
   backend:
-    #image: kokenmetlisa-backend
-    build:
-      context: ./backend
-      dockerfile: Dockerfile
+    image: kokenmetlisa-backend
     container_name: kokenmetlisa-backend
     ports:
       - 8080:8080
@@ -31,19 +28,15 @@ services:
       retries: 3
 
   frontend:
-    #image: kokenmetlisa-frontend
-    build:
-      context: ./frontend
-      dockerfile: Dockerfile
+    image: kokenmetlisa-frontend
     container_name: kokenmetlisa-frontend
-    init: true
     ports:
       - "3000:3000"
     environment:
       NODE_ENV: production
-      PORT: 3000
-      VITE_BASE_URL_BACKEND: http://kokenmetlisa-backend:8080
+      BASE_URL_BACKEND: http://backend:8080
       ORIGIN: http://localhost:3000
+      BODY_SIZE_LIMIT: 3G
     depends_on:
       backend:
         condition: service_healthy

@@ -1,5 +1,5 @@
 import { redirect, fail } from "@sveltejs/kit";
-import type { Actions, PageServerLoad } from "../$types";
+import type { Actions, PageServerLoad } from "./$types";
 import { env } from '$env/dynamic/private';
 const BASE_URL_BACKEND = env.BASE_URL_BACKEND;
 
@@ -48,7 +48,7 @@ export const actions = {
             if (error instanceof redirect) {
                 throw error;
             }
-            return fail(500, { error: 'Login failed. Please try again.' });
+            return fail(500, { error: 'Login failed. Please try again.' + error });
         }
     }
 } satisfies Actions;
