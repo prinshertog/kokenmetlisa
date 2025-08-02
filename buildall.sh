@@ -4,7 +4,7 @@ cd /home/jan/Github/kokenmetlisa
 docker compose down
 
 echo "Starting postgres for backend build"
-cd ~/Docker/postgresql
+cd /home/jan/Github/kokenmetlisa/postgresqlForKokenmetlisa/
 docker compose up -d
 
 echo "Running maven build"
@@ -12,7 +12,7 @@ cd /home/jan/Github/kokenmetlisa/backend
 mvn clean package
 
 echo "Stopping postgres"
-cd ~/Docker/postgresql
+cd /home/jan/Github/kokenmetlisa/postgresqlForKokenmetlisa
 docker compose down
 
 echo "Building frontend"

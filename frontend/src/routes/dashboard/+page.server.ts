@@ -1,6 +1,6 @@
 import { fail, redirect } from '@sveltejs/kit';
 import type { Actions } from './$types';
-import { BASE_URL_BACKEND } from '$env/static/private';
+const BASE_URL_BACKEND = import.meta.env.VITE_BASE_URL_BACKEND;
 
 export async function load({ cookies }) {
     const bearer = cookies.get('bearer');
@@ -82,42 +82,43 @@ export const actions = {
         try {
             const data = await request.formData();
             const image = data.get('image') as File;
-            console.log(image)
 
-            if (image.size > 0) {
-                const filename = `${Date.now()}-${image.name}`;
-                const dishData = {
-                    name: data.get('name'),
-                    description: data.get('description'),
-                    category: data.get('category'),
-                    imageName: filename
-                };
-    
-                const bearer = cookies.get('bearer');
-                const formData = new FormData();
-                formData.append("file", image);
-                formData.append("dishRequest", new Blob([JSON.stringify(dishData)], { type: "application/json" }));
-
-                const response = await fetch(BASE_URL_BACKEND + '/dishes', {
-                    method: 'POST',
-                    headers: {
-                        'Authorization': `Bearer ${bearer}`
-                    },
-                    body: formData
-                });
-    
-                if (!response.ok) {
-                    const errorText = await response.json();
-                    return fail(400, { error: errorText.error || 'Failed to add dish' });
-                }
-    
-                return { success: true };
+            if (image.size <= 0) {
+                return fail(400, { dishError: "You must provide an image." })
             }
+
+            const filename = `${Date.now()}-${image.name}`;
+            const dishData = {
+                name: data.get('name'),
+                description: data.get('description'),
+                category: data.get('category'),
+                imageName: filename
+            };
+
+            const bearer = cookies.get('bearer');
+            const formData = new FormData();
+            formData.append("file", image);
+            formData.append("dishRequest", new Blob([JSON.stringify(dishData)], { type: "application/json" }));
+
+            const response = await fetch(BASE_URL_BACKEND + '/dishes', {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${bearer}`
+                },
+                body: formData
+            });
+
+            if (!response.ok) {
+                const errorText = await response.json();
+                return fail(400, { dishError: errorText.error || 'Failed to add dish' });
+            }
+            
+            return { success: true };
 
             
         } catch (error) {
             return fail(500, {
-                error: error instanceof Error ? error.message : 'An unknown error occurred'
+                dishError: error instanceof Error ? error.message : 'An unknown error occurred'
             });
         }
     },

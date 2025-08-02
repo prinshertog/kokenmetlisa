@@ -1,6 +1,6 @@
 import { redirect, fail } from "@sveltejs/kit";
 import type { Actions, PageServerLoad } from "../$types";
-import { BASE_URL_BACKEND } from '$env/static/private';
+const BASE_URL_BACKEND = import.meta.env.VITE_BASE_URL_BACKEND;
 
 export const actions = {
     logout: async ({ cookies }) => {

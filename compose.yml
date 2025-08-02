@@ -9,8 +9,6 @@ services:
       POSTGRES_DB: dishes_db
     volumes:
       - postgres_data:/var/lib/postgresql/data
-    networks:
-      - network
 
   backend:
     #image: kokenmetlisa-backend
@@ -26,8 +24,6 @@ services:
       SPRING_DATASOURCE_PASSWORD: dishes_password
     depends_on:
       - postgres
-    networks:
-      - network
     healthcheck:
       test: ["CMD-SHELL", "nc -z localhost 8080 || exit 1"]
       interval: 10s
@@ -46,17 +42,12 @@ services:
     environment:
       NODE_ENV: production
       PORT: 3000
-      BASE_URL_BACKEND: http://kokenmetlisa-backend:8080
-      ORIGIN: http://localhost:3000
       VITE_BASE_URL_BACKEND: http://kokenmetlisa-backend:8080
+      ORIGIN: http://localhost:3000
     depends_on:
       backend:
         condition: service_healthy
-    networks:
-      - network
 
 volumes:
   postgres_data:
 
-networks:
-  network:

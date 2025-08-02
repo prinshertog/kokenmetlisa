@@ -17,7 +17,7 @@ COPY .env /app/build/.env
 EXPOSE 3000
 ENV NODE_ENV=production
 ENV PORT=3000
-ENV BASE_URL_BACKEND=http://kokenmetlisa-backend:8080
+#ENV BASE_URL_BACKEND=http://kokenmetlisa-backend:8080
 ENV ORIGIN=http://kokenmetlisa-frontend:3000
 ENV VITE_BASE_URL_BACKEND=http://kokenmetlisa-backend:8080
 ENV BODY_SIZE_LIMIT=1G

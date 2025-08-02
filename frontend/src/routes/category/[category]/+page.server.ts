@@ -1,5 +1,5 @@
 import { error } from '@sveltejs/kit';
-import { BASE_URL_BACKEND } from '$env/static/private';
+const BASE_URL_BACKEND = import.meta.env.VITE_BASE_URL_BACKEND;
 
 interface Category {
     category: string,
