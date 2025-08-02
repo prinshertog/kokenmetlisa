@@ -175,14 +175,14 @@
                     </a>
                     <div class="p-6">
                         <div class="flex justify-between items-start">
-                            <h3 class="text-xl font-semibold">{dish.name}</h3>
+                            <h3 class="text-xl font-semibold max-w-0.5">{dish.name}</h3>
                             <form action="?/deleteDish" method="POST" class="inline">
                                 <input type="hidden" name="id" value={dish.id}>
                                 <input type="hidden" name="imageName" value={dish.imageName}>
                                 <button class="bg-red-600 text-white px-3 py-1 rounded-md hover:bg-red-700">
                                     Delete
                                 </button>
-                                <a href="/update/{dish.id}" class="bg-blue-600 text-white px-3 py-1 rounded-md hover:bg-red-700">
+                                <a href="/update/{dish.id}" class="bg-blue-600 text-white px-3 py-1 rounded-md hover:bg-blue-700">
                                     Update
                                 </a>
                             </form>
