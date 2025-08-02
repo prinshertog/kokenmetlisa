@@ -23,7 +23,7 @@ jobs:
       run: cd postgresqlForKokenmetlisa && docker compose down
       
     - name: Building frontend
-      run: cd frontend && npm run build
+      run: cd frontend && npm i && npm run build
       
     - name: Build docker image for backend
       run: cd backend && docker build . -t "prinshertog/kokenmetlisa-backend" && docker push prinshertog/kokenmetlisa-backend
