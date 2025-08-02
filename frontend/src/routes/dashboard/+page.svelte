@@ -1,6 +1,8 @@
 <script lang="ts">
     const { data, form } = $props();
-    const { username, role, categories, BASE_URL_BACKEND } = data;
+    import { env } from '$env/dynamic/public';
+    const FILE_URL = env.PUBLIC_FILE_URL
+    const { username, role, categories } = data;
     
     interface Category {
         category: string;
@@ -166,7 +168,7 @@
                     <a href="/update/{dish.id}">
                     <img 
                         class="w-full h-48 object-cover" 
-                        src="{`${BASE_URL_BACKEND}/file/${dish.imageName}`}"
+                        src="{`${FILE_URL}/${dish.imageName}`}"
                         alt={dish.name}
                         loading="lazy"
                     />
