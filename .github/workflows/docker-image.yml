@@ -1,0 +1,32 @@
+name: Build full application
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Starting postgres for backend build
+      run: cd postgresqlForKokenmetlisa && docker compose up -d
+      
+    - name: Running maven build
+      run: cd backend && mvn clean package
+      
+    - name: Stopping postgres
+      run: cd postgresqlForKokenmetlisa && docker compose down
+      
+    - name: Building frontend
+      run: cd frontend && npm run build
+      
+    - name: Build docker image for backend
+      run: cd backend && docker build . -t "prinshertog/kokenmetlisa-backend" && docker push prinshertog/kokenmetlisa-backend
+      
+    - name: Build docker image for frontend
+      run: cd frontend && docker build . -t "prinshertog/kokenmetlisa-frontend" && docker push prinshertog/kokenmetlisa-frontend
