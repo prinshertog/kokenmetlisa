@@ -1,5 +1,7 @@
 import { error } from '@sveltejs/kit';
-const BASE_URL_BACKEND = import.meta.env.VITE_BASE_URL_BACKEND;
+import { env } from '$env/dynamic/private';
+const BASE_URL_BACKEND = env.BASE_URL_BACKEND;
+import type { PageServerLoad } from './$types';
 
 interface Category {
     category: string,
@@ -14,7 +16,7 @@ interface Dish {
     imageName: string
 }
 
-export async function load({ params, fetch }) {
+export const load: PageServerLoad = async ({ params, fetch }) => {
     try {
         const response = await fetch(`${BASE_URL_BACKEND}/dishes`);
         if (!response.ok) {

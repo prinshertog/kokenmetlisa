@@ -1,6 +1,7 @@
 import { error } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types';
-const BASE_URL_BACKEND = import.meta.env.VITE_BASE_URL_BACKEND;
+import { env } from '$env/dynamic/private';
+const BASE_URL_BACKEND = env.BASE_URL_BACKEND;
 
 export const load: PageServerLoad = async ({ params, fetch }) => {
     const apiUrl = BASE_URL_BACKEND + `/dishes/${params.id}`;

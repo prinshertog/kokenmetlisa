@@ -1,4 +1,5 @@
-import { BASE_URL_BACKEND } from "$env/static/private";
+import { env } from '$env/dynamic/private';
+const BASE_URL_BACKEND = env.BASE_URL_BACKEND;
 export async function load() {
     try {
         const categoriesResponse = await fetch(BASE_URL_BACKEND + "/category");

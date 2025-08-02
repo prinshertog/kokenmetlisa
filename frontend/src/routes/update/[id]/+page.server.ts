@@ -1,5 +1,7 @@
-const BASE_URL_BACKEND = import.meta.env.VITE_BASE_URL_BACKEND;
+import { env } from '$env/dynamic/private';
+const BASE_URL_BACKEND = env.BASE_URL_BACKEND;
 import { fail, redirect } from '@sveltejs/kit';
+import type { PageServerLoad, Actions } from '../../$types';
 
 interface Category {
     category: string,
@@ -34,9 +36,9 @@ export const actions = {
         }
         return fail(400, {error: "Failed to update dish." })
     }
-}
+} satisfies Actions
 
-export async function load({ cookies, params }) {
+export const load: PageServerLoad = async ({ cookies, params }) => {
     const bearer = cookies.get('bearer');
     if (!bearer) {
         throw redirect(303, '/login');

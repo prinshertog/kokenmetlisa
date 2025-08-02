@@ -1,8 +1,10 @@
 import { fail, redirect } from '@sveltejs/kit';
-import type { Actions } from './$types';
-const BASE_URL_BACKEND = import.meta.env.VITE_BASE_URL_BACKEND;
+import type { Actions, PageServerLoad } from './$types';
+import { env } from '$env/dynamic/private';
+const BASE_URL_BACKEND = env.BASE_URL_BACKEND;
 
-export async function load({ cookies }) {
+
+export const load: PageServerLoad = async ({ cookies }) => {
     const bearer = cookies.get('bearer');
     const role = cookies.get('role');
     const username = cookies.get('username');
