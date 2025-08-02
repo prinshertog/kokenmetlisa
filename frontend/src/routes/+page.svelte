@@ -1,6 +1,6 @@
 <script lang="ts">
     const { data } = $props();
-    const { dishes, BASE_URL_BACKEND } = data;
+    const { dishes } = data;
     import { env } from '$env/dynamic/public';
     const FILE_URL = env.PUBLIC_FILE_URL
 </script>
