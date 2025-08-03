@@ -42,6 +42,7 @@ public class FileService {
         File file = new File(fileLocation + "/" + fileName);
         boolean success = file.delete();
         if (!success) throw new FileException("File could not be deleted");
+        else System.out.println("File was deleted at " + fileLocation);
     }
 
     public byte[] getFile(String fileName) throws IOException {

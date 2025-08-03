@@ -1,6 +1,7 @@
 <script lang="ts">
     const { data, form } = $props();
     import { env } from '$env/dynamic/public';
+    const BASE_URL_BACKEND = env.PUBLIC_BASE_URL_BACKEND
     const FILE_URL = env.PUBLIC_FILE_URL
     const { username, role, categories } = data;
     
@@ -165,7 +166,7 @@
         <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {#each data.dishes as dish}
                 <div class="cursor-pointer bg-white shadow rounded-lg overflow-hidden">
-                    <a href="${FILE_URL}/${dish.imageName}">
+                    <a href="/dishes/{dish.id}">
                     <img 
                         class="w-full h-48 object-cover" 
                         src="{`${FILE_URL}/${dish.imageName}`}"

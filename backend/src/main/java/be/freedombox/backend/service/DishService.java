@@ -77,15 +77,30 @@ public class DishService implements IDishService {
     @Override
     public void update(DishUpdateRequest dishUpdateRequest, MultipartFile file) {
         if (dishRepository.findById(dishUpdateRequest.getId()).isEmpty()) throw new ObjectDoesNotExistException("Dish does not exist so cannot be updated.");
-        Dish dish = dishRepository.findById(dishUpdateRequest.getId()).get();
-        if (dishUpdateRequest.getDishName().isEmpty()) dishUpdateRequest.setDishName(dish.getName());
-        if (dishUpdateRequest.getDescription().isEmpty()) dishUpdateRequest.setDescription(dish.getDescription());
-        if (dishUpdateRequest.getCategory() == null) dishUpdateRequest.setCategory(dish.getCategory());
-        if (dishUpdateRequest.getImageName().isEmpty()) dishUpdateRequest.setImageName(dish.getImageName());
 
-        dish.setName(dishUpdateRequest.getDishName());
-        dish.setCategory(dishUpdateRequest.getCategory());
-        dish.setDescription(dishUpdateRequest.getDescription());
+        Dish dish = dishRepository.findById(dishUpdateRequest.getId()).get();
+
+        if (dishUpdateRequest.getDishName().isEmpty()) dishUpdateRequest.setDishName(dish.getName());
+        else dish.setName(dishUpdateRequest.getDishName());
+
+        if (dishUpdateRequest.getDescription().isEmpty()) dishUpdateRequest.setDescription(dish.getDescription());
+        else dish.setDescription(dishUpdateRequest.getDescription());
+
+        if (dishUpdateRequest.getCategory().isEmpty()) {
+            dishUpdateRequest.setCategory(dish.getCategory().getCategory());
+        }
+        else {
+            Category category = categoryRepository.findByCategory(dishUpdateRequest.getCategory());
+            dish.setCategory(category);
+        }
+
+        if (dishUpdateRequest.getImageName().isEmpty() || file == null) {
+            dishUpdateRequest.setImageName(dish.getImageName());
+        } else {
+            fileService.deleteFile(dish.getImageName());
+            dish.setImageName(dishUpdateRequest.getImageName());
+            fileService.saveFile(file, dishUpdateRequest.getImageName());
+        }
 
         dishRepository.save(dish);
     }

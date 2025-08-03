@@ -1,78 +1,61 @@
 import { env } from '$env/dynamic/private';
 const BASE_URL_BACKEND = env.BASE_URL_BACKEND;
-import { fail, redirect } from '@sveltejs/kit';
+import { fail } from '@sveltejs/kit';
 import type { PageServerLoad, Actions } from './$types';
-
-interface Category {
-    category: string,
-    parentCategory: Category | null
-}
-
-interface dishUpdateRequest {
-    id: number,
-    dishName: string,
-    description: string,
-    category: Category
-}
-
-interface Dish {
-    id: number,
-    name: string,
-    description: string,
-    category: Category
-    imageName: string
-}
+import { checkLogin } from '$lib/methods/loginCheck';
 
 export const actions = {
-    update: async ({ params, fetch }) => {
-        const apiUrl = BASE_URL_BACKEND + `/dishes/update/${params.id}`;
-        const response = await fetch(apiUrl);
-        const data = await response.json();
-        if (response.ok) {
-            if (!data || data.length === 0) {
-                return fail(400, {error: data.error || 'Failed to update dish'})
+    update: async ({ request, cookies, params, fetch }) => {
+        try {
+            const apiUrl = BASE_URL_BACKEND + `/dishes/${params.id}`;
+            const data = await request.formData();
+            let image = data.get('image') as File;
+
+            let filename = `${Date.now()}-${image.name}`;
+
+            const dishUpdateRequest = {
+                id: params.id,
+                dishName: data.get('name'),
+                description: data.get('description'),
+                category: data.get('category'),
+                imageName: filename
+            };
+
+            const bearer = cookies.get('bearer');
+            const formData = new FormData();
+            formData.append("file", image);
+            formData.append("dishUpdateRequest", new Blob([JSON.stringify(dishUpdateRequest)], { type: "application/json" }));
+
+            const response = await fetch(apiUrl, {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${bearer}`
+                },
+                body: formData
+            });
+            const receivedData = await response.json();
+            if (!response.ok) {
+                return fail(400, {error: receivedData.error || 'Failed to update dish'})   
             }
-            return "Dish was updated successfully"
+            if (!data || receivedData.length === 0) {
+                return fail(400, {error: receivedData.error || 'Failed to update dish'})
+            }
+            return {success: true}
+        } catch (error) {
+            return fail(500, {
+                error: error instanceof Error ? error.message : 'An unknown error occurred'
+            });
         }
-        return fail(400, {error: "Failed to update dish." })
     }
 } satisfies Actions
 
 export const load: PageServerLoad = async ({ cookies, params }) => {
     const bearer = cookies.get('bearer');
-    if (!bearer) {
-        throw redirect(303, '/login');
-    }
+    await checkLogin(cookies);
 
     try {
-        const response = await fetch(BASE_URL_BACKEND + "/login", {
-            headers: {
-                'Authorization': `Bearer ${bearer}`
-            }
-        });
-        
-        if (!response.ok) {
-            cookies.delete('bearer', { path: '/' });
-            cookies.delete('username', { path: '/' });
-            cookies.delete('role', { path: '/' });
-            throw redirect(303, '/login');
-        }
-
-        const isLoggedIn = await response.json();
-        if (!isLoggedIn.success) { 
-            cookies.delete('bearer', { path: '/' });
-            cookies.delete('username', { path: '/' });
-            cookies.delete('role', { path: '/' });
-            throw redirect(303, '/login');
-        }
-    } catch (error) {
-        cookies.delete('bearer', { path: '/' });
-        cookies.delete('username', { path: '/' });
-        cookies.delete('role', { path: '/' });
-        throw redirect(303, '/login');
-    }
-
-    try {
+        const username = cookies.get('username');
+        const role = cookies.get('role');
         const response = await fetch(BASE_URL_BACKEND + `/dishes/${params.id}`, {
             headers: {
                 'Authorization': `Bearer ${bearer}`
@@ -84,13 +67,13 @@ export const load: PageServerLoad = async ({ cookies, params }) => {
         }
 
         const data = await response.json();
-        const dish: Dish = data[0];
-
-        console.log(dish)
+        const dish = data[0];
         
         return { 
             dish,
-            BASE_URL_BACKEND
+            BASE_URL_BACKEND,
+            username,
+            role
         };
 
     } catch (error) {

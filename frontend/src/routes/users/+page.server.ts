@@ -1,6 +1,7 @@
 import { fail, redirect } from '@sveltejs/kit';
 import type { Actions, PageServerLoad } from './$types';
 import { env } from '$env/dynamic/private';
+import { checkLogin } from '$lib/methods/loginCheck';
 const BASE_URL_BACKEND = env.BASE_URL_BACKEND;
 
 
@@ -9,38 +10,7 @@ export const load: PageServerLoad = async ({ cookies }) => {
     const role = cookies.get('role');
     const username = cookies.get('username');
 
-    if (!bearer) {
-        throw redirect(303, '/login');
-    }
-    
-    try {
-        const response = await fetch(BASE_URL_BACKEND + "/login", {
-            headers: {
-                'Authorization': `Bearer ${bearer}`
-            }
-        });
-        
-        if (!response.ok) {
-            cookies.delete('bearer', { path: '/' });
-            cookies.delete('username', { path: '/' });
-            cookies.delete('role', { path: '/' });
-            throw redirect(303, '/login');
-        }
-        
-        const isLoggedIn = await response.json();
-        if (!isLoggedIn.success) { 
-            cookies.delete('bearer', { path: '/' });
-            cookies.delete('username', { path: '/' });
-            cookies.delete('role', { path: '/' });
-            throw redirect(303, '/login');
-        }
-
-    } catch (error) {
-        cookies.delete('bearer', { path: '/' });
-        cookies.delete('username', { path: '/' });
-        cookies.delete('role', { path: '/' });
-        throw redirect(303, '/login');
-    }
+    await checkLogin(cookies);
 
     if (role !== 'ADMIN' && role !== 'USER') {
         throw redirect(303, '/dashboard');

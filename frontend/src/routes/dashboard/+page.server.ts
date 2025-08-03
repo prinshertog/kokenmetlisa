@@ -1,42 +1,11 @@
 import { fail, redirect } from '@sveltejs/kit';
 import type { Actions, PageServerLoad } from './$types';
-import { env } from '$env/dynamic/private';
-const BASE_URL_BACKEND = env.BASE_URL_BACKEND;
+import { checkLogin } from '../../lib/methods/loginCheck';
+import { env } from '$env/dynamic/public';
+const BASE_URL_BACKEND = env.PUBLIC_BASE_URL_BACKEND;
 
 export const load: PageServerLoad = async ({ cookies }) => {
-    const bearer = cookies.get('bearer');
-    if (!bearer) {
-        throw redirect(303, '/login');
-    }
-
-    try {
-        const response = await fetch(BASE_URL_BACKEND + "/login", {
-            headers: {
-                'Authorization': `Bearer ${bearer}`
-            }
-        });
-        
-        if (!response.ok) {
-            cookies.delete('bearer', { path: '/' });
-            cookies.delete('username', { path: '/' });
-            cookies.delete('role', { path: '/' });
-            throw redirect(303, '/login');
-        }
-
-        const isLoggedIn = await response.json();
-        if (!isLoggedIn.success) { 
-            cookies.delete('bearer', { path: '/' });
-            cookies.delete('username', { path: '/' });
-            cookies.delete('role', { path: '/' });
-            throw redirect(303, '/login');
-        }
-    } catch (error) {
-        cookies.delete('bearer', { path: '/' });
-        cookies.delete('username', { path: '/' });
-        cookies.delete('role', { path: '/' });
-        throw redirect(303, '/login');
-    }
-
+    await checkLogin(cookies);
     try {
         const username = cookies.get('username');
         const role = cookies.get('role');
@@ -45,7 +14,7 @@ export const load: PageServerLoad = async ({ cookies }) => {
             fetch(BASE_URL_BACKEND + '/dishes'),
             fetch(BASE_URL_BACKEND + '/category', {
                 headers: {
-                    'Authorization': `Bearer ${bearer}`
+                    'Authorization': `Bearer ${cookies.get('bearer')}`
                 }
             })
         ]);

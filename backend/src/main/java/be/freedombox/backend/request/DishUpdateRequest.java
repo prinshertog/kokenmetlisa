@@ -6,10 +6,10 @@ public class DishUpdateRequest {
     private Long id;
     private String dishName;
     private String description;
-    private Category category;
+    private String category;
     private String imageName;
 
-    public DishUpdateRequest(Long id, String dishName, String description, Category category, String imageName) {
+    public DishUpdateRequest(Long id, String dishName, String description, String category, String imageName) {
         this.id = id;
         this.dishName = dishName;
         this.description = description;
@@ -41,11 +41,11 @@ public class DishUpdateRequest {
         this.description = description;
     }
 
-    public Category getCategory() {
+    public String getCategory() {
         return category;
     }
 
-    public void setCategory(Category category) {
+    public void setCategory(String category) {
         this.category = category;
     }
 

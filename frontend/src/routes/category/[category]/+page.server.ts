@@ -1,20 +1,8 @@
 import { error } from '@sveltejs/kit';
-import { env } from '$env/dynamic/private';
-const BASE_URL_BACKEND = env.BASE_URL_BACKEND;
+import { env } from '$env/dynamic/public';
+const BASE_URL_BACKEND = env.PUBLIC_BASE_URL_BACKEND;
 import type { PageServerLoad } from './$types';
-
-interface Category {
-    category: string,
-    parentCategory: Category | null
-}
-
-interface Dish {
-    id: number,
-    name: string,
-    description: string,
-    category: Category
-    imageName: string
-}
+import type { Dish } from '$lib/types/types';
 
 export const load: PageServerLoad = async ({ params, fetch }) => {
     try {
