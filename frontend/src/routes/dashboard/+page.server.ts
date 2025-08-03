@@ -6,6 +6,7 @@ const BASE_URL_BACKEND = env.PUBLIC_BASE_URL_BACKEND;
 
 export const load: PageServerLoad = async ({ cookies }) => {
     await checkLogin(cookies);
+    
     try {
         const username = cookies.get('username');
         const role = cookies.get('role');

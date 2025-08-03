@@ -1,5 +1,5 @@
-import { env } from '$env/dynamic/private';
-const BASE_URL_BACKEND = env.BASE_URL_BACKEND;
+import { env } from '$env/dynamic/public';
+const BASE_URL_BACKEND = env.PUBLIC_BASE_URL_BACKEND;
 export async function load({}) {
     try {
         const response = await fetch(BASE_URL_BACKEND + '/dishes');

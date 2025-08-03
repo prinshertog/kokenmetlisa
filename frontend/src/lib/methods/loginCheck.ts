@@ -1,6 +1,6 @@
 import { redirect } from '@sveltejs/kit';
-import { env } from '$env/dynamic/private';
-const BASE_URL_BACKEND = env.BASE_URL_BACKEND;
+import { env } from '$env/dynamic/public';
+const BASE_URL_BACKEND = env.PUBLIC_BASE_URL_BACKEND;
 export async function checkLogin( cookies: { get?: any, delete?: any }) {
     const bearer = cookies.get('bearer');
     if (!bearer) {
