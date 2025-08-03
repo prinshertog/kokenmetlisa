@@ -1,8 +1,8 @@
 import { fail, redirect } from '@sveltejs/kit';
 import type { Actions, PageServerLoad } from './$types';
-import { env } from '$env/dynamic/private';
+import { env } from '$env/dynamic/public';
 import { checkLogin } from '$lib/methods/loginCheck';
-const BASE_URL_BACKEND = env.BASE_URL_BACKEND;
+const BASE_URL_BACKEND = env.PUBLIC_BASE_URL_BACKEND;
 
 
 export const load: PageServerLoad = async ({ cookies }) => {
