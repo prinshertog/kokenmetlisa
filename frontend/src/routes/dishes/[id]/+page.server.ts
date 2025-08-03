@@ -14,8 +14,7 @@ export const load: PageServerLoad = async ({ params, fetch }) => {
             throw error(404, 'Dish not found');
         }
         return {
-            dish: data[0],
-            BASE_URL_BACKEND
+            dish: data[0]
         };
     }
 

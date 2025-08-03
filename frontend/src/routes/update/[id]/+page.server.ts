@@ -71,7 +71,6 @@ export const load: PageServerLoad = async ({ cookies, params }) => {
         
         return { 
             dish,
-            BASE_URL_BACKEND,
             username,
             role
         };

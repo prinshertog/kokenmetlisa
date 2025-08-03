@@ -1,7 +1,6 @@
 <script lang="ts">
     const { data, form } = $props();
     import { env } from '$env/dynamic/public';
-    const BASE_URL_BACKEND = env.PUBLIC_BASE_URL_BACKEND
     const FILE_URL = env.PUBLIC_FILE_URL
     const { username, role, categories } = data;
     

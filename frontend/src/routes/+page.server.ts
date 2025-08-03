@@ -1,6 +1,7 @@
 import { env } from '$env/dynamic/public';
 const BASE_URL_BACKEND = env.PUBLIC_BASE_URL_BACKEND;
 export async function load({}) {
+    console.log(BASE_URL_BACKEND);
     try {
         const response = await fetch(BASE_URL_BACKEND + '/dishes');
         if (!response.ok) {
@@ -9,8 +10,7 @@ export async function load({}) {
 
         const dishes = await response.json();
         return {
-            dishes,
-            BASE_URL_BACKEND
+            dishes
         };
     } catch (error) {
         console.error(error);

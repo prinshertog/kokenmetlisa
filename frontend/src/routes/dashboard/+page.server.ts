@@ -33,8 +33,7 @@ export const load: PageServerLoad = async ({ cookies }) => {
             dishes, 
             categories, 
             username,
-            role,
-            BASE_URL_BACKEND
+            role
         };
     } catch (error) {
         console.error(error);
