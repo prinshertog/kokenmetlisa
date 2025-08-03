@@ -1,28 +1,16 @@
 <script>
     const { data, form } = $props();
-    const { dish, username, role } = data;
+    const { dish, username } = data;
 </script>
 
 <header class="bg-white shadow">
     <div class="max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8 flex justify-between items-center">
         <h1 class="text-2xl font-semibold text-gray-900">Welcome {username}</h1>
         <div class="flex items-center space-x-4">
-            {#if role === 'ADMIN'}
-                <a href="/users" 
-                    class="px-4 py-2 text-blue-600 hover:text-blue-800 font-medium">
-                    Users
-                </a>
-            {:else}
-                <a href="/dashboard" 
-                    class="px-4 py-2 text-blue-600 hover:text-blue-800 font-medium">
-                    Dashboard
-                </a>
-            {/if}
-            <form action="?/logout" method="POST" class="inline">
-                <button class="px-4 py-2 text-red-600 hover:text-red-800 font-medium">
-                    Logout
-                </button>
-            </form>
+            <a href="/dashboard" 
+                class="px-4 py-2 text-blue-600 hover:text-blue-800 font-medium">
+                Dashboard
+            </a>
         </div>
     </div>
 </header>

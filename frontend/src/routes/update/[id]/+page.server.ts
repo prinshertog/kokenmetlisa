@@ -1,5 +1,5 @@
-import { env } from '$env/dynamic/private';
-const BASE_URL_BACKEND = env.BASE_URL_BACKEND;
+import { env } from '$env/dynamic/public';
+const BASE_URL_BACKEND = env.PUBLIC_BASE_URL_BACKEND;
 import { fail } from '@sveltejs/kit';
 import type { PageServerLoad, Actions } from './$types';
 import { checkLogin } from '$lib/methods/loginCheck';
@@ -55,7 +55,6 @@ export const load: PageServerLoad = async ({ cookies, params }) => {
 
     try {
         const username = cookies.get('username');
-        const role = cookies.get('role');
         const response = await fetch(BASE_URL_BACKEND + `/dishes/${params.id}`, {
             headers: {
                 'Authorization': `Bearer ${bearer}`
@@ -71,15 +70,12 @@ export const load: PageServerLoad = async ({ cookies, params }) => {
         
         return { 
             dish,
-            username,
-            role
+            username
         };
 
     } catch (error) {
-        console.error(error);
-        return { 
-            error: fail(400, { error: error || 'Failed to add dish' }),
-            dish: [], 
-        };
+        return fail(500, {
+            error: error instanceof Error ? error.message : 'An unknown error occurred'
+        });
     }
 }
