@@ -1,0 +1,37 @@
+name: Build full application
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    - uses: docker/login-action@v3
+      with:
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_TOKEN }}
+        
+    
+    - name: Starting postgres for backend build
+      run: cd postgresqlForKokenmetlisa && docker compose up -d
+      
+    - name: Running maven build
+      run: cd backend && mvn clean package
+      
+    - name: Stopping postgres
+      run: cd postgresqlForKokenmetlisa && docker compose down
+      
+    - name: Building frontend
+      run: cd frontend && npm i && npm run build
+      
+    - name: Build docker image for backend
+      run: cd backend && docker build . -t "prinshertog/kokenmetlisa-backend:v1-stable" && docker push prinshertog/kokenmetlisa-backend:v1-stable
+      
+    - name: Build docker image for frontend
+      run: cd frontend && docker build . -t "prinshertog/kokenmetlisa-frontend:v1-stable" && docker push prinshertog/kokenmetlisa-frontend:v1-stable
