@@ -38,6 +38,12 @@
 
       <!-- Desktop menu -->
       <nav class="hidden md:flex space-x-8">
+        <div class="relative group">
+            <a rel="external" href="/" 
+              class="text-gray-700 hover:text-green-600 transition-colors font-medium">
+              Home
+            </a>
+        </div>
         {#each categories as parentCategory}
           {#if parentCategory.parentCategory === null}
             <div class="relative group">
@@ -68,6 +74,12 @@
       {#if isMenuOpen}
         <div class="md:hidden bg-white border-t border-gray-200">
           <nav class="flex flex-col px-4 py-6">
+            <div class="py-2">
+                <a rel="external" href="/" 
+                  class="text-gray-700 hover:text-green-600 transition-colors font-medium">
+                  Home
+                </a>
+            </div>
             {#each categories as category}
               {#if category.parentCategory === null}
                 <div class="py-2">

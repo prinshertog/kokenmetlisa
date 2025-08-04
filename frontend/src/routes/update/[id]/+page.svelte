@@ -16,7 +16,7 @@
 </header>
 <main class="mt-10 flex justify-center">
     <!-- Forms Section -->
-    <div>
+    <div class="w-full">
         <!-- Add Dish Form -->
         <div class="bg-white shadow rounded-lg p-6">
             <h2 class="text-xl font-semibold mb-4">Update dish: {dish.name}</h2>
@@ -26,8 +26,8 @@
                         name="name" placeholder="Dish name" />
                 </div>
                 <div>
-                    <textarea class="w-full px-3 py-2 border rounded-md"
-                        name="description" placeholder="Description" rows="3"></textarea>
+                    <textarea class="w-full px-3 py-2 border rounded-md h-100"
+                        name="description" placeholder="Description" rows="3" value="{dish.description}"></textarea>
                 </div>
                 <div>
                     <select class="w-full px-3 py-2 border rounded-md"
