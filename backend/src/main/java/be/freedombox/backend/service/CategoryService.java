@@ -98,8 +98,6 @@ public class CategoryService implements ICategoryService {
             categoryRepository.save(category);
             categoryRepository.save(otherCategory);
 
-            System.out.println("Becomes: " + otherCategoryPosition);
-
         } catch (Exception e) {
             throw new CategoryException(e.getMessage());
         }
