@@ -1,4 +1,4 @@
-name: Build full application
+name: Build full application and push to docker hub stable
 
 on:
   push:
