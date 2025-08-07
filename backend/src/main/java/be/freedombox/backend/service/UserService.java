@@ -33,25 +33,37 @@ public class UserService implements IUserService {
 
     public User findByUsername(String username) {
         User user = userRepository.findByUsername(username);
-        if (user == null) throw new ObjectDoesNotExistException("There is no user with username " + username);
+        if (user == null)
+            throw new ObjectDoesNotExistException("There is no user with username " + username);
         return user;
     }
 
     public String bearerTokenGenerator(String username, String password) {
         User user = findByUsername(username);
-        if (!passwordEncoder.matches(password, user.getPassword())) throw new UnAuthorizedException("Wrong password");
+        if (!passwordEncoder.matches(password, user.getPassword()))
+            throw new UnAuthorizedException("Wrong password");
         return JwtUtils.generateToken(user.getUsername());
     }
 
     public List<UserDTO> all(String authorizationHeader) {
-        if (!hasRole(authorizationHeader, "ADMIN")) throw new UnAuthorizedException("Unauthorized");
-        return userRepository.findAll().stream().map(Mapper::toUserDTO).collect(Collectors.toList());
+        if (!hasRole(authorizationHeader, "ADMIN"))
+            throw new UnAuthorizedException("Unauthorized");
+        return userRepository.findAll()
+                .stream()
+                .map(Mapper::toUserDTO)
+                .collect(Collectors.toList());
     }
 
     public void create(String authorizationHeader, UserRequest userRequest) {
-        if (!hasRole(authorizationHeader, "ADMIN")) throw new UnAuthorizedException("You do not have permission to access this resource");
-        if (userRepository.existsByUsername(userRequest.getUsername())) throw new ObjectAlreadyExistsException("Username already exists");
-        User user = new User(userRequest.getUsername(), passwordEncoder.encode(userRequest.getPassword()), userRequest.getRole());
+        if (!hasRole(authorizationHeader, "ADMIN"))
+            throw new UnAuthorizedException("You do not have permission to access this resource");
+        if (userRepository.existsByUsername(userRequest.getUsername()))
+            throw new ObjectAlreadyExistsException("Username already exists");
+        User user = new User(
+                userRequest.getUsername(),
+                passwordEncoder.encode(userRequest.getPassword()),
+                userRequest.getRole()
+        );
         userRepository.save(user);
     }
 
@@ -68,9 +80,11 @@ public class UserService implements IUserService {
                 throw new UnAuthorizedException("You do not have permission to access this resource");
             }
         }
-        if (changePasswordDTO.getNewPassword().equals(changePasswordDTO.getOldPassword())) throw new IllegalInputException("New password cannot be the old password");
+        if (changePasswordDTO.getNewPassword().equals(changePasswordDTO.getOldPassword()))
+            throw new IllegalInputException("New password cannot be the old password");
         User user = findByUsername(changePasswordDTO.getUsername());
-        if (!passwordEncoder.matches(changePasswordDTO.getOldPassword(), user.getPassword())) throw new IllegalInputException("Old password is wrong");
+        if (!passwordEncoder.matches(changePasswordDTO.getOldPassword(), user.getPassword()))
+            throw new IllegalInputException("Old password is wrong");
         user.setPassword(passwordEncoder.encode(changePasswordDTO.getNewPassword()));
         userRepository.save(user);
     }

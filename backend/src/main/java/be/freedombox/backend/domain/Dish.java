@@ -5,6 +5,8 @@ import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
+import java.util.List;
+
 @Entity
 @Table(name = "Dishes")
 public class Dish {
@@ -19,9 +21,9 @@ public class Dish {
     @Column(length = 10000)
     private String description;
     @Valid
-    @ManyToOne
+    @ManyToMany
     @NotNull
-    private Category category;
+    private List<Category> categories;
     @Valid
     private String imageName;
 
@@ -29,10 +31,10 @@ public class Dish {
 
     }
 
-    public Dish(String name, String description, Category category, String imageName) {
+    public Dish(String name, String description, List<Category> categories, String imageName) {
         this.name = name;
         this.description = description;
-        this.category = category;
+        this.categories = categories;
         this.imageName = imageName;
     }
 
@@ -56,12 +58,12 @@ public class Dish {
         this.description = description;
     }
 
-    public Category getCategory() {
-        return category;
+    public List<Category> getCategories() {
+        return categories;
     }
 
-    public void setCategory(Category category) {
-        this.category = category;
+    public void setCategories(List<Category> categories) {
+        this.categories = categories;
     }
 
     public void setId(Long id) {
