@@ -112,7 +112,7 @@ public class DishService implements IDishService {
                 Validator.initCap(category)
         );
 
-        return dishRepository.getByCategory(categoryObject)
+        return dishRepository.getByCategories(categoryObject)
                 .stream()
                 .map(Mapper::toDishDTO)
                 .toList();
