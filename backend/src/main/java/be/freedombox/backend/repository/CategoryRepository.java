@@ -12,8 +12,6 @@ public interface CategoryRepository extends JpaRepository<Category, Long> {
     Category findByCategory(String category);
     Category findByPosition(int position);
     Category getCategoriesByCategory(String category);
-
     List<Category> streamByPosition(int position);
-
     boolean getCategoryByPosition(int position);
 }

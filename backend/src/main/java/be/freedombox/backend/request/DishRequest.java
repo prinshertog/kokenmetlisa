@@ -2,23 +2,25 @@ package be.freedombox.backend.request;
 
 import jakarta.validation.constraints.NotBlank;
 
+import java.util.List;
+
 public class DishRequest {
     @NotBlank(message = "Dish name is required")
     private String name;
     @NotBlank
     private String description;
     @NotBlank
-    private String category;
+    private List<String> categories;
     @NotBlank
     private String imageName;
 
     public DishRequest() {
     }
 
-    public DishRequest(String name, String description, String category, String subCategory, String imageName) {
+    public DishRequest(String name, String description, List<String> categories, String imageName) {
         this.name = name;
         this.description = description;
-        this.category = category;
+        this.categories = categories;
         this.imageName = imageName;
     }
 
@@ -38,12 +40,12 @@ public class DishRequest {
         this.description = description;
     }
 
-    public String getCategory() {
-        return category;
+    public List<String> getCategories() {
+        return categories;
     }
 
-    public void setCategory(String category) {
-        this.category = category;
+    public void setCategories(List<String> categories) {
+        this.categories = categories;
     }
 
     public String getImageName() {

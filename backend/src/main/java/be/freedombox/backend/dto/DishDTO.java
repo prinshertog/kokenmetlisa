@@ -2,21 +2,23 @@ package be.freedombox.backend.dto;
 
 import be.freedombox.backend.domain.Category;
 
+import java.util.List;
+
 public class DishDTO {
     private Long id;
     private String name;
     private String description;
-    private Category category;
+    private List<Category> categories;
     private String imageName;
 
     public DishDTO() {
     }
 
-    public DishDTO(Long id, String name, String description, Category category, String imageName) {
+    public DishDTO(Long id, String name, String description, List<Category> categories, String imageName) {
         this.id = id;
         this.name = name;
         this.description = description;
-        this.category = category;
+        this.categories = categories;
         this.imageName = imageName;
     }
 
@@ -36,12 +38,12 @@ public class DishDTO {
         this.description = description;
     }
 
-    public Category getCategory() {
-        return category;
+    public List<Category> getCategories() {
+        return categories;
     }
 
-    public void setCategory(Category category) {
-        this.category = category;
+    public void setCategories(List<Category> categories) {
+        this.categories = categories;
     }
 
     public String getImageName() {

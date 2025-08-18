@@ -2,18 +2,20 @@ package be.freedombox.backend.request;
 
 import be.freedombox.backend.domain.Category;
 
+import java.util.List;
+
 public class DishUpdateRequest {
     private Long id;
     private String dishName;
     private String description;
-    private String category;
+    private List<String> categories;
     private String imageName;
 
-    public DishUpdateRequest(Long id, String dishName, String description, String category, String imageName) {
+    public DishUpdateRequest(Long id, String dishName, String description, List<String> categories, String imageName) {
         this.id = id;
         this.dishName = dishName;
         this.description = description;
-        this.category = category;
+        this.categories = categories;
         this.imageName = imageName;
     }
 
@@ -41,12 +43,12 @@ public class DishUpdateRequest {
         this.description = description;
     }
 
-    public String getCategory() {
-        return category;
+    public List<String> getCategories() {
+        return categories;
     }
 
-    public void setCategory(String category) {
-        this.category = category;
+    public void setCategories(List<String> categories) {
+        this.categories = categories;
     }
 
     public String getImageName() {

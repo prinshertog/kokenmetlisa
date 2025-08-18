@@ -20,6 +20,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -45,17 +46,10 @@ public class DishService implements IDishService {
     }
 
     @Override
-    public void create(DishRequest dishrequest, MultipartFile file) {
+    public void create(DishRequest dishRequest, MultipartFile file) {
         try {
-            String dishName = dishrequest.getName();
-            String dishDescription = dishrequest.getDescription();
-            String imageName = dishrequest.getImageName();
-            Category dishCategory = categoryRepository.getCategoriesByCategory(dishrequest.getCategory());
-
-            Dish dish = new Dish(dishName, dishDescription, dishCategory, imageName);
-
-            fileService.saveFile(file, dishrequest.getImageName());
-            dishRepository.save(dish);
+            fileService.saveFile(file, dishRequest.getImageName());
+            dishRepository.save(Mapper.toDish(dishRequest));
         } catch (Exception e) {
             throw new DishException("Failed to create dish: " + e.getMessage());
         }
@@ -63,40 +57,47 @@ public class DishService implements IDishService {
 
     @Override
     public List<DishDTO> getById(Long id) {
-        return dishRepository.findById(id).stream().map(Mapper::toDishDTO).toList();
+        return dishRepository.findById(id)
+                .stream()
+                .map(Mapper::toDishDTO)
+                .toList();
     }
 
     @Override
     public void delete(Long id) {
-        if (dishRepository.findById(id).isEmpty()) throw new ObjectDoesNotExistException("The dish with id " + id + " does not exist");
-        String imageName = dishRepository.findById(id).get().getImageName();
-        fileService.deleteFile(imageName);
+        if (dishRepository.findById(id).isEmpty())
+            throw new ObjectDoesNotExistException("The dish with id " + id + " does not exist");
+        fileService.deleteFile(dishRepository
+                .findById(id)
+                .get()
+                .getImageName()
+        );
         dishRepository.deleteById(id);
     }
 
     @Override
     public void update(DishUpdateRequest dishUpdateRequest, MultipartFile file) {
-        if (dishRepository.findById(dishUpdateRequest.getId()).isEmpty()) throw new ObjectDoesNotExistException("Dish does not exist so cannot be updated.");
+        if (dishRepository.findById(dishUpdateRequest.getId()).isEmpty())
+            throw new ObjectDoesNotExistException("Dish does not exist so cannot be updated.");
 
         Dish dish = dishRepository.findById(dishUpdateRequest.getId()).get();
 
-        if (dishUpdateRequest.getDishName().isEmpty()) dishUpdateRequest.setDishName(dish.getName());
-        else dish.setName(dishUpdateRequest.getDishName());
+        if (!dishUpdateRequest.getDishName().isEmpty())
+            dish.setName(dishUpdateRequest.getDishName());
 
-        if (dishUpdateRequest.getDescription().isEmpty()) dishUpdateRequest.setDescription(dish.getDescription());
-        else dish.setDescription(dishUpdateRequest.getDescription());
+        if (!dishUpdateRequest.getDescription().isEmpty())
+            dish.setDescription(dishUpdateRequest.getDescription());
 
-        if (dishUpdateRequest.getCategory().isEmpty()) {
-            dishUpdateRequest.setCategory(dish.getCategory().getCategory());
+        if (!dishUpdateRequest.getCategories().isEmpty()) {
+            List<Category> categories = dishUpdateRequest
+                    .getCategories()
+                    .stream()
+                    .map(Mapper::toCategory)
+                    .toList();
+            dish.setCategories(categories);
         }
-        else {
-            Category category = categoryRepository.findByCategory(dishUpdateRequest.getCategory());
-            dish.setCategory(category);
-        }
 
-        if (dishUpdateRequest.getImageName().isEmpty() || file == null) {
-            dishUpdateRequest.setImageName(dish.getImageName());
-        } else {
+        if (!dishUpdateRequest.getImageName().isEmpty() || file != null) {
             fileService.deleteFile(dish.getImageName());
             dish.setImageName(dishUpdateRequest.getImageName());
             fileService.saveFile(file, dishUpdateRequest.getImageName());
@@ -107,8 +108,13 @@ public class DishService implements IDishService {
 
     @Override
     public List<DishDTO> getByCategory(String category) {
-        String validatedCategory = Validator.initCap(category);
-        Category fetchedCategory = categoryRepository.findByCategory(validatedCategory);
-        return dishRepository.getByCategory(fetchedCategory).stream().map(Mapper::toDishDTO).toList();
+        Category categoryObject = categoryRepository.findByCategory(
+                Validator.initCap(category)
+        );
+
+        return dishRepository.getByCategories(categoryObject)
+                .stream()
+                .map(Mapper::toDishDTO)
+                .toList();
     }
 }

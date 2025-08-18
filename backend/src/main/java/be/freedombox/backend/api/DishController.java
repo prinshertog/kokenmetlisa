@@ -48,7 +48,8 @@ public class DishController {
     }
 
     @PostMapping("/{id}")
-    public ResponseEntity<HttpStatus> updateDish(@RequestParam(value = "file", required = false) MultipartFile file, @RequestPart DishUpdateRequest dishUpdateRequest) {
+    public ResponseEntity<HttpStatus> updateDish(@RequestParam(value = "file", required = false) MultipartFile file,
+                                                 @RequestPart DishUpdateRequest dishUpdateRequest) {
         dishService.update(dishUpdateRequest, file);
         return ResponseEntity.ok(HttpStatus.OK);
     }

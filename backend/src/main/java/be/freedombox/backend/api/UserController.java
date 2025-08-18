@@ -28,19 +28,22 @@ public class UserController {
     }
 
     @PostMapping
-    public ResponseEntity<HttpStatus> addUser(@RequestHeader(value = "Authorization") String authorizationHeader, @RequestBody UserRequest userRequest) {
+    public ResponseEntity<HttpStatus> addUser(@RequestHeader(value = "Authorization") String authorizationHeader,
+                                              @RequestBody UserRequest userRequest) {
         userService.create(authorizationHeader, userRequest);
         return ResponseEntity.ok(HttpStatus.CREATED);
     }
 
     @PutMapping("/password")
-    public ResponseEntity<HttpStatus> updateUser(@RequestHeader(value = "Authorization") String authorizationHeader, @RequestBody ChangePasswordDTO changePasswordDTO) {
+    public ResponseEntity<HttpStatus> updateUser(@RequestHeader(value = "Authorization") String authorizationHeader,
+                                                 @RequestBody ChangePasswordDTO changePasswordDTO) {
         userService.changePassword(authorizationHeader, changePasswordDTO);
         return ResponseEntity.ok(HttpStatus.OK);
     }
 
     @DeleteMapping
-    public ResponseEntity<HttpStatus> deleteUser(@RequestHeader(value = "Authorization") String authorizationHeader, @RequestBody String username) {
+    public ResponseEntity<HttpStatus> deleteUser(@RequestHeader(value = "Authorization") String authorizationHeader,
+                                                 @RequestBody String username) {
         userService.delete(authorizationHeader, username);
         return ResponseEntity.ok(HttpStatus.OK);
     }
