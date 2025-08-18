@@ -19,13 +19,13 @@ jobs:
         
     
     - name: Starting postgres for backend build
-      run: cd postgresqlForKokenmetlisa && docker compose up -d
+      run: cd test-db && docker compose up -d
       
     - name: Running maven build
       run: cd backend && mvn clean package
       
     - name: Stopping postgres
-      run: cd postgresqlForKokenmetlisa && docker compose down
+      run: cd test-db && docker compose down
       
     - name: Building frontend
       run: cd frontend && npm i && npm run build
