@@ -3,6 +3,7 @@ package be.freedombox.backend.domain;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.OnDelete;
 
 @Entity
 @Table(name = "Categories")
@@ -10,7 +11,7 @@ public class Category {
     @Id
     @NotBlank(message = "Category is required")
     private String category;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.REMOVE)
     private Category parentCategory;
     private int position;
 

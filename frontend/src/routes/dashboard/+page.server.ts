@@ -61,7 +61,7 @@ export const actions = {
             const dishData = {
                 name: data.get('name'),
                 description: data.get('description'),
-                category: data.get('category'),
+                categories: data.getAll('selected-categories'),
                 imageName: filename
             };
 

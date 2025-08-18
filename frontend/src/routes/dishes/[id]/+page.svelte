@@ -1,7 +1,7 @@
 <script lang="ts">
     import { marked } from 'marked';    
     const { data } = $props();
-    const { imageName, name, description, category } = data.dish;
+    const { imageName, name, description, categories } = data.dish;
     import { env } from '$env/dynamic/public';
     const FILE_URL = env.PUBLIC_FILE_URL
     marked.setOptions({ breaks: true });
@@ -21,7 +21,12 @@
                 {@html descriptionHtml}
             </div>
             <div class="mt-4 text-sm text-gray-500">
-                <p>Category: {category.category}</p>
+                <p class="mt-4 text-sm text-gray-500">Categories:</p>
+                <div class="flex overflow-auto">
+                    {#each categories as category}
+                    <p class="m-1">{category.category}</p>
+                    {/each}
+                </div>
             </div>
         </div>
     </div>

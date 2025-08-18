@@ -30,13 +30,14 @@
                         name="description" placeholder="Description" rows="3" value="{dish.description}"></textarea>
                 </div>
                 <div>
-                    <select class="w-full px-3 py-2 border rounded-md"
-                        name="category">
-                        <option value="">Select a category</option>
+                    <div class="w-full px-3 py-2 border rounded-md">
                         {#each data.categories as category}
-                            <option value={category.category}>{category.category}</option>
+                        <p class="border-1 p-1 m-1">
+                            <label for="{category.category}">{category.category}</label>
+                            <input name="selected-categories" class="float-end" type="checkbox" id="{category.category}" value="{category.category}">
+                        </p>
                         {/each}
-                    </select>
+                    </div>
                 </div>
                 <div>
                     <input class="w-full px-3 py-2 border rounded-md" 

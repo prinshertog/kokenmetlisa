@@ -63,13 +63,14 @@
                             name="description" placeholder="Description" rows="3" required></textarea>
                     </div>
                     <div>
-                        <select class="w-full px-3 py-2 border rounded-md"
-                            name="category" required>
-                            <option value="">Select a category</option>
+                        <div class="w-full px-3 py-2 border rounded-md">
                             {#each data.categories as category}
-                                <option value={category.category}>{category.category}</option>
+                            <p class="border-1 p-1 m-1">
+                                <label for="{category.category}">{category.category}</label>
+                                <input name="selected-categories" class="float-end" type="checkbox" id="{category.category}" value="{category.category}">
+                            </p>
                             {/each}
-                        </select>
+                        </div>
                     </div>
                     <div>
                         <input class="w-full px-3 py-2 border rounded-md" 
@@ -164,7 +165,7 @@
         <!-- Dishes Grid -->
         <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {#each data.dishes as dish}
-                <div class="cursor-pointer bg-white shadow rounded-lg overflow-hidden">
+                <div class="cursor-pointer bg-white shadow rounded-lg">
                     <a href="/dishes/{dish.id}">
                     <img 
                         class="w-full h-48 object-cover" 
@@ -187,7 +188,12 @@
                                 </a>
                             </form>
                         </div>
-                        <p class="mt-4 text-sm text-gray-500">Category: {dish.category.category}</p>
+                        <p class="mt-4 text-sm text-gray-500">Categories:</p>
+                        <div class="flex overflow-auto">
+                            {#each dish.categories as category}
+                            <p class="m-1">{category.category}</p>
+                            {/each}
+                        </div>
                     </div>
                 </div>
             {/each}

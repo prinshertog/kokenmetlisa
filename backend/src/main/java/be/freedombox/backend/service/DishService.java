@@ -94,10 +94,10 @@ public class DishService implements IDishService {
                     .stream()
                     .map(Mapper::toCategory)
                     .toList();
-            dish.setCategories(categories);
+            dish.setCategories(new ArrayList<>(categories));
         }
 
-        if (!dishUpdateRequest.getImageName().isEmpty() || file != null) {
+        if (file != null) {
             fileService.deleteFile(dish.getImageName());
             dish.setImageName(dishUpdateRequest.getImageName());
             fileService.saveFile(file, dishUpdateRequest.getImageName());
