@@ -9,3 +9,7 @@ services:
       POSTGRES_DB: dishes
     ports:
       - 5432:5432
+    volumes:
+      - postgresql:/var/lib/postgresql/data
+volumes:
+  postgresql:
