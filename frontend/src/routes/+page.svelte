@@ -3,11 +3,13 @@
     const { dishes } = data;
     import { env } from '$env/dynamic/public';
     const FILE_URL = env.PUBLIC_FILE_URL
+
+    let reversedDishes = [...dishes].reverse();
 </script>
 
 <div class="container mx-auto px-4">
     <div class="flex gap-5">
-        {#each dishes as { id, name, imageName }}
+        {#each reversedDishes as { id, name, imageName }}
             <div class="w-1/4 overflow-hidden rounded-lg shadow-lg relative">
                 <a aria-label="Link" href="/dishes/{id}" class="block">
                     <div class="h-60 w-full bg-cover bg-center" 

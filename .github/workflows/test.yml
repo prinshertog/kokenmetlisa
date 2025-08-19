@@ -1,7 +1,7 @@
-name: Build full application and push to docker hub unstable
+name: Test build docker image
 
 on:
-  push:
+  pull_request:
     branches: [ "main" ]
 
 jobs:
@@ -29,7 +29,7 @@ jobs:
       run: cd frontend && npm i && npm run build
       
     - name: Build docker image for backend
-      run: cd backend && docker build . -t "prinshertog/kokenmetlisa-backend:v1-unstable" && docker push prinshertog/kokenmetlisa-backend:v1-unstable
+      run: cd backend && docker build . -t "prinshertog/kokenmetlisa-backend:v1-unstable"
       
     - name: Build docker image for frontend
-      run: cd frontend && docker build . -t "prinshertog/kokenmetlisa-frontend:v1-unstable" && docker push prinshertog/kokenmetlisa-frontend:v1-unstable
+      run: cd frontend && docker build . -t "prinshertog/kokenmetlisa-frontend:v1-unstable"
