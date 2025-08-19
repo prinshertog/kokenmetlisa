@@ -3,14 +3,7 @@
     import { env } from '$env/dynamic/public';
     const FILE_URL = env.PUBLIC_FILE_URL
     const { username, role, categories } = data;
-    
-    interface Category {
-        category: string;
-        parentCategory: {
-            category: string;
-            parentCategory: null;
-        } | null;
-    }
+    import type { Category } from '$lib/types/types.js';
 
     let mainCategories = $derived(categories.filter((cat: Category) => !cat.parentCategory));
     let getSubcategories = (parentCat: string) => {

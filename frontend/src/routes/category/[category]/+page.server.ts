@@ -15,8 +15,14 @@ export const load: PageServerLoad = async ({ params, fetch }) => {
         if (data.length === 0) {
             throw error(404, "No dishes found");
         }
-        const categoryDishes = data.filter(dish => 
-            dish.category.category === params.category || dish.category.parentCategory?.category === params.category
+        const categoryDishes = data.filter(dish => {
+                for (let category of dish.categories) {
+                    if (category.category === params.category 
+                        || category.parentCategory?.category === params.category) {
+                            return dish;
+                    }
+                }
+            }
         )
         if (categoryDishes.length === 0) {
             throw error(404, "No dishes found");

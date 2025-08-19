@@ -88,14 +88,12 @@ public class DishService implements IDishService {
         if (!dishUpdateRequest.getDescription().isEmpty())
             dish.setDescription(dishUpdateRequest.getDescription());
 
-        if (!dishUpdateRequest.getCategories().isEmpty()) {
-            List<Category> categories = dishUpdateRequest
-                    .getCategories()
-                    .stream()
-                    .map(Mapper::toCategory)
-                    .toList();
-            dish.setCategories(new ArrayList<>(categories));
-        }
+        List<Category> categories = dishUpdateRequest
+                .getCategories()
+                .stream()
+                .map(Mapper::toCategory)
+                .toList();
+        dish.setCategories(new ArrayList<>(categories));
 
         if (file != null) {
             fileService.deleteFile(dish.getImageName());

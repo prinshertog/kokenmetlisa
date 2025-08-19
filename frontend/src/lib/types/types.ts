@@ -7,6 +7,6 @@ export interface Dish {
     id: number,
     name: string,
     description: string,
-    category: Category
+    categories: Array<Category>,
     imageName: string
 }
