@@ -12,6 +12,8 @@
         );
     };
 
+    let dishesReversed = [...data.dishes].reverse();
+
 </script>
 
 <div class="min-h-screen bg-gray-50">
@@ -32,7 +34,7 @@
                     </a>
                 {/if}
                 <form action="?/logout" method="POST" class="inline">
-                    <button class="px-4 py-2 text-red-600 hover:text-red-800 font-medium">
+                    <button class="px-4 py-2 text-red-600 hover:text-red-800 font-medium cursor-pointer">
                         Logout
                     </button>
                 </form>
@@ -57,11 +59,17 @@
                     </div>
                     <div>
                         <div class="w-full px-3 py-2 border rounded-md">
-                            {#each data.categories as category}
-                            <p class="border-1 p-1 m-1">
+                            {#each mainCategories as category}
+                            <p class="bg-gray-50 rounded p-2 m-1">
                                 <label for="{category.category}">{category.category}</label>
                                 <input name="selected-categories" class="float-end" type="checkbox" id="{category.category}" value="{category.category}">
                             </p>
+                                {#each getSubcategories(category.category) as subcategory}
+                                <p class="bg-gray-100 rounded p-2 m-1 ml-4">
+                                    <label for="{subcategory.category}">↳ {subcategory.category}</label>
+                                    <input name="selected-categories" class="float-end" type="checkbox" id="{subcategory.category}" value="{subcategory.category}">
+                                </p>
+                                {/each}
                             {/each}
                         </div>
                     </div>
@@ -70,7 +78,7 @@
                             type="file" accept="image/*"
                             name="image" />
                     </div>
-                    <button class="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700">
+                    <button class="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 cursor-pointer">
                         Add Dish
                     </button>
                 </form>
@@ -93,15 +101,15 @@
                                     <div>
                                         <form action="?/up" method="POST" class="inline">
                                             <input type="hidden" name="category" value={category.category}>
-                                            <button class="text-blue-600 hover:text-blue-800">Up</button>
+                                            <button class="text-blue-600 hover:text-blue-800 ml-2 mr-2 cursor-pointer">Up</button>
                                         </form>
                                         <form action="?/down" method="POST" class="inline">
                                             <input type="hidden" name="category" value={category.category}>
-                                            <button class="text-blue-600 hover:text-blue-800">Down</button>
+                                            <button class="text-blue-600 hover:text-blue-800 ml-2 mr-2 cursor-pointer">Down</button>
                                         </form>
                                         <form action="?/deleteCategory" method="POST" class="inline">
                                             <input type="hidden" name="category" value={category.category}>
-                                            <button class="text-red-600 hover:text-red-800">Delete</button>
+                                            <button class="text-red-600 hover:text-red-800 ml-2 mr-2 cursor-pointer">Delete</button>
                                         </form>
                                     </div>
                                 </div>
@@ -112,15 +120,15 @@
                                         <div>
                                             <form action="?/up" method="POST" class="inline">
                                                 <input type="hidden" name="category" value={subcategory.category}>
-                                                <button class="text-blue-600 hover:text-blue-800">Up</button>
+                                                <button class="text-blue-600 hover:text-blue-800 ml-2 mr-2 cursor-pointer">Up</button>
                                             </form>
                                             <form action="?/down" method="POST" class="inline">
                                                 <input type="hidden" name="category" value={subcategory.category}>
-                                                <button class="text-blue-600 hover:text-blue-800">Down</button>
+                                                <button class="text-blue-600 hover:text-blue-800 ml-2 mr-2 cursor-pointer">Down</button>
                                             </form>
                                             <form action="?/deleteCategory" method="POST" class="inline">
                                                 <input type="hidden" name="category" value={subcategory.category}>
-                                                <button class="text-red-600 hover:text-red-800">Delete</button>
+                                                <button class="text-red-600 hover:text-red-800 ml-2 mr-2 cursor-pointer">Delete</button>
                                             </form>
                                         </div>
                                     </div>
@@ -145,7 +153,7 @@
                             {/each}
                         </select>
                     </div>
-                    <button class="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700">
+                    <button class="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 cursor-pointer">
                         Add Category
                     </button>
                 </form>
@@ -157,11 +165,11 @@
 
         <!-- Dishes Grid -->
         <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {#each data.dishes as dish}
-                <div class="cursor-pointer bg-white shadow rounded-lg">
+            {#each dishesReversed as dish}
+                <div class="bg-white shadow rounded-lg">
                     <a href="/dishes/{dish.id}">
                     <img 
-                        class="w-full h-48 object-cover" 
+                        class="w-full h-48 object-cover cursor-pointer" 
                         src="{`${FILE_URL}/${dish.imageName}`}"
                         alt={dish.name}
                         loading="lazy"
@@ -169,14 +177,14 @@
                     </a>
                     <div class="p-6">
                         <div class="flex justify-between items-start">
-                            <h3 class="text-xl font-semibold max-w-0.5">{dish.name}</h3>
+                            <h3 class="text-xl font-semibold max-w-0.5 hover:text-emerald-500 hover:underline"><a href="/dishes/{dish.id}">{dish.name}</a></h3>
                             <form action="?/deleteDish" method="POST" class="inline">
                                 <input type="hidden" name="id" value={dish.id}>
                                 <input type="hidden" name="imageName" value={dish.imageName}>
-                                <button class="bg-red-600 text-white px-3 py-1 rounded-md hover:bg-red-700">
+                                <button class="text-red-600 rounded-md hover:text-red-700 m-2 cursor-pointer">
                                     Delete
                                 </button>
-                                <a href="/update/{dish.id}" class="bg-blue-600 text-white px-3 py-1 rounded-md hover:bg-blue-700">
+                                <a href="/update/{dish.id}" class="text-blue-600 rounded-md hover:text-blue-700 m-2">
                                     Update
                                 </a>
                             </form>

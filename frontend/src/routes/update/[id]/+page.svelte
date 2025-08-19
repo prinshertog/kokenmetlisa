@@ -42,7 +42,7 @@
                 <div>
                     <div class="w-full px-3 py-2 border rounded-md">
                         {#each mainCategories as category}
-                        <p class="border-1 p-1 m-1">
+                        <p class="bg-gray-50 rounded p-2 m-1">
                             <label for="{category.category}">{category.category}</label>
                             
                             {#if dish.categories.some((cat: Category) => cat.category == category.category)}
@@ -52,8 +52,8 @@
                             {/if}
                         </p>
                             {#each getSubcategories(category.category) as subcategory}
-                            <p class="border-1 p-1 m-1 ml-3">
-                                <label for="{subcategory.category}">{subcategory.category}</label>
+                            <p class="bg-gray-100 rounded p-2 m-1 ml-4">
+                                <label for="{subcategory.category}">↳ {subcategory.category}</label>
                                 {#if dish.categories.some((cat: Category) => cat.category == subcategory.category)}
                                 <input checked name="selected-categories" class="float-end" type="checkbox" id="{subcategory.category}" value="{subcategory.category}">
                                 {:else}
@@ -69,7 +69,7 @@
                         type="file" accept="image/*"
                         name="image" />
                 </div>
-                <button class="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700">
+                <button class="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 cursor-pointer">
                     Update Dish
                 </button>
             </form>
