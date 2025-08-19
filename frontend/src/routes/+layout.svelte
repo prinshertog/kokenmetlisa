@@ -8,6 +8,7 @@
   function toggleMenu() {
     isMenuOpen = !isMenuOpen;
   }
+  
 </script>
 
 <div class="flex flex-col min-h-screen">
@@ -110,7 +111,7 @@
     {@render children()}
   </main>
 
-  <footer class="bg-[rgb(73,105,83)] text-white py-8">
+  <footer class="bg-[rgb(96,110,90)] text-white py-8">
     <div class="container mx-auto px-4">
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
         <div class="flex justify-center md:justify-start">

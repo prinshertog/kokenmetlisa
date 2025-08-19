@@ -15,7 +15,7 @@
                     <div class="h-60 w-full bg-cover bg-center" 
                          style="background-image: url('{`${FILE_URL}/${imageName}`}');">
                     </div>
-                    <div class="bg-[rgb(73,105,83)] p-4 text-white absolute bottom-0 w-full">
+                    <div class="bg-[rgb(96,110,90)] p-4 text-white absolute bottom-0 w-full">
                         <h2 class="text-lg font-bold">
                             {name}
                         </h2>
