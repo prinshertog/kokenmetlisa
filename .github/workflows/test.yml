@@ -1,11 +1,13 @@
 name: Test build docker image
 
 on:
+  push:
+    branches: [ main ]
   pull_request:
     branches: [ "main" ]
 
 jobs:
-  build:
+  test:
     runs-on: self-hosted
 
     strategy:
