@@ -2,7 +2,7 @@ name: Build full application and push to docker hub unstable
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "dev" ]
 
 jobs:
   build:
