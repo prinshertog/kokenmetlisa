@@ -4,6 +4,8 @@ import be.freedombox.backend.exception.FileException;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -35,6 +37,16 @@ public class FileService {
 
         } catch (Exception e) {
             throw new FileException(e.getMessage());
+        }
+    }
+
+    public void saveImage(BufferedImage image, String imageName) throws FileException  {
+        try {
+            Path fileNameLocation = Paths.get(String.valueOf(fileLocation), imageName).toAbsolutePath();
+            File outputFile = new File(fileNameLocation.toUri());
+            ImageIO.write(image, "jpg", outputFile);
+        } catch (IOException e) {
+            throw new FileException(e.toString());
         }
     }
 
