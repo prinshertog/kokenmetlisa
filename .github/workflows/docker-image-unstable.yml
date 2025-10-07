@@ -1,7 +1,7 @@
 name: Build full application and push to docker hub unstable
 
 on:
-  pull_request:
+  push:
     branches: [ "dev" ]
 
 jobs:
