@@ -1,7 +1,7 @@
 name: Build full application and push to docker hub stable
 
 on:
-  push:
+  pull_request:
     branches: [ "main" ]
 
 jobs:
