@@ -23,7 +23,6 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.nio.Buffer;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -57,6 +56,7 @@ public class DishService implements IDishService {
             BufferedImage image = convertToBufferedImage(file);
             BufferedImage resizedImage = resizeImage(image, 600, 600);
             fileService.saveImage(resizedImage, dishRequest.getImageName());
+            fileService.saveFile(file, "full-" + dishRequest.getImageName());
             dishRepository.save(Mapper.toDish(dishRequest));
         } catch (Exception e) {
             throw new DishException("Failed to create dish: " + e.getMessage());
@@ -80,6 +80,7 @@ public class DishService implements IDishService {
                 .get()
                 .getImageName()
         );
+        fileService.deleteFile("full-" + dishRepository.findById(id).get().getImageName());
         dishRepository.deleteById(id);
     }
 
@@ -112,6 +113,7 @@ public class DishService implements IDishService {
             BufferedImage image = convertToBufferedImage(file);
             BufferedImage resizedImage = resizeImage(image, 600, 600);
             fileService.saveImage(resizedImage, dishUpdateRequest.getImageName());
+            fileService.saveFile(file, "full-" + dishUpdateRequest.getImageName());
         }
 
         dishRepository.save(dish);
