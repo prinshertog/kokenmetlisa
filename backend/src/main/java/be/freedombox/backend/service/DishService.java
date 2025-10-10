@@ -4,25 +4,27 @@ import be.freedombox.backend.domain.Category;
 import be.freedombox.backend.domain.Dish;
 import be.freedombox.backend.dto.DishDTO;
 import be.freedombox.backend.exception.DishException;
-import be.freedombox.backend.exception.NotImplementedException;
+import be.freedombox.backend.exception.FileException;
 import be.freedombox.backend.exception.ObjectDoesNotExistException;
 import be.freedombox.backend.repository.CategoryRepository;
 import be.freedombox.backend.repository.DishRepository;
-import be.freedombox.backend.request.CategoryRequest;
 import be.freedombox.backend.request.DishRequest;
 import be.freedombox.backend.request.DishUpdateRequest;
-import be.freedombox.backend.tools.GlobalVariables;
 import be.freedombox.backend.tools.Mapper;
 import be.freedombox.backend.tools.Validator;
-import jdk.jshell.spi.ExecutionControl;
+import net.coobird.thumbnailator.Thumbnails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class DishService implements IDishService {
@@ -48,7 +50,13 @@ public class DishService implements IDishService {
     @Override
     public void create(DishRequest dishRequest, MultipartFile file) {
         try {
-            fileService.saveFile(file, dishRequest.getImageName());
+            if (file.getContentType() == null || !file.getContentType().startsWith("image/")) {
+                throw new IllegalArgumentException("Uploaded file is not an image");
+            }
+            BufferedImage image = convertToBufferedImage(file);
+            BufferedImage resizedImage = resizeImage(image, 600, 600);
+            fileService.saveImage(resizedImage, dishRequest.getImageName());
+            fileService.saveFile(file, "full-" + dishRequest.getImageName());
             dishRepository.save(Mapper.toDish(dishRequest));
         } catch (Exception e) {
             throw new DishException("Failed to create dish: " + e.getMessage());
@@ -72,6 +80,7 @@ public class DishService implements IDishService {
                 .get()
                 .getImageName()
         );
+        fileService.deleteFile("full-" + dishRepository.findById(id).get().getImageName());
         dishRepository.deleteById(id);
     }
 
@@ -96,9 +105,15 @@ public class DishService implements IDishService {
         dish.setCategories(new ArrayList<>(categories));
 
         if (file != null) {
+            if (file.getContentType() == null || !file.getContentType().startsWith("image/")) {
+                throw new IllegalArgumentException("Uploaded file is not an image");
+            }
             fileService.deleteFile(dish.getImageName());
             dish.setImageName(dishUpdateRequest.getImageName());
-            fileService.saveFile(file, dishUpdateRequest.getImageName());
+            BufferedImage image = convertToBufferedImage(file);
+            BufferedImage resizedImage = resizeImage(image, 600, 600);
+            fileService.saveImage(resizedImage, dishUpdateRequest.getImageName());
+            fileService.saveFile(file, "full-" + dishUpdateRequest.getImageName());
         }
 
         dishRepository.save(dish);
@@ -114,5 +129,29 @@ public class DishService implements IDishService {
                 .stream()
                 .map(Mapper::toDishDTO)
                 .toList();
+    }
+
+    private BufferedImage resizeImage(BufferedImage originalImage, int targetWidth, int targetHeight) throws FileException {
+        try {
+            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+            Thumbnails.of(originalImage)
+                    .size(targetWidth, targetHeight)
+                    .outputFormat("JPEG")
+                    .outputQuality(0.50)
+                    .toOutputStream(outputStream);
+            byte[] data = outputStream.toByteArray();
+            ByteArrayInputStream inputStream = new ByteArrayInputStream(data);
+            return ImageIO.read(inputStream);
+        } catch (IOException e) {
+            throw new FileException(e.toString());
+        }
+    }
+
+    private BufferedImage convertToBufferedImage(MultipartFile file) throws FileException {
+        try (InputStream inputStream = file.getInputStream()) {
+            return ImageIO.read(inputStream);
+        } catch (IOException e) {
+            throw new FileException(e.toString());
+        }
     }
 }
