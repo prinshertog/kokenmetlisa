@@ -2,7 +2,7 @@
   import "../app.css";
   
   const { children, data } = $props();
-  const { categories } = data;
+  const { parentCategories } = data;
   let isMenuOpen = $state(false);
   
   function toggleMenu() {
@@ -24,7 +24,7 @@
       
       <!-- Mobile menu button -->
       <button 
-        class="md:hidden p-2"
+        class="md:hidden p-2 hover:cursor-pointer"
         onclick={toggleMenu}
         aria-label="Menu"
       >
@@ -45,9 +45,8 @@
               Home
             </a>
         </div>
-        {#each categories as parentCategory}
-          {#if parentCategory.parentCategory === null}
-            <div class="relative group">
+        {#each parentCategories as parentCategory}
+          <div class="relative group">
               <a rel="external" href="/category/{parentCategory.category}" 
                 class="text-gray-700 hover:text-green-600 transition-colors inline-flex items-center">
                 {parentCategory.category}
@@ -57,17 +56,14 @@
               </a>
               <div class="absolute left-0 mt-2 w-48 bg-white rounded-md shadow-lg opacity-0 invisible 
                          group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
-                {#each categories as subCategory}
-                  {#if subCategory.parentCategory?.category === parentCategory.category}
-                    <a rel="external" href="/category/{subCategory.category}" 
-                      class="block px-4 py-2 text-sm text-gray-700 hover:bg-green-50 hover:text-green-600">
-                      {subCategory.category}
-                    </a>
-                  {/if}
+                {#each parentCategory.childCategories as subCategory}
+                  <a rel="external" href="/category/{subCategory.category}" 
+                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-green-50 hover:text-green-600">
+                    {subCategory.category}
+                  </a>
                 {/each}
               </div>
             </div>
-          {/if}
         {/each}
       </nav>
 
@@ -81,21 +77,19 @@
                   Home
                 </a>
             </div>
-            {#each categories as category}
-              {#if category.parentCategory === null}
+            {#each parentCategories as parentCategory}
+              {#if parentCategory.parentCategory === null}
                 <div class="py-2">
-                  <a rel="external" href="/category/{category.category}" 
+                  <a rel="external" href="/category/{parentCategory.category}" 
                     class="text-gray-700 hover:text-green-600 transition-colors font-medium">
-                    {category.category}
+                    {parentCategory.category}
                   </a>
                   <div class="ml-4 mt-2 space-y-2">
-                    {#each categories as subCategory}
-                      {#if subCategory.parentCategory?.category === category.category}
-                        <a rel="external" href="/category/{subCategory.category}" 
-                          class="block text-gray-600 hover:text-green-600 transition-colors text-sm">
-                          {subCategory.category}
-                        </a>
-                      {/if}
+                    {#each parentCategory.childCategories as subCategory}
+                      <a rel="external" href="/category/{subCategory.category}" 
+                        class="block text-gray-600 hover:text-green-600 transition-colors text-sm">
+                        {subCategory.category}
+                      </a>
                     {/each}
                   </div>
                 </div>
