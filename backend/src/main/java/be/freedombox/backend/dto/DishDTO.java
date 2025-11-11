@@ -1,14 +1,19 @@
 package be.freedombox.backend.dto;
 
 import be.freedombox.backend.domain.Category;
+import jakarta.validation.constraints.NotBlank;
 
 import java.util.List;
 
 public class DishDTO {
+    @NotBlank
     private Long id;
+    @NotBlank
     private String name;
+    @NotBlank
     private String description;
     private List<Category> categories;
+    @NotBlank
     private String imageName;
 
     public DishDTO() {

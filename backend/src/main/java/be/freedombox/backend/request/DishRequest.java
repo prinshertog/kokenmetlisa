@@ -9,7 +9,6 @@ public class DishRequest {
     private String name;
     @NotBlank
     private String description;
-    @NotBlank
     private List<String> categories;
     @NotBlank
     private String imageName;

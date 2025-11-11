@@ -1,8 +1,13 @@
 package be.freedombox.backend.dto;
 
+import jakarta.validation.constraints.NotBlank;
+
 public class ChangePasswordDTO {
+    @NotBlank
     private String username;
+    @NotBlank
     private String oldPassword;
+    @NotBlank
     private String newPassword;
 
     public ChangePasswordDTO() {

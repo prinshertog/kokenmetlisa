@@ -1,7 +1,11 @@
 package be.freedombox.backend.dto;
 
+import jakarta.validation.constraints.NotBlank;
+
 public class AuthDTO {
+    @NotBlank
     private String bearerToken;
+    @NotBlank
     private String role;
 
     public AuthDTO(String bearerToken, String role) {

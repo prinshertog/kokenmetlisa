@@ -1,8 +1,8 @@
 package be.freedombox.backend.request;
-
-import be.freedombox.backend.domain.Category;
+import jakarta.validation.constraints.NotBlank;
 
 public class CategoryRequest {
+    @NotBlank
     private String category;
     private String parentCategory;
 

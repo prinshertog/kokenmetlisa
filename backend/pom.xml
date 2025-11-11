@@ -112,6 +112,11 @@
             <artifactId>thumbnailator</artifactId>
             <version>0.4.11</version>
         </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <scope>annotationProcessor</scope>
+        </dependency>
     </dependencies>
 
     <build>

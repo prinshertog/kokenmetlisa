@@ -27,11 +27,15 @@ public class CategoryService implements ICategoryService {
         this.categoryRepository = categoryRepository;
     }
 
+    public Category getCategoryByCategory(String name) {
+        return categoryRepository.findCategoryByCategory(name).orElseThrow(() -> new ObjectDoesNotExistException("Category does not exist."));
+    }
+
     @Override
     public CategoryDTO create(CategoryRequest categoryRequest) {
         categoryRequest.setCategory(Validator.initCap(categoryRequest.getCategory()));
-        Category existingCategory = categoryRepository.findByCategory(categoryRequest.getCategory());
-        Category parentCategory = categoryRepository.findByCategory(categoryRequest.getParentCategory());
+        Category existingCategory = getCategoryByCategory(categoryRequest.getCategory());
+        Category parentCategory = getCategoryByCategory(categoryRequest.getParentCategory());
         if (categoryRequest.getParentCategory() != null && categoryRequest.getParentCategory().isEmpty()) {
             if (parentCategory == null) throw new ObjectDoesNotExistException("The category " + categoryRequest.getParentCategory() + " does not exist.");
         }
@@ -51,8 +55,7 @@ public class CategoryService implements ICategoryService {
     @Override
     public void delete(CategoryRequest categoryRequest) {
         categoryRequest.setCategory(Validator.initCap(categoryRequest.getCategory()));
-        Category category = categoryRepository.findByCategory(categoryRequest.getCategory());
-        if (category == null) throw new ObjectDoesNotExistException("The category " + categoryRequest.getCategory() + " does not exist.");
+        Category category = getCategoryByCategory(categoryRequest.getCategory());
         int deletedPosition = category.getPosition();
         categoryRepository.delete(category);
         resortPositions(deletedPosition);

@@ -1,8 +1,10 @@
 package be.freedombox.backend.dto;
 
 import be.freedombox.backend.domain.Category;
+import jakarta.validation.constraints.NotBlank;
 
 public class CategoryDTO {
+    @NotBlank
     private String category;
     private Category parentCategory;
 
