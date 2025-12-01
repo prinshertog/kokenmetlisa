@@ -11,7 +11,8 @@ services:
       - postgres_data:/var/lib/postgresql/data
 
   backend:
-    image: kokenmetlisa-backend
+    build:
+      context: backend
     container_name: kokenmetlisa-backend
     ports:
       - 8080:8080
@@ -19,6 +20,7 @@ services:
       SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/dishes_db
       SPRING_DATASOURCE_USERNAME: dishes_user
       SPRING_DATASOURCE_PASSWORD: dishes_password
+      CREATE_ADMIN_USER: "false"
     depends_on:
       - postgres
     healthcheck:
@@ -26,9 +28,12 @@ services:
       interval: 10s
       timeout: 5s
       retries: 3
+    volumes:
+      - files:/Files
 
   frontend:
-    image: kokenmetlisa-frontend
+    build:
+      context: frontend
     container_name: kokenmetlisa-frontend
     ports:
       - "3000:3000"
@@ -36,7 +41,6 @@ services:
       NODE_ENV: production
       BASE_URL_BACKEND: http://backend:8080
       ORIGIN: http://localhost:3000
-      PUBLIC_FILE_URL: https://dev1.freedombox.be/file
       BODY_SIZE_LIMIT: 3G
     depends_on:
       backend:
@@ -44,4 +48,4 @@ services:
 
 volumes:
   postgres_data:
-
+  files:

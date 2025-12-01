@@ -1,6 +1,7 @@
 package be.freedombox.backend.api;
 
 import be.freedombox.backend.dto.DishDTO;
+import be.freedombox.backend.exception.IllegalInputException;
 import be.freedombox.backend.request.DishRequest;
 import be.freedombox.backend.request.DishUpdateRequest;
 import be.freedombox.backend.service.DishService;
