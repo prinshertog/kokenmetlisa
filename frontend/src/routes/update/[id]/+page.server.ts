@@ -32,7 +32,6 @@ export const actions = {
                 },
                 body: formData
             });
-            console.log(response)
             if (response.status !== 200) {
                 const receivedData = await response.json();
                 if (!response.ok) {
