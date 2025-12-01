@@ -27,7 +27,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class DishService implements IDishService {
+public class DishService {
     private final DishRepository dishRepository;
     private final CategoryRepository categoryRepository;
     private final FileService fileService;
@@ -39,7 +39,6 @@ public class DishService implements IDishService {
         this.fileService = fileService;
     }
 
-    @Override
     public List<DishDTO> all() {
         return dishRepository.findAll()
                 .stream()
@@ -47,7 +46,6 @@ public class DishService implements IDishService {
                 .toList();
     }
 
-    @Override
     public void create(DishRequest dishRequest, MultipartFile file) {
         try {
             if (file.getContentType() == null || !file.getContentType().startsWith("image/")) {
@@ -63,7 +61,6 @@ public class DishService implements IDishService {
         }
     }
 
-    @Override
     public List<DishDTO> getById(Long id) {
         return dishRepository.findById(id)
                 .stream()
@@ -71,7 +68,6 @@ public class DishService implements IDishService {
                 .toList();
     }
 
-    @Override
     public void delete(Long id) {
         if (dishRepository.findById(id).isEmpty())
             throw new ObjectDoesNotExistException("The dish with id " + id + " does not exist");
@@ -84,7 +80,6 @@ public class DishService implements IDishService {
         dishRepository.deleteById(id);
     }
 
-    @Override
     public void update(DishUpdateRequest dishUpdateRequest, MultipartFile file) {
         if (dishRepository.findById(dishUpdateRequest.getId()).isEmpty())
             throw new ObjectDoesNotExistException("Dish does not exist so cannot be updated.");
@@ -119,7 +114,6 @@ public class DishService implements IDishService {
         dishRepository.save(dish);
     }
 
-    @Override
     public List<DishDTO> getByCategory(String category) {
         Category categoryObject = categoryRepository.findByCategory(
                 Validator.initCap(category)

@@ -3,7 +3,7 @@ package be.freedombox.backend.api;
 import be.freedombox.backend.dto.DishDTO;
 import be.freedombox.backend.request.DishRequest;
 import be.freedombox.backend.request.DishUpdateRequest;
-import be.freedombox.backend.service.IDishService;
+import be.freedombox.backend.service.DishService;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -17,10 +17,10 @@ import java.util.List;
 @RestController
 @RequestMapping("/dishes")
 public class DishController {
-    IDishService dishService;
+    DishService dishService;
 
     @Autowired
-    public DishController(IDishService dishService) {
+    public DishController(DishService dishService) {
         this.dishService = dishService;
     }
 

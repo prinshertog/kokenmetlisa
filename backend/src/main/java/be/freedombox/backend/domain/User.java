@@ -8,7 +8,7 @@ import lombok.*;
 @Entity
 @Builder
 @Data
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor(access = AccessLevel.PUBLIC)
 @AllArgsConstructor(access = AccessLevel.PUBLIC)
 @Table(name = "Users")
 public class User {

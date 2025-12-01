@@ -11,8 +11,8 @@ import java.util.List;
 @Entity
 @Data
 @Builder
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
-@AllArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor(access = AccessLevel.PUBLIC)
+@AllArgsConstructor(access = AccessLevel.PUBLIC)
 @Table(name = "Dishes")
 public class Dish {
     @Id
