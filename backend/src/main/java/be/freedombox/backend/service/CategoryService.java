@@ -16,10 +16,11 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
-public class CategoryService implements ICategoryService {
+public class CategoryService {
     CategoryRepository categoryRepository;
 
     @Autowired
@@ -27,32 +28,38 @@ public class CategoryService implements ICategoryService {
         this.categoryRepository = categoryRepository;
     }
 
-    @Override
-    public CategoryDTO create(CategoryRequest categoryRequest) {
-        categoryRequest.setCategory(Validator.initCap(categoryRequest.getCategory()));
-        Category existingCategory = categoryRepository.findByCategory(categoryRequest.getCategory());
-        Category parentCategory = categoryRepository.findByCategory(categoryRequest.getParentCategory());
-        if (categoryRequest.getParentCategory() != null && categoryRequest.getParentCategory().isEmpty()) {
-            if (parentCategory == null) throw new ObjectDoesNotExistException("The category " + categoryRequest.getParentCategory() + " does not exist.");
-        }
-        if (existingCategory != null) throw new ObjectAlreadyExistsException("The category " + categoryRequest.getCategory() + " already exists.");
-        Category category = new Category(categoryRequest.getCategory(), parentCategory);
-        category.setPosition(getFreePosition());
-        return Mapper.toCategoryDTO(categoryRepository.save(category));
+    public Category getCategoryByCategory(String name) {
+        return categoryRepository.findCategoryByCategory(name).orElseThrow(()
+                -> new ObjectDoesNotExistException("Category " + name + " does not exist."));
     }
 
-    @Override
+    public Category getParentCategoryByCategory(String name) {
+        return categoryRepository.findCategoryByCategory(name).orElse(null);
+    }
+
+    public boolean categoryExists(String name) {
+        return categoryRepository.findByCategory(name) != null;
+    }
+
+    public CategoryDTO create(CategoryRequest categoryRequest) {
+        categoryRequest.setCategory(Validator.initCap(categoryRequest.getCategory()));
+        if (categoryExists(categoryRequest.getCategory()))
+            throw new ObjectAlreadyExistsException("Category already exists!");
+        Category parentCategory = getParentCategoryByCategory(categoryRequest.getParentCategory());
+        Category newCategory = new Category(categoryRequest.getCategory(), parentCategory);
+        newCategory.setPosition(getFreePosition());
+        return Mapper.toCategoryDTO(categoryRepository.save(newCategory));
+    }
+
     public List<CategoryDTO> all() {
         List<Category> categories = categoryRepository.findAll();
         categories.sort(Comparator.comparing(Category::getPosition));
         return categories.stream().map(Mapper::toCategoryDTO).toList();
     }
 
-    @Override
     public void delete(CategoryRequest categoryRequest) {
         categoryRequest.setCategory(Validator.initCap(categoryRequest.getCategory()));
-        Category category = categoryRepository.findByCategory(categoryRequest.getCategory());
-        if (category == null) throw new ObjectDoesNotExistException("The category " + categoryRequest.getCategory() + " does not exist.");
+        Category category = getCategoryByCategory(categoryRequest.getCategory());
         int deletedPosition = category.getPosition();
         categoryRepository.delete(category);
         resortPositions(deletedPosition);
@@ -80,7 +87,6 @@ public class CategoryService implements ICategoryService {
         }
     }
 
-    @Override
     public void switchPosition(String categoryName, boolean isUp) {
         try {
             Category category = categoryRepository.findByCategory(categoryName);

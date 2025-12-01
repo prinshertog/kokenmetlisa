@@ -4,9 +4,10 @@ import be.freedombox.backend.dto.ChangePasswordDTO;
 import be.freedombox.backend.dto.UserDTO;
 import be.freedombox.backend.request.UserRequest;
 import be.freedombox.backend.service.UserService;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotBlank;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -22,29 +23,31 @@ public class UserController {
     }
 
     @GetMapping
-    public ResponseEntity<List<UserDTO>> allUsers(@RequestHeader(value = "Authorization") String authorizationHeader) {
+    @ResponseStatus(HttpStatus.OK)
+    public List<UserDTO> allUsers(@RequestHeader(value = "Authorization") @NotBlank String authorizationHeader) {
         List<UserDTO> users = userService.all(authorizationHeader);
-        return ResponseEntity.ok(users);
+        return users;
     }
 
     @PostMapping
-    public ResponseEntity<HttpStatus> addUser(@RequestHeader(value = "Authorization") String authorizationHeader,
-                                              @RequestBody UserRequest userRequest) {
+    @ResponseStatus(HttpStatus.OK)
+    public HttpStatus addUser(@RequestHeader(value = "Authorization") @NotBlank String authorizationHeader,
+                                              @RequestBody @Valid UserRequest userRequest) {
         userService.create(authorizationHeader, userRequest);
-        return ResponseEntity.ok(HttpStatus.CREATED);
+        return HttpStatus.CREATED;
     }
 
     @PutMapping("/password")
-    public ResponseEntity<HttpStatus> updateUser(@RequestHeader(value = "Authorization") String authorizationHeader,
-                                                 @RequestBody ChangePasswordDTO changePasswordDTO) {
+    @ResponseStatus(HttpStatus.OK)
+    public void updateUser(@RequestHeader(value = "Authorization") @NotBlank String authorizationHeader,
+                                                 @RequestBody @Valid ChangePasswordDTO changePasswordDTO) {
         userService.changePassword(authorizationHeader, changePasswordDTO);
-        return ResponseEntity.ok(HttpStatus.OK);
     }
 
     @DeleteMapping
-    public ResponseEntity<HttpStatus> deleteUser(@RequestHeader(value = "Authorization") String authorizationHeader,
-                                                 @RequestBody String username) {
+    @ResponseStatus(HttpStatus.OK)
+    public void deleteUser(@RequestHeader(value = "Authorization") @NotBlank String authorizationHeader,
+                                                 @RequestBody @NotBlank String username) {
         userService.delete(authorizationHeader, username);
-        return ResponseEntity.ok(HttpStatus.OK);
     }
 }

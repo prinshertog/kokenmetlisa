@@ -10,7 +10,6 @@ export const actions = {
             const apiUrl = BASE_URL_BACKEND + `/dishes/${params.id}`;
             const data = await request.formData();
             let image = data.get('image') as File;
-
             let filename = `${Date.now()}-${image.name}`;
 
             const dishUpdateRequest = {
@@ -33,12 +32,11 @@ export const actions = {
                 },
                 body: formData
             });
-            const receivedData = await response.json();
-            if (!response.ok) {
-                return fail(400, {error: receivedData.error || 'Failed to update dish'})   
-            }
-            if (!data || receivedData.length === 0) {
-                return fail(400, {error: receivedData.error || 'Failed to update dish'})
+            if (response.status !== 200) {
+                const receivedData = await response.json();
+                if (!response.ok) {
+                    return fail(400, {error: receivedData.error || 'Failed to update dish'})   
+                }
             }
             return {success: true}
         } catch (error) {
