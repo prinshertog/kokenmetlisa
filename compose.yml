@@ -15,6 +15,7 @@ services:
   backend:
     image: kokenmetlisa-backend
     container_name: kokenmetlisa-backend
+    restart: always
     environment:
       SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/dishes_db
       SPRING_DATASOURCE_USERNAME: dishes_user
@@ -35,6 +36,7 @@ services:
   frontend:
     image: kokenmetlisa-frontend
     container_name: kokenmetlisa-frontend
+    restart: always
     ports:
       - "3000:3000"
     environment:
