@@ -4,7 +4,7 @@ cd /home/jan/Github/kokenmetlisa
 docker compose down
 
 echo "Starting postgres for backend build"
-cd /home/jan/Github/kokenmetlisa/postgresqlForKokenmetlisa/
+cd /home/jan/Github/kokenmetlisa/test-db/
 docker compose up -d
 
 echo "Running maven build"
@@ -12,7 +12,7 @@ cd /home/jan/Github/kokenmetlisa/backend
 mvn clean package
 
 echo "Stopping postgres"
-cd /home/jan/Github/kokenmetlisa/postgresqlForKokenmetlisa
+cd /home/jan/Github/kokenmetlisa/test-db/
 docker compose down
 
 echo "Building frontend"
@@ -24,11 +24,11 @@ npm run build
 
 echo "Build docker image for frontend"
 cd /home/jan/Github/kokenmetlisa/frontend
-docker build . -t kokenmetlisa-frontend
+docker build . -t kokenmetlisa-frontend --no-cache
 
 echo "Build docker image for backend"
 cd /home/jan/Github/kokenmetlisa/backend
-docker build . -t kokenmetlisa-backend
+docker build . -t kokenmetlisa-backend --no-cache
 
 echo "Starting project docker compose"
 cd /home/jan/Github/kokenmetlisa

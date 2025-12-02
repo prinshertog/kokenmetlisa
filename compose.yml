@@ -9,13 +9,12 @@ services:
       POSTGRES_DB: dishes_db
     volumes:
       - postgres_data:/var/lib/postgresql/data
+    networks:
+      - kokenmetlisa
 
   backend:
-    build:
-      context: backend
+    image: kokenmetlisa-backend
     container_name: kokenmetlisa-backend
-    ports:
-      - 8080:8080
     environment:
       SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/dishes_db
       SPRING_DATASOURCE_USERNAME: dishes_user
@@ -29,23 +28,29 @@ services:
       timeout: 5s
       retries: 3
     volumes:
-      - files:/Files
+      - files:/app/Files
+    networks:
+      - kokenmetlisa
 
   frontend:
-    build:
-      context: frontend
+    image: kokenmetlisa-frontend
     container_name: kokenmetlisa-frontend
     ports:
       - "3000:3000"
     environment:
       NODE_ENV: production
-      BASE_URL_BACKEND: http://backend:8080
+      PUBLIC_BASE_URL_BACKEND: http://backend:8080
       ORIGIN: http://localhost:3000
       BODY_SIZE_LIMIT: 3G
     depends_on:
       backend:
         condition: service_healthy
+    networks:
+      - kokenmetlisa
 
 volumes:
   postgres_data:
   files:
+
+networks:
+  kokenmetlisa:

@@ -14,7 +14,7 @@
 
 <div class="max-w-4xl mx-auto py-8 px-4">
     <div class="bg-white shadow rounded-lg overflow-hidden">
-        <img class="w-full h-64 object-cover" src='{`${BASE_URL_BACKEND}/file/full-${imageName}`}' alt={name} />
+        <img class="w-full h-64 object-cover" src='{`/file/full-${imageName}`}' alt={name} />
         <div class="p-6">
             <h1 class="text-3xl font-bold mb-4">{name}</h1>
             <div class="prose max-w-none">
