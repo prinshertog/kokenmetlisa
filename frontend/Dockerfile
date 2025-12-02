@@ -5,7 +5,6 @@ WORKDIR /app
 
 COPY package*.json ./
 RUN npm install -g npm@11.6.4
-RUN npm set-script prepare ""
 RUN npm install --production
 
 COPY ./build ./build
