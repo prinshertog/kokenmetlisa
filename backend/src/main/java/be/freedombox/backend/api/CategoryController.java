@@ -4,10 +4,9 @@ import be.freedombox.backend.dto.CategoryDTO;
 import be.freedombox.backend.request.CategoryRequest;
 import be.freedombox.backend.request.SwitchCategoryRequest;
 import be.freedombox.backend.service.CategoryService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -23,24 +22,26 @@ public class CategoryController {
     }
 
     @GetMapping
-    public ResponseEntity<List<CategoryDTO>> getAllCategories() {
-        return ResponseEntity.ok(categoryService.all());
+    @ResponseStatus(HttpStatus.OK)
+    public List<CategoryDTO> getAllCategories() {
+        return categoryService.all();
     }
 
     @PostMapping
-    public ResponseEntity<CategoryDTO> createCategory(@RequestBody CategoryRequest categoryRequest) {
-        return ResponseEntity.ok(categoryService.create(categoryRequest));
+    @ResponseStatus(HttpStatus.OK)
+    public CategoryDTO createCategory(@RequestBody @Valid CategoryRequest categoryRequest) {
+        return categoryService.create(categoryRequest);
     }
 
     @PutMapping("/position")
-    public ResponseEntity<HttpStatus> switchCategoryPosition(@RequestBody SwitchCategoryRequest categoryRequest) {
+    @ResponseStatus(HttpStatus.OK)
+    public void switchCategoryPosition(@RequestBody @Valid SwitchCategoryRequest categoryRequest) {
         categoryService.switchPosition(categoryRequest.getCategory(), categoryRequest.isUp());
-        return ResponseEntity.ok(HttpStatus.OK);
     }
 
     @DeleteMapping
-    public ResponseEntity<HttpStatus> deleteCategory(@RequestBody CategoryRequest categoryRequest) {
+    @ResponseStatus(HttpStatus.OK)
+    public void deleteCategory(@RequestBody @Valid CategoryRequest categoryRequest) {
         categoryService.delete(categoryRequest);
-        return ResponseEntity.ok(HttpStatus.OK);
     }
 }

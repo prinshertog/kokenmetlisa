@@ -3,6 +3,7 @@ name: Run tests
 on:
   pull_request:
     branches: [ "main", "dev" ]
+  push:
 
 jobs:
   test:
@@ -16,7 +17,7 @@ jobs:
     - uses: actions/checkout@v4
     - uses: s4u/setup-maven-action@v1.19.0
       with:
-        java-version: 17
+        java-version: 21
         maven-version: ${{ matrix.maven }}
     - uses: actions/setup-node@v5
       with:

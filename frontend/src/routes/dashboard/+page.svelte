@@ -1,7 +1,7 @@
 <script lang="ts">
     const { data, form } = $props();
     import { env } from '$env/dynamic/public';
-    const FILE_URL = env.PUBLIC_FILE_URL
+    const BASE_URL_BACKEND = env.PUBLIC_BASE_URL_BACKEND;
     const { username, role, categories } = data;
     import type { Category } from '$lib/types/types.js';
 
@@ -170,7 +170,7 @@
                     <a href="/dishes/{dish.id}">
                     <img 
                         class="w-full h-48 object-cover cursor-pointer" 
-                        src="{`${FILE_URL}/${dish.imageName}`}"
+                        src="{`/file/${dish.imageName}`}"
                         alt={dish.name}
                         loading="lazy"
                     />
