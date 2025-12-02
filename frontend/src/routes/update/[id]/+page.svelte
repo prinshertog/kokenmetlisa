@@ -1,11 +1,15 @@
 <script lang="ts">
     import type { Category } from '$lib/types/types.js';
     const { data, form } = $props();
-    const { dish, username } = data;
+    const { dish, username, categories } = data;
 
-    let mainCategories = $derived(data.categories.filter((cat: Category) => !cat.parentCategory));
+    if (!categories) {
+        throw new Error("No categories found.")
+    }
+
+    let mainCategories = $derived(categories.filter((cat: Category) => !cat.parentCategory));
     let getSubcategories = (parentCat: string) => {
-        return data.categories.filter((cat: Category) => 
+        return categories.filter((cat: Category) => 
             cat.parentCategory && cat.parentCategory.category === parentCat
         );
     };

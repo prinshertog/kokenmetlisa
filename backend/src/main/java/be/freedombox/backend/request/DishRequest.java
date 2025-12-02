@@ -7,7 +7,6 @@ import java.util.List;
 
 @Builder
 @Data
-@NoArgsConstructor(access = AccessLevel.PUBLIC)
 @AllArgsConstructor(access = AccessLevel.PUBLIC)
 public class DishRequest {
     @NotBlank(message = "Dish name is required")

@@ -1,8 +1,6 @@
 <script lang="ts">
     const { data } = $props();
     const { dishes } = data;
-    import { env } from '$env/dynamic/public';
-    const BASE_URL_BACKEND = env.PUBLIC_BASE_URL_BACKEND;
 
     let reversedDishes = [...dishes].reverse();
 </script>

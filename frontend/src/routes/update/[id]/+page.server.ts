@@ -2,6 +2,7 @@ import { env } from '$env/dynamic/public';
 const BASE_URL_BACKEND = env.PUBLIC_BASE_URL_BACKEND;
 import { fail } from '@sveltejs/kit';
 import type { PageServerLoad, Actions } from './$types';
+import type { Category } from '$lib/types/types';
 import { checkLogin } from '$lib/methods/loginCheck';
 
 export const actions = {
@@ -58,6 +59,8 @@ export const load: PageServerLoad = async ({ cookies, params }) => {
                 'Authorization': `Bearer ${bearer}`
             }
         });
+        const categoryResponse = await fetch(BASE_URL_BACKEND + `/category`);
+        const categories: Category[] = await categoryResponse.json();
 
         if (!response.ok) {
             throw new Error('Failed to fetch data');
@@ -68,7 +71,8 @@ export const load: PageServerLoad = async ({ cookies, params }) => {
         
         return { 
             dish,
-            username
+            username,
+            categories
         };
 
     } catch (error) {

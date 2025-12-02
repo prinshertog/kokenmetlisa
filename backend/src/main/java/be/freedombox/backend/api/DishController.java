@@ -46,6 +46,7 @@ public class DishController {
     @PostMapping
     @ResponseStatus(HttpStatus.OK)
     public void createDish(@RequestParam("file") @Valid MultipartFile file, @RequestPart @Valid DishRequest dishRequest) {
+        System.out.println(dishRequest.getCategories());
         dishService.create(dishRequest, file);
     }
 
