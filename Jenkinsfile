@@ -37,10 +37,10 @@ pipeline {
         }
         
         stage('Build docker image for backend unstable') {
+            when {
+                branch 'dev'
+            }
             steps {
-                when {
-                    branch 'dev'
-                }
                 withCredentials([usernamePassword(
                     credentialsId: 'docker-prinshertog',
                     usernameVariable: 'DOCKER_USER',
@@ -57,10 +57,10 @@ pipeline {
         }
         
         stage('Build docker image for frontend unstable') {
+            when {
+                branch 'dev'
+            }
             steps {
-                when {
-                    branch 'dev'
-                }
                 withCredentials([usernamePassword(
                     credentialsId: 'docker-prinshertog',
                     usernameVariable: 'DOCKER_USER',
@@ -77,10 +77,10 @@ pipeline {
         }
 
         stage('Build docker image for backend stable') {
+            when {
+                branch 'main'
+            }
             steps {
-                when {
-                    branch 'main'
-                }
                 withCredentials([usernamePassword(
                     credentialsId: 'docker-prinshertog',
                     usernameVariable: 'DOCKER_USER',
@@ -97,10 +97,10 @@ pipeline {
         }
         
         stage('Build docker image for frontend stable') {
+            when {
+                branch 'main'
+            }
             steps {
-                when {
-                    branch 'main'
-                }
                 withCredentials([usernamePassword(
                     credentialsId: 'docker-prinshertog',
                     usernameVariable: 'DOCKER_USER',
