@@ -116,12 +116,4 @@ pipeline {
             }
         }
     }
-    post {
-        success {
-            githubNotify(context: 'Jenkins', status: 'SUCCESS', description: 'Build passed')
-        }
-        failure {
-            githubNotify(context: 'Jenkins', status: 'FAILURE', description: 'Build failed')
-        }
-    }
 }
