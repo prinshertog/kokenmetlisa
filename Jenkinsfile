@@ -2,13 +2,9 @@ pipeline {
     agent any
 
     stages {
-        stage('Git Checkout') {
+        stage('Git checkout.') {
             steps {
-                script {
-                    git branch: 'dev',
-                        credentialsId: 'github-prinshertog',
-                        url: 'git@github.com:prinshertog/kokenmetlisa.git'
-                }
+                checkout scm
             }
         }
         
