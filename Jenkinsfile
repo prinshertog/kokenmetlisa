@@ -36,8 +36,11 @@ pipeline {
             }
         }
         
-        stage('Build docker image for backend') {
+        stage('Build docker image for backend unstable') {
             steps {
+                when {
+                    branch 'dev'
+                }
                 withCredentials([usernamePassword(
                     credentialsId: 'docker-prinshertog',
                     usernameVariable: 'DOCKER_USER',
@@ -53,8 +56,11 @@ pipeline {
             }
         }
         
-        stage('Build docker image for frontend') {
+        stage('Build docker image for frontend unstable') {
             steps {
+                when {
+                    branch 'dev'
+                }
                 withCredentials([usernamePassword(
                     credentialsId: 'docker-prinshertog',
                     usernameVariable: 'DOCKER_USER',
@@ -66,6 +72,46 @@ pipeline {
                         --password-stdin
                     '''
                     sh 'cd frontend && docker build . -t "prinshertog/kokenmetlisa-frontend:v2-unstable" && docker push prinshertog/kokenmetlisa-frontend:v2-unstable'
+                }        
+            }
+        }
+
+        stage('Build docker image for backend stable') {
+            steps {
+                when {
+                    branch 'main'
+                }
+                withCredentials([usernamePassword(
+                    credentialsId: 'docker-prinshertog',
+                    usernameVariable: 'DOCKER_USER',
+                    passwordVariable: 'DOCKER_PASS'
+                )]) {
+                    sh '''
+                      echo "$DOCKER_PASS" | docker login \
+                        --username "$DOCKER_USER" \
+                        --password-stdin
+                    '''
+                    sh 'cd backend && docker build . -t "prinshertog/kokenmetlisa-backend:v2-stable" && docker push prinshertog/kokenmetlisa-backend:v2-stable'
+                }
+            }
+        }
+        
+        stage('Build docker image for frontend stable') {
+            steps {
+                when {
+                    branch 'main'
+                }
+                withCredentials([usernamePassword(
+                    credentialsId: 'docker-prinshertog',
+                    usernameVariable: 'DOCKER_USER',
+                    passwordVariable: 'DOCKER_PASS'
+                )]) {
+                    sh '''
+                      echo "$DOCKER_PASS" | docker login \
+                        --username "$DOCKER_USER" \
+                        --password-stdin
+                    '''
+                    sh 'cd frontend && docker build . -t "prinshertog/kokenmetlisa-frontend:v2-stable" && docker push prinshertog/kokenmetlisa-frontend:v2-stable'
                 }        
             }
         }
