@@ -14,6 +14,9 @@ import be.freedombox.backend.tools.Mapper;
 import be.freedombox.backend.tools.Validator;
 import net.coobird.thumbnailator.Thumbnails;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -147,5 +150,14 @@ public class DishService {
         } catch (IOException e) {
             throw new FileException(e.toString());
         }
+    }
+
+    public List<DishDTO> getDishesForPage(int pageNumber) {
+        Pageable pageWithTwoElements = PageRequest.of(pageNumber, 30);
+        Page<Dish> allProducts = dishRepository.findAll(pageWithTwoElements);
+        return allProducts.getContent()
+                .stream()
+                .map(Mapper::toDishDTO)
+                .toList();
     }
 }

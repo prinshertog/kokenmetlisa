@@ -9,8 +9,6 @@ import java.util.List;
 
 @Repository
 public interface DishRepository extends JpaRepository<Dish, Long> {
-    void removeDishById(Long id);
     List<Dish> findAll();
-    Dish findByName(String name);
     List<Dish> getByCategories(Category category);
 }

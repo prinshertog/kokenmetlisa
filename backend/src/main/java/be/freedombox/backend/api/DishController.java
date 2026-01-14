@@ -37,6 +37,12 @@ public class DishController {
         return dishService.all();
     }
 
+    @GetMapping("/page/{pageNumber}")
+    @ResponseStatus(HttpStatus.OK)
+    public List<DishDTO> getDishPage(@PathVariable @NotNull int pageNumber) {
+        return dishService.getDishesForPage(pageNumber);
+    }
+
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
     public List<DishDTO> getDishById(@PathVariable @NotNull Long id) {
