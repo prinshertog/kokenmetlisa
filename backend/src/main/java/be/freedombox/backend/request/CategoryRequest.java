@@ -8,6 +8,6 @@ import lombok.*;
 @AllArgsConstructor(access = AccessLevel.PUBLIC)
 public class CategoryRequest {
     @NotBlank
-    private String category;
+    private String name;
     private String parentCategory;
 }

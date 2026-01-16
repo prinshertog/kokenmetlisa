@@ -118,11 +118,11 @@ public class DishService {
     }
 
     public List<DishDTO> getByCategory(String category) {
-        Category categoryObject = categoryRepository.findByCategory(
+        Category categoryObject = categoryRepository.findByName(
                 Validator.initCap(category)
         );
 
-        return dishRepository.getByCategories(categoryObject)
+        return dishRepository.findDishByCategories(categoryObject)
                 .stream()
                 .map(Mapper::toDishDTO)
                 .toList();

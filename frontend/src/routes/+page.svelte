@@ -1,8 +1,47 @@
 <script lang="ts">
     const { data } = $props();
-    const { dishes } = data;
+    const { dishes, BASE_URL_BACKEND } = data;
 
-    let reversedDishes = [...dishes].reverse();
+    let currentPage = $state(0);
+
+    async function nextPage() {
+        try {
+            const response = await fetch(BASE_URL_BACKEND + '/dishes');
+            if (!response.ok) {
+                throw new Error(`Failed to fetch dishes: ${response.statusText}`);
+            }
+
+            const dishes = await response.json();
+            return {
+                dishes
+            };
+        } catch (error) {
+            console.error(error);
+            return {
+                error: 'Failed to load dishes'
+            };
+        }
+    }
+
+    async function prevPage() {
+        try {
+            const response = await fetch(BASE_URL_BACKEND + '/dishes');
+            if (!response.ok) {
+                throw new Error(`Failed to fetch dishes: ${response.statusText}`);
+            }
+
+            const dishes = await response.json();
+            return {
+                dishes
+            };
+        } catch (error) {
+            console.error(error);
+            return {
+                error: 'Failed to load dishes'
+            };
+        }
+    }
+    let reversedDishes = dishes.reverse();
 </script>
 
 <div class="container px-4 w-full">
@@ -23,4 +62,7 @@
     {/each}
     </div>
 </div>
-<a>Next page</a>
+<div class="justify-center flex">
+    <button onclick={() => prevPage()} class="cursor-pointer text-white bg-[rgb(96,110,90)] pl-10 pr-10 pt-5 pb-5 hover:bg-[rgb(96,110,0)]">Previous page</button>
+    <button onclick={() => nextPage()} class="cursor-pointer text-white bg-[rgb(96,110,90)] pl-10 pr-10 pt-5 pb-5 hover:bg-[rgb(96,110,0)]">Next page</button>
+</div>

@@ -1,8 +1,13 @@
 export interface Category {
-    category: string,
+    name: string,
     parentCategory: Category | null
     childCategories?: Category[]
     position?: number
+}
+
+export interface CreateCategory {
+    name: string,
+    parentCategory?: string
 }
 
 export interface Dish {

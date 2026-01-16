@@ -1,9 +1,7 @@
 <script>
     export let data;
     const { categoryDishes } = data;
-    import { env } from '$env/dynamic/public';
-    const PUBLIC_BASE_URL_BACKEND = env.PUBLIC_BASE_URL_BACKEND
-    let reversedDishes = [...categoryDishes].reverse();
+    let reversedDishes = categoryDishes.reverse();
 </script>
 
 <div class="container px-4 w-full">

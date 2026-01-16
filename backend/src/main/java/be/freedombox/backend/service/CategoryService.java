@@ -29,24 +29,24 @@ public class CategoryService {
     }
 
     public Category getCategoryByCategory(String name) {
-        return categoryRepository.findCategoryByCategory(name).orElseThrow(()
+        return categoryRepository.findCategoryByName(name).orElseThrow(()
                 -> new ObjectDoesNotExistException("Category " + name + " does not exist."));
     }
 
     public Category getParentCategoryByCategory(String name) {
-        return categoryRepository.findCategoryByCategory(name).orElse(null);
+        return categoryRepository.findCategoryByName(name).orElse(null);
     }
 
     public boolean categoryExists(String name) {
-        return categoryRepository.findByCategory(name) != null;
+        return categoryRepository.findCategoryByName(name).isPresent();
     }
 
     public CategoryDTO create(CategoryRequest categoryRequest) {
-        categoryRequest.setCategory(Validator.initCap(categoryRequest.getCategory()));
-        if (categoryExists(categoryRequest.getCategory()))
+        categoryRequest.setName(Validator.initCap(categoryRequest.getName()));
+        if (categoryExists(categoryRequest.getName()))
             throw new ObjectAlreadyExistsException("Category already exists!");
         Category parentCategory = getParentCategoryByCategory(categoryRequest.getParentCategory());
-        Category newCategory = new Category(categoryRequest.getCategory(), parentCategory);
+        Category newCategory = new Category(categoryRequest.getName(), parentCategory);
         newCategory.setPosition(getFreePosition());
         return Mapper.toCategoryDTO(categoryRepository.save(newCategory));
     }
@@ -58,8 +58,8 @@ public class CategoryService {
     }
 
     public void delete(CategoryRequest categoryRequest) {
-        categoryRequest.setCategory(Validator.initCap(categoryRequest.getCategory()));
-        Category category = getCategoryByCategory(categoryRequest.getCategory());
+        categoryRequest.setName(Validator.initCap(categoryRequest.getName()));
+        Category category = getCategoryByCategory(categoryRequest.getName());
         int deletedPosition = category.getPosition();
         categoryRepository.delete(category);
         resortPositions(deletedPosition);
@@ -89,10 +89,8 @@ public class CategoryService {
 
     public void switchPosition(String categoryName, boolean isUp) {
         try {
-            Category category = categoryRepository.findByCategory(categoryName);
-
-            if (category == null) throw new ObjectDoesNotExistException("Current category does not exist!");
-
+            Category category = categoryRepository.findCategoryByName(categoryName).orElseThrow(()
+                    -> new ObjectDoesNotExistException("Current category does not exist!"));
             Category otherCategory = findCategory(isUp, category);
 
             int categoryPosition = category.getPosition();
@@ -103,7 +101,6 @@ public class CategoryService {
 
             categoryRepository.save(category);
             categoryRepository.save(otherCategory);
-
         } catch (Exception e) {
             throw new CategoryException(e.getMessage());
         }
@@ -132,6 +129,6 @@ public class CategoryService {
         if (up && categories.isEmpty()) throw new ObjectDoesNotExistException("No category above.");
         else if (categories.isEmpty()) throw new ObjectDoesNotExistException("No category below.");
 
-        return categories.get(0);
+        return categories.getFirst();
     }
 }

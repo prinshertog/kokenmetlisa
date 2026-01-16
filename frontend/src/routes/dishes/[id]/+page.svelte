@@ -2,8 +2,6 @@
     import { marked } from 'marked';    
     const { data } = $props();
     const { imageName, name, description, categories } = data.dish;
-    import { env } from '$env/dynamic/public';
-    const BASE_URL_BACKEND = env.PUBLIC_BASE_URL_BACKEND;
     marked.setOptions({ breaks: true });
     
     // Convert markdown to HTML
@@ -24,7 +22,7 @@
                 <p class="mt-4 text-sm text-gray-500">Categories:</p>
                 <div class="flex overflow-auto">
                     {#each categories as category}
-                    <p class="m-1">{category.category}</p>
+                    <p class="m-1">{category.name}</p>
                     {/each}
                 </div>
             </div>

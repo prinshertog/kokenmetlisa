@@ -2,6 +2,7 @@ import { fail, redirect } from '@sveltejs/kit';
 import type { Actions, PageServerLoad } from './$types';
 import { checkLogin } from '../../lib/methods/loginCheck';
 import { env } from '$env/dynamic/public';
+import type { CreateCategory } from '$lib/types/types';
 const BASE_URL_BACKEND = env.PUBLIC_BASE_URL_BACKEND;
 
 export const load: PageServerLoad = async ({ cookies }) => {
@@ -103,11 +104,14 @@ export const actions = {
     addCategory: async ({ request, cookies }) => {
         try {
             const data = await request.formData();
-            const parentCategory = data.get('parentCategory');
-            const categoryData = {
-                category: data.get('category'),
-                ...(parentCategory ? { parentCategory } : {})
+            const parentCategory = data.get('parentCategory') as string;
+            const categoryData: CreateCategory = {
+                name: data.get('category') as string
             };
+
+            if (parentCategory) {
+                categoryData.parentCategory = parentCategory;
+            }
 
             const bearer = cookies.get('bearer');
             const response = await fetch(BASE_URL_BACKEND + '/category', {
@@ -193,7 +197,7 @@ export const actions = {
                     'Authorization': `Bearer ${bearer}`
                 },
                 body: JSON.stringify({ 
-                    category: category,
+                    name: category,
                     up: false
                 })
             })
@@ -221,7 +225,7 @@ export const actions = {
                     'Authorization': `Bearer ${bearer}`
                 },
                 body: JSON.stringify({ 
-                    category: category,
+                    name: category,
                     up: true
                 })
             })

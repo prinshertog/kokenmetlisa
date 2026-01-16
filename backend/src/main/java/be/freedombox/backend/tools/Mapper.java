@@ -7,6 +7,7 @@ import be.freedombox.backend.dto.AuthDTO;
 import be.freedombox.backend.dto.CategoryDTO;
 import be.freedombox.backend.dto.DishDTO;
 import be.freedombox.backend.dto.UserDTO;
+import be.freedombox.backend.exception.ObjectDoesNotExistException;
 import be.freedombox.backend.repository.CategoryRepository;
 import be.freedombox.backend.request.DishRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,7 +36,7 @@ public class Mapper {
 
     public static CategoryDTO toCategoryDTO(Category category) {
         return new CategoryDTO(
-                category.getCategory(),
+                category.getName(),
                 category.getParentCategory()
         );
     }
@@ -55,7 +56,8 @@ public class Mapper {
     }
 
     public static Category toCategory(String category) {
-        return categoryRepository.findByCategory(category);
+        return categoryRepository.findCategoryByName(category).orElseThrow(()
+                -> new ObjectDoesNotExistException("Category does not exist!"));
     }
 
     public static Dish toDish(DishRequest dishRequest) {

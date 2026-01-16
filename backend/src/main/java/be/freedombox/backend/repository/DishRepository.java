@@ -10,5 +10,5 @@ import java.util.List;
 @Repository
 public interface DishRepository extends JpaRepository<Dish, Long> {
     List<Dish> findAll();
-    List<Dish> getByCategories(Category category);
+    List<Dish> findDishByCategories(Category category);
 }

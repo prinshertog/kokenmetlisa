@@ -17,8 +17,8 @@ export const load: PageServerLoad = async ({ params, fetch }) => {
         }
         const categoryDishes = data.filter(dish => {
                 for (let category of dish.categories) {
-                    if (category.category === params.category 
-                        || category.parentCategory?.category === params.category) {
+                    if (category.name === params.category 
+                        || category.parentCategory?.name === params.category) {
                             return dish;
                     }
                 }

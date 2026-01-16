@@ -13,13 +13,14 @@ import lombok.*;
 public class Category {
     @Id
     @NotBlank(message = "Category is required")
-    private String category;
-    @ManyToOne(cascade = CascadeType.REMOVE)
+    @Column(name = "category")
+    private String name;
+    @ManyToOne(cascade = CascadeType.PERSIST)
     private Category parentCategory;
     private int position;
 
-    public Category(String category, Category parentCategory) {
-        this.category = category;
+    public Category(String name, Category parentCategory) {
+        this.name = name;
         this.parentCategory = parentCategory;
     }
 }
