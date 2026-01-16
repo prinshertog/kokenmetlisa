@@ -1,6 +1,7 @@
 services:
-  db:
-    image: postgres
+  postgres:
+    image: postgres:18
+    container_name: postgres
     restart: always
     shm_size: 128mb
     environment:
@@ -10,6 +11,6 @@ services:
     ports:
       - 5432:5432
     volumes:
-      - postgresql:/var/lib/postgresql/data
+      - postgresql:/var/lib/postgresql
 volumes:
   postgresql:
