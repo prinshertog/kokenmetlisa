@@ -14,7 +14,7 @@ public class Category {
     @Id
     @NotBlank(message = "Category is required")
     private String category;
-    @ManyToOne(cascade = CascadeType.REMOVE)
+    @ManyToOne(cascade = CascadeType.PERSIST)
     private Category parentCategory;
     private int position;
 

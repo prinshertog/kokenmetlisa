@@ -61,6 +61,9 @@ public class CategoryService {
         categoryRequest.setCategory(Validator.initCap(categoryRequest.getCategory()));
         Category category = getCategoryByCategory(categoryRequest.getCategory());
         int deletedPosition = category.getPosition();
+        if (categoryRepository.existsAllByParentCategory_Category(category.getCategory())) {
+            throw new CategoryException("Cannot delete parent category with children");
+        }
         categoryRepository.delete(category);
         resortPositions(deletedPosition);
     }
