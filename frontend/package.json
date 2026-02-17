@@ -17,7 +17,7 @@
 		"@sveltejs/adapter-node": "^5.2.12",
 		"@sveltejs/kit": "^2.20.7",
 		"@sveltejs/vite-plugin-svelte": "^5.0.0",
-		"@tailwindcss/typography": "^0.5.16",
+		"@tailwindcss/typography": "^0.5.19",
 		"@tailwindcss/vite": "^4.1.4",
 		"@types/node": "^22.15.21",
 		"autoprefixer": "^10.4.21",
@@ -33,6 +33,7 @@
 		"devalue": "^4.2.0",
 		"dotenv": "^16.5.0",
 		"json-server": "^1.0.0-beta.3",
+		"markdown-it": "^14.1.1",
 		"marked": "^15.0.12",
 		"set-cookie-parser": "^2.0.0"
 	}
