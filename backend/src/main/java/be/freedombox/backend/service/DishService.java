@@ -42,13 +42,6 @@ public class DishService {
         this.fileService = fileService;
     }
 
-    public List<DishDTO> all() {
-        return dishRepository.findAll()
-                .stream()
-                .map(Mapper::toDishDTO)
-                .toList();
-    }
-
     public void create(DishRequest dishRequest, MultipartFile file) {
         try {
             if (file.getContentType() == null || !file.getContentType().startsWith("image/")) {

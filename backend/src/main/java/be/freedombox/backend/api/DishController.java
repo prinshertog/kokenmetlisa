@@ -27,7 +27,7 @@ public class DishController {
 
     @GetMapping("/category/{category}")
     @ResponseStatus(HttpStatus.OK)
-    public List<DishDTO> getDishes(@PathVariable("category") @NotBlank String category) {
+    public List<DishDTO> getDishes(@PathVariable @NotBlank String category) {
         return dishService.getByCategory(category);
     }
 
