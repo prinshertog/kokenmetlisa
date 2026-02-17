@@ -34,7 +34,7 @@ public class DishController {
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
     public List<DishDTO> getAllDishes() {
-        return dishService.all().reversed();
+        return dishService.all();
     }
 
     @GetMapping("/{id}")
