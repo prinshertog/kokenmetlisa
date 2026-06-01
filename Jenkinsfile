@@ -7,6 +7,12 @@ pipeline {
                 checkout scm
             }
         }
+        
+        stage('Running maven build') {
+            steps {
+                sh 'cd backend && mvn clean package -DskipTests -Dspring.datasource.url=jdbc:postgresql://docker:5432/dishes'
+            }
+        }
     
         stage('Building frontend') {
             steps {
