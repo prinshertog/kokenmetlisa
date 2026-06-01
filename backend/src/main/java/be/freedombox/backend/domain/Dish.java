@@ -31,6 +31,7 @@ public class Dish {
     private List<Category> categories;
     @Valid
     private String imageName;
+    private int position;
 
     public Dish(String name, String description, List<Category> categories, String imageName) {
         this.name = name;

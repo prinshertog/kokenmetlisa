@@ -13,7 +13,8 @@ services:
       - kokenmetlisa
 
   backend:
-    image: kokenmetlisa-backend
+    build:
+      context: backend
     container_name: kokenmetlisa-backend
     restart: always
     environment:
@@ -34,7 +35,8 @@ services:
       - kokenmetlisa
 
   frontend:
-    image: kokenmetlisa-frontend
+    build:
+      context: frontend
     container_name: kokenmetlisa-frontend
     restart: always
     ports:
