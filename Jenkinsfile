@@ -7,25 +7,7 @@ pipeline {
                 checkout scm
             }
         }
-        
-        stage('Starting postgres for backend build') {
-            steps {
-                sh 'cd test-db && docker compose up -d'
-            }
-        }
-        
-        stage('Running maven build') {
-            steps {
-                sh 'cd backend && mvn clean package -Dspring.datasource.url=jdbc:postgresql://docker:5432/dishes'
-            }
-        }
-        
-        stage('Stopping postgres') {
-            steps {
-                sh 'cd test-db && docker compose down'
-            }
-        }
-        
+    
         stage('Building frontend') {
             steps {
                 sh 'cd frontend && npm i && npm run build'
