@@ -27,7 +27,7 @@ public class DishController {
 
     @GetMapping("/category/{category}")
     @ResponseStatus(HttpStatus.OK)
-    public List<DishDTO> getDishes(@PathVariable("category") @NotBlank String category) {
+    public List<DishDTO> getDishes(@PathVariable @NotBlank String category) {
         return dishService.getByCategory(category);
     }
 
@@ -46,7 +46,6 @@ public class DishController {
     @PostMapping
     @ResponseStatus(HttpStatus.OK)
     public void createDish(@RequestParam("file") @Valid MultipartFile file, @RequestPart @Valid DishRequest dishRequest) {
-        System.out.println(dishRequest.getCategories());
         dishService.create(dishRequest, file);
     }
 
