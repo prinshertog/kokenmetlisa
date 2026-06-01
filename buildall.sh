@@ -33,4 +33,3 @@ docker build . -t kokenmetlisa-backend --no-cache
 echo "Starting project docker compose"
 cd /home/jan/Github/kokenmetlisa
 docker compose up --force-recreate -d
-
