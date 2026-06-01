@@ -8,7 +8,7 @@ pipeline {
             }
         }
         
-        stage('Running maven build') {
+        stage('Building backend') {
             steps {
                 sh 'cd backend && mvn clean package -DskipTests -Dspring.datasource.url=jdbc:postgresql://docker:5432/dishes'
             }
