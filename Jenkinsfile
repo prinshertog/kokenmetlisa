@@ -19,6 +19,30 @@ pipeline {
                 sh 'cd frontend && npm i && npm run build'
             }
         }
+
+        stage('Build docker image for branch') {
+            when {
+                not {
+                    branch 'dev'
+                    branch 'main'
+                }
+            }
+            steps {
+                withCredentials([usernamePassword(
+                    credentialsId: 'docker-prinshertog',
+                    usernameVariable: 'DOCKER_USER',
+                    passwordVariable: 'DOCKER_PASS'
+                )]) {
+                    def tag = "${env.BRANCH_NAME}-${env.BUILD_NUMBER}"
+                    sh '''
+                      echo "$DOCKER_PASS" | docker login \
+                        --username "$DOCKER_USER" \
+                        --password-stdin
+                    '''
+                    sh 'cd backend && docker build . -t "prinshertog/kokenmetlisa-backend:v2-unstable" && docker push prinshertog/kokenmetlisa-backend:${tag}'
+                }
+            }
+        }
         
         stage('Build docker image for backend unstable') {
             when {
