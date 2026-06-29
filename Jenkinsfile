@@ -36,8 +36,6 @@ pipeline {
                     passwordVariable: 'DOCKER_PASS'
                 )]) {
                     script {
-                        def tag = "${env.BRANCH_NAME.replaceAll('/', '-')}-${env.BUILD_NUMBER}"
-
                         sh '''
                         echo "$DOCKER_PASS" | docker login \
                             --username "$DOCKER_USER" \
@@ -46,8 +44,8 @@ pipeline {
 
                         sh """
                             cd backend
-                            docker build . -t prinshertog/kokenmetlisa-backend:${tag}
-                            docker push prinshertog/kokenmetlisa-backend:${tag}
+                            docker build . -t prinshertog/kokenmetlisa-backend:${env.BRANCH_NAME}
+                            docker push prinshertog/kokenmetlisa-backend:${env.BRANCH_NAME}
                         """
                     }
                 }
@@ -70,8 +68,6 @@ pipeline {
                     passwordVariable: 'DOCKER_PASS'
                 )]) {
                     script {
-                        def tag = "${env.BRANCH_NAME.replaceAll('/', '-')}-${env.BUILD_NUMBER}"
-
                         sh '''
                         echo "$DOCKER_PASS" | docker login \
                             --username "$DOCKER_USER" \
@@ -79,8 +75,8 @@ pipeline {
                         '''
                         sh """
                             cd frontend
-                            docker build . -t prinshertog/kokenmetlisa-frontend:${tag}
-                            docker push prinshertog/kokenmetlisa-frontend:${tag}
+                            docker build . -t prinshertog/kokenmetlisa-frontend:${env.BRANCH_NAME}
+                            docker push prinshertog/kokenmetlisa-frontend:${env.BRANCH_NAME}
                         """
                     }
                 }
