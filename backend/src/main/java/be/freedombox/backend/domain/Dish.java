@@ -13,7 +13,7 @@ import java.util.List;
 @Builder
 @NoArgsConstructor(access = AccessLevel.PUBLIC)
 @AllArgsConstructor(access = AccessLevel.PUBLIC)
-@Table(name = "Dishes")
+@Table(name = "dishes")
 public class Dish {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

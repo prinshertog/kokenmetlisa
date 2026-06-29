@@ -9,7 +9,7 @@ import lombok.*;
 @Builder
 @NoArgsConstructor(access = AccessLevel.PUBLIC)
 @AllArgsConstructor(access = AccessLevel.PUBLIC)
-@Table(name = "Categories")
+@Table(name = "categories")
 public class Category {
     @Id
     @NotBlank(message = "Category is required")

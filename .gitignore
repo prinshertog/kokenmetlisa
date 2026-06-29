@@ -2,3 +2,5 @@
 .env
 backend/Files
 .idea
+test-db/kokenmetlisa-prod
+test
