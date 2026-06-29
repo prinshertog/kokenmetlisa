@@ -13,7 +13,6 @@ import lombok.*;
 public class Category {
     @Id
     @NotBlank(message = "Category is required")
-    @Column(name = "category")
     private String name;
     @ManyToOne(cascade = CascadeType.PERSIST)
     private Category parentCategory;

@@ -20,7 +20,7 @@
 
     async function loadDishPage(page: number) {
         const response = await fetch(
-            `${BASE_URL_BACKEND}/dishes/page/${page}`
+            `${BASE_URL_BACKEND}/dishes?page=${page}`
         );
 
         pageObject = await response.json();
@@ -65,6 +65,9 @@
         <div class="grid md:grid-cols-2 gap-6 mb-8">
             <!-- Add Dish Form -->
             <div class="bg-white shadow rounded-lg p-6">
+                {#if form?.dishError}
+                    <p class="text-red-500 bg-gray-100 border-1 border-gray-200 rounded p-2 mb-5">{form.dishError}</p>
+                {/if}
                 <h2 class="text-xl font-semibold mb-4">Add a Dish</h2>
                 <form method="POST" action="?/add" class="space-y-4" enctype="multipart/form-data">
                     <div>
@@ -100,13 +103,13 @@
                         Add Dish
                     </button>
                 </form>
-                {#if form?.dishError}
-                    <p class="mt-2 text-red-500">{form.dishError}</p>
-                {/if}
             </div>
 
             <!-- Categories Section -->
             <div class="bg-white shadow rounded-lg p-6">
+                {#if form?.categoryError}
+                    <p class="mt-2 text-red-500 bg-gray-100 border-1 border-gray-200 rounded p-2 mb-5">{form.categoryError}</p>
+                {/if}
                 <h2 class="text-xl font-semibold mb-4">Categories</h2>
                 <div class="mb-4">
                     <h3 class="font-medium mb-2">Categories and Subcategories:</h3>
@@ -175,16 +178,13 @@
                         Add Category
                     </button>
                 </form>
-                {#if form?.categoryError}
-                    <p class="mt-2 text-red-500">{form.categoryError}</p>
-                {/if}
             </div>
         </div>
 
         <!-- Dishes Grid -->
         {#if pageObject}
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {#each [...pageObject.content].reverse() as dish}
+                {#each pageObject.content as dish}
                     <div class="bg-white shadow rounded-lg">
                         
                         <a href={`/dishes/${dish.id}`}>

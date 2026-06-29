@@ -9,5 +9,5 @@ import lombok.*;
 public class CategoryRequest {
     @NotBlank
     private String name;
-    private String parentCategory;
+    private String parentCategoryName;
 }

@@ -1,1 +1,1 @@
-GET http://localhost:8080/dishes/page/2
+GET http://localhost:8080/dishes?page=0&category=Test

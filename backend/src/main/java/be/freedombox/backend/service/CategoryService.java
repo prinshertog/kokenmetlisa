@@ -29,23 +29,23 @@ public class CategoryService {
     }
 
     public Category getCategoryByCategory(String name) {
-        return categoryRepository.findCategoryByName(name).orElseThrow(()
+        return categoryRepository.findByName(name).orElseThrow(()
                 -> new ObjectDoesNotExistException("Category " + name + " does not exist."));
     }
 
-    public Category getParentCategoryByCategory(String name) {
-        return categoryRepository.findCategoryByName(name).orElse(null);
+    public Category getParentCategoryByName(String name) {
+        return categoryRepository.findByName(name).orElse(null);
     }
 
     public boolean categoryExists(String name) {
-        return categoryRepository.findCategoryByName(name).isPresent();
+        return categoryRepository.findByName(name).isPresent();
     }
 
     public CategoryDTO create(CategoryRequest categoryRequest) {
         categoryRequest.setName(Validator.initCap(categoryRequest.getName()));
         if (categoryExists(categoryRequest.getName()))
             throw new ObjectAlreadyExistsException("Category already exists!");
-        Category parentCategory = getParentCategoryByCategory(categoryRequest.getParentCategory());
+        Category parentCategory = getParentCategoryByName(categoryRequest.getParentCategoryName());
         Category newCategory = new Category(categoryRequest.getName(), parentCategory);
         newCategory.setPosition(getFreePosition());
         return Mapper.toCategoryDTO(categoryRepository.save(newCategory));
@@ -61,6 +61,9 @@ public class CategoryService {
         categoryRequest.setName(Validator.initCap(categoryRequest.getName()));
         Category category = getCategoryByCategory(categoryRequest.getName());
         int deletedPosition = category.getPosition();
+        if (categoryRepository.findByName(category.getName()).isPresent()) {
+            throw new CategoryException("Cannot delete parent category with children");
+        }
         categoryRepository.delete(category);
         resortPositions(deletedPosition);
     }
@@ -89,7 +92,7 @@ public class CategoryService {
 
     public void switchPosition(String categoryName, boolean isUp) {
         try {
-            Category category = categoryRepository.findCategoryByName(categoryName).orElseThrow(()
+            Category category = categoryRepository.findByName(categoryName).orElseThrow(()
                     -> new ObjectDoesNotExistException("Current category does not exist!"));
             Category otherCategory = findCategory(isUp, category);
 

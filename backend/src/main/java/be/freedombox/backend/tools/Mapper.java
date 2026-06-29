@@ -56,7 +56,7 @@ public class Mapper {
     }
 
     public static Category toCategory(String category) {
-        return categoryRepository.findCategoryByName(category).orElseThrow(()
+        return categoryRepository.findByName(category).orElseThrow(()
                 -> new ObjectDoesNotExistException("Category does not exist!"));
     }
 

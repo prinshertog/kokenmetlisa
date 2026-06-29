@@ -45,20 +45,6 @@ export const load: PageServerLoad = async ({ cookies }) => {
     }
 }
 
-async function loadDishPage(page: number) {
-    const pageNumber = Number(page);
-
-    const response = await fetch(
-        `${BASE_URL_BACKEND}/dishes/page/${pageNumber}`
-    );
-
-    const pageObject = await response.json();
-
-    return {
-        pageObject
-    };
-};
-
 export const actions = {
     add: async ({ request, cookies }) => {
         try {
