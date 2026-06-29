@@ -23,8 +23,10 @@ pipeline {
         stage('Build docker image for branch') {
             when {
                 not {
-                    branch 'dev'
-                    branch 'main'
+                    anyOf {
+                        branch 'dev'
+                        branch 'main'
+                    }
                 }
             }
             steps {
@@ -33,13 +35,21 @@ pipeline {
                     usernameVariable: 'DOCKER_USER',
                     passwordVariable: 'DOCKER_PASS'
                 )]) {
-                    def tag = "${env.BRANCH_NAME}-${env.BUILD_NUMBER}"
-                    sh '''
-                      echo "$DOCKER_PASS" | docker login \
-                        --username "$DOCKER_USER" \
-                        --password-stdin
-                    '''
-                    sh 'cd backend && docker build . -t "prinshertog/kokenmetlisa-backend:v2-unstable" && docker push prinshertog/kokenmetlisa-backend:${tag}'
+                    script {
+                        def tag = "${env.BRANCH_NAME.replaceAll('/', '-')}-${env.BUILD_NUMBER}"
+
+                        sh '''
+                        echo "$DOCKER_PASS" | docker login \
+                            --username "$DOCKER_USER" \
+                            --password-stdin
+                        '''
+
+                        sh """
+                            cd backend
+                            docker build . -t prinshertog/kokenmetlisa-backend:${tag}
+                            docker push prinshertog/kokenmetlisa-backend:${tag}
+                        """
+                    }
                 }
             }
         }
