@@ -10,8 +10,28 @@
         );
     };
 
-    let dishesReversed = data.dishes.reverse();
+    // here
+    import { env } from '$env/dynamic/public';
 
+    const BASE_URL_BACKEND = env.PUBLIC_BASE_URL_BACKEND;
+
+    let pageNumber = $state(0);
+    let pageObject = $state(null);
+
+    async function loadDishPage(page: number) {
+        const response = await fetch(
+            `${BASE_URL_BACKEND}/dishes/page/${page}`
+        );
+
+        pageObject = await response.json();
+    }
+
+    if (pageObject === null) {
+        loadDishPage(pageNumber);
+    }
+
+    // initial load
+    loadDishPage(pageNumber);
 </script>
 
 <div class="min-h-screen bg-gray-50">
@@ -162,40 +182,81 @@
         </div>
 
         <!-- Dishes Grid -->
-        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {#each dishesReversed as dish}
-                <div class="bg-white shadow rounded-lg">
-                    <a href="/dishes/{dish.id}">
-                    <img 
-                        class="w-full h-48 object-cover cursor-pointer" 
-                        src="{`/file/${dish.imageName}`}"
-                        alt={dish.name}
-                        loading="lazy"
-                    />
-                    </a>
-                    <div class="p-6">
-                        <div class="flex justify-between items-start">
-                            <h3 class="text-xl font-semibold max-w-0.5 hover:text-emerald-500 hover:underline"><a href="/dishes/{dish.id}">{dish.name}</a></h3>
-                            <form action="?/deleteDish" method="POST" class="inline">
-                                <input type="hidden" name="id" value={dish.id}>
-                                <input type="hidden" name="imageName" value={dish.imageName}>
-                                <button class="text-red-600 rounded-md hover:text-red-700 m-2 cursor-pointer">
-                                    Delete
-                                </button>
-                                <a href="/update/{dish.id}" class="text-blue-600 rounded-md hover:text-blue-700 m-2">
-                                    Update
-                                </a>
-                            </form>
-                        </div>
-                        <p class="mt-4 text-sm text-gray-500">Categories:</p>
-                        <div class="flex overflow-auto">
-                            {#each dish.categories as category}
-                            <p class="m-1">{category.name}</p>
-                            {/each}
+        {#if pageObject}
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {#each [...pageObject.content].reverse() as dish}
+                    <div class="bg-white shadow rounded-lg">
+                        
+                        <a href={`/dishes/${dish.id}`}>
+                            <img
+                                class="w-full h-48 object-cover cursor-pointer"
+                                src={`/file/${dish.imageName}`}
+                                alt={dish.name}
+                                loading="lazy"
+                            />
+                        </a>
+
+                        <div class="p-6">
+
+                            <div class="flex justify-between items-start">
+
+                                <h3 class="text-xl font-semibold">
+                                    <a href={`/dishes/${dish.id}`}>
+                                        {dish.name}
+                                    </a>
+                                </h3>
+
+                                <!-- ADDED: Update + Delete -->
+                                <form action="?/deleteDish" method="POST" class="inline flex items-center gap-2">
+
+                                    <input type="hidden" name="id" value={dish.id}>
+                                    <input type="hidden" name="imageName" value={dish.imageName}>
+
+                                    <button
+                                        class="text-red-600 hover:text-red-700 cursor-pointer"
+                                        type="submit"
+                                    >
+                                        Delete
+                                    </button>
+
+                                    <a
+                                        href={`/update/${dish.id}`}
+                                        class="text-blue-600 hover:text-blue-700"
+                                    >
+                                        Update
+                                    </a>
+
+                                </form>
+                            </div>
+
                         </div>
                     </div>
-                </div>
-            {/each}
+                {/each}
+            </div>
+        {/if}
+
+        <div class="mt-8 flex justify-center gap-4">
+            {#if pageObject?.first == false}
+                <button
+                    on:click={() => loadDishPage(pageObject?.number - 1)}
+                    class="rounded bg-gray-200 px-4 py-2 hover:bg-gray-300 cursor-pointer"
+                >
+                    Vorige
+                </button>
+            {/if}
+
+            <span class="px-4 py-2 font-semibold">
+                Page {pageObject?.number}
+            </span>
+
+            {#if pageObject?.last == false}
+                <button
+                    on:click={() => loadDishPage(pageObject?.number + 1)}
+                    class="rounded bg-gray-200 px-4 py-2 hover:bg-gray-300 cursor-pointer"
+                >
+                    Volgende
+                </button>
+            {/if}
         </div>
     </main>
 </div>

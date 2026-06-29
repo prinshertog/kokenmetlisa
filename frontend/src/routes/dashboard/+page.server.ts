@@ -12,8 +12,7 @@ export const load: PageServerLoad = async ({ cookies }) => {
         const username = cookies.get('username');
         const role = cookies.get('role');
         
-        const [dishesResponse, categoriesResponse] = await Promise.all([
-            fetch(BASE_URL_BACKEND + '/dishes'),
+        const [categoriesResponse] = await Promise.all([
             fetch(BASE_URL_BACKEND + '/category', {
                 headers: {
                     'Authorization': `Bearer ${cookies.get('bearer')}`
@@ -21,17 +20,15 @@ export const load: PageServerLoad = async ({ cookies }) => {
             })
         ]);
 
-        if (!dishesResponse.ok || !categoriesResponse.ok) {
+        if (!categoriesResponse.ok) {
             throw new Error('Failed to fetch data');
         }
 
-        const [dishes, categories] = await Promise.all([
-            dishesResponse.json(),
+        const [categories] = await Promise.all([
             categoriesResponse.json()
         ]);
 
         return { 
-            dishes, 
             categories, 
             username,
             role
@@ -47,6 +44,20 @@ export const load: PageServerLoad = async ({ cookies }) => {
         };
     }
 }
+
+async function loadDishPage(page: number) {
+    const pageNumber = Number(page);
+
+    const response = await fetch(
+        `${BASE_URL_BACKEND}/dishes/page/${pageNumber}`
+    );
+
+    const pageObject = await response.json();
+
+    return {
+        pageObject
+    };
+};
 
 export const actions = {
     add: async ({ request, cookies }) => {

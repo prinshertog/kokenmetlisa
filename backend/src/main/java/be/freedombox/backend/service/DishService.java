@@ -145,12 +145,9 @@ public class DishService {
         }
     }
 
-    public List<DishDTO> getDishesForPage(int pageNumber) {
-        Pageable pageWithTwoElements = PageRequest.of(pageNumber, 30);
-        Page<Dish> allProducts = dishRepository.findAll(pageWithTwoElements);
-        return allProducts.getContent()
-                .stream()
-                .map(Mapper::toDishDTO)
-                .toList();
+    public Page<DishDTO> getDishesForPage(int pageNumber) {
+        Pageable pageable = PageRequest.of(pageNumber, 2);
+        Page<Dish> dishes = dishRepository.findAll(pageable);
+        return dishes.map(Mapper::toDishDTO);
     }
 }

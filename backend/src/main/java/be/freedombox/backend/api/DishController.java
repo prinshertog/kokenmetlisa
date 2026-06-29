@@ -9,6 +9,7 @@ import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -31,9 +32,9 @@ public class DishController {
         return dishService.getByCategory(category);
     }
 
-    @GetMapping
+    @GetMapping("/page/{page}")
     @ResponseStatus(HttpStatus.OK)
-    public List<DishDTO> getDishPage(@RequestParam (defaultValue = "0") int page) {
+    public Page<DishDTO> getDishPage(@PathVariable @NotNull int page) {
         return dishService.getDishesForPage(page);
     }
 
@@ -46,7 +47,6 @@ public class DishController {
     @PostMapping
     @ResponseStatus(HttpStatus.OK)
     public void createDish(@RequestParam("file") @Valid MultipartFile file, @RequestPart @Valid DishRequest dishRequest) {
-        System.out.println(dishRequest.getCategories());
         dishService.create(dishRequest, file);
     }
 
