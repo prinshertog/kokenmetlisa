@@ -56,7 +56,12 @@ pipeline {
         
         stage('Build docker image for backend unstable') {
             when {
-                branch 'dev'
+                not {
+                    anyOf {
+                        branch 'dev'
+                        branch 'main'
+                    }
+                }
             }
             steps {
                 withCredentials([usernamePassword(
@@ -64,12 +69,20 @@ pipeline {
                     usernameVariable: 'DOCKER_USER',
                     passwordVariable: 'DOCKER_PASS'
                 )]) {
-                    sh '''
-                      echo "$DOCKER_PASS" | docker login \
-                        --username "$DOCKER_USER" \
-                        --password-stdin
-                    '''
-                    sh 'cd backend && docker build . -t "prinshertog/kokenmetlisa-backend:v2-unstable" && docker push prinshertog/kokenmetlisa-backend:v2-unstable'
+                    script {
+                        def tag = "${env.BRANCH_NAME.replaceAll('/', '-')}-${env.BUILD_NUMBER}"
+
+                        sh '''
+                        echo "$DOCKER_PASS" | docker login \
+                            --username "$DOCKER_USER" \
+                            --password-stdin
+                        '''
+                        sh """
+                            cd frontend
+                            docker build . -t prinshertog/kokenmetlisa-frontend:${tag}
+                            docker push prinshertog/kokenmetlisa-frontend:${tag}
+                        """
+                    }
                 }
             }
         }
