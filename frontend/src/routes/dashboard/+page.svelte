@@ -6,12 +6,32 @@
     let mainCategories = $derived(categories.filter((cat: Category) => !cat.parentCategory));
     let getSubcategories = (parentCat: string) => {
         return categories.filter((cat: Category) => 
-            cat.parentCategory && cat.parentCategory.category === parentCat
+            cat.parentCategory && cat.parentCategory.name === parentCat
         );
     };
 
-    let dishesReversed = [...data.dishes].reverse();
+    // here
+    import { env } from '$env/dynamic/public';
 
+    const BASE_URL_BACKEND = env.PUBLIC_BASE_URL_BACKEND;
+
+    let pageNumber = $state(0);
+    let pageObject = $state(null);
+
+    async function loadDishPage(page: number) {
+        const response = await fetch(
+            `${BASE_URL_BACKEND}/dishes?page=${page}`
+        );
+
+        pageObject = await response.json();
+    }
+
+    if (pageObject === null) {
+        loadDishPage(pageNumber);
+    }
+
+    // initial load
+    loadDishPage(pageNumber);
 </script>
 
 <div class="min-h-screen bg-gray-50">
@@ -62,13 +82,13 @@
                         <div class="w-full px-3 py-2 border rounded-md">
                             {#each mainCategories as category}
                             <p class="bg-gray-50 rounded p-2 m-1">
-                                <label for="{category.category}">{category.category}</label>
-                                <input name="selected-categories" class="float-end" type="checkbox" id="{category.category}" value="{category.category}">
+                                <label for="{category.name}">{category.name}</label>
+                                <input name="selected-categories" class="float-end" type="checkbox" id="{category.name}" value="{category.name}">
                             </p>
-                                {#each getSubcategories(category.category) as subcategory}
+                                {#each getSubcategories(category.name) as subcategory}
                                 <p class="bg-gray-100 rounded p-2 m-1 ml-4">
-                                    <label for="{subcategory.category}">↳ {subcategory.category}</label>
-                                    <input name="selected-categories" class="float-end" type="checkbox" id="{subcategory.category}" value="{subcategory.category}">
+                                    <label for="{subcategory.name}">↳ {subcategory.name}</label>
+                                    <input name="selected-categories" class="float-end" type="checkbox" id="{subcategory.name}" value="{subcategory.name}">
                                 </p>
                                 {/each}
                             {/each}
@@ -98,37 +118,37 @@
                             <!-- Main category -->
                             <div class="space-y-1">
                                 <div class="flex justify-between items-center p-2 bg-gray-50 rounded">
-                                    <span class="font-medium">{category.category}</span>
+                                    <span class="font-medium">{category.name}</span>
                                     <div>
                                         <form action="?/up" method="POST" class="inline">
-                                            <input type="hidden" name="category" value={category.category}>
+                                            <input type="hidden" name="category" value={category.name}>
                                             <button class="text-blue-600 hover:text-blue-800 ml-2 mr-2 cursor-pointer">Up</button>
                                         </form>
                                         <form action="?/down" method="POST" class="inline">
-                                            <input type="hidden" name="category" value={category.category}>
+                                            <input type="hidden" name="category" value={category.name}>
                                             <button class="text-blue-600 hover:text-blue-800 ml-2 mr-2 cursor-pointer">Down</button>
                                         </form>
                                         <form action="?/deleteCategory" method="POST" class="inline">
-                                            <input type="hidden" name="category" value={category.category}>
+                                            <input type="hidden" name="category" value={category.name}>
                                             <button class="text-red-600 hover:text-red-800 ml-2 mr-2 cursor-pointer">Delete</button>
                                         </form>
                                     </div>
                                 </div>
                                 <!-- Subcategories -->
-                                {#each getSubcategories(category.category) as subcategory}
+                                {#each getSubcategories(category.name) as subcategory}
                                     <div class="flex justify-between items-center p-2 bg-gray-100 rounded ml-4">
-                                        <span class="text-sm">↳ {subcategory.category}</span>
+                                        <span class="text-sm">↳ {subcategory.name}</span>
                                         <div>
                                             <form action="?/up" method="POST" class="inline">
-                                                <input type="hidden" name="category" value={subcategory.category}>
+                                                <input type="hidden" name="category" value={subcategory.name}>
                                                 <button class="text-blue-600 hover:text-blue-800 ml-2 mr-2 cursor-pointer">Up</button>
                                             </form>
                                             <form action="?/down" method="POST" class="inline">
-                                                <input type="hidden" name="category" value={subcategory.category}>
+                                                <input type="hidden" name="category" value={subcategory.name}>
                                                 <button class="text-blue-600 hover:text-blue-800 ml-2 mr-2 cursor-pointer">Down</button>
                                             </form>
                                             <form action="?/deleteCategory" method="POST" class="inline">
-                                                <input type="hidden" name="category" value={subcategory.category}>
+                                                <input type="hidden" name="category" value={subcategory.name}>
                                                 <button class="text-red-600 hover:text-red-800 ml-2 mr-2 cursor-pointer">Delete</button>
                                             </form>
                                         </div>
@@ -150,7 +170,7 @@
                             name="parentCategory">
                             <option value="">Select parent category (optional)</option>
                             {#each mainCategories as category}
-                                <option value={category.category}>{category.category}</option>
+                                <option value={category.name}>{category.name}</option>
                             {/each}
                         </select>
                     </div>
@@ -162,40 +182,81 @@
         </div>
 
         <!-- Dishes Grid -->
-        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {#each dishesReversed as dish}
-                <div class="bg-white shadow rounded-lg">
-                    <a href="/dishes/{dish.id}">
-                    <img 
-                        class="w-full h-48 object-cover cursor-pointer" 
-                        src="{`/file/${dish.imageName}`}"
-                        alt={dish.name}
-                        loading="lazy"
-                    />
-                    </a>
-                    <div class="p-6">
-                        <div class="flex justify-between items-start">
-                            <h3 class="text-xl font-semibold max-w-0.5 hover:text-emerald-500 hover:underline"><a href="/dishes/{dish.id}">{dish.name}</a></h3>
-                            <form action="?/deleteDish" method="POST" class="inline">
-                                <input type="hidden" name="id" value={dish.id}>
-                                <input type="hidden" name="imageName" value={dish.imageName}>
-                                <button class="text-red-600 rounded-md hover:text-red-700 m-2 cursor-pointer">
-                                    Delete
-                                </button>
-                                <a href="/update/{dish.id}" class="text-blue-600 rounded-md hover:text-blue-700 m-2">
-                                    Update
-                                </a>
-                            </form>
-                        </div>
-                        <p class="mt-4 text-sm text-gray-500">Categories:</p>
-                        <div class="flex overflow-auto">
-                            {#each dish.categories as category}
-                            <p class="m-1">{category.category}</p>
-                            {/each}
+        {#if pageObject}
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {#each pageObject.content as dish}
+                    <div class="bg-white shadow rounded-lg">
+                        
+                        <a href={`/dishes/${dish.id}`}>
+                            <img
+                                class="w-full h-48 object-cover cursor-pointer"
+                                src={`/file/${dish.imageName}`}
+                                alt={dish.name}
+                                loading="lazy"
+                            />
+                        </a>
+
+                        <div class="p-6">
+
+                            <div class="flex justify-between items-start">
+
+                                <h3 class="text-xl font-semibold">
+                                    <a href={`/dishes/${dish.id}`}>
+                                        {dish.name}
+                                    </a>
+                                </h3>
+
+                                <!-- ADDED: Update + Delete -->
+                                <form action="?/deleteDish" method="POST" class="inline flex items-center gap-2">
+
+                                    <input type="hidden" name="id" value={dish.id}>
+                                    <input type="hidden" name="imageName" value={dish.imageName}>
+
+                                    <button
+                                        class="text-red-600 hover:text-red-700 cursor-pointer"
+                                        type="submit"
+                                    >
+                                        Delete
+                                    </button>
+
+                                    <a
+                                        href={`/update/${dish.id}`}
+                                        class="text-blue-600 hover:text-blue-700"
+                                    >
+                                        Update
+                                    </a>
+
+                                </form>
+                            </div>
+
                         </div>
                     </div>
-                </div>
-            {/each}
+                {/each}
+            </div>
+        {/if}
+
+        <div class="mt-8 flex justify-center gap-4">
+            {#if pageObject?.first == false}
+                <button
+                    on:click={() => loadDishPage(pageObject?.number - 1)}
+                    class="rounded bg-gray-200 px-4 py-2 hover:bg-gray-300 cursor-pointer"
+                >
+                    Vorige
+                </button>
+            {/if}
+
+            <span class="px-4 py-2 font-semibold">
+                Page {pageObject?.number}
+            </span>
+
+            {#if pageObject?.last == false}
+                <button
+                    on:click={() => loadDishPage(pageObject?.number + 1)}
+                    class="rounded bg-gray-200 px-4 py-2 hover:bg-gray-300 cursor-pointer"
+                >
+                    Volgende
+                </button>
+            {/if}
         </div>
     </main>
 </div>

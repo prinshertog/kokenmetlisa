@@ -19,6 +19,70 @@ pipeline {
                 sh 'cd frontend && npm i && npm run build'
             }
         }
+
+        stage('Build docker image for branch backend') {
+            when {
+                not {
+                    anyOf {
+                        branch 'dev'
+                        branch 'main'
+                    }
+                }
+            }
+            steps {
+                withCredentials([usernamePassword(
+                    credentialsId: 'docker-prinshertog',
+                    usernameVariable: 'DOCKER_USER',
+                    passwordVariable: 'DOCKER_PASS'
+                )]) {
+                    script {
+                        sh '''
+                        echo "$DOCKER_PASS" | docker login \
+                            --username "$DOCKER_USER" \
+                            --password-stdin
+                        '''
+
+                        sh """
+                            cd backend
+                            docker build . -t prinshertog/kokenmetlisa-backend:${env.BRANCH_NAME}
+                            docker push prinshertog/kokenmetlisa-backend:${env.BRANCH_NAME}
+                        """
+                    }
+                }
+            }
+        }
+
+        stage('Build docker image for branch frontend') {
+            when {
+                not {
+                    anyOf {
+                        branch 'dev'
+                        branch 'main'
+                    }
+                }
+            }
+            steps {
+                withCredentials([usernamePassword(
+                    credentialsId: 'docker-prinshertog',
+                    usernameVariable: 'DOCKER_USER',
+                    passwordVariable: 'DOCKER_PASS'
+                )]) {
+                    script {
+                        sh '''
+                        echo "$DOCKER_PASS" | docker login \
+                            --username "$DOCKER_USER" \
+                            --password-stdin
+                        '''
+
+                        sh """
+                            cd frontend
+                            docker build . -t prinshertog/kokenmetlisa-frontend:${env.BRANCH_NAME}
+                            docker push prinshertog/kokenmetlisa-frontend:${env.BRANCH_NAME}
+                        """
+                    }
+                }
+            }
+        }
         
         stage('Build docker image for backend unstable') {
             when {

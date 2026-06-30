@@ -36,7 +36,7 @@ public class CategoryController {
     @PutMapping("/position")
     @ResponseStatus(HttpStatus.OK)
     public void switchCategoryPosition(@RequestBody @Valid SwitchCategoryRequest categoryRequest) {
-        categoryService.switchPosition(categoryRequest.getCategory(), categoryRequest.isUp());
+        categoryService.switchPosition(categoryRequest.getName(), categoryRequest.isUp());
     }
 
     @DeleteMapping

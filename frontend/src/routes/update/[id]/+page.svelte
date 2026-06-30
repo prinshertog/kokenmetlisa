@@ -10,7 +10,7 @@
     let mainCategories = $derived(categories.filter((cat: Category) => !cat.parentCategory));
     let getSubcategories = (parentCat: string) => {
         return categories.filter((cat: Category) => 
-            cat.parentCategory && cat.parentCategory.category === parentCat
+            cat.parentCategory && cat.parentCategory.name === parentCat
         );
     };
 
@@ -47,21 +47,21 @@
                     <div class="w-full px-3 py-2 border rounded-md">
                         {#each mainCategories as category}
                         <p class="bg-gray-50 rounded p-2 m-1">
-                            <label for="{category.category}">{category.category}</label>
+                            <label for="{category.name}">{category.name}</label>
                             
-                            {#if dish.categories.some((cat: Category) => cat.category == category.category)}
-                            <input checked name="selected-categories" class="float-end" type="checkbox" id="{category.category}" value="{category.category}">
+                            {#if dish.categories.some((cat: Category) => cat.name == category.name)}
+                            <input checked name="selected-categories" class="float-end" type="checkbox" id="{category.name}" value="{category.name}">
                             {:else}
-                            <input name="selected-categories" class="float-end" type="checkbox" id="{category.category}" value="{category.category}">
+                            <input name="selected-categories" class="float-end" type="checkbox" id="{category.name}" value="{category.name}">
                             {/if}
                         </p>
-                            {#each getSubcategories(category.category) as subcategory}
+                            {#each getSubcategories(category.name) as subcategory}
                             <p class="bg-gray-100 rounded p-2 m-1 ml-4">
-                                <label for="{subcategory.category}">↳ {subcategory.category}</label>
-                                {#if dish.categories.some((cat: Category) => cat.category == subcategory.category)}
-                                <input checked name="selected-categories" class="float-end" type="checkbox" id="{subcategory.category}" value="{subcategory.category}">
+                                <label for="{subcategory.name}">↳ {subcategory.name}</label>
+                                {#if dish.categories.some((cat: Category) => cat.name == subcategory.name)}
+                                <input checked name="selected-categories" class="float-end" type="checkbox" id="{subcategory.name}" value="{subcategory.name}">
                                 {:else}
-                                <input name="selected-categories" class="float-end" type="checkbox" id="{subcategory.category}" value="{subcategory.category}">
+                                <input name="selected-categories" class="float-end" type="checkbox" id="{subcategory.name}" value="{subcategory.name}">
                                 {/if}
                             </p>
                             {/each}

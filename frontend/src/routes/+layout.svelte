@@ -47,9 +47,9 @@
         </div>
         {#each parentCategories as parentCategory}
           <div class="relative group">
-              <a rel="external" href="/category/{parentCategory.category}" 
+              <a rel="external" href="/category/{parentCategory.name}" 
                 class="text-gray-700 hover:text-green-600 transition-colors inline-flex items-center">
-                {parentCategory.category}
+                {parentCategory.name}
                 <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
                 </svg>
@@ -57,9 +57,9 @@
               <div class="absolute left-0 mt-2 w-48 bg-white rounded-md shadow-lg opacity-0 invisible 
                          group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
                 {#each parentCategory.childCategories as subCategory}
-                  <a rel="external" href="/category/{subCategory.category}" 
+                  <a rel="external" href="/category/{subCategory.name}" 
                     class="block px-4 py-2 text-sm text-gray-700 hover:bg-green-50 hover:text-green-600">
-                    {subCategory.category}
+                    {subCategory.name}
                   </a>
                 {/each}
               </div>
@@ -80,15 +80,15 @@
             {#each parentCategories as parentCategory}
               {#if parentCategory.parentCategory === null}
                 <div class="py-2">
-                  <a rel="external" href="/category/{parentCategory.category}" 
+                  <a rel="external" href="/category/{parentCategory.name}" 
                     class="text-gray-700 hover:text-green-600 transition-colors font-medium">
-                    {parentCategory.category}
+                    {parentCategory.name}
                   </a>
                   <div class="ml-4 mt-2 space-y-2">
                     {#each parentCategory.childCategories as subCategory}
-                      <a rel="external" href="/category/{subCategory.category}" 
+                      <a rel="external" href="/category/{subCategory.name}" 
                         class="block text-gray-600 hover:text-green-600 transition-colors text-sm">
-                        {subCategory.category}
+                        {subCategory.name}
                       </a>
                     {/each}
                   </div>
