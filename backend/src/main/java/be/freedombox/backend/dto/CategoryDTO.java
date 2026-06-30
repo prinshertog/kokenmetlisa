@@ -10,6 +10,6 @@ import lombok.*;
 @AllArgsConstructor(access = AccessLevel.PUBLIC)
 public class CategoryDTO {
     @NotBlank
-    private String category;
+    private String name;
     private Category parentCategory;
 }

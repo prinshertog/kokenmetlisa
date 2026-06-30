@@ -3,6 +3,7 @@ package be.freedombox.backend.service;
 import be.freedombox.backend.domain.Category;
 import be.freedombox.backend.domain.Dish;
 import be.freedombox.backend.dto.DishDTO;
+import be.freedombox.backend.exception.CategoryException;
 import be.freedombox.backend.exception.DishException;
 import be.freedombox.backend.exception.FileException;
 import be.freedombox.backend.exception.ObjectDoesNotExistException;
@@ -14,6 +15,10 @@ import be.freedombox.backend.tools.Mapper;
 import be.freedombox.backend.tools.Validator;
 import net.coobird.thumbnailator.Thumbnails;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -25,6 +30,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class DishService {
@@ -37,13 +43,6 @@ public class DishService {
         this.dishRepository = dishRepository;
         this.categoryRepository = categoryRepository;
         this.fileService = fileService;
-    }
-
-    public List<DishDTO> all() {
-        return dishRepository.findAll()
-                .stream()
-                .map(Mapper::toDishDTO)
-                .toList();
     }
 
     public void create(DishRequest dishRequest, MultipartFile file) {
@@ -115,14 +114,14 @@ public class DishService {
     }
 
     public List<DishDTO> getByCategory(String category) {
-        Category categoryObject = categoryRepository.findByCategory(
+        Category categoryObject = categoryRepository.findByName(
                 Validator.initCap(category)
-        );
+        ).orElseThrow(() -> new CategoryException("Wrong category name, category could not be found."));
 
-        return dishRepository.getByCategories(categoryObject)
+        return dishRepository.findByCategories(categoryObject)
                 .stream()
                 .map(Mapper::toDishDTO)
-                .toList();
+                .toList().reversed();
     }
 
     private BufferedImage resizeImage(BufferedImage originalImage, int targetWidth, int targetHeight) throws FileException {
@@ -147,5 +146,22 @@ public class DishService {
         } catch (IOException e) {
             throw new FileException(e.toString());
         }
+    }
+
+    public Page<DishDTO> getDishesForPage(int pageNumber) {
+        Pageable pageable = PageRequest.of(pageNumber, 24, Sort.by(Sort.Direction.DESC, "id"));
+        Page<Dish> dishes = dishRepository.findAll(pageable);
+        return dishes.map(Mapper::toDishDTO);
+    }
+
+    public Page<DishDTO> getDishesForPage(int pageNumber, String categoryName) {
+        Pageable pageable = PageRequest.of(pageNumber, 24, Sort.by(Sort.Direction.DESC, "id"));
+        Page<Dish> dishes = dishRepository.findByCategories(getByName(categoryName), pageable);
+        return dishes.map(Mapper::toDishDTO);
+    }
+
+    private Category getByName(String categoryName) {
+        return categoryRepository.findByName(categoryName)
+                .orElseThrow(() -> new CategoryException("Invalid category name, category not found"));
     }
 }

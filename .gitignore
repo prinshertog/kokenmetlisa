@@ -2,3 +2,6 @@
 .env
 backend/Files
 .idea
+test-db/postgresql
+files
+postgresql

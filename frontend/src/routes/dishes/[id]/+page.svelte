@@ -2,10 +2,14 @@
     import MarkdownIt from "markdown-it";  
     const { data } = $props();
     const { imageName, name, description, categories } = data.dish;
+
+    let checkedDescription = description;
+    if (checkedDescription === null) {
+        checkedDescription = "No description available.";
+    }
     
     const md = new MarkdownIt(); 
-    const html = md.render(description); 
-
+    const html = md.render(checkedDescription); 
 </script>
 
 <div class="max-w-4xl mx-auto py-8 px-4">
@@ -20,7 +24,7 @@
                 <p class="mt-4 text-sm text-gray-500">Categories:</p>
                 <div class="flex overflow-auto">
                     {#each categories as category}
-                    <p class="m-1">{category.category}</p>
+                    <p class="m-1">{category.name}</p>
                     {/each}
                 </div>
             </div>

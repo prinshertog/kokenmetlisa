@@ -10,7 +10,7 @@ import lombok.*;
 @Data
 @NoArgsConstructor(access = AccessLevel.PUBLIC)
 @AllArgsConstructor(access = AccessLevel.PUBLIC)
-@Table(name = "Users")
+@Table(name = "users")
 public class User {
     @Id
     private String username;

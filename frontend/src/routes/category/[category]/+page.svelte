@@ -1,14 +1,10 @@
 <script>
-    export let data;
-    const { categoryDishes } = data;
-    import { env } from '$env/dynamic/public';
-    const PUBLIC_BASE_URL_BACKEND = env.PUBLIC_BASE_URL_BACKEND
-    let reversedDishes = [...categoryDishes].reverse();
+    let { data } = $props();
 </script>
 
 <div class="container px-4 w-full">
     <div class="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 xs:grid-cols-1 gap-10">
-    {#each reversedDishes as { id, name, imageName }}
+    {#each data.pageObject.content as { id, name, imageName }}
         <div class="overflow-hidden rounded-lg shadow-lg relative">
             <a aria-label="Link" href="/dishes/{id}" class="block">
                 <div class="h-60 w-full bg-cover bg-center" 
@@ -23,4 +19,27 @@
         </div>
     {/each}
     </div>
+</div>
+<div class="mt-8 flex justify-center gap-4">
+    {#if data.pageObject.first == false}
+    <a
+        href={`?page=${data.pageObject.number - 1}`}
+        class="rounded bg-gray-200 px-4 py-2 hover:bg-gray-300"
+    >
+        Vorige
+    </a>
+    {/if}
+
+    <span class="px-4 py-2 font-semibold">
+        Page {data.pageObject.number}
+    </span>
+
+    {#if data.pageObject.last == false}
+        <a
+            href={`?page=${data.pageObject.number + 1}`}
+            class="rounded bg-gray-200 px-4 py-2 hover:bg-gray-300"
+        >
+            Volgende
+        </a>
+    {/if}
 </div>

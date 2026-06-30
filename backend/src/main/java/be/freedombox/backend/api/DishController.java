@@ -9,6 +9,9 @@ import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -33,8 +36,15 @@ public class DishController {
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public List<DishDTO> getAllDishes() {
-        return dishService.all();
+    public Page<DishDTO> getDishes(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(required = false) String category
+    ) {
+        if (category == null || category.isEmpty()) {
+            return dishService.getDishesForPage(page);
+        } else {
+            return dishService.getDishesForPage(page, category);
+        }
     }
 
     @GetMapping("/{id}")

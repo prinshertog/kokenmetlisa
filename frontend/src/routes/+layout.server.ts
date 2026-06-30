@@ -13,9 +13,9 @@ export async function load() {
         const parentCategories: Category[] = categories
             .filter(c => c.parentCategory == null)
             .map(c => ({
-                category: c.category,
+                name: c.name,
                 parentCategory: c.parentCategory,
-                childCategories: categories.filter(sc => sc.parentCategory?.category == c.category)
+                childCategories: categories.filter(sc => sc.parentCategory?.name == c.name)
             }))
         return { parentCategories };
     } catch (error) {
