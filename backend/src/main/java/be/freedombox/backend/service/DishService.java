@@ -149,13 +149,13 @@ public class DishService {
     }
 
     public Page<DishDTO> getDishesForPage(int pageNumber) {
-        Pageable pageable = PageRequest.of(pageNumber, 2, Sort.by(Sort.Direction.DESC, "id"));
+        Pageable pageable = PageRequest.of(pageNumber, 24, Sort.by(Sort.Direction.DESC, "id"));
         Page<Dish> dishes = dishRepository.findAll(pageable);
         return dishes.map(Mapper::toDishDTO);
     }
 
     public Page<DishDTO> getDishesForPage(int pageNumber, String categoryName) {
-        Pageable pageable = PageRequest.of(pageNumber, 2, Sort.by(Sort.Direction.DESC, "id"));
+        Pageable pageable = PageRequest.of(pageNumber, 24, Sort.by(Sort.Direction.DESC, "id"));
         Page<Dish> dishes = dishRepository.findByCategories(getByName(categoryName), pageable);
         return dishes.map(Mapper::toDishDTO);
     }

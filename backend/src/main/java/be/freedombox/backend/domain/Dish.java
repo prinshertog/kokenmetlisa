@@ -27,7 +27,11 @@ public class Dish {
     private String description;
     @Valid
     @ManyToMany
-    @NotNull
+    @JoinTable(
+            name = "dishes_categories",
+            joinColumns = @JoinColumn(name = "dish_id"),
+            inverseJoinColumns = @JoinColumn(name = "category_name")
+    )
     private List<Category> categories;
     @Valid
     private String imageName;
