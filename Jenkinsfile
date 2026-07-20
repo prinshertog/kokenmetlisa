@@ -99,7 +99,7 @@ pipeline {
                         --username "$DOCKER_USER" \
                         --password-stdin
                     '''
-                    sh 'cd backend && docker build . -t "prinshertog/kokenmetlisa-backend:v2-unstable" && docker push prinshertog/kokenmetlisa-backend:v2-unstable'
+                    sh 'cd backend && docker build . -t "prinshertog/kokenmetlisa-backend:v0.2-unstable" && docker push prinshertog/kokenmetlisa-backend:v0.2-unstable'
                 }
             }
         }
@@ -119,7 +119,7 @@ pipeline {
                         --username "$DOCKER_USER" \
                         --password-stdin
                     '''
-                    sh 'cd frontend && docker build . -t "prinshertog/kokenmetlisa-frontend:v2-unstable" && docker push prinshertog/kokenmetlisa-frontend:v2-unstable'
+                    sh 'cd frontend && docker build . -t "prinshertog/kokenmetlisa-frontend:v0.2-unstable" && docker push prinshertog/kokenmetlisa-frontend:v0.2-unstable'
                 }        
             }
         }
@@ -139,7 +139,7 @@ pipeline {
                         --username "$DOCKER_USER" \
                         --password-stdin
                     '''
-                    sh 'cd backend && docker build . -t "prinshertog/kokenmetlisa-backend:v2-stable" && docker push prinshertog/kokenmetlisa-backend:v2-stable'
+                    sh 'cd backend && docker build . -t "prinshertog/kokenmetlisa-backend:v0.2" && docker push prinshertog/kokenmetlisa-backend:v0.2'
                 }
             }
         }
@@ -159,7 +159,7 @@ pipeline {
                         --username "$DOCKER_USER" \
                         --password-stdin
                     '''
-                    sh 'cd frontend && docker build . -t "prinshertog/kokenmetlisa-frontend:v2-stable" && docker push prinshertog/kokenmetlisa-frontend:v2-stable'
+                    sh 'cd frontend && docker build . -t "prinshertog/kokenmetlisa-frontend:v0.2" && docker push prinshertog/kokenmetlisa-frontend:v0.2'
                 }        
             }
         }
