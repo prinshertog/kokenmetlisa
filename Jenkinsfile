@@ -44,8 +44,8 @@ pipeline {
 
                         sh """
                             cd backend
-                            docker build . -t prinshertog/kokenmetlisa-backend:${env.BRANCH_NAME}
-                            docker push prinshertog/kokenmetlisa-backend:${env.BRANCH_NAME}
+                            docker build . -t prinshertog/kokenmetlisa-backend:${env.GIT_COMMIT}
+                            docker push prinshertog/kokenmetlisa-backend:${env.GIT_COMMIT}
                         """
                     }
                 }
@@ -76,8 +76,8 @@ pipeline {
 
                         sh """
                             cd frontend
-                            docker build . -t prinshertog/kokenmetlisa-frontend:${env.BRANCH_NAME}
-                            docker push prinshertog/kokenmetlisa-frontend:${env.BRANCH_NAME}
+                            docker build . -t prinshertog/kokenmetlisa-frontend:${env.GIT_COMMIT}
+                            docker push prinshertog/kokenmetlisa-frontend:${env.GIT_COMMIT}
                         """
                     }
                 }
