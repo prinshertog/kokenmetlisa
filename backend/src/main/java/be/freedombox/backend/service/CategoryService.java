@@ -134,4 +134,9 @@ public class CategoryService {
 
         return categories.getFirst();
     }
+
+    public Category getByName(String categoryName) {
+        return categoryRepository.findByName(categoryName)
+                .orElseThrow(() -> new CategoryException("Invalid category name, category not found"));
+    }
 }

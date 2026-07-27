@@ -2,6 +2,10 @@
     let { data } = $props();
 </script>
 
+<svelte:head>
+    <title>Koken met Lisa | Category</title>
+</svelte:head>
+
 <div class="container px-4 w-full">
     <div class="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 xs:grid-cols-1 gap-10">
     {#each data.pageObject.content as { id, name, imageName }}

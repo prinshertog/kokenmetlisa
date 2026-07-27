@@ -12,6 +12,10 @@
     const html = md.render(checkedDescription); 
 </script>
 
+<svelte:head>
+    <title>Koken met Lisa | Dish</title>
+</svelte:head>
+
 <div class="max-w-4xl mx-auto py-8 px-4">
     <div class="bg-white shadow rounded-lg overflow-hidden">
         <img class="w-full h-64 object-cover" src='{`/file/full-${imageName}`}' alt={name} />

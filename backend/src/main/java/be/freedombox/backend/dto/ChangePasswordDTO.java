@@ -8,10 +8,7 @@ import lombok.*;
 @NoArgsConstructor(access = AccessLevel.PUBLIC)
 @AllArgsConstructor(access = AccessLevel.PUBLIC)
 public class ChangePasswordDTO {
-    @NotBlank
     private String username;
-    @NotBlank
     private String oldPassword;
-    @NotBlank
     private String newPassword;
 }

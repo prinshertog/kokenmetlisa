@@ -34,6 +34,10 @@
     loadDishPage(pageNumber);
 </script>
 
+<svelte:head>
+    <title>Koken met Lisa | Dashboard</title>
+</svelte:head>
+
 <div class="min-h-screen bg-gray-50">
     <!-- Header -->
     <header class="bg-white shadow">

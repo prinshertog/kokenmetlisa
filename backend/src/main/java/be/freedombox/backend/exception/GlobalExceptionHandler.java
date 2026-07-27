@@ -72,4 +72,9 @@ public class GlobalExceptionHandler {
     public ResponseEntity<Map<String, String>> handleCategoryException(CategoryException ex) {
         return createErrorResponse(ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
     }
+
+    @ExceptionHandler(InspirationDishException.class)
+    public ResponseEntity<Map<String, String>> handleInspirationDishException(InspirationDishException ex) {
+        return createErrorResponse(ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+    }
 }

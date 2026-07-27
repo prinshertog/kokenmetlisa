@@ -11,10 +11,11 @@ services:
       - ./postgresql:/var/lib/postgresql
 
   backend:
-    image: prinshertog/kokenmetlisa-backend:52-add-pagination-for-the-application-for-a-smooth-experience
-    # build:
-    #  context: backend
-    # container_name: kokenmetlisa-backend
+    #image: prinshertog/kokenmetlisa-backend:52-add-pagination-for-the-application-for-a-smooth-experience
+    build:
+      context: backend
+      no_cache: true
+    container_name: kokenmetlisa-backend
     restart: always
     environment:
       SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/dishes
@@ -34,10 +35,10 @@ services:
       - 8080:8080
 
   frontend:
-    image: prinshertog/kokenmetlisa-frontend:52-add-pagination-for-the-application-for-a-smooth-experience
-    # build:
-    #  context: frontend
-    #  no_cache: true
+    #image: prinshertog/kokenmetlisa-frontend:52-add-pagination-for-the-application-for-a-smooth-experience
+    build:
+      context: frontend
+      no_cache: true
     container_name: kokenmetlisa-frontend
     restart: always
     ports:

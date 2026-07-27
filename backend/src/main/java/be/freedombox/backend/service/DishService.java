@@ -35,13 +35,13 @@ import java.util.Optional;
 @Service
 public class DishService {
     private final DishRepository dishRepository;
-    private final CategoryRepository categoryRepository;
+    private final CategoryService categoryService;
     private final FileService fileService;
 
     @Autowired
-    public DishService(DishRepository dishRepository, CategoryRepository categoryRepository, FileService fileService) {
+    public DishService(DishRepository dishRepository, CategoryService categoryService, FileService fileService) {
         this.dishRepository = dishRepository;
-        this.categoryRepository = categoryRepository;
+        this.categoryService = categoryService;
         this.fileService = fileService;
     }
 
@@ -85,10 +85,10 @@ public class DishService {
 
         Dish dish = dishRepository.findById(dishUpdateRequest.getId()).get();
 
-        if (!dishUpdateRequest.getDishName().isEmpty())
+        if (!dishUpdateRequest.getDishName().isBlank())
             dish.setName(dishUpdateRequest.getDishName());
 
-        if (!dishUpdateRequest.getDescription().isEmpty())
+        if (!dishUpdateRequest.getDescription().isBlank())
             dish.setDescription(dishUpdateRequest.getDescription());
 
         List<Category> categories = dishUpdateRequest
@@ -114,9 +114,9 @@ public class DishService {
     }
 
     public List<DishDTO> getByCategory(String category) {
-        Category categoryObject = categoryRepository.findByName(
+        Category categoryObject = categoryService.getByName(
                 Validator.initCap(category)
-        ).orElseThrow(() -> new CategoryException("Wrong category name, category could not be found."));
+        );
 
         return dishRepository.findByCategories(categoryObject)
                 .stream()
@@ -156,12 +156,7 @@ public class DishService {
 
     public Page<DishDTO> getDishesForPage(int pageNumber, String categoryName) {
         Pageable pageable = PageRequest.of(pageNumber, 24, Sort.by(Sort.Direction.DESC, "id"));
-        Page<Dish> dishes = dishRepository.findByCategories(getByName(categoryName), pageable);
+        Page<Dish> dishes = dishRepository.findByCategories(categoryService.getByName(categoryName), pageable);
         return dishes.map(Mapper::toDishDTO);
-    }
-
-    private Category getByName(String categoryName) {
-        return categoryRepository.findByName(categoryName)
-                .orElseThrow(() -> new CategoryException("Invalid category name, category not found"));
     }
 }

@@ -3,6 +3,10 @@
     const { currentUser, isAdmin, users } = data;
 </script>
 
+<svelte:head>
+    <title>Koken met Lisa | Users</title>
+</svelte:head>
+
 <div class="min-h-screen bg-gray-50">
     <header class="bg-white shadow">
         <div class="max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8 flex justify-between items-center">

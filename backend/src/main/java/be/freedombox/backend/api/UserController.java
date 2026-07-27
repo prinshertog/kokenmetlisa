@@ -25,8 +25,7 @@ public class UserController {
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
     public List<UserDTO> allUsers(@RequestHeader(value = "Authorization") @NotBlank String authorizationHeader) {
-        List<UserDTO> users = userService.all(authorizationHeader);
-        return users;
+        return userService.all(authorizationHeader);
     }
 
     @PostMapping

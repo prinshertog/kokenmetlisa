@@ -11,13 +11,9 @@ import java.util.List;
 @NoArgsConstructor(access = AccessLevel.PUBLIC)
 @AllArgsConstructor(access = AccessLevel.PUBLIC)
 public class DishDTO {
-    @NotBlank
     private Long id;
-    @NotBlank
     private String name;
-    @NotBlank
     private String description;
     private List<Category> categories;
-    @NotBlank
     private String imageName;
 }
