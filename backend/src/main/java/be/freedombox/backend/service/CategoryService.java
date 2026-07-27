@@ -57,15 +57,21 @@ public class CategoryService {
         return categories.stream().map(Mapper::toCategoryDTO).toList();
     }
 
-    public void delete(CategoryRequest categoryRequest) {
-        categoryRequest.setName(Validator.initCap(categoryRequest.getName()));
-        Category category = getCategoryByCategory(categoryRequest.getName());
-        int deletedPosition = category.getPosition();
-        if (categoryRepository.findByName(category.getName()).isPresent()) {
-            throw new CategoryException("Cannot delete parent category with children");
+    public void delete(String categoryName) {
+        try {
+            Validator.initCap(categoryName);
+            Category category = getCategoryByCategory(categoryName);
+            int deletedPosition = category.getPosition();
+
+            if (!categoryRepository.findByParentCategory(category).isEmpty()) {
+                throw new CategoryException("Cannot delete parent category with children");
+            }
+
+            categoryRepository.delete(category);
+            resortPositions(deletedPosition);
+        } catch (Exception error) {
+            throw new CategoryException("Could not delete category: " + error.getMessage());
         }
-        categoryRepository.delete(category);
-        resortPositions(deletedPosition);
     }
 
     private void resortPositions(int deletedPosition) {

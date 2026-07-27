@@ -43,12 +43,12 @@ export const actions = {
                 cookies.set("role", authData.role, {path: "/"});
             }
 
-            throw redirect(303, "/dashboard");
+            throw redirect(303, "/dashboard/dishes");
         } catch (error) {
             if (error instanceof redirect) {
                 throw error;
             }
-            return fail(500, { error: 'Login failed. Please try again.' + error });
+            return fail(500, { error: 'Login failed. Please try again.' });
         }
     }
 } satisfies Actions;
@@ -56,7 +56,7 @@ export const actions = {
 export const load: PageServerLoad = async ({ cookies }) => {
     const bearer = cookies.get('bearer');
     if (bearer) {
-        throw redirect(303, '/dashboard');
+        throw redirect(303, '/dashboard/dishes');
     }
     return {};
 };

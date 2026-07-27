@@ -41,7 +41,7 @@ public class CategoryController {
 
     @DeleteMapping
     @ResponseStatus(HttpStatus.OK)
-    public void deleteCategory(@RequestBody @Valid CategoryRequest categoryRequest) {
-        categoryService.delete(categoryRequest);
+    public void deleteCategory(@RequestBody @Valid String categoryName) {
+        categoryService.delete(categoryName);
     }
 }

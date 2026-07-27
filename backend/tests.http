@@ -349,7 +349,7 @@ DELETE http://localhost:8080/category
 Content-Type: application/json
 
 {
-  "category": "hoofdgerechten"
+  "category": "Testt"
 }
 
 ###

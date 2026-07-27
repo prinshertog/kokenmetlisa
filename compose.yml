@@ -9,6 +9,8 @@ services:
       POSTGRES_DB: dishes
     volumes:
       - ./postgresql:/var/lib/postgresql
+    ports:
+      - 5432:5432
 
   backend:
     #image: prinshertog/kokenmetlisa-backend:52-add-pagination-for-the-application-for-a-smooth-experience
@@ -21,7 +23,7 @@ services:
       SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/dishes
       SPRING_DATASOURCE_USERNAME: dishes_user
       SPRING_DATASOURCE_PASSWORD: dishes_password
-      CREATE_ADMIN_USER: "false"
+      CREATE_ADMIN_USER: "true"
     depends_on:
       - postgres
     healthcheck:
