@@ -51,79 +51,89 @@
     </header>
 
     <main class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
-        <!-- Categories Section -->
-        <div class="bg-white shadow rounded-lg p-6">
+      <div class="grid gap-6 lg:grid-cols-[360px_minmax(0,1fr)]">
+        <section class="bg-white shadow rounded-lg p-6 space-y-6">
+          <div>
+            <h2 class="text-xl font-semibold mb-3">New Category</h2>
             {#if form?.categoryError}
-                <p class="mt-2 text-red-500 bg-gray-100 border-1 border-gray-200 rounded p-2 mb-5">{form.categoryError}</p>
+              <p class="text-red-600 bg-red-50 border border-red-200 rounded p-3 mb-4">{form.categoryError}</p>
             {/if}
-            <h2 class="text-xl font-semibold mb-4">Categories</h2>
-            <div class="mb-4">
-                <h3 class="font-medium mb-2">Categories and Subcategories:</h3>
-                <div class="space-y-2">
-                    {#each mainCategories as category}
-                        <!-- Main category -->
-                        <div class="space-y-1">
-                            <div class="flex justify-between items-center p-2 bg-gray-50 rounded">
-                                <span class="font-medium">{category.name}</span>
-                                <div>
-                                    <form action="?/up" method="POST" class="inline">
-                                        <input type="hidden" name="category" value={category.name}>
-                                        <button class="text-blue-600 hover:text-blue-800 ml-2 mr-2 cursor-pointer">Up</button>
-                                    </form>
-                                    <form action="?/down" method="POST" class="inline">
-                                        <input type="hidden" name="category" value={category.name}>
-                                        <button class="text-blue-600 hover:text-blue-800 ml-2 mr-2 cursor-pointer">Down</button>
-                                    </form>
-                                    <form action="?/deleteCategory" method="POST" class="inline">
-                                        <input type="hidden" name="category" value={category.name}>
-                                        <button class="text-red-600 hover:text-red-800 ml-2 mr-2 cursor-pointer">Delete</button>
-                                    </form>
-                                </div>
-                            </div>
-                            <!-- Subcategories -->
-                            {#each getSubcategories(category.name) as subcategory}
-                                <div class="flex justify-between items-center p-2 bg-gray-100 rounded ml-4">
-                                    <span class="text-sm">↳ {subcategory.name}</span>
-                                    <div>
-                                        <form action="?/up" method="POST" class="inline">
-                                            <input type="hidden" name="category" value={subcategory.name}>
-                                            <button class="text-blue-600 hover:text-blue-800 ml-2 mr-2 cursor-pointer">Up</button>
-                                        </form>
-                                        <form action="?/down" method="POST" class="inline">
-                                            <input type="hidden" name="category" value={subcategory.name}>
-                                            <button class="text-blue-600 hover:text-blue-800 ml-2 mr-2 cursor-pointer">Down</button>
-                                        </form>
-                                        <form action="?/deleteCategory" method="POST" class="inline">
-                                            <input type="hidden" name="category" value={subcategory.name}>
-                                            <button class="text-red-600 hover:text-red-800 ml-2 mr-2 cursor-pointer">Delete</button>
-                                        </form>
-                                    </div>
-                                </div>
-                            {/each}
-                        </div>
-                    {/each}
-                </div>
-            </div>
-
-            <!-- Update Category Form -->
             <form method="POST" action="?/addCategory" class="space-y-4">
-                <div>
-                    <input class="w-full px-3 py-2 border rounded-md" type="text"
-                        name="category" placeholder="Category name" required />
-                </div>
-                <div>
-                    <select class="w-full px-3 py-2 border rounded-md"
-                        name="parentCategory">
-                        <option value="">Select parent category (optional)</option>
-                        {#each mainCategories as category}
-                            <option value={category.name}>{category.name}</option>
-                        {/each}
-                    </select>
-                </div>
-                <button class="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 cursor-pointer">
-                    Add Category
-                </button>
+              <div>
+                <label class="block text-sm font-medium text-gray-700" for="category-name">Category name</label>
+                <input id="category-name" name="category" required
+                  class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" />
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700" for="parent-category">Parent category</label>
+                <select id="parent-category" name="parentCategory"
+                  class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                  <option value="">Select parent category (optional)</option>
+                  {#each mainCategories as category}
+                    <option value={category.name}>{category.name}</option>
+                  {/each}
+                </select>
+              </div>
+              <button type="submit" class="w-full rounded bg-blue-600 py-2 px-4 text-white hover:bg-blue-700">Add Category</button>
             </form>
-        </div>
+          </div>
+        </section>
+
+        <section class="bg-white shadow rounded-lg p-6 space-y-6">
+          <div>
+            <h2 class="text-xl font-semibold mb-4">Categories</h2>
+            <p class="text-sm text-gray-600 mb-6">Manage the dashboard categories and their positions.</p>
+            <div class="space-y-4">
+              {#each mainCategories as category}
+                <div class="rounded-xl border border-gray-200 bg-gray-50 p-4">
+                  <div class="flex items-center justify-between gap-4">
+                    <div>
+                      <p class="font-semibold text-gray-900">{category.name}</p>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                      <form action="?/up" method="POST" class="inline">
+                        <input type="hidden" name="category" value={category.name}>
+                        <button class="rounded bg-white px-3 py-2 text-sm text-blue-600 hover:bg-blue-50">Up</button>
+                      </form>
+                      <form action="?/down" method="POST" class="inline">
+                        <input type="hidden" name="category" value={category.name}>
+                        <button class="rounded bg-white px-3 py-2 text-sm text-blue-600 hover:bg-blue-50">Down</button>
+                      </form>
+                      <form action="?/deleteCategory" method="POST" class="inline">
+                        <input type="hidden" name="category" value={category.name}>
+                        <button class="rounded bg-red-50 px-3 py-2 text-sm text-red-600 hover:bg-red-100">Delete</button>
+                      </form>
+                    </div>
+                  </div>
+
+                  {#if getSubcategories(category.name).length > 0}
+                    <div class="mt-4 space-y-3 rounded-lg bg-white p-4">
+                      {#each getSubcategories(category.name) as subcategory}
+                        <div class="flex items-center justify-between gap-4 rounded-lg border border-gray-200 bg-gray-50 p-3">
+                          <span class="text-sm text-gray-700">↳ {subcategory.name}</span>
+                          <div class="flex gap-2">
+                            <form action="?/up" method="POST" class="inline">
+                              <input type="hidden" name="category" value={subcategory.name}>
+                              <button class="rounded bg-white px-3 py-2 text-sm text-blue-600 hover:bg-blue-50">Up</button>
+                            </form>
+                            <form action="?/down" method="POST" class="inline">
+                              <input type="hidden" name="category" value={subcategory.name}>
+                              <button class="rounded bg-white px-3 py-2 text-sm text-blue-600 hover:bg-blue-50">Down</button>
+                            </form>
+                            <form action="?/deleteCategory" method="POST" class="inline">
+                              <input type="hidden" name="category" value={subcategory.name}>
+                              <button class="rounded bg-red-50 px-3 py-2 text-sm text-red-600 hover:bg-red-100">Delete</button>
+                            </form>
+                          </div>
+                        </div>
+                      {/each}
+                    </div>
+                  {/if}
+                </div>
+              {/each}
+            </div>
+          </div>
+        </section>
+      </div>
     </main>
 </div>

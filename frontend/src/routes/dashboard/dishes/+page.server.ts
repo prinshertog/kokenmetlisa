@@ -1,5 +1,5 @@
 import { fail, redirect } from '@sveltejs/kit';
-import type { Actions, PageServerLoad } from '../$types';
+import type { Actions, PageServerLoad } from './$types';
 import { env } from '$env/dynamic/public';
 import { checkLogin } from '$lib/methods/loginCheck';
 const BASE_URL_BACKEND = env.PUBLIC_BASE_URL_BACKEND;
@@ -124,6 +124,53 @@ export const actions = {
             return { success: true, dishDeleted: true };
         } catch (error) {
             return fail(500, { error: 'Failed to delete dish' + (error instanceof Error ? error.message : 'An unknown error occurred') });
+        }
+    },
+
+    updateDish: async ({ request, cookies }) => {
+        try {
+            const data = await request.formData();
+            const id = data.get('id');
+            const name = data.get('name') as string;
+            const description = data.get('description') as string;
+            const existingImageName = data.get('existingImageName') as string;
+            const categories = data.getAll('selected-categories').map(String);
+            const image = data.get('image') as File | null;
+            const filename = image && image.size > 0 ? `${Date.now()}-${image.name}` : existingImageName;
+
+            const dishUpdateRequest = {
+                id,
+                dishName: name,
+                description,
+                categories,
+                imageName: filename
+            };
+
+            const bearer = cookies.get('bearer');
+            const formData = new FormData();
+            if (image && image.size > 0) {
+                formData.append('file', image);
+            }
+            formData.append('dishUpdateRequest', new Blob([JSON.stringify(dishUpdateRequest)], { type: 'application/json' }));
+
+            const response = await fetch(`${BASE_URL_BACKEND}/dishes/${id}`, {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${bearer}`
+                },
+                body: formData
+            });
+
+            if (!response.ok) {
+                const errorText = await response.json();
+                return fail(400, { updateError: errorText.error || 'Failed to update dish' });
+            }
+
+            return { success: true, updateSuccess: true };
+        } catch (error) {
+            return fail(500, {
+                updateError: error instanceof Error ? error.message : 'An unknown error occurred'
+            });
         }
     },
 } satisfies Actions;

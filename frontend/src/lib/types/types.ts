@@ -17,3 +17,13 @@ export interface Dish {
     categories: Array<Category>,
     imageName: string
 }
+
+export interface InspirationDish {
+    id: number,
+    title: string,
+    shortDescription?: string,
+    imageUrl?: string,
+    categories: Array<Category>,
+    sourceName: string,
+    externalUrl?: string
+}

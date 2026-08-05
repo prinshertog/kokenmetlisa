@@ -45,6 +45,12 @@
               Home
             </a>
         </div>
+        <div class="relative group">
+            <a rel="external" href="/mijn-inspiratiebronnen" 
+              class="text-gray-700 hover:text-green-600 transition-colors font-medium">
+              Mijn inspiratiebronnen
+            </a>
+        </div>
         {#each parentCategories as parentCategory}
           <div class="relative group">
               <a rel="external" href="/category/{parentCategory.name}" 
@@ -75,6 +81,12 @@
                 <a rel="external" href="/" 
                   class="text-gray-700 hover:text-green-600 transition-colors font-medium">
                   Home
+                </a>
+            </div>
+            <div class="py-2">
+                <a rel="external" href="/mijn-inspiratiebronnen" 
+                  class="text-gray-700 hover:text-green-600 transition-colors font-medium">
+                  Mijn inspiratiebronnen
                 </a>
             </div>
             {#each parentCategories as parentCategory}

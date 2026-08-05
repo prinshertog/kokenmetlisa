@@ -1,6 +1,13 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
 
+button,
+input[type="button"],
+input[type="submit"],
+input[type="reset"] {
+  cursor: pointer;
+}
+
 body {
   font-family: Verdana, Geneva, sans-serif;
 }
