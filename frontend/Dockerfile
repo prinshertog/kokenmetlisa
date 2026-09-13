@@ -1,5 +1,5 @@
 # Build stage
-FROM node:20-alpine AS build
+FROM docker.io/node:20-alpine AS build
 
 WORKDIR /app
 
@@ -11,7 +11,7 @@ COPY . .
 RUN npm run build
 
 # Production stage
-FROM node:20-alpine
+FROM docker.io/node:20-alpine
 
 WORKDIR /app
 
