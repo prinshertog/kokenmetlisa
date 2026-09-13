@@ -7,7 +7,7 @@ export interface Category {
 
 export interface CreateCategory {
     name: string,
-    parentCategory?: string
+    parentCategoryName?: string
 }
 
 export interface Dish {

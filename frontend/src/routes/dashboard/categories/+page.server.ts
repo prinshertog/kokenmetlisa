@@ -56,14 +56,12 @@ export const actions = {
     addCategory: async ({ request, cookies }) => {
         try {
             const data = await request.formData();
-            const parentCategory = data.get('parentCategory') as string;
             const categoryData: CreateCategory = {
-                name: data.get('category') as string
+                name: data.get('category') as string,
+                parentCategoryName: data.get('parentCategory') as string ?? null
             };
 
-            if (parentCategory) {
-                categoryData.parentCategory = parentCategory;
-            }
+            console.log(categoryData);
 
             const bearer = cookies.get('bearer');
             const response = await fetch(BASE_URL_BACKEND + '/category', {
